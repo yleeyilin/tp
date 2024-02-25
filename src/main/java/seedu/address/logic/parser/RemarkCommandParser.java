@@ -10,12 +10,17 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Remark;
 
+/**
+ * A class that represents a remark made by the user.
+ */
 public class RemarkCommandParser implements Parser<RemarkCommand> {
+    /**
+     * Reads the input by the user to check if it is a valid remarl.
+     */
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
             PREFIX_REMARK);
-    
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -23,9 +28,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemarkCommand.MESSAGE_USAGE), ive);
         }
-    
         Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
-    
         return new RemarkCommand(index, remark);
     }
 }
