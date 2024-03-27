@@ -38,6 +38,9 @@ public class DeadlineNote extends Note {
      *         correct format.
      */
     public static Boolean isValidDate(String test) {
+        if (test.equals("")) {
+            return false;
+        }
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }

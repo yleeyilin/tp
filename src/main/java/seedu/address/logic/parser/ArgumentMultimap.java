@@ -93,6 +93,10 @@ public class ArgumentMultimap {
         return false;
     }
 
+    public boolean containsPrefix(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
