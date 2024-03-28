@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -40,15 +41,12 @@ public class RateCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person personToRate = model.findByName(targetName);
-
-        if (personToRate == null) {
-            throw new CommandException(RateMessages.MESSAGE_RATE_NAME_NOT_FOUND);
-        }
+        Person personToRate = model.findByName(targetName, RateMessages.MESSAGE_RATE_NAME_NOT_FOUND);
 
         Person ratedPerson = personToRate.updateRating(rating);
 
         model.setPerson(personToRate, ratedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(RateMessages.MESSAGE_RATE_PERSON_SUCCESS,
                 RateMessages.format(personToRate)));

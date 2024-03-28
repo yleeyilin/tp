@@ -74,17 +74,22 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
-        note.setText(person.getNote().toString());
         String currentRating = person.getRating().toString();
         if ("0".equals(currentRating)) {
-            rating.setText("No rating given yet");
+            rating.setText("");
+            rating.setManaged(false);
         } else {
             int intValue = Integer.parseInt(currentRating);
             rating.setText("⭐".repeat(Math.max(0, intValue)));
+            rating.setManaged(true);
         }
         if (person.getPin().getIsPinned()) {
-            pin.setText("📌   ");
+            pin.setText("📌    ");
             pin.setManaged(true);
+        }
+        if (!"No note here".equals(person.getNote().toString())) {
+            note.setText(person.getNote().toString());
+            note.setManaged(true);
         }
         email.setText(person.getEmail().value);
         person.getTags().stream()
