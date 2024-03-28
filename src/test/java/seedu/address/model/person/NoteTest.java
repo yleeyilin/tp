@@ -14,6 +14,13 @@ public class NoteTest {
     }
 
     @Test
+    public void constructor_invalidNote_throwsIllegalArgumentException() {
+        String invalidNote = "";
+        assertThrows(IllegalArgumentException.class, () -> new Note(invalidNote));
+    }
+
+
+    @Test
     public void isValidNote() {
         // null address
         assertThrows(NullPointerException.class, () -> Note.isValidNote(null));

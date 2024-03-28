@@ -32,8 +32,10 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         Name name;
         Note note;
-//        try {
 
+        if (!arePrefixesPresent(argMultimap, PREFIX_NOTE)) {
+            throw new ParseException("note is missing");
+        }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -42,25 +44,13 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         if (!argMultimap.containsPrefix(PREFIX_DEADLINE)) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+            note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         } else {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
+            note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).orElse(""),
                     argMultimap.getValue(PREFIX_DEADLINE).get());
         }
 
-//            if (argMultimap.getValue(PREFIX_DEADLINE).isEmpty()) {
-//                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-//                note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
-//            } else {
-//                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-//                note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
-//                        argMultimap.getValue(PREFIX_DEADLINE).get());
-//            }
-//        } catch (IllegalValueException ive) {
-//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-//                    NoteCommand.MESSAGE_USAGE), ive);
-//        }
 
         return new NoteCommand(name, note);
     }
