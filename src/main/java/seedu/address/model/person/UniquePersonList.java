@@ -133,7 +133,8 @@ public class UniquePersonList implements Iterable<Person> {
             internalList.sort(Comparator.comparing(p -> {
                 if (p instanceof Staff) {
                     Staff staff = (Staff) p;
-                    return "0" + staff.getSalary().toString();
+                    String salary = staff.getSalary().toString();
+                    return "0" + salary.length() + salary;
                 }
                 return "1" + p.getName().toString();
             }));
@@ -149,7 +150,8 @@ public class UniquePersonList implements Iterable<Person> {
             internalList.sort(Comparator.comparing(p -> {
                 if (p instanceof Supplier) {
                     Supplier supplier = (Supplier) p;
-                    return "0" + supplier.getProduct().toString();
+                    String product = supplier.getProduct().toString();
+                    return "0" + product.length() + product;
                 }
                 return "1" + p.getName().toString();
             }));
@@ -165,7 +167,8 @@ public class UniquePersonList implements Iterable<Person> {
             internalList.sort(Comparator.comparing(p -> {
                 if (p instanceof Maintainer) {
                     Maintainer maintainer = (Maintainer) p;
-                    return "0" + maintainer.getCommission().toString();
+                    String commission = maintainer.getCommission().toString();
+                    return "0" + commission.length() + commission;
                 }
                 return "1" + p.getName().toString();
             }));
@@ -178,14 +181,14 @@ public class UniquePersonList implements Iterable<Person> {
                 return "1" + p.getName().toString();
             }));
         } else if (field.equalsIgnoreCase("note")) {
-            internalList.sort(Comparator.comparing(
-                    (Person p) -> p.getNote().toString()).reversed());
+            internalList.sort(Comparator.comparing((Person p) ->
+                    p.getNote().toString()).reversed());
         } else if (field.equalsIgnoreCase("pin")) {
-            internalList.sort(Comparator.comparing(
-                    (Person p) -> p.getPin().toString()).reversed());
+            internalList.sort(Comparator.comparing((Person p) ->
+                    p.getPin().toString()).reversed());
         } else if (field.equalsIgnoreCase("rating")) {
-            internalList.sort(Comparator.comparing(
-                    (Person p) -> p.getRating().toString()).reversed());
+            internalList.sort(Comparator.comparing((Person p) ->
+                    p.getRating().toString()).reversed());
         } else {
             internalList.sort(Comparator.comparing(p -> p.getName().toString()));
         }

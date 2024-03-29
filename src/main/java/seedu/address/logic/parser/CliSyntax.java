@@ -47,19 +47,19 @@ public class CliSyntax {
     };
 
     public static final Prefix[] PREFIX_SORT_COLLECTION = new Prefix[] {
-            PREFIX_NAME,
-            PREFIX_PHONE,
-            PREFIX_EMAIL,
-            PREFIX_ADDRESS,
-            PREFIX_TAG_FIELD,
-            PREFIX_SALARY,
-            PREFIX_EMPLOYMENT,
-            PREFIX_PRICE,
-            PREFIX_PRODUCT,
-            PREFIX_SKILL,
-            PREFIX_COMMISSION,
-            PREFIX_NOTE,
-            PREFIX_PIN,
-            PREFIX_RATING,
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_ADDRESS,
+        PREFIX_TAG_FIELD,
+        PREFIX_SALARY,
+        PREFIX_EMPLOYMENT,
+        PREFIX_PRICE,
+        PREFIX_PRODUCT,
+        PREFIX_SKILL,
+        PREFIX_COMMISSION,
+        PREFIX_NOTE,
+        PREFIX_PIN,
+        PREFIX_RATING
     };
 }
