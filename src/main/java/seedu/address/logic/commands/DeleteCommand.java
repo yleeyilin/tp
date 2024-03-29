@@ -34,13 +34,10 @@ public class DeleteCommand extends Command {
 
         Person personToDelete;
 
-        personToDelete = model.findByName(targetName);
-
-        if (personToDelete == null) {
-            throw new CommandException(DeleteMessages.MESSAGE_DELETE_NAME_NOT_FOUND);
-        }
+        personToDelete = model.findByName(targetName, DeleteMessages.MESSAGE_DELETE_NAME_NOT_FOUND);
 
         model.deletePerson(personToDelete);
+
         return new CommandResult(String.format(DeleteMessages.MESSAGE_DELETE_PERSON_SUCCESS,
                 DeleteMessages.format(personToDelete)));
     }
