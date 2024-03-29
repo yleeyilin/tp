@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -110,6 +111,87 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void sortByPinnedStatus() {
         internalList.sort(Comparator.comparing(Person::isPinned).reversed());
+    }
+
+    /**
+     * Sorts the list based on the specified field.
+     */
+    public void sortBy(Prefix prefix) {
+        String field = prefix.getPrefix();
+
+        if (field.equalsIgnoreCase("name")) {
+            internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+        } else if (field.equalsIgnoreCase("phone")) {
+            internalList.sort(Comparator.comparing(p -> p.getPhone().toString()));
+        } else if (field.equalsIgnoreCase("email")) {
+            internalList.sort(Comparator.comparing(p -> p.getEmail().toString()));
+        } else if (field.equalsIgnoreCase("address")) {
+            internalList.sort(Comparator.comparing(p -> p.getAddress().toString()));
+        } else if (field.equalsIgnoreCase("tag")) {
+            internalList.sort(Comparator.comparing(p -> p.getTags().toString()));
+        } else if (field.equalsIgnoreCase("salary")) {
+            internalList.sort(Comparator.comparing(p -> {
+                if (p instanceof Staff) {
+                    Staff staff = (Staff) p;
+                    String salary = staff.getSalary().toString();
+                    return "0" + salary.length() + salary;
+                }
+                return "1" + p.getName().toString();
+            }));
+        } else if (field.equalsIgnoreCase("employment")) {
+            internalList.sort(Comparator.comparing(p -> {
+                if (p instanceof Staff) {
+                    Staff staff = (Staff) p;
+                    return "0" + staff.getEmployment().toString();
+                }
+                return "1" + p.getName().toString();
+            }));
+        } else if (field.equalsIgnoreCase("product")) {
+            internalList.sort(Comparator.comparing(p -> {
+                if (p instanceof Supplier) {
+                    Supplier supplier = (Supplier) p;
+                    String product = supplier.getProduct().toString();
+                    return "0" + product.length() + product;
+                }
+                return "1" + p.getName().toString();
+            }));
+        } else if (field.equalsIgnoreCase("price")) {
+            internalList.sort(Comparator.comparing(p -> {
+                if (p instanceof Supplier) {
+                    Supplier supplier = (Supplier) p;
+                    return "0" + supplier.getPrice().toString();
+                }
+                return "1" + p.getName().toString();
+            }));
+        } else if (field.equalsIgnoreCase("commission")) {
+            internalList.sort(Comparator.comparing(p -> {
+                if (p instanceof Maintainer) {
+                    Maintainer maintainer = (Maintainer) p;
+                    String commission = maintainer.getCommission().toString();
+                    return "0" + commission.length() + commission;
+                }
+                return "1" + p.getName().toString();
+            }));
+        } else if (field.equalsIgnoreCase("skill")) {
+            internalList.sort(Comparator.comparing(p -> {
+                if (p instanceof Maintainer) {
+                    Maintainer maintainer = (Maintainer) p;
+                    return "0" + maintainer.getSkill().toString();
+                }
+                return "1" + p.getName().toString();
+            }));
+        } else if (field.equalsIgnoreCase("note")) {
+            internalList.sort(Comparator.comparing((Person p) ->
+                    p.getNote().toString()).reversed());
+        } else if (field.equalsIgnoreCase("pin")) {
+            internalList.sort(Comparator.comparing((Person p) ->
+                    p.getPin().toString()).reversed());
+        } else if (field.equalsIgnoreCase("rating")) {
+            internalList.sort(Comparator.comparing((Person p) ->
+                    p.getRating().toString()).reversed());
+        } else {
+            internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+        }
     }
 
     @Override

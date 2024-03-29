@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.UnpinMessages;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -40,6 +41,7 @@ public class UnpinCommand extends Command {
         Person personToPin = model.findByName(name, UnpinMessages.MESSAGE_UNPIN_NAME_NOT_FOUND);
         personToPin.toUnpin();
         model.updatePinnedPersonList();
+        model.updateSortedPersonList(new Prefix("name"));
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(UnpinMessages.MESSAGE_UNPIN_PERSON_SUCCESS,

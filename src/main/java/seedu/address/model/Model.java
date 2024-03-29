@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Maintainer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -94,6 +95,11 @@ public interface Model {
      * Update the person list to display pinned contacts first.
      */
     void updatePinnedPersonList();
+
+    /**
+     * Sorts the contact list by a specified parameter.
+     */
+    void updateSortedPersonList(Prefix prefix);
 
     /**
      * Find a contact by their name.
