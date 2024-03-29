@@ -1,18 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.messages.NoteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -34,7 +30,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         Note note;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NOTE)) {
-            throw new ParseException("note is missing");
+            throw new ParseException(NoteMessages.MESSAGE_NOTE_NOT_SPECIFIED);
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE)

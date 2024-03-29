@@ -26,7 +26,7 @@ public class Note {
      */
     public Note(String note) {
         requireNonNull(note);
-//        checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
         value = note;
     }
 
