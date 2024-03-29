@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_COLLECTION;
 
 /**
  * Parses input arguments and creates a new PinCommand object
@@ -45,30 +46,16 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     public Prefix mapName(ArgumentMultimap argMultimap) throws ParseException {
         try {
-            String value = ParserUtil.parseField(argMultimap.getValue(PREFIX_FIELD).get());
+            String value = argMultimap.getValue(PREFIX_FIELD).get();
 
-            List<String> validKeywords = List.of(
-                    "name",
-                    "phone",
-                    "email",
-                    "address",
-                    "salary",
-                    "employment",
-                    "product",
-                    "price",
-                    "skill",
-                    "commission",
-                    "tag",
-                    "note",
-                    "pin",
-                    "unpin",
-                    "rating");
-
-            if (!validKeywords.contains(value.toLowerCase())) {
-                throw new ParseException(SortMessages.MESSAGE_SORT_INVALID_FIELD);
+            for (Prefix prefix : PREFIX_SORT_COLLECTION) {
+                String keyword = ParserUtil.parseSortField(prefix.getPrefix());
+                if (keyword.equalsIgnoreCase(value)) {
+                    return new Prefix(value);
+                }
             }
 
-            return new Prefix(value);
+            throw new ParseException(String.format(SortMessages.MESSAGE_SORT_INVALID_FIELD));
 
         } catch (ParseException pe) {
             throw new ParseException(String.format(SortMessages.MESSAGE_SORT_INVALID_FIELD, pe.getMessage()));

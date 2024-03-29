@@ -297,4 +297,23 @@ public class ParserUtil {
         }
         return trimmedCommand;
     }
+
+    /**
+     * Parses a {@code String sort field}.
+     * Leading "; " and trailing " : " will be trimmed
+     *
+     * @throws ParseException if the given {@code commandType} is invalid.
+     */
+    public static String parseSortField(String sortField) throws ParseException {
+
+        requireNonNull(sortField);
+
+        // Remove "; " using replace()
+        String removedSemicolon = sortField.replace("; ", "");
+
+        // Remove " : " using replaceAll()
+        String trimmedSortField = removedSemicolon.replaceAll(" : ", "");
+
+        return trimmedSortField;
+    }
 }
