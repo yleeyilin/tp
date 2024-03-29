@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -110,6 +111,16 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void sortByPinnedStatus() {
         internalList.sort(Comparator.comparing(Person::isPinned).reversed());
+    }
+
+    /**
+     * Sorts the list based on the specified field.
+     */
+    public void sortBy(Prefix prefix) {
+        String field = prefix.getPrefix();
+        if (field.equalsIgnoreCase("name")) {
+            internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+        }
     }
 
     @Override
