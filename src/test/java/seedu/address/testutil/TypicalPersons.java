@@ -68,7 +68,7 @@ public class TypicalPersons {
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withNote("meet on wednesday")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withPhone("98765432").withNote("i love dogs")
             .withTags("owesMoney", "friends").withRating("0").build();
 
     public static final Staff BENSONSTAFF = new StaffBuilder().withName("Benson Meier Staff")
