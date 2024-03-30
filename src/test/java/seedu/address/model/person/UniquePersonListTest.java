@@ -393,9 +393,7 @@ public class UniquePersonListTest {
                 new PersonBuilder(BOB).withNote(VALID_NOTE_AMY).build();
         Person personWithLexicographicallyLaterNote =
                 new PersonBuilder(ALICE).withNote(VALID_NOTE_BOB).build();
-        Person personWithNoNote = new PersonBuilder(CARL).withNote("").build();
 
-        uniquePersonList.add(personWithNoNote);
         uniquePersonList.add(personWithLexicographicallyEarlierNote);
         uniquePersonList.add(personWithLexicographicallyLaterNote);
         uniquePersonList.sortBy(new Prefix("note"));
@@ -403,7 +401,6 @@ public class UniquePersonListTest {
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(personWithLexicographicallyLaterNote);
         expectedUniquePersonList.add(personWithLexicographicallyEarlierNote);
-        expectedUniquePersonList.add(personWithNoNote);
 
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }

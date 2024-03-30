@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.messages.NoteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Commission;
@@ -54,6 +55,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -241,6 +243,9 @@ public class ParserUtil {
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
+        if (Note.isNoteContainingDeadline(trimmedNote)) {
+            throw new ParseException(NoteMessages.MESSAGE_DEADLINE_NOT_SPECIFIED);
+        }
         if (!Note.isValidNote(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }

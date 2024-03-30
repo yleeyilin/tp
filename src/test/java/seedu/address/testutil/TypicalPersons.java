@@ -85,6 +85,7 @@ public class TypicalPersons {
             .withNote("meet on wednesday")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
+            .withNote("i love dogs")
             .withTags("owesMoney", "friends")
             .withRating("0")
             .build();

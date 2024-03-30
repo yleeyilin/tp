@@ -28,6 +28,7 @@ public class DeadlineNoteTest {
         // valid deadlineNotes
         assertTrue(DeadlineNote.isValidDate("2019-10-10"));
     }
+
     @Test
     public void equals() {
         Note deadlineNote = new DeadlineNote("kind cats", "2025-10-10");
