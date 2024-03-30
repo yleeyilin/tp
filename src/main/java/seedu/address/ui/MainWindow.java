@@ -39,10 +39,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // help windows for each command
     private HelpWindow helpWindow;
-    private HelpDeleteWindow helpDeleteWindow;
-    private HelpEditWindow helpEditWindow;
-    private HelpSearchWindow helpSearchWindow;
-    private HelpAddWindow helpAddWindow;
+    private HelpOtherWindow helpOtherWindow;
 
     @FXML
     private StackPane titlePlaceholder;
@@ -79,10 +76,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Instantiate all help windows
         helpWindow = new HelpWindow();
-        helpDeleteWindow = new HelpDeleteWindow();
-        helpEditWindow = new HelpEditWindow();
-        helpSearchWindow = new HelpSearchWindow();
-        helpAddWindow = new HelpAddWindow();
+        helpOtherWindow = new HelpOtherWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -172,15 +166,30 @@ public class MainWindow extends UiPart<Stage> {
         if (isHelpGeneralCommand) {
             handleHelp();
         } else if (isDeleteHelpCommand) {
-            handleDeleteHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_DELETE_MESSAGE);
         } else if (isEditHelpCommand) {
-            handleEditHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_EDIT_MESSAGE);
         } else if (isSearchHelpCommand) {
-            handleSearchHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_SEARCH_MESSAGE);
         } else if (isAddHelpCommand) {
-            handleAddHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_ADD_MESSAGE);
+        }
+
+    }
+
+    /**
+     * Opens the help delete window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleOtherHelp(String displayedMessage) {
+        helpOtherWindow.setHelpMessage(displayedMessage);
+        if (!helpOtherWindow.isShowing()) {
+            helpOtherWindow.show();
+        } else {
+            helpOtherWindow.focus();
         }
     }
+
 
     /**
      * Opens the help window or focuses on it if it's already opened.
@@ -191,54 +200,6 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help delete window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleDeleteHelp() {
-        if (!helpDeleteWindow.isShowing()) {
-            helpDeleteWindow.show();
-        } else {
-            helpDeleteWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help edit window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleEditHelp() {
-        if (!helpEditWindow.isShowing()) {
-            helpEditWindow.show();
-        } else {
-            helpEditWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help search window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleSearchHelp() {
-        if (!helpSearchWindow.isShowing()) {
-            helpSearchWindow.show();
-        } else {
-            helpSearchWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help search window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleAddHelp() {
-        if (!helpAddWindow.isShowing()) {
-            helpAddWindow.show();
-        } else {
-            helpAddWindow.focus();
         }
     }
 

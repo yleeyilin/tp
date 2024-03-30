@@ -13,21 +13,10 @@ import seedu.address.commons.core.LogsCenter;
 /**
  * Controller for a help page.
  */
-public class HelpAddWindow extends UiPart<Stage> {
+public class HelpOtherWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Adds a other/maintainer/supplier/staff person to pooch planner"
-            + "\n" + "" + "\n"
-            + "Format:" + "\n"
-            + "/pooch-add ; name : [name] ; phone : [phone] ; address : [address] ; email : [email]" + "\n"
-            + "/pooch-maintainer ; name : [name] ; phone : [phone] ; address : [address] ;"
-            + " email : [email] ; skill : [skill] ; commission : [commission/hr]" + "\n"
-            + "/pooch-supplier ; name : [name] ; phone : [phone] ; address : [address] ;"
-            + " email : [email] ; product : [product] ; price : [price/(quantity)]" + "\n"
-            + "/pooch-staff ; name : [name] ; phone : [phone] ; address : [address] ;"
-            + " email : [email] ; salary : [salary/hr]  ; employment : [part/full]" + "\n"
-            + "\n" + "" + "\n"
-            + "Go to our UG for more information : " + USERGUIDE_URL;
+    public static String displayedMessage = "Go to our user guide for more information : " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -43,15 +32,15 @@ public class HelpAddWindow extends UiPart<Stage> {
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpAddWindow(Stage root) {
+    public HelpOtherWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        helpMessage.setText(displayedMessage);
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpAddWindow() {
+    public HelpOtherWindow() {
         this(new Stage());
     }
 
@@ -101,6 +90,9 @@ public class HelpAddWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    public void setHelpMessage(String message) {
+        helpMessage.setText(message);
+    }
     /**
      * Copies the URL to the user guide to the clipboard.
      */
