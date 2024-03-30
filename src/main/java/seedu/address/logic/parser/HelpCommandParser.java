@@ -22,7 +22,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_HELP);
         String commandType;
-        if (!arePrefixesPresent(argMultimap, PREFIX_HELP) || !argMultimap.getPreamble().isEmpty()) {
+        boolean isPreambleEmpty = argMultimap.getPreamble().isEmpty();
+        boolean isContainingHelpPrefix = arePrefixesPresent(argMultimap, PREFIX_HELP);
+
+        if (!isContainingHelpPrefix || !isPreambleEmpty) {
             throw new ParseException(String.format(HelpMessages.MESSAGE_HELP_MISSING_COMMAND,
                     HelpCommand.MESSAGE_USAGE));
         }

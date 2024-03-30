@@ -39,6 +39,7 @@ public class HelpCommand extends Command {
         this.commandType = commandType;
     }
 
+    //change name of this? not really a verb. buy its a boolean
     /**
      * Checks if command provided is a valid command.
      *
@@ -48,7 +49,9 @@ public class HelpCommand extends Command {
      * */
     public static boolean isValidCommandType(String commandType) {
         for (CommandTypes c : CommandTypes.values()) {
-            if (c.name().toLowerCase().equals(commandType.toLowerCase())) {
+            String lowercaseName = c.name().toLowerCase();
+            String lowercaseCommandType = commandType.toLowerCase();
+            if (lowercaseName.equals(lowercaseCommandType)) {
                 return true;
             }
         }
@@ -57,15 +60,16 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (commandType.equals("general")) {
+        String capitalisedCommandType = commandType.toUpperCase();
+        if (capitalisedCommandType.equals(CommandTypes.GENERAL.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("add")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.ADD.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("delete")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.DELETE.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("edit")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.EDIT.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("search")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.SEARCH.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE, true, false);
         } else {
             throw new CommandException(HelpMessages.MESSAGES_INVALID_COMMAND_TYPE);

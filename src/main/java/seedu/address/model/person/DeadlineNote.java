@@ -30,6 +30,7 @@ public class DeadlineNote extends Note {
         this.deadline = convertDate(deadline);
     }
 
+    //same thing, do i rename to somethinf more verby?
     /**
      * Returns true if date is in valid format, else
      * returns false.
@@ -59,8 +60,8 @@ public class DeadlineNote extends Note {
      * readable format.
      */
     public String convertDate(String deadline) {
-        LocalDate currDate = LocalDate.parse(deadline);
-        return currDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        LocalDate originalDate = LocalDate.parse(deadline);
+        return originalDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
 
@@ -81,7 +82,8 @@ public class DeadlineNote extends Note {
         }
 
         DeadlineNote otherNote = (DeadlineNote) other;
-        return super.equals(otherNote) && deadline.equals(otherNote.deadline);
+        boolean isDeadlineEqual = deadline.equals(otherNote.deadline);
+        return super.equals(otherNote) && isDeadlineEqual;
     }
 
     @Override

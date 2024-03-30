@@ -39,7 +39,8 @@ public class Note {
     }
 
     public static boolean isNoteContainingDeadline(String test) {
-        return test.contains("; deadline :");
+        String trimmedDeadlinePrefix = "; deadline :";
+        return test.contains(trimmedDeadlinePrefix);
     }
 
     public void setValue(String value) {

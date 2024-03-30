@@ -36,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+
+    // help windows for each command
     private HelpWindow helpWindow;
     private HelpDeleteWindow helpDeleteWindow;
     private HelpEditWindow helpEditWindow;
@@ -75,6 +77,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        // Instantiate all help windows
         helpWindow = new HelpWindow();
         helpDeleteWindow = new HelpDeleteWindow();
         helpEditWindow = new HelpEditWindow();
@@ -156,18 +159,17 @@ public class MainWindow extends UiPart<Stage> {
     public void handleAllHelp(CommandResult commandResult) {
         String userFeedback = commandResult.getFeedbackToUser();
 
-        Boolean isHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE);
-        Boolean isDeleteHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE);
-        Boolean isEditHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE);
-        Boolean isSearchHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE);
-        Boolean isAddHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE);
+        if (!commandResult.isShowHelp()) {
+            return;
+        }
 
-        if (isHelpCommand) {
+        Boolean isHelpGeneralCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE);
+        Boolean isDeleteHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE);
+        Boolean isEditHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE);
+        Boolean isSearchHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE);
+        Boolean isAddHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE);
+
+        if (isHelpGeneralCommand) {
             handleHelp();
         } else if (isDeleteHelpCommand) {
             handleDeleteHelp();
@@ -178,7 +180,6 @@ public class MainWindow extends UiPart<Stage> {
         } else if (isAddHelpCommand) {
             handleAddHelp();
         }
-
     }
 
     /**

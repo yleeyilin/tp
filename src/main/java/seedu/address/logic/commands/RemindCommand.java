@@ -19,6 +19,8 @@ public class RemindCommand extends Command {
             + " with notes that have deadlines from"
             + "the current day onwards.\n"
             + "Example: " + COMMAND_WORD;
+
+    //needed? is empty constructor automatic?
     public RemindCommand() {
     }
 
