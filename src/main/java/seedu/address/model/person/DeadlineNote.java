@@ -60,6 +60,8 @@ public class DeadlineNote extends Note {
      * readable format.
      */
     public String convertDate(String deadline) {
+        assert (isValidDate(deadline)) : "deadline to convert is not valid";
+
         LocalDate originalDate = LocalDate.parse(deadline);
         return originalDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

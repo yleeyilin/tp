@@ -19,10 +19,11 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public HelpCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_HELP);
+        assert (args != null) : "argument to pass for help command is null";
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
         String commandType;
-        boolean isPreambleEmpty = argMultimap.getPreamble().isEmpty();
+        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
         boolean isContainingHelpPrefix = arePrefixesPresent(argMultimap, PREFIX_HELP);
 
         if (!isContainingHelpPrefix || !isPreambleEmpty) {

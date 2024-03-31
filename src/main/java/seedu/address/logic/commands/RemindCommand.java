@@ -20,10 +20,6 @@ public class RemindCommand extends Command {
             + "the current day onwards.\n"
             + "Example: " + COMMAND_WORD;
 
-    //needed? is empty constructor automatic?
-    public RemindCommand() {
-    }
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

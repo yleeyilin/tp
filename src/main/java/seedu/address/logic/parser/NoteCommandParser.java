@@ -24,6 +24,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public NoteCommand parse(String args) throws ParseException {
+        assert (args != null) : "argument to pass for note command is null";
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         Name name;
@@ -31,7 +33,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         boolean isContainingNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NOTE);
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
         boolean isContainingNameNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE);
-        boolean isPreambleEmpty = argMultimap.getPreamble().isEmpty();
+        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
 
         if (!isContainingNotePrefix) {
             throw new ParseException(NoteMessages.MESSAGE_NOTE_NOT_SPECIFIED);

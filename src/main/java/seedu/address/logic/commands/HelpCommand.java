@@ -48,9 +48,12 @@ public class HelpCommand extends Command {
      * @return boolean showing whether the command type is valid.
      * */
     public static boolean isValidCommandType(String commandType) {
+        assert (commandType != null) : "specified command type to give help for is null";
+
         for (CommandTypes c : CommandTypes.values()) {
             String lowercaseName = c.name().toLowerCase();
             String lowercaseCommandType = commandType.toLowerCase();
+
             if (lowercaseName.equals(lowercaseCommandType)) {
                 return true;
             }
@@ -58,8 +61,12 @@ public class HelpCommand extends Command {
         return false;
     }
 
+    // strange that i do accept model as param never interact. but cant removed cuz
+    // it inherits this from command parent
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert (commandType != null) : "specified command type to give help for is null";
+
         String capitalisedCommandType = commandType.toUpperCase();
         if (capitalisedCommandType.equals(CommandTypes.GENERAL.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE, true, false);
