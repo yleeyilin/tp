@@ -19,8 +19,6 @@ public class RemindCommand extends Command {
             + " with notes that have deadlines from"
             + "the current day onwards.\n"
             + "Example: " + COMMAND_WORD;
-    public RemindCommand() {
-    }
 
     @Override
     public CommandResult execute(Model model) {

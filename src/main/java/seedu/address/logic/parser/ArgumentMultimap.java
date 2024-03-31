@@ -112,6 +112,10 @@ public class ArgumentMultimap {
         return argMultimap.equals(otherArgumentMultimap.argMultimap);
     }
 
+    public boolean isPreambleEmpty() {
+        return this.getPreamble().isEmpty();
+    }
+
     /**
      * Returns a string implementation of Argument Multi Map
      */

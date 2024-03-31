@@ -47,25 +47,35 @@ public class HelpCommand extends Command {
      * @return boolean showing whether the command type is valid.
      * */
     public static boolean isValidCommandType(String commandType) {
+        assert (commandType != null) : "specified command type to give help for is null";
+
         for (CommandTypes c : CommandTypes.values()) {
-            if (c.name().toLowerCase().equals(commandType.toLowerCase())) {
+            String lowercaseName = c.name().toLowerCase();
+            String lowercaseCommandType = commandType.toLowerCase();
+
+            if (lowercaseName.equals(lowercaseCommandType)) {
                 return true;
             }
         }
         return false;
     }
 
+    // strange that i do accept model as param never interact. but cant removed cuz
+    // it inherits this from command parent
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (commandType.equals("general")) {
+        assert (commandType != null) : "specified command type to give help for is null";
+
+        String capitalisedCommandType = commandType.toUpperCase();
+        if (capitalisedCommandType.equals(CommandTypes.GENERAL.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("add")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.ADD.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("delete")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.DELETE.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("edit")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.EDIT.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("search")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.SEARCH.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE, true, false);
         } else {
             throw new CommandException(HelpMessages.MESSAGES_INVALID_COMMAND_TYPE);
