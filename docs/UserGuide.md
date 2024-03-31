@@ -26,7 +26,7 @@ Contact | Definition and Examples
 --------|------------------
 Person | Any persons that do not hold a special relationship<br> E.g. Neighbours, Work Friends.
 Staff | Any full-time or part-time employees that do not do any specialised work.<br> E.g. Waiters, Waitresses, Dishwashers.
-Supplier | Add logistics partner that supplies stocks for your Dog Cafe.<br> E.g. Kibbles Supplier, Coffee Beans Supplier.
+Supplier | Add logistics partner that supplies stocks for your dog cafe.<br> E.g. Kibbles Supplier, Coffee Beans Supplier.
 Maintainer | Any externally hired specialised persons who take care of the Dogs.<br> E.g. Dog Groomers, Vet.
 
 
