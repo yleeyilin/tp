@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.messages.SearchMessages;
+import seedu.address.logic.messages.RemindMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.RemindPredicate;
 
@@ -27,7 +27,7 @@ public class RemindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(new RemindPredicate());
         return new CommandResult(
-                String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS, model.getFilteredPersonList().size()));
+                String.format(RemindMessages.MESSAGE_REMIND_PERSON_SUCCESS, model.getFilteredPersonList().size()));
     }
 
     @Override

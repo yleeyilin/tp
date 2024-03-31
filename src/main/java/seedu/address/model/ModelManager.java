@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Maintainer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -191,6 +192,14 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Sorts the contact list by a specified parameter.
+     */
+    public void updateSortedPersonList(Prefix prefix) {
+        addressBook.updateSortedList(prefix);
+    }
+
+    /**
+     * Find the person by their name.
      * Find a general contact by their name.
      * @param targetName Refers to the name identifier.
      * @param message Refers to the exception message for the specific command.
