@@ -38,9 +38,9 @@ public class PinCommand extends Command {
         requireNonNull(model);
 
         Person personToPin = model.findByName(name, PinMessages.MESSAGE_PIN_NAME_NOT_FOUND);
+        Person pinnedPerson = personToPin.updateToPinned();
 
-        personToPin.toPin();
-
+        model.setPerson(personToPin, pinnedPerson);
         model.updatePinnedPersonList();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

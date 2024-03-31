@@ -89,6 +89,28 @@ public class Person {
         return personToReturn;
     }
 
+    /**
+     * Returns a new instantiation of the current {@code Person} with the updated pin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    public Person updateToPinned() {
+        Person personToReturn = new Person(this.name, this.phone, this.email, this.address, this.note, this.tags,
+                this.rating);
+        personToReturn.toPin();
+        return personToReturn;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Person} with the updated unpin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    public Person updateToUnpinned() {
+        Person personToReturn = new Person(this.name, this.phone, this.email, this.address, this.note, this.tags,
+                this.rating);
+        personToReturn.toUnpin();
+        return personToReturn;
+    }
+
     public Pin getPin() {
         return this.pin;
     }

@@ -61,8 +61,32 @@ public class Supplier extends Person {
     }
 
     /**
+     * Returns a new instantiation of the current {@code Supplier} with the updated pin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Supplier updateToPinned() {
+        Supplier supplierToReturn = new Supplier(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
+                this.getNote(), this.getTags(), this.product, this.price, this.getRating());
+        supplierToReturn.toPin();
+        return supplierToReturn;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Supplier} with the updated unpin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Supplier updateToUnpinned() {
+        Supplier supplierToReturn = new Supplier(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
+                this.getNote(), this.getTags(), this.product, this.price, this.getRating());
+        supplierToReturn.toUnpin();
+        return supplierToReturn;
+    }
+
+    /**
      * Returns true if both staffs have the same identity and data fields.
-     * This defines a stronger notion of equality between two staff.
+     * This defines a stronger notion of equality between two supplier.
      */
     @Override
     public boolean equals(Object other) {
