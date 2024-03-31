@@ -26,8 +26,7 @@ public class PinCommand extends Command {
     private final Name name;
 
     /**
-     * @param name of the person in the person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param name of the person in the person list to pin.
      */
     public PinCommand(Name name) {
         requireNonNull(name);
