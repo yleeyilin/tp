@@ -60,6 +60,30 @@ public class Maintainer extends Person {
     }
 
     /**
+     * Returns a new instantiation of the current {@code Maintainer} with the updated pin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Maintainer updateToPinned() {
+        Maintainer maintainerToReturn = new Maintainer(this.getName(), this.getPhone(), this.getEmail(),
+                this.getAddress(), this.getNote(), this.getTags(), this.skill, this.commission, this.getRating());
+        maintainerToReturn.toPin();
+        return maintainerToReturn;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Maintainer} with the updated unpin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Maintainer updateToUnpinned() {
+        Maintainer maintainerToReturn = new Maintainer(this.getName(), this.getPhone(), this.getEmail(),
+                this.getAddress(), this.getNote(), this.getTags(), this.skill, this.commission, this.getRating());
+        maintainerToReturn.toUnpin();
+        return maintainerToReturn;
+    }
+
+    /**
      * Returns true if both Maintainer have the same identity and data fields.
      * This defines a stronger notion of equality between two maintainer.
      */
