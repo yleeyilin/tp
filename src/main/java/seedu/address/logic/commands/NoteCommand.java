@@ -32,8 +32,8 @@ public class NoteCommand extends Command {
     private final Note note;
 
     /**
-     * @param name of the person in the filtered person list to edit the note
-     * @param note of the person to be updated to
+     * @param name of the person in the filtered person list to edit the note.
+     * @param note of the person to be updated to.
      */
     public NoteCommand(Name name, Note note) {
         requireAllNonNull(name, note);

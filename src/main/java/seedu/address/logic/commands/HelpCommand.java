@@ -39,7 +39,6 @@ public class HelpCommand extends Command {
         this.commandType = commandType;
     }
 
-    //change name of this? not really a verb. buy its a boolean
     /**
      * Checks if command provided is a valid command.
      *

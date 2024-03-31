@@ -10,7 +10,6 @@ import java.util.Objects;
 
 /**
  * Represents a Person's Note with Deadline in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
  */
 public class DeadlineNote extends Note {
 
@@ -18,7 +17,7 @@ public class DeadlineNote extends Note {
     private String deadline;
 
     /**
-     * Constructs an {@code Note}.
+     * Constructs an {@code DeadlineNote}.
      *
      * @param note A valid note.
      * @param note A valid deadline.
@@ -30,7 +29,6 @@ public class DeadlineNote extends Note {
         this.deadline = convertDate(deadline);
     }
 
-    //same thing, do i rename to somethinf more verby?
     /**
      * Returns true if date is in valid format, else
      * returns false.
