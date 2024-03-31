@@ -16,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpOtherWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";
-    public static String displayedMessage = "Go to our user guide for more information : " + USERGUIDE_URL;
+    private static String displayedMessage = "Go to our user guide for more information : " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

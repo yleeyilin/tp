@@ -48,7 +48,8 @@ public class HelpMessages extends Messages {
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
 
-    public static final String DISPLAYED_SEARCH_MESSAGE = "Searches through the address book using specified fields and keyword"
+    public static final String DISPLAYED_SEARCH_MESSAGE = "Searches through the address book using"
+            + " specified fields and keyword"
             + "\n" + "" + "\n"
             + "Formats:" + "\n"
             + "/search ; name : [full/partial name]" + "\n"
