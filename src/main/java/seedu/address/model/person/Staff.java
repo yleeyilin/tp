@@ -61,6 +61,30 @@ public class Staff extends Person {
     }
 
     /**
+     * Returns a new instantiation of the current {@code Staff} with the updated pin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Staff updateToPinned() {
+        Staff staffToReturn = new Staff(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
+                this.getNote(), this.getTags(), this.salary, this.employment, this.getRating());
+        staffToReturn.toPin();
+        return staffToReturn;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Staff} with the updated unpin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Staff updateToUnpinned() {
+        Staff staffToReturn = new Staff(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
+                this.getNote(), this.getTags(), this.salary, this.employment, this.getRating());
+        staffToReturn.toUnpin();
+        return staffToReturn;
+    }
+
+    /**
      * Returns true if both staffs have the same identity and data fields.
      * This defines a stronger notion of equality between two staff.
      */

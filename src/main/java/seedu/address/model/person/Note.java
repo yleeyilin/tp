@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's Note in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
  */
 public class Note {
 
@@ -32,14 +31,18 @@ public class Note {
 
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid note.
      */
     public static boolean isValidNote(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string contains deadline prefix.
+     */
     public static boolean isNoteContainingDeadline(String test) {
-        return test.contains("; deadline :");
+        String trimmedDeadlinePrefix = "; deadline :";
+        return test.contains(trimmedDeadlinePrefix);
     }
 
     public void setValue(String value) {
