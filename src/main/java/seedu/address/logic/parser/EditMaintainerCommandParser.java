@@ -63,9 +63,13 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditMaintainerCommand.MESSAGE_USAGE));
+        ArrayList<String> unknownFieldPrefixes = ArgumentTokenizer.checkUnknownPrefix(fieldArgs,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_SKILL, PREFIX_COMMISSION);
+        ParserUtil.verifyNoUnknownPrefix(unknownFieldPrefixes, EditMaintainerCommand.MESSAGE_USAGE);
 
         ArgumentMultimap fieldArgMultimap =
-                ArgumentTokenizer.tokenize(fieldArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

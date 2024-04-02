@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.EditMaintainerCommand;
 import seedu.address.logic.commands.EditStaffCommand;
 import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -63,6 +64,9 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditStaffCommand.MESSAGE_USAGE));
+        ArrayList<String> unknownFieldPrefixes = ArgumentTokenizer.checkUnknownPrefix(fieldArgs,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT, PREFIX_SALARY);
+        ParserUtil.verifyNoUnknownPrefix(unknownFieldPrefixes, EditMaintainerCommand.MESSAGE_USAGE);
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

@@ -60,12 +60,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE));
+        ArrayList<String> unknownFieldPrefixes = ArgumentTokenizer.checkUnknownPrefix(fieldArgs,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        ParserUtil.verifyNoUnknownPrefix(unknownFieldPrefixes, EditCommand.MESSAGE_USAGE);
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-
         EditPersonDescriptor editPersonDescriptor;
 
         try {
