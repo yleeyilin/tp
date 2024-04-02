@@ -15,13 +15,13 @@ import seedu.address.model.person.RemindPredicate;
  * the current day onwards.
  */
 public class RemindCommand extends Command {
-    private final Logger logger = LogsCenter.getLogger(getClass());
     public static final String COMMAND_WORD = "/remind";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all persons names"
             + " with notes that have deadlines from"
             + "the current day onwards.\n"
             + "Example: " + COMMAND_WORD;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @Override
     public CommandResult execute(Model model) {

@@ -21,7 +21,6 @@ import seedu.address.model.person.Person;
  * A non-empty note must be specified.
  */
 public class NoteCommand extends Command {
-    private final Logger logger = LogsCenter.getLogger(getClass());
     public static final String COMMAND_WORD = "/note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -34,6 +33,7 @@ public class NoteCommand extends Command {
             + " Moochie" + PREFIX_NOTE + "Meet at 6pm Tuesday";
     private final Name name;
     private final Note note;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * @param name of the person in the filtered person list to edit the note.

@@ -13,7 +13,6 @@ import seedu.address.model.Model;
  * Format full help instructions for every command for display.
  */
 public class HelpCommand extends Command {
-    private final Logger logger = LogsCenter.getLogger(getClass());
     public static final String COMMAND_WORD = "/help";
     public static final String MESSAGE_USAGE = "Shows program usage instructions.\n"
             + "Example: /help ; command : exit";
@@ -21,6 +20,7 @@ public class HelpCommand extends Command {
             + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort as"
             + " valid command type inputs.";
     private String commandType;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
 
     enum CommandTypes {
