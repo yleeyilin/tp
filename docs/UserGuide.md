@@ -152,13 +152,21 @@ General Format: `/add-person ; name : [target name] ; phone : [target phone] ; a
 
 For example, if you want to add Janna's contact into PoochPlanner, you can key in `/add-person ; name : Janna ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com`, specifying the target fields `name`, `phone`, `address` and `email` in the command.
 
-![Add before](images/ug-images/command-images/add-before.png)
-Image depicting an example of using `add-person` command
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/add-before.png" alt="Add before" style="width:100%;"/>
+    <small>Image depicting an example of using `add-person` command</small>
+    <br>
+</div>
 
 Upon adding the new contact, PoochPlanner generates a newly generated contact card displaying Janna's details.
 
-![Add after](images/ug-images/command-images/add-after.png)
-Image depicting a newly added contact card
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/add-after.png" alt="Add after" style="width:100%;"/>
+    <small>Image depicting a newly added contact card` command</small>
+    <br>
+</div>
 
 PoochPlanner allows you to add staff (`add-staff`), supplier (`add-supplier`) and maintainer (`add-maintainer`) as well. The table below summarises the command, format and examples for each type of person.
 
@@ -195,13 +203,21 @@ General Format: `/edit-person ; name : [target-name] ; field : { [target-field 1
 
 For example, if you want to modify Janna's address, you can key in `/edit-person ; name : Janna ; field : { address : Pooch Street 31 }`, specifying the target name `Janna` and address `Pooch Street 31`.
 
-![Edit before](images/ug-images/command-images/edit-before.png)
-Image depicting an example of using `edit-person` command
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/edit-before.png" alt="Edit before" style="width:100%;"/>
+    <small>Image depicting an example of using `edit-person` command</small>
+    <br>
+</div>
 
 Upon editing the new contact, Janna's address is updated with the new address `Pooch Street 31`.
 
-![Edit after](images/ug-images/command-images/edit-after.png)
-Image depicting updated address
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/edit-after.png" alt="Edit after" style="width:100%;"/>
+    <small>Image depicting updated address</small>
+    <br>
+</div>
 
 The edit command also works for staff (`edit-staff`), supplier (`edit-supplier`) and maintainer (`edit-maintainer`) as well. The table below summarises the command, format and examples for each type of person.
 
@@ -243,13 +259,21 @@ Format: `/search ; [target-field] : [value]`
 
 For example, if you want to search for every **Tom** in the address book, you can key in `/search ; name : Tom`, specifying `name` as the target field to search within, and `Tom` as the search query.
 
-![Search before](images/ug-images/command-images/search-before.png)
-Image depicting `search` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/search-before.png" alt="Search before" style="width:100%;"/>
+    <small>Image depicting `search` command usage</small>
+    <br>
+</div>
 
 Upon searching, the address book displays all contacts that contains the name `Tom`.
 
-![Search after](images/ug-images/command-images/search-after.png)
-Image depicting matching queries for `Tom`
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/search-after.png" alt="Search after" style="width:100%;"/>
+    <small>Image depicting matching queries for `Tom`</small>
+    <br>
+</div>
 
 More Examples:
 * `/search ; phone : 98765432`
@@ -293,13 +317,21 @@ Format: `/delete ; name : [value]`
 
 For example, if you want to delete **Poochie** from the address book, you can key in `/delete ; name : Poochie`.
 
-![Delete before](images/ug-images/command-images/delete-before.png)
-Image depicting `delete` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/delete-before.png" alt="Delete before" style="width:100%;"/>
+    <small>Image depicting `delete` command usage</small>
+    <br>
+</div>
 
 Upon deleting, PoochPlanner removes `Poochie` from the list of contacts.
 
-![Delete after](images/ug-images/command-images/delete-after.png)
-Image depicting updated list of contacts
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/delete-after.png" alt="Delete after" style="width:100%;"/>
+    <small>Image depicting updated list of contacts</small>
+    <br>
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -316,13 +348,21 @@ Format: `/rate ; name : [name] ; rating : [rating value from 1-5]`
 
 For example, if you want to rate **Janna** 5 stars, you can key in `/rate ; name : Janna ; rating : 5`.
 
-![Rate before](images/ug-images/command-images/rate-before.png)
-Image depicting `rate` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/rate-before.png" alt="Rate before" style="width:100%;"/>
+    <small>Image depicting `rate` command usage</small>
+    <br>
+</div>
 
 PoochPlanner updates the rating for Janna to 5 stars.
 
-![Rate after](images/ug-images/command-images/rate-after.png)
-Image depicting updated rating
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/rate-after.png" alt="Rate after" style="width:100%;"/>
+    <small>Image depicting updated rating</small>
+    <br>
+</div>
 
 More Examples:
 * `/rate ; name : Poochie ; rating : 3`
@@ -356,13 +396,21 @@ Format: `/pin ; name : [name]`
 
 For example, if you want to pin **Poochie** to the top, you can key in`/pin ; name : Poochie`.
 
-![Pin before](images/ug-images/command-images/pin-before.png)
-Image depicting `pin` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/pin-before.png" alt="Pin before" style="width:100%;"/>
+    <small>Image depicting `pin` command usage</small>
+    <br>
+</div>
 
 PoochPlanner pins `Poochie` on top.
 
-![Pin after](images/ug-images/command-images/pin-after.png)
-Image depicting pinned card
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/pin-after.png" alt="Pin after" style="width:100%;"/>
+    <small>Image depicting pinned card</small>
+    <br>
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -387,13 +435,21 @@ Format: `/unpin ; name : [name]`
 
 For example, if you want to unpin **Poochie**, you can key in`/unpin ; name : Poochie`.
 
-![Unpin before](images/ug-images/command-images/unpin-before.png)
-Image depicting `unpin` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/unpin-before.png" alt="Unpin before" style="width:100%;"/>
+    <small>Image depicting `unpin` command usage</small>
+    <br>
+</div>
 
 PoochPlanner unpins `Poochie`.
 
-![Unpin after](images/ug-images/command-images/unpin-after.png)
-Image depicting pinned card
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/unpin-after.png" alt="Unpin after" style="width:100%;"/>
+    <small>Image depicting unpinned card</small>
+    <br>
+</div>
 
 More Examples:
 * `/unpin ; name : Moochie`
@@ -417,13 +473,21 @@ Format: `/sort ; field : [target-field]`
 
 For example, `sort ; field : name` sorts the contacts by name in ascending order, from A to Z.
 
-![Sort before](images/ug-images/command-images/sort-before.png)
-Image depicting `sort` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/sort-before.png" alt="Sort before" style="width:100%;"/>
+    <small>Image depicting `sort` command usage</small>
+    <br>
+</div>
 
 PoochPlanner sorts the contacts in ascending order.
 
-![Sort after](images/ug-images/command-images/sort-after.png)
-Image depicting sorted list of contacts
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/sort-after.png" alt="Sort after" style="width:100%;"/>
+    <small>Image depicting sorted list of contacts</small>
+    <br>
+</div>
 
 More Examples:
 * `/sort ; field : phone`
@@ -447,13 +511,21 @@ Format: `/note ; name : [name] ; note : [note message]`
 
 For example, if you want to add a note _"meet poochie tonight to get kibble"_ to Poochie, you can key in `/note ; name : Poochie ; note : meet poochie tonight to eat kibble`.
 
-![Note before](images/ug-images/command-images/note-before.png)
-Image depicting `note` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/note-before.png" alt="Note before" style="width:100%;"/>
+    <small>Image depicting `note` command usage</small>
+    <br>
+</div>
 
 PoochPlanner adds the note to `Poochie` within the contact card.
 
-![Note after](images/ug-images/command-images/note-after.png)
-Image depicting newly added note
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/note-after.png" alt="Note after" style="width:100%;"/>
+    <small>Image depicting newly added note</small>
+    <br>
+</div>
 
 More Examples:
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie`
@@ -483,13 +555,21 @@ Undoes the most recent action so that you can revert back changes easily.
 
 Format: `/undo`
 
-![Undo before](images/ug-images/command-images/undo-before.png)
-Image depicting `undo` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/undo-before.png" alt="Undo before" style="width:100%;"/>
+    <small>Image depicting `undo` command usage</small>
+    <br>
+</div>
 
 PoochPlanner undoes the accidental deletion of `Poochie`
 
-![Undo after](images/ug-images/command-images/undo-after.png)
-Image depicting `undo` action completion
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/undo-after.png" alt="Undo after" style="width:100%;"/>
+    <small>Image depicting `undo` action completion</small>
+    <br>
+</div>
 
 Examples:
 * `/undo`
@@ -517,13 +597,21 @@ Redoes an action so that you can reverse unintentional uses of the undo command.
 
 Format: `/redo`
 
-![Redo before](images/ug-images/command-images/redo-before.png)
-Image depicting `redo` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/redo-before.png" alt="Redo before" style="width:100%;"/>
+    <small>Image depicting `redo` command usage</small>
+    <br>
+</div>
 
 PoochPlanner redoes the deletion of `Poochie`
 
-![Redo after](images/ug-images/command-images/redo-after.png)
-Image depicting `redo` action completion
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/redo-after.png" alt="Redo after" style="width:100%;"/>
+    <small>Image depicting `redo` action completion</small>
+    <br>
+</div>
 
 Examples:
 * `/redo`
@@ -552,13 +640,21 @@ Shows a help message of how to use commands so that you can get help about comma
 
 Format: `/help ; command : [command type]`
 
-![Help before](images/ug-images/command-images/help-before.png)
-Image depicting `help` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/help-before.png" alt="Help before" style="width:100%;"/>
+    <small>Image depicting `help` command usage</small>
+    <br>
+</div>
 
 PoochPlanneropens the `help` window for `add` command
 
-![Help after](images/ug-images/command-images/help-after.png)
-Image depicting `help` window
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/help-after.png" alt="Help after" style="width:100%;"/>
+    <small>Image depicting `help` window</small>
+    <br>
+</div>
 
 More Examples:
 * `/help ; command : delete`
