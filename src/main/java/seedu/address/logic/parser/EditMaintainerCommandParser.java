@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -48,12 +46,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         if (hasDuplicateNamePrefix) {
             unknownPrefixes.add("name");
         }
-
-        if (unknownPrefixes.size() > 0) {
-            String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
-            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
-            throw new ParseException(exception);
-        }
+        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, EditMaintainerCommand.MESSAGE_USAGE);
 
         // check for missing name
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {

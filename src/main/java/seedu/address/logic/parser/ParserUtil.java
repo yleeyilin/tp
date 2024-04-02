@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -362,4 +365,19 @@ public class ParserUtil {
             throw new ParseException(message, pe);
         }
     }
+
+    /**
+     * Verifies that there are no invalid prefixes.
+     * @param unknownPrefixes List of unknown prefixes.
+     * @throws ParseException Thrown when there are valid prefixes.
+     */
+    public static void verifyNoUnknownPrefix(ArrayList<String> unknownPrefixes, String message) throws ParseException {
+        if (unknownPrefixes.size() > 0) {
+            String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
+            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
+            throw new ParseException(exception);
+        }
+    }
+
+
 }
