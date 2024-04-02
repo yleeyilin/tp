@@ -1,10 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.messages.UnpinMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,18 +27,23 @@ public class UnpinCommandParser implements Parser<UnpinCommand> {
     public UnpinCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        Name name;
+        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args, PREFIX_NAME);
+
+        if (unknownPrefixes.size() > 0) {
+            String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
+            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+            throw new ParseException(exception);
+        }
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        // check for missing name
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             throw new ParseException(String.format(UnpinMessages.MESSAGE_UNPIN_MISSING_NAME,
                     UnpinCommand.MESSAGE_USAGE));
         }
 
-        name = mapName(argMultimap);
+        Name name = mapName(argMultimap);
 
         return new UnpinCommand(name);
     }
