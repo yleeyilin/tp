@@ -6,7 +6,6 @@ import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.PinCommand;
@@ -38,35 +37,13 @@ public class PinCommandParser implements Parser<PinCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             throw new ParseException(String.format(PinMessages.MESSAGE_PIN_MISSING_NAME,
                     PinCommand.MESSAGE_USAGE));
         }
 
-        Name name = mapName(argMultimap);
+        Name name = ParserUtil.mapName(argMultimap, PinMessages.MESSAGE_PIN_INVALID_NAME);
 
         return new PinCommand(name);
-    }
-
-    /**
-     * Returns name value using PREFIX.
-     * @param argMultimap Object that contains mapping of prefix to value.
-     * @return Returns object representing name.
-     * @throws ParseException Thrown when command is in invalid format.
-     */
-    public Name mapName(ArgumentMultimap argMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(PinMessages.MESSAGE_PIN_INVALID_NAME, pe.getMessage()));
-        }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

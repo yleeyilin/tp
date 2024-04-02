@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditMaintainerCommand;
 import seedu.address.logic.commands.EditMaintainerCommand.EditMaintainerDescriptor;
@@ -57,19 +56,20 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         }
 
         // check for missing name
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 
         // check for missing field
-        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 
-        name = mapName(argMultimap);
-        fieldArgs = mapFields(argMultimap);
+        name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
+        fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditMaintainerCommand.MESSAGE_USAGE));
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -95,43 +95,6 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         editMaintainerDescriptor.setTags(tags);
 
         return new EditMaintainerCommand(name, editMaintainerDescriptor);
-    }
-
-    /**
-     * Returns name value using PREFIX.
-     * @param argMultimap Object that contains mapping of prefix to value.
-     * @return Returns object representing name.
-     * @throws ParseException Thrown when command is in invalid format.
-     */
-    public Name mapName(ArgumentMultimap argMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_NAME, pe.getMessage()));
-        }
-    }
-
-    /**
-     * Returns field values using PREFIX.
-     * @param argMultimap Object that contains mapping of prefix to value.
-     * @return Returns object representing the respective fields.
-     * @throws ParseException Thrown when command is in invalid format.
-     */
-    public String mapFields(ArgumentMultimap argMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseField(argMultimap.getValue(PREFIX_FIELD).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditMaintainerCommand.MESSAGE_USAGE), pe);
-        }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
