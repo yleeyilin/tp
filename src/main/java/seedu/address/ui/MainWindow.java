@@ -36,11 +36,10 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+
+    // help windows for each command
     private HelpWindow helpWindow;
-    private HelpDeleteWindow helpDeleteWindow;
-    private HelpEditWindow helpEditWindow;
-    private HelpSearchWindow helpSearchWindow;
-    private HelpAddWindow helpAddWindow;
+    private HelpOtherWindow helpOtherWindow;
 
     @FXML
     private StackPane titlePlaceholder;
@@ -75,11 +74,9 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        // Instantiate all help windows
         helpWindow = new HelpWindow();
-        helpDeleteWindow = new HelpDeleteWindow();
-        helpEditWindow = new HelpEditWindow();
-        helpSearchWindow = new HelpSearchWindow();
-        helpAddWindow = new HelpAddWindow();
+        helpOtherWindow = new HelpOtherWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -156,30 +153,75 @@ public class MainWindow extends UiPart<Stage> {
     public void handleAllHelp(CommandResult commandResult) {
         String userFeedback = commandResult.getFeedbackToUser();
 
-        Boolean isHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE);
-        Boolean isDeleteHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE);
-        Boolean isEditHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE);
-        Boolean isSearchHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE);
-        Boolean isAddHelpCommand = commandResult.isShowHelp()
-                && userFeedback.equals(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE);
+        if (!commandResult.isShowHelp()) {
+            return;
+        }
 
-        if (isHelpCommand) {
+        Boolean isHelpGeneralCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE);
+        Boolean isDeleteHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE);
+        Boolean isEditHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE);
+        Boolean isSearchHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE);
+        Boolean isAddHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE);
+        Boolean isExitHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EXIT_HELP_MESSAGE);
+        Boolean isListHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_LIST_HELP_MESSAGE);
+        Boolean isNoteHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_NOTE_HELP_MESSAGE);
+        Boolean isPinHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_PIN_HELP_MESSAGE);
+        Boolean isUnpinHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_UNPIN_HELP_MESSAGE);
+        Boolean isRateHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_RATE_HELP_MESSAGE);
+        Boolean isRedoHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_REDO_HELP_MESSAGE);
+        Boolean isUndoHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_UNDO_HELP_MESSAGE);
+        Boolean isRemindHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_REMIND_HELP_MESSAGE);
+        Boolean isSortHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE);
+
+
+
+        if (isHelpGeneralCommand) {
             handleHelp();
         } else if (isDeleteHelpCommand) {
-            handleDeleteHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_DELETE_MESSAGE);
         } else if (isEditHelpCommand) {
-            handleEditHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_EDIT_MESSAGE);
         } else if (isSearchHelpCommand) {
-            handleSearchHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_SEARCH_MESSAGE);
         } else if (isAddHelpCommand) {
-            handleAddHelp();
+            handleOtherHelp(HelpMessages.DISPLAYED_ADD_MESSAGE);
+        } else if (isExitHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_EXIT_MESSAGE);
+        } else if (isListHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_LIST_MESSAGE);
+        } else if (isNoteHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_NOTE_MESSAGE);
+        } else if (isPinHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_PIN_MESSAGE);
+        } else if (isUnpinHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_UNPIN_MESSAGE);
+        } else if (isRateHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_RATE_MESSAGE);
+        } else if (isRedoHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_REDO_MESSAGE);
+        } else if (isUndoHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_UNDO_MESSAGE);
+        } else if (isRemindHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_REMIND_MESSAGE);
+        } else if (isSortHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_SORT_MESSAGE);
         }
 
     }
+
+    /**
+     * Opens the help delete window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleOtherHelp(String displayedMessage) {
+        helpOtherWindow.setHelpMessage(displayedMessage);
+        if (!helpOtherWindow.isShowing()) {
+            helpOtherWindow.show();
+        } else {
+            helpOtherWindow.focus();
+        }
+    }
+
 
     /**
      * Opens the help window or focuses on it if it's already opened.
@@ -190,54 +232,6 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help delete window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleDeleteHelp() {
-        if (!helpDeleteWindow.isShowing()) {
-            helpDeleteWindow.show();
-        } else {
-            helpDeleteWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help edit window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleEditHelp() {
-        if (!helpEditWindow.isShowing()) {
-            helpEditWindow.show();
-        } else {
-            helpEditWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help search window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleSearchHelp() {
-        if (!helpSearchWindow.isShowing()) {
-            helpSearchWindow.show();
-        } else {
-            helpSearchWindow.focus();
-        }
-    }
-
-    /**
-     * Opens the help search window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleAddHelp() {
-        if (!helpAddWindow.isShowing()) {
-            helpAddWindow.show();
-        } else {
-            helpAddWindow.focus();
         }
     }
 

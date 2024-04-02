@@ -10,7 +10,6 @@ import java.util.Objects;
 
 /**
  * Represents a Person's Note with Deadline in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
  */
 public class DeadlineNote extends Note {
 
@@ -18,7 +17,7 @@ public class DeadlineNote extends Note {
     private String deadline;
 
     /**
-     * Constructs an {@code Note}.
+     * Constructs an {@code DeadlineNote}.
      *
      * @param note A valid note.
      * @param note A valid deadline.
@@ -59,8 +58,10 @@ public class DeadlineNote extends Note {
      * readable format.
      */
     public String convertDate(String deadline) {
-        LocalDate currDate = LocalDate.parse(deadline);
-        return currDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        assert (isValidDate(deadline)) : "deadline to convert is not valid";
+
+        LocalDate originalDate = LocalDate.parse(deadline);
+        return originalDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
 
@@ -81,7 +82,8 @@ public class DeadlineNote extends Note {
         }
 
         DeadlineNote otherNote = (DeadlineNote) other;
-        return super.equals(otherNote) && deadline.equals(otherNote.deadline);
+        boolean isDeadlineEqual = deadline.equals(otherNote.deadline);
+        return super.equals(otherNote) && isDeadlineEqual;
     }
 
     @Override

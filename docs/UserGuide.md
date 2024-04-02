@@ -3,15 +3,19 @@ layout: page
 title: User Guide
 ---
 
-![Ui](images/PoochPlannerLogo.png)
+<div style="text-align:center;">
+    <br>
+    <img src="images/PoochPlannerLogo.png" alt="Add before" style="width:100%;"/>
+    <br>
+</div>
 
 ## Welcome to PoochPlanner
 
 **PoochPlanner** is the quintessential address book crafted exclusively for ***dog cafe owners***. We understand the unique challenges you face, which is why PoochPlanner comes packed with features designed specifically to simplify contact management for dog cafe owners like you.
 
-By seamlessly combining the efficiency of a Command Line Interface (CLI) with the intuitive interface of a Graphical User Interface (GUI), PoochPlanner empowers you to effortlessly complete your contact management tasks ***two*** times faster than traditional GUI applications.
+By seamlessly combining the efficiency of a Command Line Interface (CLI) with the intuitive interface of a Graphical User Interface (GUI), PoochPlanner empowers you to effortlessly complete your contact management tasks two times faster than traditional GUI applications.
 
-Get started by following the steps in this user guide! Experience the ***difference*** today with PoochPlanner—the ultimate solution tailored to your needs. 
+Get started by following the steps in this user guide! Experience the difference today with PoochPlanner—the ultimate solution tailored to your needs. 
 
 ## Table of Contents
 
@@ -24,10 +28,10 @@ PoochPlanner is your go-to address book, tailor-made for dog cafe owners like yo
 
 Contact | Definition and Examples
 --------|------------------
-Person | Any persons that do not hold a special relationship<br> E.g. Neighbours, Work Friends.
+Person | Any persons that do not hold a special relationship.<br> E.g. Neighbours, Work Friends.
 Staff | Any full-time or part-time employees that do not do any specialised work.<br> E.g. Waiters, Waitresses, Dishwashers.
 Supplier | Add logistics partner that supplies stocks for your dog cafe.<br> E.g. Kibbles Supplier, Coffee Beans Supplier.
-Maintainer | Any externally hired specialised persons who take care of the Dogs.<br> E.g. Dog Groomers, Vet.
+Maintainer | Any externally hired specialised persons who take care of the dogs.<br> E.g. Dog Groomers, Vet.
 
 
 But our commitment to improving your contact management experience doesn't end there. In addition to the essential functionalities like adding, searching, editing, deleting, undoing, and redoing, **PoochPlanner** comes loaded with extra features. You can now pin important contacts, jot down notes, set reminders, and even rate your contacts - all to ensure a seamless and efficient workflow tailored to your needs.
@@ -40,20 +44,20 @@ Note | Add additional information so that you can easily view all contact detail
 Remind | Add any reminders to a contact so that you will never miss out any tasks.
 Rating | Rate any of the contacts so that you can easily track their performance.
 
-## How to use this User Guide
+## Navigating this User Guide
 This user guide is designed to help you make the most of PoochPlanner, whether you are a beginner or an experienced user.
 
 - If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
 - Encountering issues or have questions about PoochPlanner? Check out our **[FAQ](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#faq)** for helpful troubleshooting tips and answers to common queries.
 - New to PoochPlanner? Explore the following sections to familiarise yourself with the basics:<br>
-    > **[Navigating the GUI](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#navigating-the-gui)** : Learn about the command box and contact cards.<br>
-    > **[Features](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#features)** : Discover the exciting features waiting for you.<br>
+    1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the command box and contact cards.<br>
+    2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
 - Already familiar with PoochPlanner? Dive into our special features to enhance your experience:
-    > **[Rate](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#rating-a-contact--rate)** : Give performance rating to your contacts. <br>
-    > **[Pin](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#pinning-a-contact--pin)** & **[Unpin](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
-    > **[Sort](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
-    > **[Note](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#adding-a-note--note)** : Add notes to your contacts.<br>
-- Check out our **[Command Summary](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#command-summary)** for a quick reference to all available commands.
+    1. **[Rate](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#rating-a-contact--rate)** : Give performance rating to your contacts. <br>
+    2. **[Pin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#pinning-a-contact--pin)** & **[Unpin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
+    3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
+    4. **[Note](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : Add notes to your contacts.<br>
+- Check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)** for a quick reference to all available commands.
 
 
 ## Useful Notations and Glossary
@@ -127,6 +131,8 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 
 ## Features
 
+### Core Features
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -144,7 +150,7 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Adding a contact: `add`
+#### Adding a contact: `add`
 
 Adds a **person/ staff / supplier / maintainer** contact to PoochPlanner to consistently update your planner with new contacts.
 
@@ -152,13 +158,21 @@ General Format: `/add-person ; name : [target name] ; phone : [target phone] ; a
 
 For example, if you want to add Janna's contact into PoochPlanner, you can key in `/add-person ; name : Janna ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com`, specifying the target fields `name`, `phone`, `address` and `email` in the command.
 
-![Add before](images/ug-images/command-images/add-before.png)
-Image depicting an example of using `add-person` command
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/add-before.png" alt="Add before" style="width:100%;"/>
+    <small>Image depicting an example of using `add-person` command</small>
+    <br>
+</div>
 
 Upon adding the new contact, PoochPlanner generates a newly generated contact card displaying Janna's details.
 
-![Add after](images/ug-images/command-images/add-after.png)
-Image depicting a newly added contact card
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/add-after.png" alt="Add after" style="width:100%;"/>
+    <small>Image depicting a newly added contact card` command</small>
+    <br>
+</div>
 
 PoochPlanner allows you to add staff (`add-staff`), supplier (`add-supplier`) and maintainer (`add-maintainer`) as well. The table below summarises the command, format and examples for each type of person.
 
@@ -187,7 +201,7 @@ PoochPlanner allows you to add staff (`add-staff`), supplier (`add-supplier`) an
 </div>
 
 
-### Editing a contact : `edit`
+#### Editing a contact : `edit`
 
 Edits a **person / staff / supplier / maintainer** contact in the Pooch Planner so that you can consistently modify and update your contacts with new details.
 
@@ -195,13 +209,21 @@ General Format: `/edit-person ; name : [target-name] ; field : { [target-field 1
 
 For example, if you want to modify Janna's address, you can key in `/edit-person ; name : Janna ; field : { address : Pooch Street 31 }`, specifying the target name `Janna` and address `Pooch Street 31`.
 
-![Edit before](images/ug-images/command-images/edit-before.png)
-Image depicting an example of using `edit-person` command
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/edit-before.png" alt="Edit before" style="width:100%;"/>
+    <small>Image depicting an example of using `edit-person` command</small>
+    <br>
+</div>
 
 Upon editing the new contact, Janna's address is updated with the new address `Pooch Street 31`.
 
-![Edit after](images/ug-images/command-images/edit-after.png)
-Image depicting updated address
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/edit-after.png" alt="Edit after" style="width:100%;"/>
+    <small>Image depicting updated address</small>
+    <br>
+</div>
 
 The edit command also works for staff (`edit-staff`), supplier (`edit-supplier`) and maintainer (`edit-maintainer`) as well. The table below summarises the command, format and examples for each type of person.
 
@@ -235,7 +257,7 @@ The edit command also works for staff (`edit-staff`), supplier (`edit-supplier`)
 
 </div>
 
-### Searching a contact : `search`
+#### Searching a contact : `search`
 
 Filters a **person / staff / supplier / maintainer** contact in PoochPlanner so that you can locate your contacts more easily.
 
@@ -243,13 +265,21 @@ Format: `/search ; [target-field] : [value]`
 
 For example, if you want to search for every **Tom** in the address book, you can key in `/search ; name : Tom`, specifying `name` as the target field to search within, and `Tom` as the search query.
 
-![Search before](images/ug-images/command-images/search-before.png)
-Image depicting `search` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/search-before.png" alt="Search before" style="width:100%;"/>
+    <small>Image depicting `search` command usage</small>
+    <br>
+</div>
 
 Upon searching, the address book displays all contacts that contains the name `Tom`.
 
-![Search after](images/ug-images/command-images/search-after.png)
-Image depicting matching queries for `Tom`
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/search-after.png" alt="Search after" style="width:100%;"/>
+    <small>Image depicting matching queries for `Tom`</small>
+    <br>
+</div>
 
 More Examples:
 * `/search ; phone : 98765432`
@@ -285,7 +315,7 @@ Example:
 
 </div>
 
-### Deleting a contact : `delete`
+#### Deleting a contact : `delete`
 
 Deletes a **person / staff / supplier / maintainer** contact from the Pooch Planner so that you can remove outdated contacts.
 
@@ -293,13 +323,21 @@ Format: `/delete ; name : [value]`
 
 For example, if you want to delete **Poochie** from the address book, you can key in `/delete ; name : Poochie`.
 
-![Delete before](images/ug-images/command-images/delete-before.png)
-Image depicting `delete` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/delete-before.png" alt="Delete before" style="width:100%;"/>
+    <small>Image depicting `delete` command usage</small>
+    <br>
+</div>
 
 Upon deleting, PoochPlanner removes `Poochie` from the list of contacts.
 
-![Delete after](images/ug-images/command-images/delete-after.png)
-Image depicting updated list of contacts
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/delete-after.png" alt="Delete after" style="width:100%;"/>
+    <small>Image depicting updated list of contacts</small>
+    <br>
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -308,7 +346,9 @@ Image depicting updated list of contacts
 * Name must be present in Pooch Planner.<br>
 </div>
 
-### Rating a Contact : `rate`
+### Special Features
+
+#### Rating a Contact : `rate`
 
 Gives a **person / staff / supplier / maintainer** contact from the Pooch Planner a performance rating so that cafe owners can track the performance of their contacts.
 
@@ -316,13 +356,21 @@ Format: `/rate ; name : [name] ; rating : [rating value from 1-5]`
 
 For example, if you want to rate **Janna** 5 stars, you can key in `/rate ; name : Janna ; rating : 5`.
 
-![Rate before](images/ug-images/command-images/rate-before.png)
-Image depicting `rate` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/rate-before.png" alt="Rate before" style="width:100%;"/>
+    <small>Image depicting `rate` command usage</small>
+    <br>
+</div>
 
 PoochPlanner updates the rating for Janna to 5 stars.
 
-![Rate after](images/ug-images/command-images/rate-after.png)
-Image depicting updated rating
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/rate-after.png" alt="Rate after" style="width:100%;"/>
+    <small>Image depicting updated rating</small>
+    <br>
+</div>
 
 More Examples:
 * `/rate ; name : Poochie ; rating : 3`
@@ -348,7 +396,7 @@ More Examples:
 
 </div>
 
-### Pinning a contact : `pin`
+#### Pinning a contact : `pin`
 
 Pins the specified contact on Pooch Planner so that your important contacts will consistently appear at the top on the contact list.
 
@@ -356,13 +404,21 @@ Format: `/pin ; name : [name]`
 
 For example, if you want to pin **Poochie** to the top, you can key in`/pin ; name : Poochie`.
 
-![Pin before](images/ug-images/command-images/pin-before.png)
-Image depicting `pin` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/pin-before.png" alt="Pin before" style="width:100%;"/>
+    <small>Image depicting `pin` command usage</small>
+    <br>
+</div>
 
 PoochPlanner pins `Poochie` on top.
 
-![Pin after](images/ug-images/command-images/pin-after.png)
-Image depicting pinned card
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/pin-after.png" alt="Pin after" style="width:100%;"/>
+    <small>Image depicting pinned card</small>
+    <br>
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -379,7 +435,7 @@ Image depicting pinned card
 
 </div>
 
-### Unpinning a contact : `unpin`
+#### Unpinning a contact : `unpin`
 
 Unpins the specified contact on Pooch Planner so that your less important contacts can be removed from the top on the contact list.
 
@@ -387,13 +443,21 @@ Format: `/unpin ; name : [name]`
 
 For example, if you want to unpin **Poochie**, you can key in`/unpin ; name : Poochie`.
 
-![Unpin before](images/ug-images/command-images/unpin-before.png)
-Image depicting `unpin` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/unpin-before.png" alt="Unpin before" style="width:100%;"/>
+    <small>Image depicting `unpin` command usage</small>
+    <br>
+</div>
 
 PoochPlanner unpins `Poochie`.
 
-![Unpin after](images/ug-images/command-images/unpin-after.png)
-Image depicting pinned card
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/unpin-after.png" alt="Unpin after" style="width:100%;"/>
+    <small>Image depicting unpinned card</small>
+    <br>
+</div>
 
 More Examples:
 * `/unpin ; name : Moochie`
@@ -409,7 +473,7 @@ More Examples:
 * Using unpin command on a contact that has been unpinned do not make any changes to Pooch Planner.<br>
 </div> 
 
-### Sorting the address book : `sort`
+#### Sorting the address book : `sort`
 
 Sorts the address book by a target field in ascending order so that you can display your contacts neatly and locate them easily.
 
@@ -417,13 +481,21 @@ Format: `/sort ; field : [target-field]`
 
 For example, `sort ; field : name` sorts the contacts by name in ascending order, from A to Z.
 
-![Sort before](images/ug-images/command-images/sort-before.png)
-Image depicting `sort` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/sort-before.png" alt="Sort before" style="width:100%;"/>
+    <small>Image depicting `sort` command usage</small>
+    <br>
+</div>
 
 PoochPlanner sorts the contacts in ascending order.
 
-![Sort after](images/ug-images/command-images/sort-after.png)
-Image depicting sorted list of contacts
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/sort-after.png" alt="Sort after" style="width:100%;"/>
+    <small>Image depicting sorted list of contacts</small>
+    <br>
+</div>
 
 More Examples:
 * `/sort ; field : phone`
@@ -439,21 +511,31 @@ More Examples:
 * All field input are case-insensitive.<br>
 </div>
 
-### Adding a note : `note`
+#### Adding a note : `note`
 
 Adds a note to a specified person from the Pooch Planner so that you can keep track of any details regarding the contact.
 
-Format: `/note ; name : [name] ; note : [note message]`
+Format: 
+`/note ; name : [name] ; note : [note message]`
+`/note ; name : [name] ; note : [note message] ; deadline : [date]`
 
 For example, if you want to add a note _"meet poochie tonight to get kibble"_ to Poochie, you can key in `/note ; name : Poochie ; note : meet poochie tonight to eat kibble`.
 
-![Note before](images/ug-images/command-images/note-before.png)
-Image depicting `note` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/note-before.png" alt="Note before" style="width:100%;"/>
+    <small>Image depicting `note` command usage</small>
+    <br>
+</div>
 
 PoochPlanner adds the note to `Poochie` within the contact card.
 
-![Note after](images/ug-images/command-images/note-after.png)
-Image depicting newly added note
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/note-after.png" alt="Note after" style="width:100%;"/>
+    <small>Image depicting newly added note</small>
+    <br>
+</div>
 
 More Examples:
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie`
@@ -477,19 +559,27 @@ More Examples:
 
 </div>
 
-### Undoing a command : `undo`
+#### Undoing a command : `undo`
 
 Undoes the most recent action so that you can revert back changes easily.
 
 Format: `/undo`
 
-![Undo before](images/ug-images/command-images/undo-before.png)
-Image depicting `undo` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/undo-before.png" alt="Undo before" style="width:100%;"/>
+    <small>Image depicting `undo` command usage</small>
+    <br>
+</div>
 
 PoochPlanner undoes the accidental deletion of `Poochie`
 
-![Undo after](images/ug-images/command-images/undo-after.png)
-Image depicting `undo` action completion
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/undo-after.png" alt="Undo after" style="width:100%;"/>
+    <small>Image depicting `undo` action completion</small>
+    <br>
+</div>
 
 Examples:
 * `/undo`
@@ -511,19 +601,27 @@ Examples:
 
 </div>
 
-### Redoing a command : `redo`
+#### Redoing a command : `redo`
 
 Redoes an action so that you can reverse unintentional uses of the undo command.
 
 Format: `/redo`
 
-![Redo before](images/ug-images/command-images/redo-before.png)
-Image depicting `redo` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/redo-before.png" alt="Redo before" style="width:100%;"/>
+    <small>Image depicting `redo` command usage</small>
+    <br>
+</div>
 
 PoochPlanner redoes the deletion of `Poochie`
 
-![Redo after](images/ug-images/command-images/redo-after.png)
-Image depicting `redo` action completion
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/redo-after.png" alt="Redo after" style="width:100%;"/>
+    <small>Image depicting `redo` action completion</small>
+    <br>
+</div>
 
 Examples:
 * `/redo`
@@ -546,19 +644,27 @@ Examples:
 
 </div>
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
 Shows a help message of how to use commands so that you can get help about commands easily.
 
 Format: `/help ; command : [command type]`
 
-![Help before](images/ug-images/command-images/help-before.png)
-Image depicting `help` command usage
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/help-before.png" alt="Help before" style="width:100%;"/>
+    <small>Image depicting `help` command usage</small>
+    <br>
+</div>
 
 PoochPlanneropens the `help` window for `add` command
 
-![Help after](images/ug-images/command-images/help-after.png)
-Image depicting `help` window
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/command-images/help-after.png" alt="Help after" style="width:100%;"/>
+    <small>Image depicting `help` window</small>
+    <br>
+</div>
 
 More Examples:
 * `/help ; command : delete`
@@ -666,7 +772,7 @@ Examples:
 ### Checking Java Version
 
 **Q**: How can I check my Java version?<br>
-**A**: Open a command line and type `java -version`. If you do not have Java installed, you can insdtall Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version. For macOS users, you may wish to follow the instructions [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
+**A**: Open a command line and type `java -version`. If you do not have Java installed, you can install Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version. For macOS users, you may wish to follow the instructions [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
 
 ### Loading Data from Another Computer
 

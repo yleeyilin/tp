@@ -24,33 +24,37 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public NoteCommand parse(String args) throws ParseException {
+        assert (args != null) : "argument to pass for note command is null";
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         Name name;
         Note note;
+        boolean isContainingNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NOTE);
+        boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
+        boolean isContainingNameNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE);
+        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NOTE)) {
+        if (!isContainingNotePrefix) {
             throw new ParseException(NoteMessages.MESSAGE_NOTE_NOT_SPECIFIED);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!isContainingNameNotePrefix || !isPreambleEmpty) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        if (!argMultimap.containsPrefix(PREFIX_DEADLINE)) {
+        if (!isContainingDeadlinePrefix) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
+            note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         } else {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).orElse(""),
+            note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
                     argMultimap.getValue(PREFIX_DEADLINE).get());
         }
-
-
         return new NoteCommand(name, note);
     }
 
+    //method repeated, need to abstract somewhere
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
