@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-![Ui](images/PoochPlannerLogo.png)
+<div style="text-align:center;">
+    <br>
+    <img src="images/PoochPlannerLogo.png" alt="Add before" style="width:100%;"/>
+    <br>
+</div>
 
 ## Welcome to PoochPlanner
 
