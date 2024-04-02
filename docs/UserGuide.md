@@ -9,9 +9,9 @@ title: User Guide
 
 **PoochPlanner** is the quintessential address book crafted exclusively for ***dog cafe owners***. We understand the unique challenges you face, which is why PoochPlanner comes packed with features designed specifically to simplify contact management for dog cafe owners like you.
 
-By seamlessly combining the efficiency of a Command Line Interface (CLI) with the intuitive interface of a Graphical User Interface (GUI), PoochPlanner empowers you to effortlessly complete your contact management tasks ***two*** times faster than traditional GUI applications.
+By seamlessly combining the efficiency of a Command Line Interface (CLI) with the intuitive interface of a Graphical User Interface (GUI), PoochPlanner empowers you to effortlessly complete your contact management tasks two times faster than traditional GUI applications.
 
-Get started by following the steps in this user guide! Experience the ***difference*** today with PoochPlanner—the ultimate solution tailored to your needs. 
+Get started by following the steps in this user guide! Experience the difference today with PoochPlanner—the ultimate solution tailored to your needs. 
 
 ## Table of Contents
 
@@ -24,10 +24,10 @@ PoochPlanner is your go-to address book, tailor-made for dog cafe owners like yo
 
 Contact | Definition and Examples
 --------|------------------
-Person | Any persons that do not hold a special relationship<br> E.g. Neighbours, Work Friends.
+Person | Any persons that do not hold a special relationship.<br> E.g. Neighbours, Work Friends.
 Staff | Any full-time or part-time employees that do not do any specialised work.<br> E.g. Waiters, Waitresses, Dishwashers.
 Supplier | Add logistics partner that supplies stocks for your dog cafe.<br> E.g. Kibbles Supplier, Coffee Beans Supplier.
-Maintainer | Any externally hired specialised persons who take care of the Dogs.<br> E.g. Dog Groomers, Vet.
+Maintainer | Any externally hired specialised persons who take care of the dogs.<br> E.g. Dog Groomers, Vet.
 
 
 But our commitment to improving your contact management experience doesn't end there. In addition to the essential functionalities like adding, searching, editing, deleting, undoing, and redoing, **PoochPlanner** comes loaded with extra features. You can now pin important contacts, jot down notes, set reminders, and even rate your contacts - all to ensure a seamless and efficient workflow tailored to your needs.
@@ -40,20 +40,20 @@ Note | Add additional information so that you can easily view all contact detail
 Remind | Add any reminders to a contact so that you will never miss out any tasks.
 Rating | Rate any of the contacts so that you can easily track their performance.
 
-## How to use this User Guide
+## Navigating this User Guide
 This user guide is designed to help you make the most of PoochPlanner, whether you are a beginner or an experienced user.
 
 - If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
 - Encountering issues or have questions about PoochPlanner? Check out our **[FAQ](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#faq)** for helpful troubleshooting tips and answers to common queries.
 - New to PoochPlanner? Explore the following sections to familiarise yourself with the basics:<br>
-    > **[Navigating the GUI](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#navigating-the-gui)** : Learn about the command box and contact cards.<br>
-    > **[Features](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#features)** : Discover the exciting features waiting for you.<br>
+    1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the command box and contact cards.<br>
+    2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
 - Already familiar with PoochPlanner? Dive into our special features to enhance your experience:
-    > **[Rate](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#rating-a-contact--rate)** : Give performance rating to your contacts. <br>
-    > **[Pin](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#pinning-a-contact--pin)** & **[Unpin](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
-    > **[Sort](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
-    > **[Note](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#adding-a-note--note)** : Add notes to your contacts.<br>
-- Check out our **[Command Summary](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#command-summary)** for a quick reference to all available commands.
+    1. **[Rate](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#rating-a-contact--rate)** : Give performance rating to your contacts. <br>
+    2. **[Pin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#pinning-a-contact--pin)** & **[Unpin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
+    3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
+    4. **[Note](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : Add notes to your contacts.<br>
+- Check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)** for a quick reference to all available commands.
 
 
 ## Useful Notations and Glossary
@@ -127,6 +127,8 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 
 ## Features
 
+### Core Features
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -144,7 +146,7 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Adding a contact: `add`
+#### Adding a contact: `add`
 
 Adds a **person/ staff / supplier / maintainer** contact to PoochPlanner to consistently update your planner with new contacts.
 
@@ -195,7 +197,7 @@ PoochPlanner allows you to add staff (`add-staff`), supplier (`add-supplier`) an
 </div>
 
 
-### Editing a contact : `edit`
+#### Editing a contact : `edit`
 
 Edits a **person / staff / supplier / maintainer** contact in the Pooch Planner so that you can consistently modify and update your contacts with new details.
 
@@ -251,7 +253,7 @@ The edit command also works for staff (`edit-staff`), supplier (`edit-supplier`)
 
 </div>
 
-### Searching a contact : `search`
+#### Searching a contact : `search`
 
 Filters a **person / staff / supplier / maintainer** contact in PoochPlanner so that you can locate your contacts more easily.
 
@@ -309,7 +311,7 @@ Example:
 
 </div>
 
-### Deleting a contact : `delete`
+#### Deleting a contact : `delete`
 
 Deletes a **person / staff / supplier / maintainer** contact from the Pooch Planner so that you can remove outdated contacts.
 
@@ -340,7 +342,9 @@ Upon deleting, PoochPlanner removes `Poochie` from the list of contacts.
 * Name must be present in Pooch Planner.<br>
 </div>
 
-### Rating a Contact : `rate`
+### Special Features
+
+#### Rating a Contact : `rate`
 
 Gives a **person / staff / supplier / maintainer** contact from the Pooch Planner a performance rating so that cafe owners can track the performance of their contacts.
 
@@ -388,7 +392,7 @@ More Examples:
 
 </div>
 
-### Pinning a contact : `pin`
+#### Pinning a contact : `pin`
 
 Pins the specified contact on Pooch Planner so that your important contacts will consistently appear at the top on the contact list.
 
@@ -427,7 +431,7 @@ PoochPlanner pins `Poochie` on top.
 
 </div>
 
-### Unpinning a contact : `unpin`
+#### Unpinning a contact : `unpin`
 
 Unpins the specified contact on Pooch Planner so that your less important contacts can be removed from the top on the contact list.
 
@@ -465,7 +469,7 @@ More Examples:
 * Using unpin command on a contact that has been unpinned do not make any changes to Pooch Planner.<br>
 </div> 
 
-### Sorting the address book : `sort`
+#### Sorting the address book : `sort`
 
 Sorts the address book by a target field in ascending order so that you can display your contacts neatly and locate them easily.
 
@@ -503,7 +507,7 @@ More Examples:
 * All field input are case-insensitive.<br>
 </div>
 
-### Adding a note : `note`
+#### Adding a note : `note`
 
 Adds a note to a specified person from the Pooch Planner so that you can keep track of any details regarding the contact.
 
@@ -549,7 +553,7 @@ More Examples:
 
 </div>
 
-### Undoing a command : `undo`
+#### Undoing a command : `undo`
 
 Undoes the most recent action so that you can revert back changes easily.
 
@@ -591,7 +595,7 @@ Examples:
 
 </div>
 
-### Redoing a command : `redo`
+#### Redoing a command : `redo`
 
 Redoes an action so that you can reverse unintentional uses of the undo command.
 
@@ -634,7 +638,7 @@ Examples:
 
 </div>
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
 Shows a help message of how to use commands so that you can get help about commands easily.
 

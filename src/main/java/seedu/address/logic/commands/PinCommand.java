@@ -26,8 +26,7 @@ public class PinCommand extends Command {
     private final Name name;
 
     /**
-     * @param name of the person in the person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param name of the person in the person list to pin.
      */
     public PinCommand(Name name) {
         requireNonNull(name);
@@ -39,9 +38,9 @@ public class PinCommand extends Command {
         requireNonNull(model);
 
         Person personToPin = model.findByName(name, PinMessages.MESSAGE_PIN_NAME_NOT_FOUND);
+        Person pinnedPerson = personToPin.updateToPinned();
 
-        personToPin.toPin();
-
+        model.setPerson(personToPin, pinnedPerson);
         model.updatePinnedPersonList();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
