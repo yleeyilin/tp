@@ -29,6 +29,7 @@ public class NoteCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME"
             + PREFIX_NOTE + "NOTE"
+            + "\n"
             + "Example: " + COMMAND_WORD + PREFIX_NAME
             + " Moochie" + PREFIX_NOTE + "Meet at 6pm Tuesday";
     private final Name name;
