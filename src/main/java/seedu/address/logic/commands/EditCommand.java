@@ -75,7 +75,6 @@ public class EditCommand extends Command {
         requireNonNull(model);
 
         Person personToEdit = model.findPersonByName(name, EditMessages.MESSAGE_INVALID_EDIT_PERSON);
-
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         model.setPerson(personToEdit, editedPerson);
@@ -83,6 +82,7 @@ public class EditCommand extends Command {
 
         logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedPerson)));
+
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedPerson)));
     }
