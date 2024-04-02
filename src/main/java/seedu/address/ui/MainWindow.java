@@ -162,6 +162,18 @@ public class MainWindow extends UiPart<Stage> {
         Boolean isEditHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE);
         Boolean isSearchHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE);
         Boolean isAddHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE);
+        Boolean isExitHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EXIT_HELP_MESSAGE);
+        Boolean isListHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_LIST_HELP_MESSAGE);
+        Boolean isNoteHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_NOTE_HELP_MESSAGE);
+        Boolean isPinHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_PIN_HELP_MESSAGE);
+        Boolean isUnpinHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_UNPIN_HELP_MESSAGE);
+        Boolean isRateHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_RATE_HELP_MESSAGE);
+        Boolean isRedoHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_REDO_HELP_MESSAGE);
+        Boolean isUndoHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_UNDO_HELP_MESSAGE);
+        Boolean isRemindHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_REMIND_HELP_MESSAGE);
+        Boolean isSortHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE);
+
+
 
         if (isHelpGeneralCommand) {
             handleHelp();
@@ -173,6 +185,26 @@ public class MainWindow extends UiPart<Stage> {
             handleOtherHelp(HelpMessages.DISPLAYED_SEARCH_MESSAGE);
         } else if (isAddHelpCommand) {
             handleOtherHelp(HelpMessages.DISPLAYED_ADD_MESSAGE);
+        } else if (isExitHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_EXIT_MESSAGE);
+        } else if (isListHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_LIST_MESSAGE);
+        } else if (isNoteHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_NOTE_MESSAGE);
+        } else if (isPinHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_PIN_MESSAGE);
+        } else if (isUnpinHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_UNPIN_MESSAGE);
+        } else if (isRateHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_RATE_MESSAGE);
+        } else if (isRedoHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_REDO_MESSAGE);
+        } else if (isUndoHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_UNDO_MESSAGE);
+        } else if (isRemindHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_REMIND_MESSAGE);
+        } else if (isSortHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_SORT_MESSAGE);
         }
 
     }

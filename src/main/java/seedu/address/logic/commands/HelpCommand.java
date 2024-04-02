@@ -13,22 +13,28 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "/help";
     public static final String MESSAGE_USAGE = "Shows program usage instructions.\n"
             + "Example: /help ; command : exit";
-    public static final String MESSAGE_CONSTRAINTS = "Only accepts add, clear, delete, edit, exit,"
-            + "list, note as valid command type inputs.";
+    public static final String MESSAGE_CONSTRAINTS = "Only accepts general, add, delete, edit,"
+            + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort as"
+            + " valid command type inputs.";
     private String commandType;
 
 
-    //did not include find as it will be removed in the future
     enum CommandTypes {
         GENERAL,
         ADD,
-        CLEAR,
         DELETE,
         EDIT,
         EXIT,
         SEARCH,
         LIST,
-        NOTE
+        NOTE,
+        PIN,
+        UNPIN,
+        RATE,
+        REDO,
+        UNDO,
+        REMIND,
+        SORT
     }
 
     /**
@@ -77,6 +83,26 @@ public class HelpCommand extends Command {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE, true, false);
         } else if (capitalisedCommandType.equals(CommandTypes.SEARCH.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.EXIT.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_EXIT_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.LIST.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_LIST_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.NOTE.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_NOTE_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.PIN.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_PIN_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.UNPIN.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_UNPIN_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.RATE.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_RATE_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.REDO.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_REDO_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.UNDO.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_UNDO_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.REMIND.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_REMIND_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.SORT.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE, true, false);
         } else {
             throw new CommandException(HelpMessages.MESSAGES_INVALID_COMMAND_TYPE);
         }
