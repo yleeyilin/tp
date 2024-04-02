@@ -515,7 +515,9 @@ More Examples:
 
 Adds a note to a specified person from the Pooch Planner so that you can keep track of any details regarding the contact.
 
-Format: `/note ; name : [name] ; note : [note message]`
+Format: 
+`/note ; name : [name] ; note : [note message]`
+`/note ; name : [name] ; note : [note message] ; deadline : [date]`
 
 For example, if you want to add a note _"meet poochie tonight to get kibble"_ to Poochie, you can key in `/note ; name : Poochie ; note : meet poochie tonight to eat kibble`.
 
@@ -770,7 +772,7 @@ Examples:
 ### Checking Java Version
 
 **Q**: How can I check my Java version?<br>
-**A**: Open a command line and type `java -version`. If you do not have Java installed, you can insdtall Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version. For macOS users, you may wish to follow the instructions [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
+**A**: Open a command line and type `java -version`. If you do not have Java installed, you can install Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version. For macOS users, you may wish to follow the instructions [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
 
 ### Loading Data from Another Computer
 
