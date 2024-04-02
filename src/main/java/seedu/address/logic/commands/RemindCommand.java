@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.messages.RemindMessages;
 import seedu.address.model.Model;
@@ -12,7 +15,7 @@ import seedu.address.model.person.RemindPredicate;
  * the current day onwards.
  */
 public class RemindCommand extends Command {
-
+    private final Logger logger = LogsCenter.getLogger(getClass());
     public static final String COMMAND_WORD = "/remind";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all persons names"
@@ -22,6 +25,7 @@ public class RemindCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info("started executing the remind command");
         requireNonNull(model);
         model.updateFilteredPersonList(new RemindPredicate());
         return new CommandResult(

@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.HelpMessages;
 import seedu.address.model.Model;
@@ -10,6 +13,7 @@ import seedu.address.model.Model;
  * Format full help instructions for every command for display.
  */
 public class HelpCommand extends Command {
+    private final Logger logger = LogsCenter.getLogger(getClass());
     public static final String COMMAND_WORD = "/help";
     public static final String MESSAGE_USAGE = "Shows program usage instructions.\n"
             + "Example: /help ; command : exit";
@@ -34,7 +38,8 @@ public class HelpCommand extends Command {
         REDO,
         UNDO,
         REMIND,
-        SORT
+        SORT,
+        CLEAR
     }
 
     /**
@@ -47,6 +52,7 @@ public class HelpCommand extends Command {
 
     /**
      * Checks if command provided is a valid command.
+     * Parameter commandType cannot be null.
      *
      * @param commandType command type that user needs help for.
      *
@@ -58,7 +64,6 @@ public class HelpCommand extends Command {
         for (CommandTypes c : CommandTypes.values()) {
             String lowercaseName = c.name().toLowerCase();
             String lowercaseCommandType = commandType.toLowerCase();
-
             if (lowercaseName.equals(lowercaseCommandType)) {
                 return true;
             }
@@ -66,11 +71,18 @@ public class HelpCommand extends Command {
         return false;
     }
 
-    // strange that i do accept model as param never interact. but cant removed cuz
-    // it inherits this from command parent
+    /**
+     * Executes the command and returns the result message.
+     * Field commandType cannot be null.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert (commandType != null) : "specified command type to give help for is null";
+        logger.info("started executing the help command");
 
         String capitalisedCommandType = commandType.toUpperCase();
         if (capitalisedCommandType.equals(CommandTypes.GENERAL.name())) {
@@ -103,6 +115,8 @@ public class HelpCommand extends Command {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_REMIND_HELP_MESSAGE, true, false);
         } else if (capitalisedCommandType.equals(CommandTypes.SORT.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.CLEAR.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_CLEAR_HELP_MESSAGE, true, false);
         } else {
             throw new CommandException(HelpMessages.MESSAGES_INVALID_COMMAND_TYPE);
         }
