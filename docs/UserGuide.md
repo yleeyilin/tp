@@ -15,7 +15,7 @@ title: User Guide
 
 By seamlessly combining the efficiency of a Command Line Interface (CLI) with the intuitive interface of a Graphical User Interface (GUI), PoochPlanner empowers you to effortlessly complete your contact management tasks two times faster than traditional GUI applications.
 
-Get started by following the steps in this user guide! Experience the difference today with PoochPlanner—the ultimate solution tailored to your needs. 
+Get started by following the steps in this user guide! Experience the difference today with PoochPlanner—the ultimate solution tailored to your needs.
 
 ## Table of Contents
 
@@ -701,7 +701,7 @@ Pooch Planner data are saved in the hard disk automatically after any command th
 
 ### Editing the data file
 
-Pooch Planner data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Pooch Planner data are saved automatically as a JSON file `[JAR file location]/data/PoochPlanner.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br>
 
