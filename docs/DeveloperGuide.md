@@ -155,6 +155,53 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Search feature
+
+#### Overview
+
+The `search` command enables users to find contacts in PoochPlanner that match the input search queries.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `search` command.
+
+![Search Command Sequence Diagram](images/dg-images/search-command-sequence-diagram.png)
+
+#### Details
+
+1. The user inputs the command to search for contacts with the specified search queries.
+2. `SearchCommandParser`  invokes the `parse` method which parses the user input by storing the prefixes and their respective values in an `ArgumentMultimap` object, and using this object to create an instance of `KeywordPredicate`.
+3. `SearchCommandParser` then creates a new instance of `SearchCommand` containing the aforementioned `KeywordPredicate`.
+4. `LogicManager` invokes the `execute` method of `SearchCommand`.
+5. This invokes the `updateFilteredPersonList` method in `Model` property, taking in `KeywordPredicate` as a parameter to filter and update `UniquePersonList`.
+6. The `execute` method of `SearchCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Search` command.
+
+#### Example Usage
+
+1. The user launches the application.
+2. The user inputs `/search ; name : Poochie` into the CLI.
+3. The address book is updated to display all contact cards that match the search queries.
+
+### Sort feature
+
+#### Overview
+
+The `sort` command enables users to sort contacts in PoochPlanner by a target field.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `sort` command.
+
+#### Details
+
+1. The user inputs the command to sort contacts with the target field.
+2. `SortCommandParser` invokes the `parse` method which parses the user input through `ArgumentMultimap` and `mapName`, creating a new `Prefix` object.
+3. `SortCommandParser` then creates a new `SortCommand` object with the target `prefix`, returning this object.
+4. The `LogicManager` invokes the `execute` method of `SortCommand`, which invokes the `updateSortedPersonList` method in `Model` property with the target `prefix` to update the interface of PoochPlanner to sort`UniquePersonList` by the target field.
+5. The `execute` method of `SortCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Sort` command.
+
+#### Example Usage
+
+1. The user launches the application.
+2. The user inputs `/sort ; field : phone` into the CLI.
+3. The address book is updated to sort all the contact cards by ascending phone number.
+
 ### Undo/redo feature
 
 #### Implementation

@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SearchCommandParser" as SearchCommandParser LOGIC_COLOR
+participant "r:SearchCommand" as SearchCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("/search ; phone : 98765432")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/search ; phone : 98765432")
+activate AddressBookParser
+
+create SearchCommandParser
+AddressBookParser -> SearchCommandParser
+activate SearchCommandParser
+
+SearchCommandParser --> AddressBookParser
+deactivate SearchCommandParser
+
+AddressBookParser -> SearchCommandParser : parse(" ; phone : 98765432")
+activate SearchCommandParser
+
+create SearchCommand
+SearchCommandParser -> SearchCommand
+activate SearchCommand
+
+SearchCommand --> SearchCommandParser : r
+deactivate SearchCommand
+
+SearchCommandParser --> AddressBookParser : r
+deactivate SearchCommandParser
+
+SearchCommandParser -[hidden]-> AddressBookParser
+destroy SearchCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> SearchCommand : execute()
+activate SearchCommand
+
+SearchCommand -> Model : updateFilteredPersonList(KeywordPredicate)
+activate Model
+
+Model --> SearchCommand
+deactivate Model
+
+create CommandResult
+SearchCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SearchCommand
+deactivate CommandResult
+
+SearchCommand --> LogicManager : result
+deactivate SearchCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
