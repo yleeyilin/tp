@@ -71,6 +71,7 @@ Symbol | Meaning
 :information_source: | Important Information
 :exclamation: | Warning or Caution
 :bulb: | Additional Information such as Tips or Notes
+:x: | Error Handling or Incorrect Action
 
 The following glossary table provides clarification on commonly-used terms as well as terminology that is possibly unknown to you.
 
@@ -516,34 +517,53 @@ More Examples:
 #### Adding a note : `note`
 
 Adds a note to a specified person from the Pooch Planner so that you can keep track of any details regarding the contact.
+You can specify an optional deadline for the note.
 
 Format: 
 `/note ; name : [name] ; note : [note message]`
 `/note ; name : [name] ; note : [note message] ; deadline : [date]`
 
-For example, if you want to add a note _"meet poochie tonight to get kibble"_ to Poochie, you can key in `/note ; name : Poochie ; note : meet poochie tonight to eat kibble`.
-
-<div style="text-align:center;">
-    <br>
-    <img src="images/ug-images/command-images/note-before.png" alt="Note before" style="width:100%;"/>
-    <small>Image depicting `note` command usage</small>
-    <br>
-</div>
-
-PoochPlanner adds the note to `Poochie` within the contact card.
-
-<div style="text-align:center;">
-    <br>
-    <img src="images/ug-images/command-images/note-after.png" alt="Note after" style="width:100%;"/>
-    <small>Image depicting newly added note</small>
-    <br>
-</div>
-
-More Examples:
+Examples:
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie`
+  <br>
+  The above command adds the note "get 10kg of matcha from moochie" to the contact with name **_Moochie_**.
+  [//]: # (insert image showing example)
 
-  The above command adds the note "get 10kg of matcha from moochie" to 
-  the contact with name **_Moochie_**.
+[//]: # (<div style="text-align:center;">)
+
+[//]: # (    <br>)
+
+[//]: # (    <img src="images/ug-images/command-images/note-before.png" alt="Note before" style="width:100%;"/>)
+
+[//]: # (    <small>Image depicting `note` command usage</small>)
+
+[//]: # (    <br>)
+
+[//]: # (</div>)
+
+[//]: # ()
+[//]: # (PoochPlanner adds the note to `Poochie` within the contact card.)
+
+[//]: # ()
+[//]: # (<div style="text-align:center;">)
+
+[//]: # (    <br>)
+
+[//]: # (    <img src="images/ug-images/command-images/note-after.png" alt="Note after" style="width:100%;"/>)
+
+[//]: # (    <small>Image depicting newly added note</small>)
+
+[//]: # (    <br>)
+
+[//]: # (</div>)
+
+* `/note ; name : Moochie ; note : get 10kg of matcha from moochie ; deadline : 2020-10-10`
+  <br>
+  The above command adds the note "get 10kg of matcha from moochie" to the contact with name **_Moochie_**.
+  It also sets a deadline of the note to Nov 10 2020.
+  [//]: # (insert image showing example)
+
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -551,13 +571,28 @@ More Examples:
 
 * Name must be present in Pooch Planner.<br>
 
-* Note can only be added but not deleted.<br>
-
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* Adding note can be used to add small, additional details! <br>
+* Notes added are intended to be short details! <br>
+* To remove a note, specify in the note field "No note here". This note is case-sensitive.
+
+</div>
+
+
+<div markdown="span" class="alert alert-danger">:x: **Error Handling:**<br>
+
+* If you receive the error message "Failed to add note to Pooch Contact - Name is not specified 🐾",
+  ensure you have specified a name in the name field <br>
+* If you receive the error message "Failed to add note to Pooch Contact - Name does not exist in our address book 🐾",
+  ensure you have specified a name of a contact that is already exists in the planner <br>
+* If you receive the error message "Failed to add note to Pooch Contact - Note is not specified 🐾",
+  ensure you have specified a name of a non-empty note in the note field.
+* If you receive the error message "Failed to add note to Pooch Contact - Deadline is not specified 🐾",
+  ensure you have specified a deadline in the deadline field.
+* If you receive the error message "Date must be in the format yyyy-mm-dd (e.g., 2019-10-15)",
+  ensure you have specified a deadline in the correct format as stated in the error message.
 
 </div>
 
@@ -648,46 +683,93 @@ Examples:
 
 #### Viewing help : `help`
 
-Shows a help message of how to use commands so that you can get help about commands easily.
+Shows a help message of how to use commands so that you can get help regarding the commands easily.
 
 Format: `/help ; command : [command type]`
-
-<div style="text-align:center;">
-    <br>
-    <img src="images/ug-images/command-images/help-before.png" alt="Help before" style="width:100%;"/>
-    <small>Image depicting `help` command usage</small>
-    <br>
-</div>
-
-PoochPlanneropens the `help` window for `add` command
-
-<div style="text-align:center;">
-    <br>
-    <img src="images/ug-images/command-images/help-after.png" alt="Help after" style="width:100%;"/>
-    <small>Image depicting `help` window</small>
-    <br>
-</div>
-
-More Examples:
+<br>
+Examples:
 * `/help ; command : delete`
-
+  <br>
   The above command gives help for delete command.
-* `/help ; command : add`
 
+[//]: # (insert image showing example)
+
+* `/help ; command : add`
+  <br>
   The above command gives help for add command.
+  [//]: # (insert image showing example of both command box and the output)
+
+[//]: # (<div style="text-align:center;">)
+
+[//]: # (    <br>)
+
+[//]: # (    <img src="images/ug-images/command-images/help-before.png" alt="Help before" style="width:100%;"/>)
+
+[//]: # (    <small>Image depicting `help` command usage</small>)
+
+[//]: # (    <br>)
+
+[//]: # (</div>)
+
+[//]: # ()
+[//]: # (PoochPlanner opens the `help` window for `add` command.)
+
+[//]: # ()
+[//]: # (<div style="text-align:center;">)
+
+[//]: # (    <br>)
+
+[//]: # (    <img src="images/ug-images/command-images/help-after.png" alt="Help after" style="width:100%;"/>)
+
+[//]: # (    <small>Image depicting `help` window</small>)
+
+[//]: # (    <br>)
+
+[//]: # (</div>)
+
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
 * Command must be specified.<br>
 
-* Help is only given for `delete`, `add`, `edit`, `search`.<br>
+* Help is given for all commands. Valid command inputs include general, add, clear, delete, edit,
+  exit, list, note, pin, unpin, undo, redo, rate, remind, search, sort.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* To see help for all commands, the corresponding command field is `general`.<br>
+* If you wish to get help for all commands, enter the command input as general to be directed to a general help window.<br>
 
 </div>
+
+<div markdown="span" class="alert alert-danger">:x: **Error Handling:**<br>
+
+* If you receive the error message "Failed to give help - Help requires a command field. 🐾",
+  ensure you have specified a valid command in the command field <br>
+
+</div>
+
+#### Viewing reminders : `remind`
+
+Shows all contacts with note deadlines from today onwards so that you can view all your coming deadlines easily.
+
+Format: `/remind`
+<br>
+Examples:
+* `/remind`
+  <br>
+  The above command displays all contacts with note deadlines from today onwards.
+
+[//]: # (insert image showing example)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
+
+* Specifying '/remind [any text]' is equivalent to '/remind'<br>
+* To return back to full contact list, use the command '/list'
+
+</div>
+
 
 ### Exiting the program : `exit`
 
