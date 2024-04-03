@@ -50,11 +50,10 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
+        name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         if (!isContainingDeadlinePrefix) {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         } else {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
                     argMultimap.getValue(PREFIX_DEADLINE).get());
         }
