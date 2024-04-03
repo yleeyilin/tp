@@ -47,17 +47,19 @@ Rating | Rate any of the contacts so that you can easily track their performance
 ## Navigating this User Guide
 This user guide is designed to help you make the most of PoochPlanner, whether you are a beginner or an experienced user.
 
-- If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
-- Encountering issues or have questions about PoochPlanner? Check out our **[FAQ](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#faq)** for helpful troubleshooting tips and answers to common queries.
-- New to PoochPlanner? Explore the following sections to familiarise yourself with the basics:<br>
+To get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
+- If you are a new user, explore the following sections to familiarise yourself with the basics:<br>
     1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the command box and contact cards.<br>
     2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
-- Already familiar with PoochPlanner? Dive into our special features to enhance your experience:
+- If you are an advanced user, dive into our special features to futher enhance your experience:
     1. **[Rate](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#rating-a-contact--rate)** : Give performance rating to your contacts. <br>
     2. **[Pin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#pinning-a-contact--pin)** & **[Unpin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
     3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
     4. **[Note](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : Add notes to your contacts.<br>
-- Check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)** for a quick reference to all available commands.
+
+Check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)** for a quick reference to all available commands.
+
+Encountering issues or have questions about PoochPlanner? Check out our **[FAQ](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#faq)** for helpful troubleshooting tips and answers to common queries.
 
 
 ## Useful Notations and Glossary
@@ -74,7 +76,7 @@ The following glossary table provides clarification on commonly-used terms as we
 
 Abbreviation/Nomenclature | Meaning
 --------|------------------
-GUI | GUI stands for Graphical User Interface and it represents the visual display of PoochPlanner that users can see when the application is run.
+GUI | GUI stands for Graphical User Interface and it represents the visual display of PoochPlanner that you can see when the application is run.
 GUI Component | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-gui).
 CLI | CLI stands for Command Line Interface and it represents a text-based user interface to interact with the application.
 Command | An input from the user that tells PoochPlanner to perform an action. View PoochPlanner’s [Command Summary](#command-summary).
