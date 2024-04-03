@@ -19,21 +19,4 @@ public class RateMessages {
     public static final String MESSAGE_RATE_INVALID_PARAMETERS = "Failed to rate Pooch Contact - "
             + "%1$s \uD83D\uDC3E";
 
-    /**
-     * Formats the {@code person} for display to the user.
-     */
-    public static String format(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        if (person instanceof Staff) {
-            builder.append("Pooch Staff ");
-        } else if (person instanceof Supplier) {
-            builder.append("Supplier ");
-        } else if (person instanceof Maintainer) {
-            builder.append("Maintenance Crew ");
-        } else {
-            builder.append("Other Contact ");
-        }
-        builder.append(person.getName());
-        return builder.toString();
-    }
 }

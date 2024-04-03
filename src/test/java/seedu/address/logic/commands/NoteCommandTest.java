@@ -43,7 +43,7 @@ public class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
         String expectedMessage = String.format(NoteMessages.MESSAGE_ADD_NOTE_SUCCESS,
-                NoteMessages.format(expectedPerson));
+                NoteMessages.formatPerson(expectedPerson));
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }

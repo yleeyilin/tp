@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.RateMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -49,7 +50,7 @@ public class RateCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(RateMessages.MESSAGE_RATE_PERSON_SUCCESS,
-                RateMessages.format(personToRate)));
+                Messages.formatPerson(personToRate)));
     }
 
     @Override

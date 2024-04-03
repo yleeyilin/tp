@@ -87,10 +87,10 @@ public class EditMaintainerCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.format(editedMaintainer)));
+                EditMessages.formatPerson(editedMaintainer)));
 
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.format(editedMaintainer)));
+                EditMessages.formatPerson(editedMaintainer)));
     }
 
     /**

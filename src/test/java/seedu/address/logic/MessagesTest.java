@@ -60,22 +60,22 @@ public class MessagesTest {
     @Test
     public void addFormat() {
         // Normal Person
-        String testNormalString = AddMessages.format(ALICE);
-        String expectedNormalString = "Other Contact Alice Pauline";
+        String testNormalString = AddMessages.formatPerson(ALICE);
+        String expectedNormalString = "General Contact Alice Pauline";
         assertEquals(testNormalString, expectedNormalString);
 
         // Staff
-        String testStaffString = AddMessages.format(ALICESTAFF);
-        String expectedStaffString = "Pooch Staff Alice Pauline";
+        String testStaffString = AddMessages.formatPerson(ALICESTAFF);
+        String expectedStaffString = "Staff Alice Pauline";
         assertEquals(testStaffString, expectedStaffString);
 
         // Maintainer
-        String testMaintainerString = AddMessages.format(ALICEMAINTAINER);
+        String testMaintainerString = AddMessages.formatPerson(ALICEMAINTAINER);
         String expectedMaintainerString = "Maintainer Alice Pauline";
         assertEquals(testMaintainerString, expectedMaintainerString);
 
         // Supplier
-        String testSupplierString = AddMessages.format(ALICESUPPLIER);
+        String testSupplierString = AddMessages.formatPerson(ALICESUPPLIER);
         String expectedSupplierString = "Supplier Alice Pauline";
         assertEquals(testSupplierString, expectedSupplierString);
     }
@@ -83,22 +83,22 @@ public class MessagesTest {
     @Test
     public void deleteFormat() {
         // Normal Person
-        String testNormalString = DeleteMessages.format(ALICE);
-        String expectedNormalString = "Other Contact Alice Pauline";
+        String testNormalString = DeleteMessages.formatPerson(ALICE);
+        String expectedNormalString = "General Contact Alice Pauline";
         assertEquals(testNormalString, expectedNormalString);
 
         // Staff
-        String testStaffString = DeleteMessages.format(ALICESTAFF);
-        String expectedStaffString = "Pooch Staff Alice Pauline";
+        String testStaffString = DeleteMessages.formatPerson(ALICESTAFF);
+        String expectedStaffString = "Staff Alice Pauline";
         assertEquals(testStaffString, expectedStaffString);
 
         // Maintainer
-        String testMaintainerString = DeleteMessages.format(ALICEMAINTAINER);
+        String testMaintainerString = DeleteMessages.formatPerson(ALICEMAINTAINER);
         String expectedMaintainerString = "Maintainer Alice Pauline";
         assertEquals(testMaintainerString, expectedMaintainerString);
 
         // Supplier
-        String testSupplierString = DeleteMessages.format(ALICESUPPLIER);
+        String testSupplierString = DeleteMessages.formatPerson(ALICESUPPLIER);
         String expectedSupplierString = "Supplier Alice Pauline";
         assertEquals(testSupplierString, expectedSupplierString);
     }
@@ -106,22 +106,22 @@ public class MessagesTest {
     @Test
     public void editFormat() {
         // Normal Person
-        String testNormalString = EditMessages.format(ALICE);
-        String expectedNormalString = "Other Contact Alice Pauline";
+        String testNormalString = EditMessages.formatPerson(ALICE);
+        String expectedNormalString = "General Contact Alice Pauline";
         assertEquals(testNormalString, expectedNormalString);
 
         // Staff
-        String testStaffString = EditMessages.format(ALICESTAFF);
-        String expectedStaffString = "Pooch Staff Alice Pauline";
+        String testStaffString = EditMessages.formatPerson(ALICESTAFF);
+        String expectedStaffString = "Staff Alice Pauline";
         assertEquals(testStaffString, expectedStaffString);
 
         // Maintainer
-        String testMaintainerString = EditMessages.format(ALICEMAINTAINER);
+        String testMaintainerString = EditMessages.formatPerson(ALICEMAINTAINER);
         String expectedMaintainerString = "Maintainer Alice Pauline";
         assertEquals(testMaintainerString, expectedMaintainerString);
 
         // Supplier
-        String testSupplierString = EditMessages.format(ALICESUPPLIER);
+        String testSupplierString = EditMessages.formatPerson(ALICESUPPLIER);
         String expectedSupplierString = "Supplier Alice Pauline";
         assertEquals(testSupplierString, expectedSupplierString);
     }
@@ -129,22 +129,22 @@ public class MessagesTest {
     @Test
     public void pinFormat() {
         // Normal Person
-        String testNormalString = PinMessages.format(ALICE);
-        String expectedNormalString = "Other Contact Alice Pauline";
+        String testNormalString = Messages.formatPerson(ALICE);
+        String expectedNormalString = "General Contact Alice Pauline";
         assertEquals(testNormalString, expectedNormalString);
 
         // Staff
-        String testStaffString = PinMessages.format(ALICESTAFF);
-        String expectedStaffString = "Pooch Staff Alice Pauline";
+        String testStaffString = Messages.formatPerson(ALICESTAFF);
+        String expectedStaffString = "Staff Alice Pauline";
         assertEquals(testStaffString, expectedStaffString);
 
         // Maintainer
-        String testMaintainerString = PinMessages.format(ALICEMAINTAINER);
+        String testMaintainerString = Messages.formatPerson(ALICEMAINTAINER);
         String expectedMaintainerString = "Maintainer Alice Pauline";
         assertEquals(testMaintainerString, expectedMaintainerString);
 
         // Supplier
-        String testSupplierString = PinMessages.format(ALICESUPPLIER);
+        String testSupplierString = Messages.formatPerson(ALICESUPPLIER);
         String expectedSupplierString = "Supplier Alice Pauline";
         assertEquals(testSupplierString, expectedSupplierString);
     }
@@ -152,22 +152,22 @@ public class MessagesTest {
     @Test
     public void unpinFormat() {
         // Normal Person
-        String testNormalString = UnpinMessages.format(ALICE);
-        String expectedNormalString = "Other Contact Alice Pauline";
+        String testNormalString = Messages.formatPerson(ALICE);
+        String expectedNormalString = "General Contact Alice Pauline";
         assertEquals(testNormalString, expectedNormalString);
 
         // Staff
-        String testStaffString = UnpinMessages.format(ALICESTAFF);
-        String expectedStaffString = "Pooch Staff Alice Pauline";
+        String testStaffString = Messages.formatPerson(ALICESTAFF);
+        String expectedStaffString = "Staff Alice Pauline";
         assertEquals(testStaffString, expectedStaffString);
 
         // Maintainer
-        String testMaintainerString = UnpinMessages.format(ALICEMAINTAINER);
+        String testMaintainerString = Messages.formatPerson(ALICEMAINTAINER);
         String expectedMaintainerString = "Maintainer Alice Pauline";
         assertEquals(testMaintainerString, expectedMaintainerString);
 
         // Supplier
-        String testSupplierString = UnpinMessages.format(ALICESUPPLIER);
+        String testSupplierString = Messages.formatPerson(ALICESUPPLIER);
         String expectedSupplierString = "Supplier Alice Pauline";
         assertEquals(testSupplierString, expectedSupplierString);
     }
