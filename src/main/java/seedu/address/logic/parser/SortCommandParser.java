@@ -1,11 +1,18 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_COLLECTION;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.RateCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,12 +32,13 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         Prefix prefix;
 
+        ParserUtil.verifyNoUnknownPrefix(args, SortCommand.MESSAGE_USAGE, "sort",
+                PREFIX_FIELD);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 
-        // check for missing name
-        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
-            throw new ParseException(SortMessages.MESSAGE_SORT_INVALID_FIELD);
-        }
+        ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, "sort",
+                PREFIX_FIELD);
 
         prefix = mapName(argMultimap);
 

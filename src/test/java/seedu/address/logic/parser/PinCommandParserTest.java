@@ -1,14 +1,19 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.messages.PinMessages;
 import seedu.address.model.person.Name;
+
+import java.util.ArrayList;
 
 public class PinCommandParserTest {
     private PinCommandParser parser = new PinCommandParser();
@@ -16,10 +21,15 @@ public class PinCommandParserTest {
     @Test
     public void parse_missingNamePrefix_failure() {
         // no field specified
+        // no field specified
+        ArrayList<String> undetectedFields = new ArrayList<>();
+        undetectedFields.add("name");
+        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String expectedMessage = exception + "\n"
+                + String.format(MESSAGE_COMMAND_FORMAT, PinCommand.MESSAGE_USAGE);
         String userInput = PinCommand.COMMAND_WORD + " "
                 + "Alice Pauline";
-        assertParseFailure(parser, userInput, String.format(PinMessages.MESSAGE_PIN_MISSING_NAME,
-                PinCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test

@@ -43,6 +43,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, "note",
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
+        // check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",
                 PREFIX_NAME, PREFIX_NOTE);
 

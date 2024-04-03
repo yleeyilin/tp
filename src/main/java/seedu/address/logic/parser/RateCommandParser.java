@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.RateCommand;
 import seedu.address.logic.messages.RateMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -39,15 +40,8 @@ public class RateCommandParser implements Parser<RateCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_RATING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(RateMessages.MESSAGE_RATE_MISSING_NAME,
-                    RateCommand.MESSAGE_USAGE));
-        }
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_RATING)) {
-            throw new ParseException(String.format(RateMessages.MESSAGE_RATE_MISSING_RATING,
-                    RateCommand.MESSAGE_USAGE));
-        }
+        ParserUtil.verifyNoMissingField(argMultimap, RateCommand.MESSAGE_USAGE, "rate",
+                PREFIX_NAME, PREFIX_RATING);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 

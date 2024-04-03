@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 
+import seedu.address.logic.commands.PinCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.messages.UnpinMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,10 +30,8 @@ public class UnpinCommandParser implements Parser<UnpinCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(UnpinMessages.MESSAGE_UNPIN_MISSING_NAME,
-                    UnpinCommand.MESSAGE_USAGE));
-        }
+        ParserUtil.verifyNoMissingField(argMultimap, UnpinCommand.MESSAGE_USAGE, "unpin",
+                PREFIX_NAME);
 
         Name name = ParserUtil.mapName(argMultimap, UnpinMessages.MESSAGE_UNPIN_INVALID_NAME);
 
