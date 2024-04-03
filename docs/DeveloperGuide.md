@@ -155,6 +155,120 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Note feature
+
+The note feature allows users to add notes to the specified contact.
+
+#### Implementation
+
+The note command mechanism is facilitated by `NoteCommandParser` class which implements the `Parser` interface.
+
+`NoteCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`NoteCommandParser` implements the following operations:
+* `NoteCommandParser#parse()` — Parses the input arguments by storing the name and the prefix of its respective values as an `ArgumentMultimap`.
+  It creates a new `NoteCommand` object with the parsed name, note and the optional deadline field.
+
+The `NoteCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#findByName(name, errorMessage)` — to find the person with the specified name.
+* `Model#setPerson(Person, Person)` — Sets the person in the existing contact list to the new `Person` object which has been edited by `NoteCommand#execute()`.
+* `Model#updateFilteredPersonList(Predicate)` — Updates the view of the application to show all contacts.
+
+The method `NoteCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the note operation works:
+
+[//]: # (![Add Remark Sequence Diagram]&#40;images/AddRemarkSequenceDiagram.png&#41;)
+[//]: # (add sequence diagram here)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `/note ; name : Janna ; note : get kibble` command in the CLI.
+
+**Step 3**: The given note will be added to the description of the contact with the given name.
+
+**Aspect: How to store note field in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Add note field to all 4 constructors (Person, Staff, Maintainer, Supplier).
+    * Pros: Maintains OOP. As in real life, each person has a note description, having each class containing
+  a note field models this and preserves OOP.
+    * Cons: Changing the constructors of 4 classes is a tedious task.
+
+* **Alternative 2**: Add note field to the Parent person constructor and use a setter to set new notes.
+    * Pros: Much simpler implementation that will require less refactoring of code.
+    * Cons: Violates OOP, specifically encapsulation as the other classes would be able to manipulate the
+  inner details of the Person classes.
+
+### Help feature
+
+The help feature receive help for all commands.
+
+#### Implementation
+
+The note command mechanism is facilitated by `HelpCommandParser` class which implements the `Parser` interface.
+
+`HelpCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`HelpCommandParser` implements the following operations:
+* `HelpCommandParserr#parse()` — Parses the input arguments by storing the the prefix of its respective values as an `ArgumentMultimap`.
+  It creates a new `HelpCommand` object with the command type field.
+
+The method `HelpCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the add help operation works:
+
+[//]: # (![Add Remark Sequence Diagram]&#40;images/AddRemarkSequenceDiagram.png&#41;)
+[//]: # (add sequence diagram here)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `/help ; command : delete` command in the CLI.
+
+**Step 3**: Help for the delete command will be displayed.
+
+**Aspect: How to display different help command windows:**
+
+* **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Difference
+ in messages is created by displaying different strings.
+    * Pros: Code is made much more concise.
+    * Cons: Lengthy if-else statements are required to displayed the correct string.
+
+* **Alternative 2**: Create a different window for each type of command.
+    * Pros: All details relating to a single command is within its own page. Can be perceived as neater.
+    * Cons: Highly repetitive code. Even small mistakes made, would have to be fixed in over 10 windows.
+
+### Remind feature
+
+The remind feature allows users to view all contacts with note deadlines from today onwards.
+
+#### Implementation
+
+The `RemindCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#updateFilteredPersonList(Predicate)` — Updates the view of the application to show contacts
+with note deadlines from today onwards.
+
+The method `RemindCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the remind operation works:
+
+[//]: # (![Add Remark Sequence Diagram]&#40;images/AddRemarkSequenceDiagram.png&#41;)
+[//]: # (add sequence diagram here)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `/remind` command in the CLI.
+
+**Step 3**: Contacts that have deadline notes from today onwards will be displayed.
+
+**Aspect: How to store note field in Persons class and subclasses:**
+
+
 ### Undo/redo feature
 
 #### Implementation
@@ -272,21 +386,24 @@ The app is optimised for use using Command Line Interface (CLI) while still enco
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority      | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                       |
-|---------------|---------------------------------------|------------------------------------------------------------|-------------------------------------------------------|
-| `* * *`       | well connected user                   | search contacts                                            | save time                                             |
-| `* * *`       | well connected user                   | add contacts                                               | have the address to contact others in the future      |
-| `* * *`       | cafe owner user                       | delete the contacts                                        | keep my contacts updated and remove outdated contacts |
-| `* * *`       | long-term user                        | edit contacts                                              | update some contact information                       |
-| `* * *`       | first-time user                       | get help about what commnads I can use on the contact book | easily know how to navigate the system                |
-| `**`          | frugal user                           | sort my vendors in ascending order of price                | view the vendors selling the cheapest products easily |
-| `**`          | careless user                         | undo my commands                                           | fix mistakes easily                                   |
-| `**`          | forgetful user                        | star contacts that are important                           | remember to contact them easily                       |
-| `**`          | careless user                         | undo previous command                                      | fix my mistakes easily                                |
-| `**`          | careless user                         | retrieve state before undo                                 | fix my mistakes easily                                |
-| `**`          | well connected user                   | pin contacts                                               | easily view frequent contacts                         |
-| `**`          | well connected user                   | unpin contacts                                             | focus on my frequent contacts                         |
-| `**`          | profit-maximising user                | rate the efficiency/productivity/performance of contacts   | evaluate and justify my business expenses             |
+| Priority      | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                          |
+|---------------|---------------------------------------|------------------------------------------------------------|----------------------------------------------------------|
+| `* * *`       | well connected user                   | search contacts                                            | save time                                                |
+| `* * *`       | well connected user                   | add contacts                                               | have the address to contact others in the future         |
+| `* * *`       | cafe owner user                       | delete the contacts                                        | keep my contacts updated and remove outdated contacts    |
+| `* * *`       | long-term user                        | edit contacts                                              | update some contact information                          |
+| `* * *`       | first-time user                       | get help about what commnads I can use on the contact book | easily know how to navigate the system                   |
+| `**`          | frugal user                           | sort my vendors in ascending order of price                | view the vendors selling the cheapest products easily    |
+| `**`          | careless user                         | undo my commands                                           | fix mistakes easily                                      |
+| `**`          | forgetful user                        | star contacts that are important                           | remember to contact them easily                          |
+| `**`          | careless user                         | undo previous command                                      | fix my mistakes easily                                   |
+| `**`          | careless user                         | retrieve state before undo                                 | fix my mistakes easily                                   |
+| `**`          | well connected user                   | pin contacts                                               | easily view frequent contacts                            |
+| `**`          | well connected user                   | unpin contacts                                             | focus on my frequent contacts                            |
+| `**`          | profit-maximising user                | rate the efficiency/productivity/performance of contacts   | evaluate and justify my business expenses                |
+| `**`          | busy user                             | note down all details about my contacts                    | keep track of all important details and deadlines easily |
+| `**`          | forgetful user                        | be reminded of my deadlines                                | complete all my tasks on time                            |
+
 *{More to be added}*
 
 ### Use cases
