@@ -583,9 +583,9 @@ Examples:
 <div markdown="span" class="alert alert-danger">:x: **Error Handling:**<br>
 
 * If you receive the error message "Failed to add note to Pooch Contact - Name is not specified 🐾",
-  ensure you have specified a name in the name field <br>
+  ensure you have specified a name in the name field. <br>
 * If you receive the error message "Failed to add note to Pooch Contact - Name does not exist in our address book 🐾",
-  ensure you have specified a name of a contact that is already exists in the planner <br>
+  ensure you have specified a name of a contact that is already exists in the planner. <br>
 * If you receive the error message "Failed to add note to Pooch Contact - Note is not specified 🐾",
   ensure you have specified a name of a non-empty note in the note field.
 * If you receive the error message "Failed to add note to Pooch Contact - Deadline is not specified 🐾",
@@ -764,8 +764,8 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* Specifying '/remind [any text]' is equivalent to '/remind'<br>
-* To return back to full contact list, use the command '/list'
+* Specifying '/remind [any text]' is equivalent to '/remind'.<br>
+* To return back to full contact list, use the command '/list'.
 
 </div>
 
