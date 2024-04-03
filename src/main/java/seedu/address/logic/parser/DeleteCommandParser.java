@@ -31,9 +31,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         assert (args != null) : "`argument` to pass for delete command is null";
         logger.log(Level.INFO, "Going to start parsing for delete command.");
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args, PREFIX_NAME);
-
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, DeleteCommand.MESSAGE_USAGE);
+        ParserUtil.verifyNoUnknownPrefix(args, DeleteCommand.MESSAGE_USAGE, PREFIX_NAME);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 

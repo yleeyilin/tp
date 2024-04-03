@@ -38,9 +38,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         Note note;
 
         //check for unknown prefixes
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+        ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE,
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, NoteCommand.MESSAGE_USAGE);
 
         boolean isContainingNamePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME);
         boolean isContainingNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NOTE);

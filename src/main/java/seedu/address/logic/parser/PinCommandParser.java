@@ -23,9 +23,7 @@ public class PinCommandParser implements Parser<PinCommand> {
     public PinCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args, PREFIX_NAME);
-
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, PinCommand.MESSAGE_USAGE);
+        ParserUtil.verifyNoUnknownPrefix(args, PinCommand.MESSAGE_USAGE, PREFIX_NAME);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);

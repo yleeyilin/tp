@@ -3,8 +3,15 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +21,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.messages.NoteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -368,10 +376,16 @@ public class ParserUtil {
 
     /**
      * Verifies that there are no invalid prefixes.
-     * @param unknownPrefixes List of unknown prefixes.
+     * @param args Arguments.
+     * @param message Error messages to be displayed.
+     * @param prefixes Required prefixes in the command.
      * @throws ParseException Thrown when there are valid prefixes.
      */
-    public static void verifyNoUnknownPrefix(ArrayList<String> unknownPrefixes, String message) throws ParseException {
+    public static void verifyNoUnknownPrefix(String args, String message, Prefix... prefixes)
+            throws ParseException {
+        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+                prefixes);
+
         if (unknownPrefixes.size() > 0) {
             String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
@@ -379,5 +393,15 @@ public class ParserUtil {
         }
     }
 
+    public static void verifyNoMissingField(ArgumentMultimap argMultimap, String message, Prefix... prefixes) throws
+            ParseException {
+        if (!arePrefixesPresent(argMultimap, prefixes)) {
+            ArrayList<String> missingFields = ArgumentTokenizer.checkUndetectedPrefix(argMultimap,
+                    prefixes);
+            String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, missingFields);
+            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
+            throw new ParseException(exception);
+        }
+    }
 
 }

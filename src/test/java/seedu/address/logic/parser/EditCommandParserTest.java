@@ -78,8 +78,7 @@ public class EditCommandParserTest {
         String userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[name]");
-        exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        String exception = String.format(EditMessages.MESSAGE_EDIT_NAME, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (product)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
@@ -138,7 +137,7 @@ public class EditCommandParserTest {
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY + SKILL_DESC_AMY + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, skill, name]");
+        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, skill]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified three invalid field (salary, skill and commission)

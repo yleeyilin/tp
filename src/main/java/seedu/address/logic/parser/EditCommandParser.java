@@ -35,15 +35,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         Name name;
         String fieldArgs;
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
+
+        ParserUtil.verifyNoUnknownPrefix(args, EditCommand.MESSAGE_USAGE,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
         boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
         if (hasDuplicateNamePrefix) {
-            unknownPrefixes.add("name");
+            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_NAME,
+                    EditCommand.MESSAGE_USAGE));
         }
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, EditCommand.MESSAGE_USAGE);
 
         // check for missing name
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
@@ -62,7 +63,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 EditCommand.MESSAGE_USAGE));
         ArrayList<String> unknownFieldPrefixes = ArgumentTokenizer.checkUnknownPrefix(fieldArgs,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        ParserUtil.verifyNoUnknownPrefix(unknownFieldPrefixes, EditCommand.MESSAGE_USAGE);
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
