@@ -18,6 +18,9 @@ public class NoteMessages extends Messages {
     public static final String MESSAGE_NOTE_NOT_SPECIFIED = "Failed to add note to Pooch Contact - "
             + "Note is not specified \uD83D\uDC3E";
 
+    public static final String MESSAGE_NAME_NOT_SPECIFIED = "Failed to add note to Pooch Contact - "
+            + "Name is not specified \uD83D\uDC3E";
+
     public static final String MESSAGE_DEADLINE_NOT_SPECIFIED = "Failed to add note to Pooch Contact - "
             + "Deadline is not specified \uD83D\uDC3E";
 
