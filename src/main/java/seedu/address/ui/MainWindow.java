@@ -172,6 +172,7 @@ public class MainWindow extends UiPart<Stage> {
         Boolean isUndoHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_UNDO_HELP_MESSAGE);
         Boolean isRemindHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_REMIND_HELP_MESSAGE);
         Boolean isSortHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE);
+        Boolean isClearHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_CLEAR_HELP_MESSAGE);
 
 
 
@@ -205,6 +206,12 @@ public class MainWindow extends UiPart<Stage> {
             handleOtherHelp(HelpMessages.DISPLAYED_REMIND_MESSAGE);
         } else if (isSortHelpCommand) {
             handleOtherHelp(HelpMessages.DISPLAYED_SORT_MESSAGE);
+        } else if (isClearHelpCommand) {
+            handleOtherHelp(HelpMessages.DISPLAYED_CLEAR_MESSAGE);
+        } else {
+            // As particular command cannot be identified, display
+            // general help message.
+            handleHelp();
         }
 
     }

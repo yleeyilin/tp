@@ -31,6 +31,8 @@ public class HelpMessages extends Messages {
             "Opened help window for remind command.";
     public static final String MESSAGES_SHOWING_SORT_HELP_MESSAGE =
             "Opened help window for sort command.";
+    public static final String MESSAGES_SHOWING_CLEAR_HELP_MESSAGE =
+            "Opened help window for clear command.";
     public static final String MESSAGES_INVALID_COMMAND_TYPE = "Invalid command type given.";
 
     public static final String MESSAGE_HELP_MISSING_COMMAND = "Failed to give help - "
@@ -141,6 +143,12 @@ public class HelpMessages extends Messages {
     public static final String DISPLAYED_SORT_MESSAGE = "Sorts contacts because on specified field."
             + "\n" + "" + "\n"
             + "Format:" + "/sort ; target-field"
+            + "\n" + "" + "\n"
+            + "Go to our UG for more information : " + USERGUIDE_URL;
+
+    public static final String DISPLAYED_CLEAR_MESSAGE = "Clear all contacts."
+            + "\n" + "" + "\n"
+            + "Format:" + "/clear"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
