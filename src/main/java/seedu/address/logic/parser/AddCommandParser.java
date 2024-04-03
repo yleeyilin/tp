@@ -44,15 +44,15 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         assert (args != null) : "`argument` to pass for add command is null";
         logger.log(Level.INFO, "Going to start parsing for add command.");
-        ParserUtil.verifyNoUnknownPrefix(args, AddCommand.MESSAGE_USAGE,
+        ParserUtil.verifyNoUnknownPrefix(args, AddCommand.MESSAGE_USAGE, "add",
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE,
                         PREFIX_RATING);
 
-        ParserUtil.verifyNoMissingField(argMultimap, AddCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_ADDRESS,
-                PREFIX_PHONE, PREFIX_EMAIL);
+        ParserUtil.verifyNoMissingField(argMultimap, AddCommand.MESSAGE_USAGE, "add",
+                PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

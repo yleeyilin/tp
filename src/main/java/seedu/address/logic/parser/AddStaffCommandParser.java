@@ -44,7 +44,7 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStaffCommand parse(String args) throws ParseException {
-        ParserUtil.verifyNoUnknownPrefix(args, AddStaffCommand.MESSAGE_USAGE,
+        ParserUtil.verifyNoUnknownPrefix(args, AddStaffCommand.MESSAGE_USAGE, "add-staff",
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
 
@@ -52,8 +52,8 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
 
-        ParserUtil.verifyNoMissingField(argMultimap, AddStaffCommand.MESSAGE_USAGE, PREFIX_NAME,
-                PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_EMPLOYMENT, PREFIX_SALARY);
+        ParserUtil.verifyNoMissingField(argMultimap, AddStaffCommand.MESSAGE_USAGE, "add-staff",
+                PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_EMPLOYMENT, PREFIX_SALARY);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE));

@@ -41,7 +41,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
 
-        ParserUtil.verifyNoUnknownPrefix(args, EditStaffCommand.MESSAGE_USAGE, PREFIX_NAME,
+        ParserUtil.verifyNoUnknownPrefix(args, EditStaffCommand.MESSAGE_USAGE, "edit-staff", PREFIX_NAME,
                 PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT, PREFIX_SALARY);
 
         boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
@@ -51,7 +51,8 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         }
 
         // check for missing fields
-        ParserUtil.verifyNoMissingField(argMultimap, EditStaffCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_FIELD);
+        ParserUtil.verifyNoMissingField(argMultimap, EditStaffCommand.MESSAGE_USAGE, "edit-staff",
+                PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,

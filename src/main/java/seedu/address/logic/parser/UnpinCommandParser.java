@@ -23,7 +23,7 @@ public class UnpinCommandParser implements Parser<UnpinCommand> {
     public UnpinCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ParserUtil.verifyNoUnknownPrefix(args, UnpinCommand.MESSAGE_USAGE, PREFIX_NAME);
+        ParserUtil.verifyNoUnknownPrefix(args, UnpinCommand.MESSAGE_USAGE, "unpin", PREFIX_NAME);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);

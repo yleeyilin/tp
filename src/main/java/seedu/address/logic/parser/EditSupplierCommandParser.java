@@ -41,7 +41,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
 
 
-        ParserUtil.verifyNoUnknownPrefix(args, EditSupplierCommand.MESSAGE_USAGE,
+        ParserUtil.verifyNoUnknownPrefix(args, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
 
@@ -52,7 +52,8 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         }
 
         // check for missing fields
-        ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_FIELD);
+        ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
+                PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,

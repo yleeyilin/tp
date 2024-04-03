@@ -17,8 +17,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
@@ -44,7 +47,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
+    private static final Logger logger = LogsCenter.getLogger("ParselUtil");
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -378,14 +381,15 @@ public class ParserUtil {
      * Verifies that there are no invalid prefixes.
      * @param args Arguments.
      * @param message Error messages to be displayed.
+     * @param commandType Command Type.
      * @param prefixes Required prefixes in the command.
      * @throws ParseException Thrown when there are valid prefixes.
      */
-    public static void verifyNoUnknownPrefix(String args, String message, Prefix... prefixes)
+    public static void verifyNoUnknownPrefix(String args, String message, String commandType, Prefix... prefixes)
             throws ParseException {
         ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
                 prefixes);
-
+        logger.log(Level.WARNING, "Parsing error while parsing for " + commandType + " command.");
         if (unknownPrefixes.size() > 0) {
             String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
@@ -393,9 +397,11 @@ public class ParserUtil {
         }
     }
 
-    public static void verifyNoMissingField(ArgumentMultimap argMultimap, String message, Prefix... prefixes) throws
+    public static void verifyNoMissingField(ArgumentMultimap argMultimap, String message, String commandType,
+                                            Prefix... prefixes) throws
             ParseException {
         if (!arePrefixesPresent(argMultimap, prefixes)) {
+            logger.log(Level.WARNING, "Parsing error while parsing for " + commandType + " command.");
             ArrayList<String> missingFields = ArgumentTokenizer.checkUndetectedPrefix(argMultimap,
                     prefixes);
             String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, missingFields);

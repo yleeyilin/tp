@@ -33,11 +33,11 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         assert (args != null) : "argument to pass for help command is null";
         logger.log(Level.INFO, "Going to start parsing for help command.");
 
-        ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, PREFIX_HELP);
+        ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help", PREFIX_HELP);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
 
-        ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, PREFIX_HELP);
+        ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help", PREFIX_HELP);
 
         String commandType;
 

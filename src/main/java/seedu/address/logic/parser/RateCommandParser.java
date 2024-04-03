@@ -34,7 +34,7 @@ public class RateCommandParser implements Parser<RateCommand> {
         assert (args != null) : "`argument` to pass for rate command is null";
         logger.log(Level.INFO, "Going to start parsing for rate command.");
 
-        ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE,
+        ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE, "rate",
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_RATING);
