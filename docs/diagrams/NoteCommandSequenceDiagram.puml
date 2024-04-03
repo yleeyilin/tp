@@ -50,6 +50,9 @@ activate NoteCommand
 NoteCommand -> Model : setPerson(personToEdit, editedPerson)
 activate Model
 
+NoteCommand -> Model : findByName(name)
+activate Model
+
 Model --> NoteCommand
 
 NoteCommand -> Model : updateFilteredPersonList()

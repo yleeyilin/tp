@@ -201,6 +201,85 @@ Given below is an example usage scenario for the command:
     * Cons: Violates OOP, specifically encapsulation as the other classes would be able to manipulate the
   inner details of the Person classes.
 
+### Rate feature
+
+#### Overview
+
+The rate command enables users to rate a specific contact from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the
+execution of the `rate` command.
+
+![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
+
+#### Details
+
+**1**: The user inputs the command to add a rating to a specific contact by first stating the target name of the
+contact they want to rate. This is followed by the rating to be given to the user.
+
+**2**: `RateCommandParser` invokes the `parse` method which parses the user input by storing the name and its
+prefix in an `ArgumentMultimap`. A `RateCommand` object is created with the parsed name, and rating.
+
+**3**: `LogicManager` invokes the `execute` method of `RateCommand`.
+
+**4**: The `execute` method of `RateCommand` invokes the `findByName` method in `Model` property to find the
+contact with the specified name.
+
+**5**: The `execute` method of `RateCommand` invokes the `setPerson` method in `Model` property to set the contact
+in the existing contact list to the new `Person` object which has been edited the `execute` method of `RateCommand`.
+
+**6**: The `execute` method of `RateCommand` invokes the `updateFilteredPersonList` method in `Model` property to
+update the view of PoochPlanner to show all contacts.
+
+**7**: The `execute` method of `RateCommand` returns a `CommandResult` object which stores the data regarding the
+completion of the `Rate` command.
+
+#### Example Usage
+
+**1**: The user launches the PoochPlanner application.
+
+**2**: The user inputs `/delete ; name : Poochie` into the CLI.
+
+**3**: The contact with the name `Poochie` is removed from PoochPlanner.
+
+### Delete feature
+
+#### Overview
+
+The delete command enables users to delete a specific contact from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the
+execution of the `delete` command.
+
+![Delete Sequence Diagram](images/DeleteSequenceDiagram.png)
+
+#### Details
+
+**1**: The user inputs the command to delete a contact by stating the target name of the contact they want to delete.
+
+**2**: `CommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their
+respective values as an `ArgumentMultimap` object.
+**3**: A `DeleteCommand` object is created with the name of the contact to delete.
+
+**4**: The `DeleteCommandParser` returns the `DeleteCommand` object.
+
+**5**: The `LogicManager` invokes the `execute` method of `DeleteCommand`.
+
+**6**: The `execute` method of `DeleteCommand` invokes the `deletePerson` method in the 'Model` property to remove the
+specified contact from the `addressBook` property in `ModelManager`.
+
+**7**: The `execute` method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the
+completion of the `Delete` command.
+
+#### Example Usage
+
+**1**: The user launches the application.
+
+**2**: The user inputs `/delete ; name : Poochie` into the CLI.
+
+**3**: The contact with the name ‘Poochie’ will be deleted from PoochPlanner.
+
+
 ### Help feature
 
 The help feature receive help for all commands.
