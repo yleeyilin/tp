@@ -50,17 +50,8 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 
-        // check for missing name
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
-                    EditMaintainerCommand.MESSAGE_USAGE));
-        }
-
-        // check for missing field
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
-                    EditMaintainerCommand.MESSAGE_USAGE));
-        }
+        // check for missing fields
+        ParserUtil.verifyNoMissingField(argMultimap, EditMaintainerCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,

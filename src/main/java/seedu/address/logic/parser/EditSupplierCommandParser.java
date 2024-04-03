@@ -51,17 +51,8 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
                     EditSupplierCommand.MESSAGE_USAGE));
         }
 
-        // check for missing name
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
-                    EditSupplierCommand.MESSAGE_USAGE));
-        }
-
-        // check for missing field
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
-                    EditSupplierCommand.MESSAGE_USAGE));
-        }
+        // check for missing fields
+        ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,

@@ -19,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SUPPLIER;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
@@ -31,6 +32,7 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -40,6 +42,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
+
+import java.util.ArrayList;
 
 public class EditSupplierCommandParserTest {
     private EditSupplierCommandParser parser = new EditSupplierCommandParser();
@@ -56,18 +60,26 @@ public class EditSupplierCommandParserTest {
     @Test
     public void parse_missingName_failure() {
         // no field specified
+        ArrayList<String> undetectedFields = new ArrayList<>();
+        undetectedFields.add("name");
+        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String expectedMessage = exception + "\n"
+                + String.format(MESSAGE_COMMAND_FORMAT, EditSupplierCommand.MESSAGE_USAGE);
         String userInput = EditSupplierCommand.COMMAND_WORD + " "
                 + " " + PREFIX_FIELD + "{" + " }";
-        assertParseFailure(parser, userInput, String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
-                EditSupplierCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_missingField_failure() {
         // no field specified
+        ArrayList<String> undetectedFields = new ArrayList<>();
+        undetectedFields.add("field");
+        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String expectedMessage = exception + "\n"
+                + String.format(MESSAGE_COMMAND_FORMAT, EditSupplierCommand.MESSAGE_USAGE);
         String userInput = EditSupplierCommand.COMMAND_WORD + " " + PREFIX_NAME;
-        assertParseFailure(parser, userInput, String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
-                EditSupplierCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
