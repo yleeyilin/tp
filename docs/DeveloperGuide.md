@@ -346,9 +346,73 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Edit feature
 
-#### Implementation
+#### Overview
 
-The edit feature implements a search by name function for each user class `person`, `maintainer`, `supplier` and `staff` and edits the specified field.
+The edit-XYZ command enables users to modify a specified field of an existing contact from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `edit-XYZ` command.
+
+![Edit Sequence Diagram](images/EditCommandSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`,
+`staff`, `suppliers`, `maintainers`. 
+</div>
+
+#### Details
+
+1. The user inputs the command to edit a specified contact by first stating the target name of the contact they want to edit. This is followed by the respective fields and new values the user wants to modify. 
+2. `EditCommandParser` parses the user input and creates an `editPersonDescriptor` object which contains the new values to be edited for the specified contact.
+3. An `EditCommand` object is created with the name of the contact to edit and the`editPersonDescriptor` object. 
+4. The `EditCommandParser` returns the `EditCommand` object. 
+5. The `LogicManager` invokes the `execute` method of `EditCommand`.
+6. The `execute` method of `EditCommand` finds the specified contact by `name`. The `execute` method then calls `createEditedPerson` of `EditCommand` which creates a new `Person` object that contains the updated values of the contact.
+7. The `execute` method of `EditCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object. 
+8. The `execute` method of `EditCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
+9. The `execute` method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Edit` command.
+
+#### Example Usage
+1. The user launches the application. 
+2. The user inputs `/edit-person ; name : Alice Tan ; field : { phone : 9990520 ; email : impooch@gmail12.com }`
+3. The contact card for `Alice Tan` is updated for the `phone` and `email` field respectively. This change should be reflected on the contact list page on PoochPlanner.
+
+
+### Pin / Unpin feature
+
+#### Overview
+
+The `pin`/`unpin` command enables users to pin/unpin any existing contacts in PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `pin` command.
+
+![Pin Sequence Diagram](images/PinCommandSequenceDiagram.png)
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `unpin` command.
+
+![Unpin Sequence Diagram](images/UnpinCommandSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The implementation for person, staff, suppliers, maintainers are the same. Pin and Unpin are also implemented similarly as seen in the sequence diagrams. 
+</div>
+
+#### Details
+
+1. The user inputs the command to pin/unpin a specified contact by stating the target name of the contact they want to pin/unpin.
+2. `PinCommandParser`/`UnpinCommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their respective values as an `ArgumentMultimap` object. 
+3. A `PinCommand`/`UnpinCommand` object is created with the name of the contact to pin/unpin.
+4. The `PinCommandParser`/`UnpinCommandParser` returns the `PinCommand`/`UnpinCommand` object.
+5. The `LogicManager` invokes the `execute` method of `PinCommand`/`UnpinCommand`.
+6. The `execute` method of `PinCommand`/`UnpinCommand` finds the specified contact by `name`. The `updateToPinned`/`updateToUnpinned` method of `Person` which creates a new `Person` object that contains the updated pin boolean of the contact.
+7. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object. 
+8. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `updatePinnedPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
+9. The `execute` method of `PinCommand`/`UnpinCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Pin`/`Unpin` command.
+
+
+#### Example Usage
+1. The user launches the application.
+2. The user inputs `/pin ; name : Alice Tan` or `unpin ; name : Alice Tan` into the CLI.
+3. The contact card for `Alice Tan` is now pinned / unpinned. This change should be reflected on the contact list page on PoochPlanner.
+
 
 ### \[Proposed\] Data archiving
 
