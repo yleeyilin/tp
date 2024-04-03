@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -35,10 +36,22 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         Name name;
         Note note;
+
+        //check for unknown prefixes
+        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+                PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
+        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, NoteCommand.MESSAGE_USAGE);
+
+        boolean isContainingNamePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME);
         boolean isContainingNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NOTE);
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
         boolean isContainingNameNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
+
+        if (!isContainingNamePrefix) {
+            logger.log(Level.WARNING, "Parsing error while parsing for note command.");
+            throw new ParseException(NoteMessages.MESSAGE_NAME_NOT_SPECIFIED);
+        }
 
         if (!isContainingNotePrefix) {
             logger.log(Level.WARNING, "Parsing error while parsing for note command.");
