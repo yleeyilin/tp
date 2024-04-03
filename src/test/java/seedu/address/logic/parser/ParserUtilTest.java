@@ -55,8 +55,11 @@ public class ParserUtilTest {
     private static final String VALID_DEADLINE = "2019-10-10";
     private static final String VALID_NOTE = "kind doggos";
     private static final String INVALID_DEADLINE = "2019";
+    private static final String VALID_SORT_FIELD = "name";
+    private static final String INVALID_SORT_FIELD = "name";
 
-
+    private static final String LEADING_SEMICOLON = "; ";
+    private static final String TRAILING_COLON = " : ";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -377,5 +380,18 @@ public class ParserUtilTest {
     public void parseDeadline_validValueWithoutWhitespace_returnsDeadline() throws Exception {
         DeadlineNote expectedDeadlineNote = new DeadlineNote(VALID_NOTE, VALID_DEADLINE);
         assertEquals(expectedDeadlineNote, ParserUtil.parseDeadlineNote(VALID_NOTE, VALID_DEADLINE));
+    }
+
+    @Test
+    public void parseSortField_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil
+                .parseSortField(null));
+    }
+
+    @Test
+    public void parseSortField_validSortField_returnsSortField() throws Exception {
+        String expectedSortField = LEADING_SEMICOLON + VALID_SORT_FIELD + TRAILING_COLON;
+        Prefix prefix = new Prefix(VALID_SORT_FIELD);
+        assertEquals(prefix, new Prefix(ParserUtil.parseSortField(expectedSortField)));
     }
 }

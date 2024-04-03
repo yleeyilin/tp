@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COLLECTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
 
 import java.util.stream.Stream;
 
@@ -21,7 +21,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      */
     public SearchCommand parse(String args) throws ParseException {
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_COLLECTION);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_COLLECTION);
 
         // invalid command syntax
         if (!argMultimap.getPreamble().isEmpty()) {
@@ -29,12 +29,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         }
 
         // no prefixes present
-        if (!atLeastOnePrefixPresent(argMultimap, PREFIX_COLLECTION)) {
+        if (!atLeastOnePrefixPresent(argMultimap, PREFIX_SEARCH_COLLECTION)) {
             throw new ParseException(SearchMessages.MESSAGE_SEARCH_MISSING_FIELD);
         }
 
         // check for duplicate field entries
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COLLECTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SEARCH_COLLECTION);
 
         return new SearchCommand(new KeywordPredicate(argMultimap));
     }

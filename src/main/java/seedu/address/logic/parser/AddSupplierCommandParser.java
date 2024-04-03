@@ -46,6 +46,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_RATING);
 
+        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, AddSupplierCommand.MESSAGE_USAGE);
         if (unknownPrefixes.size() > 0) {
             String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);

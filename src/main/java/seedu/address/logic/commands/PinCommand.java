@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.PinMessages;
@@ -26,8 +25,7 @@ public class PinCommand extends Command {
     private final Name name;
 
     /**
-     * @param name of the person in the person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param name of the person in the person list to pin.
      */
     public PinCommand(Name name) {
         requireNonNull(name);
@@ -39,11 +37,10 @@ public class PinCommand extends Command {
         requireNonNull(model);
 
         Person personToPin = model.findByName(name, PinMessages.MESSAGE_PIN_NAME_NOT_FOUND);
+        Person pinnedPerson = personToPin.updateToPinned();
 
-        personToPin.toPin();
-
+        model.setPerson(personToPin, pinnedPerson);
         model.updatePinnedPersonList();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(PinMessages.MESSAGE_PIN_PERSON_SUCCESS,
                 PinMessages.format(personToPin)));

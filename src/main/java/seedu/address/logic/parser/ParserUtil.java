@@ -1,14 +1,21 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.messages.NoteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Commission;
@@ -54,6 +61,7 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -241,6 +249,9 @@ public class ParserUtil {
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
+        if (Note.isNoteContainingDeadline(trimmedNote)) {
+            throw new ParseException(NoteMessages.MESSAGE_DEADLINE_NOT_SPECIFIED);
+        }
         if (!Note.isValidNote(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
@@ -297,4 +308,76 @@ public class ParserUtil {
         }
         return trimmedCommand;
     }
+
+    /**
+     * Parses a {@code String sort field}.
+     * Leading "; " and trailing " : " will be trimmed
+     *
+     * @throws ParseException if the given {@code commandType} is invalid.
+     */
+    public static String parseSortField(String sortField) throws ParseException {
+
+        requireNonNull(sortField);
+
+        // Remove "; " using replace()
+        String removedSemicolon = sortField.replace("; ", "");
+
+        // Remove " : " using replaceAll()
+        String trimmedSortField = removedSemicolon.replaceAll(" : ", "");
+
+        return trimmedSortField;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns name value using PREFIX.
+     * @param argMultimap Object that contains mapping of prefix to value.
+     * @param message Error message to throw if parse exception.
+     * @return Returns object representing name.
+     * @throws ParseException Thrown when command is in invalid format.
+     */
+    public static Name mapName(ArgumentMultimap argMultimap, String message) throws ParseException {
+        try {
+            return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(message, pe.getMessage()));
+        }
+    }
+
+    /**
+     * Returns field values using PREFIX.
+     * @param argMultimap Object that contains mapping of prefix to value.
+     * @param message Error message to throw if parse exception.
+     * @return Returns object representing the respective fields.
+     * @throws ParseException Thrown when command is in invalid format.
+     */
+    public static String mapFields(ArgumentMultimap argMultimap, String message) throws ParseException {
+        try {
+            return ParserUtil.parseField(argMultimap.getValue(PREFIX_FIELD).get());
+        } catch (ParseException pe) {
+            throw new ParseException(message, pe);
+        }
+    }
+
+    /**
+     * Verifies that there are no invalid prefixes.
+     * @param unknownPrefixes List of unknown prefixes.
+     * @throws ParseException Thrown when there are valid prefixes.
+     */
+    public static void verifyNoUnknownPrefix(ArrayList<String> unknownPrefixes, String message) throws ParseException {
+        if (unknownPrefixes.size() > 0) {
+            String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
+            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
+            throw new ParseException(exception);
+        }
+    }
+
+
 }

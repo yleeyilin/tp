@@ -93,6 +93,10 @@ public class ArgumentMultimap {
         return false;
     }
 
+    public boolean containsPrefix(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -106,6 +110,10 @@ public class ArgumentMultimap {
 
         ArgumentMultimap otherArgumentMultimap = (ArgumentMultimap) other;
         return argMultimap.equals(otherArgumentMultimap.argMultimap);
+    }
+
+    public boolean isPreambleEmpty() {
+        return this.getPreamble().isEmpty();
     }
 
     /**
