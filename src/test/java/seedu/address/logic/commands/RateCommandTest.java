@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.RateMessages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -39,7 +40,7 @@ public class RateCommandTest {
 
         RateCommand rateCommand = new RateCommand(toAddRatingPerson.getName(), validRating1);
         String expectedMessage = String.format(RateMessages.MESSAGE_RATE_PERSON_SUCCESS,
-                RateMessages.format(expectedPerson));
+                Messages.formatPerson(expectedPerson));
 
         assertCommandSuccess(rateCommand, model, expectedMessage, expectedModel);
     }

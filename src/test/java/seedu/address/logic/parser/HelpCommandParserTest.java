@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.messages.HelpMessages.MESSAGE_HELP_MISSING_COMMAND;
+import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +35,12 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_missingCommand_throwsParseException() {
+        ArrayList<String> undetectedFields = new ArrayList<>();
+        undetectedFields.add("command");
+        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String expectedMessage = exception + "\n"
+                + String.format(MESSAGE_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "/help ; command :",
-                String.format(MESSAGE_HELP_MISSING_COMMAND, HelpCommand.MESSAGE_USAGE));
+                expectedMessage);
     }
 }

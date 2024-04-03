@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_UNDETECTED_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -41,25 +38,16 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMaintainerCommand parse(String args) throws ParseException {
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+        ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
-
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, AddMaintainerCommand.MESSAGE_USAGE);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_SKILL, PREFIX_COMMISSION)) {
-            ArrayList<String> undetectedFields = ArgumentTokenizer.checkUndetectedPrefix(argMultimap,
-                    PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_SKILL, PREFIX_COMMISSION);
-            String exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
-            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
-            throw new ParseException(exception);
-        }
+        ParserUtil.verifyNoMissingField(argMultimap, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SKILL, PREFIX_COMMISSION);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE));

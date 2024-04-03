@@ -25,12 +25,13 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         Prefix prefix;
 
+        ParserUtil.verifyNoUnknownPrefix(args, SortCommand.MESSAGE_USAGE, "sort",
+                PREFIX_FIELD);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 
-        // check for missing name
-        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
-            throw new ParseException(SortMessages.MESSAGE_SORT_INVALID_FIELD);
-        }
+        ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, "sort",
+                PREFIX_FIELD);
 
         prefix = mapName(argMultimap);
 
