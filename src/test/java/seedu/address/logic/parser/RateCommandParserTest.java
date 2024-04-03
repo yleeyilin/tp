@@ -27,7 +27,7 @@ public class RateCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + INVALID_RATING_DESC,
-                String.format(RateMessages.MESSAGE_RATE_INVALID_RATING, Rating.MESSAGE_CONSTRAINTS));
+                String.format(RateMessages.MESSAGE_RATE_INVALID_PARAMETERS, Rating.MESSAGE_CONSTRAINTS));
     }
 
     @Test
