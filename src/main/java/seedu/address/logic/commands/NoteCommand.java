@@ -1,10 +1,14 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.NoteMessages;
 import seedu.address.model.Model;
@@ -17,7 +21,6 @@ import seedu.address.model.person.Person;
  * A non-empty note must be specified.
  */
 public class NoteCommand extends Command {
-
     public static final String COMMAND_WORD = "/note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -25,14 +28,16 @@ public class NoteCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME"
             + PREFIX_NOTE + "NOTE"
+            + "\n"
             + "Example: " + COMMAND_WORD + PREFIX_NAME
             + " Moochie" + PREFIX_NOTE + "Meet at 6pm Tuesday";
     private final Name name;
     private final Note note;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * @param name of the person in the filtered person list to edit the note
-     * @param note of the person to be updated to
+     * @param name of the person in the filtered person list to edit the note.
+     * @param note of the person to be updated to.
      */
     public NoteCommand(Name name, Note note) {
         requireAllNonNull(name, note);
@@ -42,10 +47,10 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("started executing the note command");
+        requireNonNull(model);
         Person personToEdit = model.findByName(name, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);
-
         Person editedPerson = personToEdit.updateNote(note);
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

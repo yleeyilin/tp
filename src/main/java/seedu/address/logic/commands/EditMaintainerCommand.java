@@ -88,6 +88,7 @@ public class EditMaintainerCommand extends Command {
 
         logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedMaintainer)));
+
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedMaintainer)));
     }

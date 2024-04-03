@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.UnpinMessages;
@@ -26,7 +25,7 @@ public class UnpinCommand extends Command {
     private final Name name;
 
     /**
-     * @param name of the person in the person list to pin
+     * @param name of the person in the person list to unpin.
      */
     public UnpinCommand(Name name) {
         requireNonNull(name);
@@ -37,13 +36,14 @@ public class UnpinCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person personToPin = model.findByName(name, UnpinMessages.MESSAGE_UNPIN_NAME_NOT_FOUND);
-        personToPin.toUnpin();
+        Person personToUnpin = model.findByName(name, UnpinMessages.MESSAGE_UNPIN_NAME_NOT_FOUND);
+        Person unpinnedPerson = personToUnpin.updateToUnpinned();
+
+        model.setPerson(personToUnpin, unpinnedPerson);
         model.updatePinnedPersonList();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(UnpinMessages.MESSAGE_UNPIN_PERSON_SUCCESS,
-                UnpinMessages.format(personToPin)));
+                UnpinMessages.format(personToUnpin)));
     }
 
     @Override
