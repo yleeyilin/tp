@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
-Note that `HelpXYZWindow` refers to the variations of Help Windows implemented, i.e. `HelpWindow`, `HelpPoochStaffWindow`,`HelpPoochSupplierWindow`,`HelpPoochMaintenanceWindow`,`HelpDeleteWindow`,`HelpEditWindow`,`HelpSearchWindow`
+Note that `HelpWindow` refers to a window that provides general help for all commands. `HelpOtherWindow` refers to a window which offers help for specific commands.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -154,6 +154,118 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Note feature
+
+The note feature allows users to add notes to the specified contact.
+
+#### Implementation
+
+The note command mechanism is facilitated by `NoteCommandParser` class which implements the `Parser` interface.
+
+`NoteCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`NoteCommandParser` implements the following operations:
+* `NoteCommandParser#parse()` — Parses the input arguments by storing the name and the prefix of its respective values as an `ArgumentMultimap`.
+  It creates a new `NoteCommand` object with the parsed name, note and the optional deadline field.
+
+The `NoteCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#findByName(name, errorMessage)` — to find the person with the specified name.
+* `Model#setPerson(Person, Person)` — Sets the person in the existing contact list to the new `Person` object which has been edited by `NoteCommand#execute()`.
+* `Model#updateFilteredPersonList(Predicate)` — Updates the view of the application to show all contacts.
+
+The method `NoteCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the note operation works:
+
+![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
+
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `/note ; name : Janna ; note : get kibble` command in the CLI.
+
+**Step 3**: The given note will be added to the description of the contact with the given name.
+
+**Aspect: How to store note field in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Add note field to all 4 constructors (Person, Staff, Maintainer, Supplier).
+    * Pros: Maintains OOP. As in real life, each person has a note description, having each class containing
+  a note field models this and preserves OOP.
+    * Cons: Changing the constructors of 4 classes is a tedious task.
+
+* **Alternative 2**: Add note field to the Parent person constructor and use a setter to set new notes.
+    * Pros: Much simpler implementation that will require less refactoring of code.
+    * Cons: Violates OOP, specifically encapsulation as the other classes would be able to manipulate the
+  inner details of the Person classes.
+
+### Help feature
+
+The help feature receive help for all commands.
+
+#### Implementation
+
+The note command mechanism is facilitated by `HelpCommandParser` class which implements the `Parser` interface.
+
+`HelpCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`HelpCommandParser` implements the following operations:
+* `HelpCommandParserr#parse()` — Parses the input arguments by storing the the prefix of its respective values as an `ArgumentMultimap`.
+  It creates a new `HelpCommand` object with the command type field.
+
+The method `HelpCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the add help operation works:
+
+![Help Sequence Diagram](images/HelpCommandSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `/help ; command : delete` command in the CLI.
+
+**Step 3**: Help for the delete command will be displayed.
+
+**Aspect: How to display different help command windows:**
+
+* **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Difference
+ in messages is created by displaying different strings.
+    * Pros: Code is made much more concise.
+    * Cons: Lengthy if-else statements are required to displayed the correct string.
+
+* **Alternative 2**: Create a different window for each type of command.
+    * Pros: All details relating to a single command is within its own page. Can be perceived as neater.
+    * Cons: Highly repetitive code. Even small mistakes made, would have to be fixed in over 10 windows.
+
+### Remind feature
+
+The remind feature allows users to view all contacts with note deadlines from today onwards.
+
+#### Implementation
+
+The `RemindCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#updateFilteredPersonList(Predicate)` — Updates the view of the application to show contacts
+with note deadlines from today onwards.
+
+The method `RemindCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the remind operation works:
+
+![Remind Sequence Diagram](images/RemindCommandSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `/remind` command in the CLI.
+
+**Step 3**: Contacts that have deadline notes from today onwards will be displayed.
+
+**Aspect: How to store note field in Persons class and subclasses:**
+
 
 ### Undo/redo feature
 
@@ -264,7 +376,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Dog cafe owners who need to manage a team of staff, F&B vendors & a dog maintainence team.
 * Prefer typing over other types and is comfortable using CLI applications.
 
-**Value proposition**: PoochPlanner is a desktop application to track details of various groups (vendors, staff, dog maintainence) that dog cafe owners have to regularly interact with. 
+**Value proposition**: PoochPlanner is a desktop application to track details of various groups (vendors, staff, dog maintainence) that dog cafe owners have to regularly interact with.
 The app is optimised for use using Command Line Interface (CLI) while still encompassing a user-friendly Graphical User Interface (GUI).
 
 
@@ -272,21 +384,24 @@ The app is optimised for use using Command Line Interface (CLI) while still enco
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority      | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                       |
-|---------------|---------------------------------------|------------------------------------------------------------|-------------------------------------------------------|
-| `* * *`       | well connected user                   | search contacts                                            | save time                                             |
-| `* * *`       | well connected user                   | add contacts                                               | have the address to contact others in the future      |
-| `* * *`       | cafe owner user                       | delete the contacts                                        | keep my contacts updated and remove outdated contacts |
-| `* * *`       | long-term user                        | edit contacts                                              | update some contact information                       |
-| `* * *`       | first-time user                       | get help about what commnads I can use on the contact book | easily know how to navigate the system                |
-| `**`          | frugal user                           | sort my vendors in ascending order of price                | view the vendors selling the cheapest products easily |
-| `**`          | careless user                         | undo my commands                                           | fix mistakes easily                                   |
-| `**`          | forgetful user                        | star contacts that are important                           | remember to contact them easily                       |
-| `**`          | careless user                         | undo previous command                                      | fix my mistakes easily                                |
-| `**`          | careless user                         | retrieve state before undo                                 | fix my mistakes easily                                |
-| `**`          | well connected user                   | pin contacts                                               | easily view frequent contacts                         |
-| `**`          | well connected user                   | unpin contacts                                             | focus on my frequent contacts                         |
-| `**`          | profit-maximising user                | rate the efficiency/productivity/performance of contacts   | evaluate and justify my business expenses             |
+| Priority      | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                          |
+|---------------|---------------------------------------|------------------------------------------------------------|----------------------------------------------------------|
+| `* * *`       | well connected user                   | search contacts                                            | save time                                                |
+| `* * *`       | well connected user                   | add contacts                                               | have the address to contact others in the future         |
+| `* * *`       | cafe owner user                       | delete the contacts                                        | keep my contacts updated and remove outdated contacts    |
+| `* * *`       | long-term user                        | edit contacts                                              | update some contact information                          |
+| `* * *`       | first-time user                       | get help about what commnads I can use on the contact book | easily know how to navigate the system                   |
+| `**`          | frugal user                           | sort my vendors in ascending order of price                | view the vendors selling the cheapest products easily    |
+| `**`          | careless user                         | undo my commands                                           | fix mistakes easily                                      |
+| `**`          | forgetful user                        | star contacts that are important                           | remember to contact them easily                          |
+| `**`          | careless user                         | undo previous command                                      | fix my mistakes easily                                   |
+| `**`          | careless user                         | retrieve state before undo                                 | fix my mistakes easily                                   |
+| `**`          | well connected user                   | pin contacts                                               | easily view frequent contacts                            |
+| `**`          | well connected user                   | unpin contacts                                             | focus on my frequent contacts                            |
+| `**`          | profit-maximising user                | rate the efficiency/productivity/performance of contacts   | evaluate and justify my business expenses                |
+| `**`          | busy user                             | note down all details about my contacts                    | keep track of all important details and deadlines easily |
+| `**`          | forgetful user                        | be reminded of my deadlines                                | complete all my tasks on time                            |
+
 *{More to be added}*
 
 ### Use cases
@@ -594,7 +709,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1b2. User re-enters a new command with another name.
    * Steps 1b1 - 1b2 are repeated until the input references a Person that exists in PoochPlanner.
    * Use case resumes from step 2.
- 
+
  ---
 **System**: `PoochPlanner`
 
@@ -624,7 +739,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1b2. User re-enters a new command with another name.
    * Steps 1b1 - 1b2 are repeated until the input references a Person that exists in PoochPlanner.
    * Use case resumes from step 2.
- 
+
 ---
 **System**: `PoochPlanner`
 
@@ -655,7 +770,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b2. User re-enters the correct command with a new note value.
     * Steps 1b1 - 1b2 are repeated until the rating provided is valid (non-null/non-empty).
     * Use case resumes from step 2.
-  
+
 * 1c. PoochPlanner detects an additional deadline field.
 
     * 1b1. PoochPlanner identifies note as a special note, a deadline note.
@@ -737,7 +852,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Edting a `Person` contact
 
-   1. Prerequisites: The contact to be edited must exist and should have been added as a `Person` type. You can run the following command to add in a contact to edit: 
+   1. Prerequisites: The contact to be edited must exist and should have been added as a `Person` type. You can run the following command to add in a contact to edit:
       ```
       /add-person ; name : Person1 ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com
       ```
@@ -746,13 +861,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `/edit ; name : Person1 ; field : { address : Pooch Street 31}`<br>
       Expected: The address field of contact named 'Person1' is edited to `Pooch Street 31`. Details of the edited contact shown in the status message.
-   
+
    1. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com}`<br>
       Expected: The phone and email field of contact named 'Person1' is edited to `99990520` and `impooch@gmail13.com` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Staff` contact
 
-   1. Prerequisites: The contact to be edited must exist and should have been added as a `Staff` type. You can run the following command to add in a contact to edit: 
+   1. Prerequisites: The contact to be edited must exist and should have been added as a `Staff` type. You can run the following command to add in a contact to edit:
       ```
       /add-staff ; name : Staff1 ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time
       ```
@@ -764,13 +879,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `/edit-staff ; name : Staff1 ; field : { employment : full-time}`<br>
       Expected: The employment field of contact named 'Staff1' is edited to `full-time`. Details of the edited contact shown in the status message.
-   
+
    1. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time}`<br>
       Expected: The salary and employment field of contact named 'Staff1' is edited to `40/hr` and `part-time` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Supplier` contact
 
-   1. Prerequisites: The contact to be edited must exist and should have been added as a `Supplier` type. You can run the following command to add in a contact to edit: 
+   1. Prerequisites: The contact to be edited must exist and should have been added as a `Supplier` type. You can run the following command to add in a contact to edit:
       ```
       /add-supplier ; name : Supplier1 ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag
       ```
@@ -782,13 +897,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `/edit-supplier ; name : Supplier1 ; field : { price : $10/bag}`<br>
       Expected: The price field of contact named 'Supplier1' is edited to `$10/bag`. Details of the edited contact shown in the status message.
-   
+
    1. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag}`<br>
       Expected: The product and price field of contact named 'Supplier1' is edited to `kibbles` and `$75/bag` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Maintainer` contact
 
-   1. Prerequisites: The contact to be edited must exist and should have been added as a `Maintainer` type. You can run the following command to add in a contact to edit: 
+   1. Prerequisites: The contact to be edited must exist and should have been added as a `Maintainer` type. You can run the following command to add in a contact to edit:
       ```
       /add-maintainer ; name : Maintainer1  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr
       ```
@@ -800,7 +915,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { skill : cleaner}`<br>
       Expected: The skill field of contact named 'Maintainer1' is edited to `cleaner`. Details of the edited contact shown in the status message.
-   
+
    1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $12/hr ; skill : janitor}`<br>
       Expected: The commission and skill field of contact named 'Maintainer1' is edited to `$12/hr` and `janitor` respectively. Details of the edited contact shown in the status message.
 
@@ -846,6 +961,32 @@ testers are expected to do more *exploratory* testing.
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
 
 1. _{ more test cases …​ }_
+
+### Adding a note to a contact
+
+1. Adding a note(no deadline) to a contact
+
+  1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
+     ```
+     /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+     ```
+  1. Test case: `/note ; name : Poochie ; note : get kibble`<br>
+     Expected: Woof! Added note to Pooch Contact Other Contact Janna successfully! 🐶
+  2. Test case: `/note ; name : ; note : get kibble`<br>
+     Expected : Names should only contain alphanumeric characters and spaces, and it should not be blank
+  3. Test case: `/note ; name : Poochie ; note : `<br>
+     Expected : Failed to add note to Pooch Contact - Note is not specified 🐾
+
+
+2. Adding a note(with deadline) to a contact
+
+  1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
+     ```
+     /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+     ```
+  1. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
+     Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
+
 
 ### Saving data
 

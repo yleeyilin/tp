@@ -24,7 +24,7 @@ Get started by following the steps in this user guide! Experience the difference
 
 --------------------------------------------------------------------------------------------------------------------
 ## Introducing PoochPlanner
-PoochPlanner is your go-to address book, tailor-made for dog cafe owners like you. With four main contact types—**person, staff, supplier, maintainer**—each equipped with its own set of attributes and functions, managing your contacts has never been easier. 
+PoochPlanner is your go-to address book, tailor-made for dog cafe owners like you. With four main contact types—**person, staff, supplier, maintainer**—each equipped with its own set of attributes and functions, managing your contacts has never been easier.
 
 Contact | Definition and Examples
 --------|------------------
@@ -47,17 +47,19 @@ Rating | Rate any of the contacts so that you can easily track their performance
 ## Navigating this User Guide
 This user guide is designed to help you make the most of PoochPlanner, whether you are a beginner or an experienced user.
 
-- If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
-- Encountering issues or have questions about PoochPlanner? Check out our **[FAQ](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#faq)** for helpful troubleshooting tips and answers to common queries.
-- New to PoochPlanner? Explore the following sections to familiarise yourself with the basics:<br>
+To get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
+- If you are a new user, explore the following sections to familiarise yourself with the basics:<br>
     1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the command box and contact cards.<br>
     2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
-- Already familiar with PoochPlanner? Dive into our special features to enhance your experience:
+- If you are an advanced user, dive into our special features to further enhance your experience:
     1. **[Rate](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#rating-a-contact--rate)** : Give performance rating to your contacts. <br>
     2. **[Pin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#pinning-a-contact--pin)** & **[Unpin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
     3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
     4. **[Note](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : Add notes to your contacts.<br>
-- Check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)** for a quick reference to all available commands.
+
+Check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)** for a quick reference to all available commands.
+
+Encountering issues or have questions about PoochPlanner? Check out our **[FAQ](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#faq)** for helpful troubleshooting tips and answers to common queries.
 
 
 ## Useful Notations and Glossary
@@ -74,7 +76,7 @@ The following glossary table provides clarification on commonly-used terms as we
 
 Abbreviation/Nomenclature | Meaning
 --------|------------------
-GUI | GUI stands for Graphical User Interface and it represents the visual display of PoochPlanner that users can see when the application is run.
+GUI | GUI stands for Graphical User Interface and it represents the visual display of PoochPlanner that you can see when the application is run.
 GUI Component | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-gui).
 CLI | CLI stands for Command Line Interface and it represents a text-based user interface to interact with the application.
 Command | An input from the user that tells PoochPlanner to perform an action. View PoochPlanner’s [Command Summary](#command-summary).
@@ -227,12 +229,12 @@ Upon editing the new contact, Janna's address is updated with the new address `P
 
 The edit command also works for staff (`edit-staff`), supplier (`edit-supplier`) and maintainer (`edit-maintainer`) as well. The table below summarises the command, format and examples for each type of person.
 
-| Edits a ...    | Format & Examples                                                                                                                                                                                                                                                           |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit ; name : Mochie ; field : { address : Pooch Street 31`<br> The above command edits the **address** field of **_Mochie_** to **_Pooch Street 31_**.                                                                                  |
-| **Staff**      | Format : <br>`/edit-staff ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part/full] }` <br><br> Example: <br>`/edit-staff ; name : Thomas ; field : { address : Poochie Street 25 ; employment : full-time }` <br> The above command edits the **address and employment** field of **_Thomas_** to **_Poochie Street 25_** and **_full-time_** respectively.|
-| **Supplier**   | Format : <br>`/edit-supplier ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price] }` <br><br> Example: <br>`/edit-supplier ; name : Supplier1 ; field : { product : kibble ; price : $75/bag}` <br>The above command edits the **product and price** field of **_Supplier1_** to **_kibble_** and **_$75/bag_** respectively.                  |
-| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of **_Maintainer1_** to **_$10/hr_**.                       |
+| Edits a ...    | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit ; name : Mochie ; field : { address : Pooch Street 31}`<br> The above command edits the **address** field of **_Mochie_** to **_Pooch Street 31_**.                                                                                                                                     |
+| **Staff**      | Format : <br>`/edit-staff ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part/full] }` <br><br> Example: <br>`/edit-staff ; name : Thomas ; field : { address : Poochie Street 25 ; employment : full-time }` <br> The above command edits the **address and employment** field of **_Thomas_** to **_Poochie Street 25_** and **_full-time_** respectively. |
+| **Supplier**   | Format : <br>`/edit-supplier ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price] }` <br><br> Example: <br>`/edit-supplier ; name : Supplier1 ; field : { product : kibble ; price : $75/bag}` <br>The above command edits the **product and price** field of **_Supplier1_** to **_kibble_** and **_$75/bag_** respectively.                                   |
+| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of **_Maintainer1_** to **_$10/hr_**.                                                                           |
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -374,7 +376,7 @@ PoochPlanner updates the rating for Janna to 5 stars.
 
 More Examples:
 * `/rate ; name : Poochie ; rating : 3`
-  
+
   The above command rates the contact with the name **_Poochie_** with a rating of `3`.
 
 
@@ -471,7 +473,7 @@ More Examples:
 * Name must be present in Pooch Planner.<br>
 
 * Using unpin command on a contact that has been unpinned do not make any changes to Pooch Planner.<br>
-</div> 
+</div>
 
 #### Sorting the address book : `sort`
 
@@ -500,7 +502,7 @@ PoochPlanner sorts the contacts in ascending order.
 More Examples:
 * `/sort ; field : phone`
 
-  The above command sorts the contacts by phone number in ascending order, from smallest to largest. 
+  The above command sorts the contacts by phone number in ascending order, from smallest to largest.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -515,7 +517,7 @@ More Examples:
 
 Adds a note to a specified person from the Pooch Planner so that you can keep track of any details regarding the contact.
 
-Format: 
+Format:
 `/note ; name : [name] ; note : [note message]`
 `/note ; name : [name] ; note : [note message] ; deadline : [date]`
 
@@ -540,7 +542,7 @@ PoochPlanner adds the note to `Poochie` within the contact card.
 More Examples:
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie`
 
-  The above command adds the note "get 10kg of matcha from moochie" to 
+  The above command adds the note "get 10kg of matcha from moochie" to
   the contact with name **_Moochie_**.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
@@ -583,7 +585,7 @@ PoochPlanner undoes the accidental deletion of `Poochie`
 
 Examples:
 * `/undo`
-    
+
     The above command undoes the most recent command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
@@ -593,7 +595,7 @@ Examples:
 * Any unnecessary parameter or value after /undo will simply be ignored.<br>
 
 * This command can only be executed when at least one changes have been made.<br>
-</div> 
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
@@ -861,4 +863,4 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 | **Unpin**                | Format : <br>`/unpin ; name : [name]`                                                                                                                  <br> <br> Example : <br> `/unpin ; name : Poochie`                                                                                                                                     |
 | **Sort**                 | Format : <br>`/sort ; target-field`                                                                                                                    <br> <br> Example : <br> `/sort ; name`                                                                                                                                                |
 | **Note**                 | Format : <br>`/note ; name : [name] ; note : [note]` or `/note ; name : [name] ; note : [note] ; deadline : [deadline]`                                <br> <br> Example : <br> `/note ; name : Poochie ; note : get dog for groomers ; deadline : 2020-10-10`                                                                                |
-| **Exit**                 | Format : <br>`exit`                                                                                                                                    <br> <br> Example : <br> `exit`                                                                                                                                                        | 
+| **Exit**                 | Format : <br>`exit`                                                                                                                                    <br> <br> Example : <br> `exit`                                                                                                                                                        |
