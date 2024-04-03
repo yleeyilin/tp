@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PinCommandParser" as PinCommandParser LOGIC_COLOR
+participant "r:PinCommand" as PinCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("/pin ; name : poochie")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/pin ; name : poochie")
+activate AddressBookParser
+
+create PinCommandParser
+AddressBookParser -> PinCommandParser
+activate PinCommandParser
+
+PinCommandParser --> AddressBookParser
+deactivate PinCommandParser
+
+AddressBookParser -> PinCommandParser : parse(" ; name : poochie")
+activate PinCommandParser
+
+create PinCommand
+PinCommandParser -> PinCommand
+activate PinCommand
+
+PinCommand --> PinCommandParser : r
+deactivate PinCommand
+
+PinCommandParser --> AddressBookParser : r
+deactivate PinCommandParser
+
+PinCommandParser -[hidden]-> AddressBookParser
+destroy PinCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> PinCommand : execute()
+activate PinCommand
+
+PinCommand -> Model : findByName(name)
+activate Model
+
+Model --> PinCommand
+
+PinCommand -> Model : setPerson(personToPin, pinnedPerson)
+
+Model --> PinCommand
+
+PinCommand -> Model : updatePinnedPersonList()
+
+Model --> PinCommand
+deactivate Model
+
+create CommandResult
+PinCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PinCommand
+deactivate CommandResult
+
+PinCommand --> LogicManager : result
+deactivate PinCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

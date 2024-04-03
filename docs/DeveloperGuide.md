@@ -504,9 +504,72 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ### Edit feature
 
-#### Implementation
+#### Overview
 
-The edit feature implements a search by name function for each user class `person`, `maintainer`, `supplier` and `staff` and edits the specified field.
+The edit-XYZ command enables users to modify a specified field of an existing contact from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `edit-XYZ` command.
+
+![Edit Sequence Diagram](images/EditCommandSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`, `staff`, `suppliers`, `maintainers`. 
+</div>
+
+#### Details
+
+1. The user inputs the command to edit a specified contact by first stating the target name of the contact they want to edit. This is followed by the respective fields and new values the user wants to modify. 
+2. `EditCommandParser` parses the user input and creates an `editPersonDescriptor` object which contains the new values to be edited for the specified contact.
+3. An `EditCommand` object is created with the name of the contact to edit and the`editPersonDescriptor` object. 
+4. The `EditCommandParser` returns the `EditCommand` object. 
+5. The `LogicManager` invokes the `execute` method of `EditCommand`.
+6. The `execute` method of `EditCommand` finds the specified contact by `name`. The `execute` method then calls `createEditedPerson` of `EditCommand` which creates a new `Person` object that contains the updated values of the contact.
+7. The `execute` method of `EditCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object. 
+8. The `execute` method of `EditCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
+9. The `execute` method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Edit` command.
+
+#### Example Usage
+1. The user launches the application. 
+2. The user inputs `/edit-person ; name : Alice Tan ; field : { phone : 9990520 ; email : impooch@gmail12.com }`
+3. The contact card for `Alice Tan` is updated for the `phone` and `email` field respectively. This change should be reflected on the contact list page on PoochPlanner.
+
+
+### Pin / Unpin feature
+
+#### Overview
+
+The `pin`/`unpin` command enables users to pin/unpin any existing contacts in PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `pin` command.
+
+![Pin Sequence Diagram](images/PinCommandSequenceDiagram.png)
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `unpin` command.
+
+![Unpin Sequence Diagram](images/UnpinCommandSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The implementation for person, staff, suppliers, maintainers are the same. Pin and Unpin are also implemented similarly as seen in the sequence diagrams. 
+</div>
+
+#### Details
+
+1. The user inputs the command to pin/unpin a specified contact by stating the target name of the contact they want to pin/unpin.
+2. `PinCommandParser`/`UnpinCommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their respective values as an `ArgumentMultimap` object. 
+3. A `PinCommand`/`UnpinCommand` object is created with the name of the contact to pin/unpin.
+4. The `PinCommandParser`/`UnpinCommandParser` returns the `PinCommand`/`UnpinCommand` object.
+5. The `LogicManager` invokes the `execute` method of `PinCommand`/`UnpinCommand`.
+6. The `execute` method of `PinCommand`/`UnpinCommand` finds the specified contact by `name`. The `updateToPinned`/`updateToUnpinned` method of `Person` which creates a new `Person` object that contains the updated pin boolean of the contact.
+7. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object. 
+8. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `updatePinnedPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
+9. The `execute` method of `PinCommand`/`UnpinCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Pin`/`Unpin` command.
+
+
+#### Example Usage
+1. The user launches the application.
+2. The user inputs `/pin ; name : Alice Tan` or `unpin ; name : Alice Tan` into the CLI.
+3. The contact card for `Alice Tan` is now pinned / unpinned. This change should be reflected on the contact list page on PoochPlanner.
+
 
 ### \[Proposed\] Data archiving
 
@@ -562,7 +625,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-
 ---
 **System**: `PoochPlanner`
 
@@ -570,11 +632,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a new contact is added into list`
+**Guarantee**: `If MSS reach step 3, a new contact is added into list.`
 
 **MSS**:
 
-1.  User requests to add contact of a person.
+1.  User requests to add the contact of a person.
 2.  PoochPlanner updates list of persons.
 3.  PoochPlanner confirms success update.
 
@@ -585,28 +647,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects a missing field in the entered input.
 
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the correct command with the required field.
+   * 1a2. User re-enters a new command with the required field.
    * Steps 1a1 - 1a2 are repeated until the input entered are correct.
    * Use case resumes from step 2.
 
 * 1b. PoochPlanner detects a duplicate name entry.
 
    * 1b1. PoochPlanner displays the error message.
-   * 1b2. User re-enters the correct command with another name.
+   * 1b2. User re-enters a new command with another name.
    * Steps 1b1 - 1b2 are repeated until there is no duplicate entry in input.
    * Use case resumes from step 2.
 
 * 1c. PoochPlanner detects wrong format for email.
 
    * 1c1. PoochPlanner displays the error message.
-   * 1c2. User re-enters the correct email format.
+   * 1c2. User re-enters a new command with correct email format.
    * Steps 1c1 - 1c2 are repeated until there is no error in input.
    * Use case resumes from step 2.
 
-* 1d. PoochPlanner detect unknown input for employment.
+* 1d. PoochPlanner detects unknown input for employment.
 
   * 1d1. PoochPlanner displays the error message.
-  * 1d2. User re-enters the correct input for employment.
+  * 1d2. User re-enters a new command with correct input for employment.
   * Steps 1d1 - 1d2 are repeated until there is no error in input.
   * Use case resumes from step 2.
 
@@ -617,7 +679,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a contact is deleted from list`
+**Guarantee**: `If MSS reach step 3, the contact is deleted from list.`
 
 **MSS**:
 
@@ -632,15 +694,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects a missing name field in the entered input.
 
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the correct command with the name field.
+   * 1a2. User re-enters a new command with the name field.
    * Steps 1a1 - 1a2 are repeated until the input entered are correct.
    * Use case resumes from step 2.
 
-* 1b. PoochPlanner is unable to find the Person.
+* 1b. PoochPlanner is unable to find the contact.
 
    * 1b1. PoochPlanner displays the error message.
    * 1b2. User re-enters a new command with another name.
-   * Steps 1b1 - 1b2 are repeated until the input references a Person that exists in PoochPlanner.
+   * Steps 1b1 - 1b2 are repeated until the input references a contact that exists in PoochPlanner.
    * Use case resumes from step 2.
 
 ---
@@ -650,7 +712,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a contact is edited successfully in the list`
+**Guarantee**: `If MSS reach step 3, the contact is edited successfully in the list.`
 
 **MSS**:
 
@@ -665,42 +727,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects a missing name field in the entered input.
 
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the correct command with the name field.
+   * 1a2. User re-enters a new command with the name field.
    * Steps 1a1 - 1a2 are repeated until the input entered are correct.
    * Use case resumes from step 2.
 
-* 1b. PoochPlanner is unable to find the Person.
+* 1b. PoochPlanner is unable to find the contact.
 
    * 1b1. PoochPlanner displays the error message.
    * 1b2. User re-enters a new command with another name.
-   * Steps 1b1 - 1b2 are repeated until the input references a Person that exists in PoochPlanner.
+   * Steps 1b1 - 1b2 are repeated until the input references a contact that exists in PoochPlanner.
    * Use case resumes from step 2.
 
 * 1c. User requests to edit the name field to a name that already exists in PoochPlanner.
 
    * 1c1. PoochPlanner displays the error message.
-   * 1c2. User re-enters the command with a different name.
+   * 1c2. User re-enters a new command with a different name.
    * Steps 1c1 - 1c2 are repeated until the new name field is valid.
    * Use case resumes from step 2.
 
-* 1d. User did not specify the field that they want to edit.
+* 1d. PoochPlanner detects empty field in the entered input.
 
    * 1d1. PoochPlanner displays the error message.
-   * 1d2. User re-enters the command and specify the field/s to edit.
+   * 1d2. User re-enters a new command and specify the field/s to edit.
    * Steps 1d1 - 1d2 are repeated until there exist a specified field to edit.
    * Use case resumes from step 2.
 
-* 1e. User specified an invalid field.
+* 1e. User specifies an invalid field.
 
    * 1e1. PoochPlanner displays the error message.
-   * 1e2. User re-enters the command and edits a different field.
+   * 1e2. User re-enters a new command and edits a different field.
    * Steps 1e1 - 1e2 are repeated until there exist a valid field in the input.
    * Use case resumes from step 2.
 
 * 1f. PoochPlanner detects wrong format for email.
 
     * 1f1. PoochPlanner displays the error message.
-    * 1f2. User re-enters the correct email format.
+    * 1f2. User re-enters a new command with a correct email format.
     * Steps 1f1 - 1f2 are repeated until there is no error in input.
     * Use case resumes from step 2.
 
@@ -724,7 +786,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects a missing field in the entered input.
 
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the correct command with a specified field.
+   * 1a2. User re-enters a new command with a specified field.
    * Steps 1a1 - 1a2 are repeated until a valid field is inputted by the User.
    * Use case resumes from step 2.
 
@@ -732,7 +794,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    * 1b1. PoochPlanner displays the error message.
    * 1b2. User re-enters a new command with only one field.
-   * Steps 1b1 - 1b2 are repeated until the input references a Person that exists in PoochPlanner.
+   * Steps 1b1 - 1b2 are repeated until the input references a contact that exists in PoochPlanner.
    * Use case resumes from step 2.
 
 * 1c. PoochPlanner detects invalid field in the entered input.
@@ -745,9 +807,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC05 - Add rating to a contact`
+**Use case**: `UC05 - Add a rating to a contact`
 
 **Actor**: `User`
+
+**Guarantee**: `If MSS reach step 3, a rating for the contact is updated successfully in the list.`
 
 **MSS**:
 
@@ -762,14 +826,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects a missing name in the entered input.
 
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the correct command with a specified name.
+   * 1a2. User re-enters a new command with a specified name.
    * Steps 1a1 - 1a2 are repeated until a valid name is inputted by the User.
    * Use case resumes from step 2.
 
 * 1b. PoochPlanner detects an invalid rating in the entered input.
 
    * 1b1. PoochPlanner displays the error message.
-   * 1b2. User re-enters the correct command with a new rating value.
+   * 1b2. User re-enters a new command with a new rating value.
    * Steps 1b1 - 1b2 are repeated until the rating provided is an integer between 1 and 5 inclusive.
    * Use case resumes from step 2.
 
@@ -791,7 +855,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User requests to learn about an invalid command(a command not offered by PoochPlanner).
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the command and request to learn about a valid command.
+   * 1a2. User re-enters a new command and request to learn about a valid command.
    * Steps 1a1 - 1a2 are repeated until a valid command is inputted by the User.
    * Use case resumes from step 2.
 
@@ -805,13 +869,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to undo previous command.
-2.  PoochPlanner retrieve previous state of address book.
+2.  PoochPlanner retrieves previous record of address book.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. PoochPlanner has no previous state of address book.
+* 1a. PoochPlanner detects no previous state of address book.
 
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
@@ -826,13 +890,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to redo previous command.
-2.  PoochPlanner retrieve future state of address book.
+2.  PoochPlanner retrieves future record of address book.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. PoochPlanner has no next state of address book.
+* 1a. PoochPlanner detects no next record of address book.
 
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
@@ -847,25 +911,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to pin a contact.
-2.  PoochPlanner display a list of contact with pinned contact at the top.
+2.  PoochPlanner displays a list of contact with pinned contact at the top.
 
     Use case ends.
 
 * 1a. PoochPlanner detects a missing name field in the entered input.
 
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the command with a specified name field.
+   * 1a2. User re-enters a new command with a specified name field.
    * Steps 1a1 - 1a2 are repeated until the input entered are correct.
    * Use case resumes from step 2.
 
-* 1b. PoochPlanner is unable to find the person.
+* 1b. PoochPlanner fails to find the person.
 
    * 1b1. PoochPlanner displays the error message.
    * 1b2. User re-enters a new command with another name.
-   * Steps 1b1 - 1b2 are repeated until the input references a Person that exists in PoochPlanner.
+   * Steps 1b1 - 1b2 are repeated until the input references a contact that exists in PoochPlanner.
    * Use case resumes from step 2.
 
- ---
+---
 **System**: `PoochPlanner`
 
 **Use case**: `UC10 - Unpin a contact`
@@ -875,7 +939,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to unpin a contact.
-2.  PoochPlanner display a list of contact with the remaining pinned contact at the top.
+2.  PoochPlanner displays a list of contact with the remaining pinned contact at the top.
 
     Use case ends.
 
@@ -884,23 +948,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects a missing name field in the entered input.
 
    * 1a1. PoochPlanner displays the error message.
-   * 1a2. User re-enters the command with a specified name field.
+   * 1a2. User re-enters a new command with a specified name field.
    * Steps 1a1 - 1a2 are repeated until the input entered are correct.
    * Use case resumes from step 2.
 
-* 1b. PoochPlanner is unable to find the person.
+* 1b. PoochPlanner fails to find the person.
 
    * 1b1. PoochPlanner displays the error message.
    * 1b2. User re-enters a new command with another name.
-   * Steps 1b1 - 1b2 are repeated until the input references a Person that exists in PoochPlanner.
+   * Steps 1b1 - 1b2 are repeated until the input references a contact that exists in PoochPlanner.
    * Use case resumes from step 2.
 
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC11 - Add note to a contact`
+**Use case**: `UC11 - Add a note to a contact`
 
 **Actor**: `User`
+
+**Guarantee**: `If MSS reach step 3, a note for the contact is updated successfully in the list.`
 
 **MSS**:
 
@@ -915,14 +981,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects a missing/invalid name in the entered input.
 
     * 1a1. PoochPlanner displays the error message.
-    * 1a2. User re-enters the correct command with a specified name.
+    * 1a2. User re-enters a new command with a specified name.
     * Steps 1a1 - 1a2 are repeated until a valid name is inputted by the User.
     * Use case resumes from step 2.
 
 * 1b. PoochPlanner detects an missing/invalid note in the entered input.
 
     * 1b1. PoochPlanner displays the error message.
-    * 1b2. User re-enters the correct command with a new note value.
+    * 1b2. User re-enters a new command with a new note value.
     * Steps 1b1 - 1b2 are repeated until the rating provided is valid (non-null/non-empty).
     * Use case resumes from step 2.
 
@@ -935,16 +1001,70 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC12 - Add a reminder to a contact`
+**Use case**: `UC12 - View reminders for contact list`
+
+**Actor**: `User`
+
+**Guarantee**: `If MSS reach step 2, contacts will be displayed only if their note deadlines are on and after today's current date.`
+
+**MSS**:
+
+1.  User requests to receive reminders.
+2.  PoochPlanner displays all relevant contacts.
+
+    Use case ends.
+
+---
+**System**: `PoochPlanner`
+
+**Use case**: `UC13 - Sort contact list`
 
 **Actor**: `User`
 
 **MSS**:
 
-1.  User requests to receive a reminder of all the contacts with relevant note deadlines(note
-deadlines are relevant if they are on and after today's current date).
+1.  User requests to sort the address book by a specified field.
+2.  PoochPlanner updates the addrees book in the sorted order.
+3.  PoochPlanner confirms that the addressbook has been successfully sorted.
+
+    Use case ends.
+
+**Extensions**:
+
+* 1a. PoochPlanner detects a missing/invalid name in the entered input.
+
+    * 1a1. PoochPlanner displays the error message.
+    * 1a2. User re-enters a new command with a specified name.
+    * Steps 1a1 - 1a2 are repeated until a valid name is inputted by the User.
+    * Use case resumes from step 2.
+
+---
+**System**: `PoochPlanner`
+
+**Use case**: `UC14 - Clear contact list`
+
+**Actor**: `User`
+
+**MSS**:
+
+1.  User requests to clear the address book.
+2.  PoochPlanner updates the address book.
+3.  PoochPlanner confirms that the addressbook has been cleared.
+
+    Use case ends.
+
+---
+**System**: `PoochPlanner`
+
+**Use case**: `UC15 - List contact list`
+
+**Actor**: `User`
+
+**MSS**:
+
+1.  User requests to list the contact books.
 2.  PoochPlanner displays all relevant contacts.
-3.  PoochPlanner confirms that the note has been successfully added.
+3.  PoochPlanner confirms that all relevant contacts has been successfully listed.
 
     Use case ends.
 
