@@ -3,10 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
-
-import seedu.address.logic.commands.PinCommand;
-import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.messages.UnpinMessages;
 import seedu.address.logic.parser.exceptions.ParseException;

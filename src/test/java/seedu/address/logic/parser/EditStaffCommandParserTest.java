@@ -30,9 +30,10 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPersons.ALICESTAFF;
 import static seedu.address.testutil.TypicalPersons.CARL;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditStaffCommand;
 import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -42,8 +43,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditStaffDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
-
-import java.util.ArrayList;
 
 public class EditStaffCommandParserTest {
     private EditStaffCommandParser parser = new EditStaffCommandParser();

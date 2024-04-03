@@ -12,8 +12,6 @@ import seedu.address.logic.messages.AddMessages;
 import seedu.address.logic.messages.DeleteMessages;
 import seedu.address.logic.messages.EditMessages;
 import seedu.address.logic.messages.Messages;
-import seedu.address.logic.messages.PinMessages;
-import seedu.address.logic.messages.UnpinMessages;
 
 /**
  * Contains unit tests for {@code Messages}.

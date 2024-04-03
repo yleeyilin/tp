@@ -10,14 +10,13 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.RateCommand;
 import seedu.address.logic.messages.RateMessages;
 import seedu.address.model.person.Rating;
-
-import java.util.ArrayList;
 
 public class RateCommandParserTest {
     private final RateCommandParser parser = new RateCommandParser();

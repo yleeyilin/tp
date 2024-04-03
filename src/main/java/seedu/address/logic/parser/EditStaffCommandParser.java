@@ -10,12 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditMaintainerCommand;
 import seedu.address.logic.commands.EditStaffCommand;
 import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.logic.messages.EditMessages;

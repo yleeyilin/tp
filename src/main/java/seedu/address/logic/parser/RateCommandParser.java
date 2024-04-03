@@ -7,13 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.RateCommand;
 import seedu.address.logic.messages.RateMessages;
 import seedu.address.logic.parser.exceptions.ParseException;

@@ -20,7 +20,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_FIELD;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.RateCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.messages.SearchMessages;
 import seedu.address.logic.parser.exceptions.ParseException;

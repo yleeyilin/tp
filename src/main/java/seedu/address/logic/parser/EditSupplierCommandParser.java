@@ -10,11 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
 import seedu.address.logic.messages.EditMessages;

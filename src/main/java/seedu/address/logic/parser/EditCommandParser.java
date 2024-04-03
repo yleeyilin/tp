@@ -7,14 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.messages.EditMessages;

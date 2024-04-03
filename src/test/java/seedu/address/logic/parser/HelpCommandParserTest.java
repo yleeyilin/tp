@@ -1,19 +1,17 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.messages.HelpMessages.MESSAGE_HELP_MISSING_COMMAND;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
-
-import java.util.ArrayList;
 
 public class HelpCommandParserTest {
 

@@ -6,14 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.commands.UnpinCommand;
-import seedu.address.logic.messages.UnpinMessages;
 import seedu.address.model.person.Name;
-
-import java.util.ArrayList;
 
 public class UnpinCommandParserTest {
     private UnpinCommandParser parser = new UnpinCommandParser();
