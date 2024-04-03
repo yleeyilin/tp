@@ -50,7 +50,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(DeleteMessages.MESSAGE_DELETE_INVALID_PARAMETERS, pe.getMessage()));
         }
-
     }
 
     /**
