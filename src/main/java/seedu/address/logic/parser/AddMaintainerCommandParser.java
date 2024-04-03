@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_UNDETECTED_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
@@ -46,11 +45,7 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
-        if (unknownPrefixes.size() > 0) {
-            String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
-            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
-            throw new ParseException(exception);
-        }
+        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, AddMaintainerCommand.MESSAGE_USAGE);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
