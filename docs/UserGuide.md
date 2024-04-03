@@ -15,7 +15,7 @@ title: User Guide
 
 By seamlessly combining the efficiency of a Command Line Interface (CLI) with the intuitive interface of a Graphical User Interface (GUI), PoochPlanner empowers you to effortlessly complete your contact management tasks two times faster than traditional GUI applications.
 
-Get started by following the steps in this user guide! Experience the difference today with PoochPlanner—the ultimate solution tailored to your needs. 
+Get started by following the steps in this user guide! Experience the difference today with PoochPlanner—the ultimate solution tailored to your needs.
 
 ## Table of Contents
 
