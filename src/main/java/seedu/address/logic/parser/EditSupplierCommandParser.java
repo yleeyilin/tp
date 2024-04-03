@@ -3,24 +3,16 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
@@ -45,37 +37,40 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         Name name;
         String fieldArgs;
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
+        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+                PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
 
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
         boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
         if (hasDuplicateNamePrefix) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD,
-                    "Editing Pooch Contact name is not allowed!"));
+            unknownPrefixes.add("name");
         }
 
+        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, EditSupplierCommand.MESSAGE_USAGE);
+
         // check for missing name
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
                     EditSupplierCommand.MESSAGE_USAGE));
         }
 
         // check for missing field
-        if (!arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
                     EditSupplierCommand.MESSAGE_USAGE));
         }
 
-        name = mapName(argMultimap);
-        fieldArgs = mapFields(argMultimap);
+        name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
+        fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditSupplierCommand.MESSAGE_USAGE));
+        ArrayList<String> unknownFieldPrefixes = ArgumentTokenizer.checkUnknownPrefix(fieldArgs,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PRODUCT, PREFIX_PRICE);
+        ParserUtil.verifyNoUnknownPrefix(unknownFieldPrefixes, EditSupplierCommand.MESSAGE_USAGE);
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_EMPLOYMENT, PREFIX_SALARY,
-                        PREFIX_SKILL, PREFIX_COMMISSION);
-
-        // check for invalid fields
-        checkEditFieldValidity(fieldArgMultimap);
+                        PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
 
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
@@ -96,95 +91,6 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         editSupplierDescriptor.setTags(tags);
 
         return new EditSupplierCommand(name, editSupplierDescriptor);
-    }
-
-    /**
-     * Checks all invalid fields for supplier class.
-     * @param fieldArgMultimap The prefix to value mapping.
-     * @throws ParseException Throws when there exist invalid fields.
-     */
-    public void checkEditFieldValidity(ArgumentMultimap fieldArgMultimap) throws ParseException {
-        ArrayList<String> invalidFields = new ArrayList<>();
-        if (arePrefixesPresent(fieldArgMultimap, PREFIX_NAME)) {
-            invalidFields.add("name");
-        }
-        if (arePrefixesPresent(fieldArgMultimap, PREFIX_SALARY)) {
-            invalidFields.add("salary");
-        }
-        if (arePrefixesPresent(fieldArgMultimap, PREFIX_EMPLOYMENT)) {
-            invalidFields.add("employment");
-        }
-        if (arePrefixesPresent(fieldArgMultimap, PREFIX_SKILL)) {
-            invalidFields.add("skill");
-        }
-        if (arePrefixesPresent(fieldArgMultimap, PREFIX_COMMISSION)) {
-            invalidFields.add("commission");
-        }
-        if (invalidFields.size() > 0) {
-            throw new ParseException(formatInvalidFieldString(invalidFields));
-        }
-    }
-
-    /**
-     * Formats the string for invalid fields.
-     * @param invalidFields The exact invalid fields.
-     * @return A string that specifies the exact invalid fields.
-     */
-    public String formatInvalidFieldString(ArrayList<String> invalidFields) {
-        String formattedFieldString = "";
-        if (invalidFields.size() == 1) {
-            return String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD,
-                "Editing Pooch Contact " + invalidFields.get(0) + " is not allowed for supplier");
-        }
-        for (int i = 0; i < invalidFields.size(); i++) {
-            if (i == invalidFields.size() - 2) {
-                formattedFieldString += invalidFields.get(i) + " and ";
-            } else if (i == invalidFields.size() - 1) {
-                formattedFieldString += invalidFields.get(i);
-            } else {
-                formattedFieldString += invalidFields.get(i) + ", ";
-            }
-        }
-        return String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD,
-                "Editing Pooch Contact " + formattedFieldString + " is not allowed for supplier");
-    }
-
-    /**
-     * Returns name value using PREFIX.
-     * @param argMultimap Object that contains mapping of prefix to value.
-     * @return Returns object representing name.
-     * @throws ParseException Thrown when command is in invalid format.
-     */
-    public Name mapName(ArgumentMultimap argMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_NAME, pe.getMessage()));
-        }
-
-    }
-
-    /**
-     * Returns field values using PREFIX.
-     * @param argMultimap Object that contains mapping of prefix to value.
-     * @return Returns object representing the respective fields.
-     * @throws ParseException Thrown when command is in invalid format.
-     */
-    public String mapFields(ArgumentMultimap argMultimap) throws ParseException {
-        try {
-            return ParserUtil.parseField(argMultimap.getValue(PREFIX_FIELD).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditSupplierCommand.MESSAGE_USAGE), pe);
-        }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
@@ -217,20 +123,4 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
 
         return editSupplierDescription;
     }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
-    }
-
 }

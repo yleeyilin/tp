@@ -20,9 +20,9 @@ public class Staff extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Staff(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                 Salary salary, Employment employment) {
-        super(name, phone, email, address, new Note("No additional note set"), tags);
+    public Staff(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags,
+                 Salary salary, Employment employment, Rating rating) {
+        super(name, phone, email, address, note, tags, rating);
         requireAllNonNull(salary, employment);
         this.salary = salary;
         this.employment = employment;
@@ -34,6 +34,54 @@ public class Staff extends Person {
 
     public Employment getEmployment() {
         return employment;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Staff} with the updated note,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Staff updateNote(Note note) {
+        Staff staffToReturn = new Staff(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), note,
+                this.getTags(), this.salary, this.employment, this.getRating());
+        staffToReturn.setPinIfPinned(this);
+        return staffToReturn;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Staff} with the updated rating,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Staff updateRating(Rating rating) {
+        Staff staffToReturn = new Staff(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
+                this.getNote(), this.getTags(), this.salary, this.employment, rating);
+        staffToReturn.setPinIfPinned(this);
+        return staffToReturn;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Staff} with the updated pin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Staff updateToPinned() {
+        Staff staffToReturn = new Staff(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
+                this.getNote(), this.getTags(), this.salary, this.employment, this.getRating());
+        staffToReturn.toPin();
+        return staffToReturn;
+    }
+
+    /**
+     * Returns a new instantiation of the current {@code Staff} with the updated unpin,
+     * which throws {@code UnsupportedOperationException} if modification is attempted.
+     */
+    @Override
+    public Staff updateToUnpinned() {
+        Staff staffToReturn = new Staff(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
+                this.getNote(), this.getTags(), this.salary, this.employment, this.getRating());
+        staffToReturn.toUnpin();
+        return staffToReturn;
     }
 
     /**
@@ -71,6 +119,7 @@ public class Staff extends Person {
                 .add("email", getEmail())
                 .add("address", getAddress())
                 .add("tags", getTags())
+                .add("rating", getRating())
                 .add("salary", salary)
                 .add("employment", employment)
                 .toString();

@@ -15,7 +15,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,7 +28,9 @@ import seedu.address.model.person.Commission;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Maintainer;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Skill;
 import seedu.address.model.tag.Tag;
 
@@ -36,11 +40,12 @@ import seedu.address.model.tag.Tag;
 public class EditMaintainerCommand extends Command {
     public static final String COMMAND_WORD = "/edit-maintainer";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the maintainer identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\nEdits the details of the maintainer identified "
             + "by the name used in the displayed person list.\n"
-            + "Parameters: "
+            + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_FIELD + "FIELD] "
+            + "[" + PREFIX_FIELD + "FIELD] \n"
+            + "Field Parameters: "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -53,9 +58,10 @@ public class EditMaintainerCommand extends Command {
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
 
+    private static final Logger logger = LogsCenter.getLogger(EditMaintainerCommand.class);
+
     private final Name name;
     private final EditMaintainerDescriptor editMaintainerDescriptor;
-
     /**
      * @param name of the maintainer in the filtered person list to edit
      * @param editMaintainerDescriptor details to edit the maintainer with
@@ -73,16 +79,16 @@ public class EditMaintainerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Maintainer maintainerToEdit = model.findMaintainerByName(name);
-
+        Maintainer maintainerToEdit = model.findMaintainerByName(name,
+                EditMessages.MESSAGE_INVALID_EDIT_MAINTAINER);
         Maintainer editedMaintainer = createEditedMaintainer(maintainerToEdit, editMaintainerDescriptor);
-
-        if (!maintainerToEdit.isSamePerson(editedMaintainer) && model.hasPerson(editedMaintainer)) {
-            throw new CommandException(EditMessages.MESSAGE_EDIT_NO_DIFFERENCE);
-        }
 
         model.setPerson(maintainerToEdit, editedMaintainer);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditMessages.format(editedMaintainer)));
+
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedMaintainer)));
     }
@@ -99,13 +105,15 @@ public class EditMaintainerCommand extends Command {
         Phone updatedPhone = editMaintainerDescriptor.getPhone().orElse(maintainerToEdit.getPhone());
         Email updatedEmail = editMaintainerDescriptor.getEmail().orElse(maintainerToEdit.getEmail());
         Address updatedAddress = editMaintainerDescriptor.getAddress().orElse(maintainerToEdit.getAddress());
+        Note presentNote = maintainerToEdit.getNote(); //edit cannot change note
+        Rating presentRating = maintainerToEdit.getRating(); //edit cannot change rating
         Set<Tag> updatedTags = editMaintainerDescriptor.getTags().orElse(maintainerToEdit.getTags());
         Skill updatedSkill = editMaintainerDescriptor.getSkill().orElse(maintainerToEdit.getSkill());
         Commission updatedCommission = editMaintainerDescriptor.getCommission()
                 .orElse(maintainerToEdit.getCommission());
 
-        return new Maintainer(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, updatedSkill, updatedCommission);
+        return new Maintainer(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote,
+                updatedTags, updatedSkill, updatedCommission, presentRating);
     }
 
     @Override

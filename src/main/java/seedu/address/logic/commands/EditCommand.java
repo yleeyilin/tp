@@ -13,7 +13,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,6 +27,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,11 +37,12 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "/edit-person";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\nEdits the details of the person identified "
             + "by the name used in the displayed person list.\n"
-            + "Parameters: "
+            + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_FIELD + "FIELD] "
+            + "[" + PREFIX_FIELD + "FIELD] \n"
+            + "Field Parameters: "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EMAIL + "EMAIL] \n"
@@ -48,6 +52,8 @@ public class EditCommand extends Command {
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
+
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     private final Name name;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -68,16 +74,15 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person personToEdit = model.findPersonByName(name);
-
+        Person personToEdit = model.findPersonByName(name, EditMessages.MESSAGE_INVALID_EDIT_PERSON);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(EditMessages.MESSAGE_EDIT_NO_DIFFERENCE);
-        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditMessages.format(editedPerson)));
+
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedPerson)));
     }
@@ -94,9 +99,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Note presentNote = personToEdit.getNote(); //edit cannot change note
+        Rating presentRating = personToEdit.getRating(); //edit cannot change rating
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote, updatedTags);
+        return new Person(updatedName,
+                updatedPhone, updatedEmail, updatedAddress, presentNote, updatedTags, presentRating);
     }
 
     @Override

@@ -9,10 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -30,15 +26,19 @@ import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.PinCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.KeywordPredicate;
 import seedu.address.model.person.Maintainer;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
@@ -151,14 +151,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
-
-    @Test
     public void parseCommand_help() throws Exception {
         HelpCommand command = (HelpCommand) parser.parseCommand(
                 HelpCommand.COMMAND_WORD + " ; command : " + "add");
@@ -187,6 +179,35 @@ public class AddressBookParserTest {
         assertTrue(command instanceof NoteCommand);
     }
 
+    @Test
+    public void parseCommand_redo() throws Exception {
+        RedoCommand command = (RedoCommand) parser.parseCommand("/redo");
+        assertTrue(command instanceof RedoCommand);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        UndoCommand command = (UndoCommand) parser.parseCommand("/undo");
+        assertTrue(command instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_pin() throws Exception {
+        PinCommand command = (PinCommand) parser.parseCommand("/pin ; name : Bob Choo");
+        assertEquals(new PinCommand(new Name("Bob Choo")), command);
+    }
+
+    @Test
+    public void parseCommand_unpin() throws Exception {
+        UnpinCommand command = (UnpinCommand) parser.parseCommand("/unpin ; name : Bob Choo");
+        assertEquals(new UnpinCommand(new Name("Bob Choo")), command);
+    }
+
+    @Test
+    public void parseCommand_remind() throws Exception {
+        RemindCommand command = (RemindCommand) parser.parseCommand("/remind");
+        assertTrue(command instanceof RemindCommand);
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

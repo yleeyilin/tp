@@ -15,7 +15,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,9 +26,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Price;
 import seedu.address.model.person.Product;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.tag.Tag;
 
@@ -37,11 +41,12 @@ public class EditSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "/edit-supplier";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the supplier identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\nEdits the details of the supplier identified "
             + "by the name used in the displayed person list.\n"
-            + "Parameters: "
+            + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_FIELD + "FIELD] "
+            + "[" + PREFIX_FIELD + "FIELD] \n"
+            + "Field Parameters: "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -53,6 +58,8 @@ public class EditSupplierCommand extends Command {
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
+
+    private static final Logger logger = LogsCenter.getLogger(EditSupplierCommand.class);
 
     private final Name name;
     private final EditSupplierDescriptor editSupplierDescriptor;
@@ -74,16 +81,16 @@ public class EditSupplierCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Supplier supplierToEdit = model.findSupplierByName(name);
-
+        Supplier supplierToEdit = model.findSupplierByName(name,
+                EditMessages.MESSAGE_INVALID_EDIT_SUPPLIER);
         Supplier editedSupplier = createEditedSupplier(supplierToEdit, editSupplierDescriptor);
-
-        if (!supplierToEdit.isSamePerson(editedSupplier) && model.hasPerson(editedSupplier)) {
-            throw new CommandException(EditMessages.MESSAGE_EDIT_NO_DIFFERENCE);
-        }
 
         model.setPerson(supplierToEdit, editedSupplier);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditMessages.format(editedSupplier)));
+
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedSupplier)));
     }
@@ -100,12 +107,14 @@ public class EditSupplierCommand extends Command {
         Phone updatedPhone = editSupplierDescriptor.getPhone().orElse(supplierToEdit.getPhone());
         Email updatedEmail = editSupplierDescriptor.getEmail().orElse(supplierToEdit.getEmail());
         Address updatedAddress = editSupplierDescriptor.getAddress().orElse(supplierToEdit.getAddress());
+        Note presentNote = supplierToEdit.getNote(); //edit cannot change note
+        Rating presentRating = supplierToEdit.getRating(); //edit cannot change rating
         Set<Tag> updatedTags = editSupplierDescriptor.getTags().orElse(supplierToEdit.getTags());
         Product updatedProduct = editSupplierDescriptor.getProduct().orElse(supplierToEdit.getProduct());
         Price updatedPrice = editSupplierDescriptor.getPrice().orElse(supplierToEdit.getPrice());
 
-        return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, updatedProduct, updatedPrice);
+        return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote,
+                updatedTags, updatedProduct, updatedPrice, presentRating);
     }
 
     @Override

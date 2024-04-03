@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Price;
 import seedu.address.model.person.Product;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.Skill;
 import seedu.address.model.person.Staff;
@@ -31,9 +32,7 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
-
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
     private final String name;
     private final String phone;
     private final String email;
@@ -43,9 +42,10 @@ class JsonAdaptedPerson {
     private String product;
     private String price;
     private String skill;
-
     private String commission;
     private String note;
+    private String rating;
+    private String pin;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -54,13 +54,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("note") String note,
+                             @JsonProperty("note") String note, @JsonProperty("rating") String rating,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("salary") String salary,
                              @JsonProperty("employment") String employment,
                              @JsonProperty("product") String product,
                              @JsonProperty("price") String price,
                              @JsonProperty("skill") String skill,
+                             @JsonProperty("pin") String pin,
                              @JsonProperty("commission") String commission) {
         this.name = name;
         this.phone = phone;
@@ -72,6 +73,8 @@ class JsonAdaptedPerson {
         this.price = price;
         this.skill = skill;
         this.note = note;
+        this.rating = rating;
+        this.pin = pin;
         this.commission = commission;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -86,7 +89,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        rating = source.getRating().toString();
         note = source.getNote().toString();
+        pin = source.getPin().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -114,6 +119,14 @@ class JsonAdaptedPerson {
 
     public void setCommission(String commission) {
         this.commission = commission;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     /**
@@ -159,7 +172,11 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Note modelNote = new Note(note);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        final Rating modelRating = new Rating(rating);
 
         if (salary != null && employment != null) {
             if (!Salary.isValidSalary(salary)) {
@@ -170,9 +187,12 @@ class JsonAdaptedPerson {
             }
             final Salary modelSalary = new Salary(salary);
             final Employment modelEmployment = new Employment(employment);
-            Staff currStaff = new Staff(modelName, modelPhone, modelEmail, modelAddress,
-                    modelTags, modelSalary, modelEmployment);
+            Staff currStaff = new Staff(modelName, modelPhone, modelEmail, modelAddress, modelNote,
+                    modelTags, modelSalary, modelEmployment, modelRating);
             currStaff.setNoteContent(note);
+            if (pin.equals("true")) {
+                currStaff.toPin();
+            }
             return currStaff;
         }
 
@@ -185,9 +205,12 @@ class JsonAdaptedPerson {
             }
             final Product modelProduct = new Product(product);
             final Price modelPrice = new Price(price);
-            Supplier currSupplier = new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelProduct, modelPrice);
+            Supplier currSupplier = new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelNote, modelTags,
+                    modelProduct, modelPrice, modelRating);
             currSupplier.setNoteContent(note);
+            if (pin.equals("true")) {
+                currSupplier.toPin();
+            }
             return currSupplier;
         }
 
@@ -200,9 +223,12 @@ class JsonAdaptedPerson {
             }
             final Skill modelSkill = new Skill(skill);
             final Commission modelCommission = new Commission(commission);
-            Maintainer currMaintainer = new Maintainer(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    modelSkill, modelCommission);
+            Maintainer currMaintainer = new Maintainer(modelName, modelPhone, modelEmail, modelAddress, modelNote,
+                    modelTags, modelSkill, modelCommission, modelRating);
             currMaintainer.setNoteContent(note);
+            if (pin.equals("true")) {
+                currMaintainer.toPin();
+            }
             return currMaintainer;
         }
 
@@ -212,9 +238,21 @@ class JsonAdaptedPerson {
         if (!Note.isValidNote(note)) {
             throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
         }
-        final Note modelNote = new Note(note);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNote, modelTags);
+        if (rating == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rating.class.getSimpleName()));
+        }
+        if (!Rating.isValidRating(rating)) {
+            throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS);
+        }
+
+        Person personToAdd = new Person(modelName, modelPhone, modelEmail, modelAddress, modelNote, modelTags,
+                modelRating);
+
+        if (pin.equals("true")) {
+            personToAdd.toPin();
+        }
+        return personToAdd;
     }
 
 }

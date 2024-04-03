@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.HelpMessages;
 import seedu.address.model.Model;
@@ -13,22 +16,30 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "/help";
     public static final String MESSAGE_USAGE = "Shows program usage instructions.\n"
             + "Example: /help ; command : exit";
-    public static final String MESSAGE_CONSTRAINTS = "Only accepts add, clear, delete, edit, exit,"
-            + "list, note as valid command type inputs.";
+    public static final String MESSAGE_CONSTRAINTS = "Only accepts general, add, delete, edit,"
+            + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort as"
+            + " valid command type inputs.";
     private String commandType;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
 
-    //did not include find as it will be removed in the future
     enum CommandTypes {
         GENERAL,
         ADD,
-        CLEAR,
         DELETE,
         EDIT,
         EXIT,
         SEARCH,
         LIST,
-        NOTE
+        NOTE,
+        PIN,
+        UNPIN,
+        RATE,
+        REDO,
+        UNDO,
+        REMIND,
+        SORT,
+        CLEAR
     }
 
     /**
@@ -41,32 +52,71 @@ public class HelpCommand extends Command {
 
     /**
      * Checks if command provided is a valid command.
+     * Parameter commandType cannot be null.
      *
      * @param commandType command type that user needs help for.
      *
      * @return boolean showing whether the command type is valid.
      * */
     public static boolean isValidCommandType(String commandType) {
+        assert (commandType != null) : "specified command type to give help for is null";
+
         for (CommandTypes c : CommandTypes.values()) {
-            if (c.name().toLowerCase().equals(commandType.toLowerCase())) {
+            String lowercaseName = c.name().toLowerCase();
+            String lowercaseCommandType = commandType.toLowerCase();
+            if (lowercaseName.equals(lowercaseCommandType)) {
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * Executes the command and returns the result message.
+     * Field commandType cannot be null.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (commandType.equals("general")) {
+        assert (commandType != null) : "specified command type to give help for is null";
+        logger.info("started executing the help command");
+
+        String capitalisedCommandType = commandType.toUpperCase();
+        if (capitalisedCommandType.equals(CommandTypes.GENERAL.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("add")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.ADD.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("delete")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.DELETE.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("edit")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.EDIT.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE, true, false);
-        } else if (commandType.equals("search")) {
+        } else if (capitalisedCommandType.equals(CommandTypes.SEARCH.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.EXIT.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_EXIT_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.LIST.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_LIST_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.NOTE.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_NOTE_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.PIN.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_PIN_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.UNPIN.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_UNPIN_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.RATE.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_RATE_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.REDO.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_REDO_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.UNDO.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_UNDO_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.REMIND.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_REMIND_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.SORT.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE, true, false);
+        } else if (capitalisedCommandType.equals(CommandTypes.CLEAR.name())) {
+            return new CommandResult(HelpMessages.MESSAGES_SHOWING_CLEAR_HELP_MESSAGE, true, false);
         } else {
             throw new CommandException(HelpMessages.MESSAGES_INVALID_COMMAND_TYPE);
         }

@@ -1,26 +1,26 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.NoteMessages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Maintainer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Staff;
-import seedu.address.model.person.Supplier;
 
 /**
  * Adds a note of an existing person in the address book.
  * A non-empty note must be specified.
  */
 public class NoteCommand extends Command {
-
     public static final String COMMAND_WORD = "/note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -28,14 +28,16 @@ public class NoteCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME"
             + PREFIX_NOTE + "NOTE"
+            + "\n"
             + "Example: " + COMMAND_WORD + PREFIX_NAME
             + " Moochie" + PREFIX_NOTE + "Meet at 6pm Tuesday";
     private final Name name;
     private final Note note;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * @param name of the person in the filtered person list to edit the note
-     * @param note of the person to be updated to
+     * @param name of the person in the filtered person list to edit the note.
+     * @param note of the person to be updated to.
      */
     public NoteCommand(Name name, Note note) {
         requireAllNonNull(name, note);
@@ -45,45 +47,15 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Person personToEdit = model.findByName(name);
-        Person editedPerson;
-
-        if (personToEdit instanceof Maintainer) {
-            editedPerson = new Maintainer(
-                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getAddress(), personToEdit.getTags(), ((Maintainer) personToEdit).getSkill(), (
-                            (Maintainer) personToEdit).getCommission());
-            editedPerson.setNoteContent(note.toString());
-        } else if (personToEdit instanceof Staff) {
-            editedPerson = new Staff(
-                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getAddress(), personToEdit.getTags(), ((Staff) personToEdit).getSalary(), (
-                            (Staff) personToEdit).getEmployment());
-            editedPerson.setNoteContent(note.toString());
-        } else if (personToEdit instanceof Supplier) {
-            editedPerson = new Supplier(
-                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getAddress(), personToEdit.getTags(), ((Supplier) personToEdit).getProduct(), (
-                            (Supplier) personToEdit).getPrice());
-            editedPerson.setNoteContent(note.toString());
-        } else {
-            editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getAddress(), note, personToEdit.getTags());
-        }
-
+        logger.info("started executing the note command");
+        requireNonNull(model);
+        Person personToEdit = model.findByName(name, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);
+        Person editedPerson = personToEdit.updateNote(note);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
-    }
-
-    /**
-     * Generates a command execution success message
-     * {@code personToEdit}.
-     */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(NoteMessages.MESSAGE_ADD_NOTE_SUCCESS, personToEdit);
+        return new CommandResult(String.format(NoteMessages.MESSAGE_ADD_NOTE_SUCCESS,
+                NoteMessages.format(editedPerson)));
     }
 
     @Override

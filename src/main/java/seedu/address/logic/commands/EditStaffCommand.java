@@ -15,7 +15,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,7 +27,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Employment;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.Staff;
 import seedu.address.model.tag.Tag;
@@ -37,11 +41,12 @@ public class EditStaffCommand extends Command {
 
     public static final String COMMAND_WORD = "/edit-staff";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the staff identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\nEdits the details of the staff identified "
             + "by the name used in the displayed person list.\n"
-            + "Parameters: "
+            + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_FIELD + "FIELD] "
+            + "[" + PREFIX_FIELD + "FIELD] \n"
+            + "Field Parameters: "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -53,6 +58,8 @@ public class EditStaffCommand extends Command {
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
+
+    private static final Logger logger = LogsCenter.getLogger(EditStaffCommand.class);
 
     private final Name name;
     private final EditStaffDescriptor editStaffDescriptor;
@@ -73,8 +80,8 @@ public class EditStaffCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Staff staffToEdit = model.findStaffByName(name);
-
+        Staff staffToEdit = model.findStaffByName(name,
+                EditMessages.MESSAGE_INVALID_EDIT_STAFF);
         Staff editedStaff = createEditedStaff(staffToEdit, editStaffDescriptor);
 
         if (!staffToEdit.isSamePerson(editedStaff) && model.hasPerson(editedStaff)) {
@@ -83,6 +90,10 @@ public class EditStaffCommand extends Command {
 
         model.setPerson(staffToEdit, editedStaff);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
+                EditMessages.format(editedStaff)));
+
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.format(editedStaff)));
     }
@@ -99,12 +110,14 @@ public class EditStaffCommand extends Command {
         Phone updatedPhone = editStaffDescriptor.getPhone().orElse(staffToEdit.getPhone());
         Email updatedEmail = editStaffDescriptor.getEmail().orElse(staffToEdit.getEmail());
         Address updatedAddress = editStaffDescriptor.getAddress().orElse(staffToEdit.getAddress());
+        Note presentNote = staffToEdit.getNote(); //edit cannot change note
+        Rating presentRating = staffToEdit.getRating(); //edit cannot change rating
         Set<Tag> updatedTags = editStaffDescriptor.getTags().orElse(staffToEdit.getTags());
         Salary updatedSalary = editStaffDescriptor.getSalary().orElse(staffToEdit.getSalary());
         Employment updatedEmployment = editStaffDescriptor.getEmployment().orElse(staffToEdit.getEmployment());
 
-        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, updatedSalary, updatedEmployment);
+        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote,
+                updatedTags, updatedSalary, updatedEmployment, presentRating);
     }
 
     @Override

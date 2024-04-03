@@ -2,14 +2,17 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_UNDETECTED_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -21,7 +24,9 @@ import seedu.address.model.person.Commission;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Maintainer;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Skill;
 import seedu.address.model.tag.Tag;
 
@@ -36,23 +41,27 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMaintainerCommand parse(String args) throws ParseException {
-        String unknownPrefix = ArgumentTokenizer.checkUnknownPrefix(args,
+        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SKILL, PREFIX_COMMISSION);
+                PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
-        if (unknownPrefix != null) {
-            String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefix);
+        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, AddMaintainerCommand.MESSAGE_USAGE);
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_SKILL, PREFIX_COMMISSION)) {
+            ArrayList<String> undetectedFields = ArgumentTokenizer.checkUndetectedPrefix(argMultimap,
+                    PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
+                    PREFIX_SKILL, PREFIX_COMMISSION);
+            String exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
             throw new ParseException(exception);
         }
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_SKILL, PREFIX_COMMISSION);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_SKILL, PREFIX_COMMISSION)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE));
         }
 
@@ -62,13 +71,17 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse("No note here");
+        Note note = noteContent.equals("No note here") ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
+        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse("0"));
+
         Tag tag = new Tag("maintainer");
         Set<Tag> tags = new HashSet<>();
         tags.add(tag);
         Skill skill = ParserUtil.parseSkill(argMultimap.getValue(PREFIX_SKILL).get());
         Commission commission = ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).get());
 
-        Maintainer person = new Maintainer(name, phone, email, address, tags, skill, commission);
+        Maintainer person = new Maintainer(name, phone, email, address, note, tags, skill, commission, rating);
 
         return new AddMaintainerCommand(person);
     }
