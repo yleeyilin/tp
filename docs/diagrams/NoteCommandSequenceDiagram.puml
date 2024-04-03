@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
+participant "r:NoteCommand" as NoteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("/note ; name : poochie ; note : get kibble")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/note ; name : poochie ; note : get kibble")
+activate AddressBookParser
+
+create NoteCommandParser
+AddressBookParser -> NoteCommandParser
+activate NoteCommandParser
+
+NoteCommandParser --> AddressBookParser
+deactivate NoteCommandParser
+
+AddressBookParser -> NoteCommandParser : parse(" ; name : poochie ; note : get kibble")
+activate NoteCommandParser
+
+create NoteCommand
+NoteCommandParser -> NoteCommand
+activate NoteCommand
+
+NoteCommand --> NoteCommandParser : r
+deactivate NoteCommand
+
+NoteCommandParser --> AddressBookParser : r
+deactivate NoteCommandParser
+
+NoteCommandParser -[hidden]-> AddressBookParser
+destroy NoteCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> NoteCommand : execute()
+activate NoteCommand
+
+NoteCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+
+Model --> NoteCommand
+
+NoteCommand -> Model : updateFilteredPersonList()
+
+Model --> NoteCommand
+deactivate Model
+
+create CommandResult
+NoteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NoteCommand
+deactivate CommandResult
+
+NoteCommand --> LogicManager : result
+deactivate NoteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

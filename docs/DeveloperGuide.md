@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
-Note that `HelpXYZWindow` refers to the variations of Help Windows implemented, i.e. `HelpWindow`, `HelpPoochStaffWindow`,`HelpPoochSupplierWindow`,`HelpPoochMaintenanceWindow`,`HelpDeleteWindow`,`HelpEditWindow`,`HelpSearchWindow`
+Note that `HelpWindow` refers to a window that provides general help for all commands. `HelpOtherWindow` refers to a window which offers help for specific commands.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -178,8 +178,8 @@ The method `NoteCommand#execute()` returns a new `CommandResult` object, which s
 
 The following sequence diagram below shows how the note operation works:
 
-[//]: # (![Add Remark Sequence Diagram]&#40;images/AddRemarkSequenceDiagram.png&#41;)
-[//]: # (add sequence diagram here)
+![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
+
 
 Given below is an example usage scenario for the command:
 
@@ -219,8 +219,7 @@ The method `HelpCommand#execute()` returns a new `CommandResult` object, which s
 
 The following sequence diagram below shows how the add help operation works:
 
-[//]: # (![Add Remark Sequence Diagram]&#40;images/AddRemarkSequenceDiagram.png&#41;)
-[//]: # (add sequence diagram here)
+![Help Sequence Diagram](images/HelpCommandSequenceDiagram.png)
 
 Given below is an example usage scenario for the command:
 
@@ -255,8 +254,7 @@ The method `RemindCommand#execute()` returns a new `CommandResult` object, which
 
 The following sequence diagram below shows how the remind operation works:
 
-[//]: # (![Add Remark Sequence Diagram]&#40;images/AddRemarkSequenceDiagram.png&#41;)
-[//]: # (add sequence diagram here)
+![Remind Sequence Diagram](images/RemindCommandSequenceDiagram.png)
 
 Given below is an example usage scenario for the command:
 
@@ -963,6 +961,32 @@ testers are expected to do more *exploratory* testing.
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
 
 1. _{ more test cases …​ }_
+
+### Adding a note to a contact
+
+1. Adding a note(no deadline) to a contact
+
+  1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
+     ```
+     /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+     ```
+  1. Test case: `/note ; name : Poochie ; note : get kibble`<br>
+     Expected: Woof! Added note to Pooch Contact Other Contact Janna successfully! 🐶
+  2. Test case: `/note ; name : ; note : get kibble`<br>
+     Expected : Names should only contain alphanumeric characters and spaces, and it should not be blank
+  3. Test case: `/note ; name : Poochie ; note : `<br>
+     Expected : Failed to add note to Pooch Contact - Note is not specified 🐾
+
+
+2. Adding a note(with deadline) to a contact
+
+  1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
+     ```
+     /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+     ```
+  1. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
+     Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
+
 
 ### Saving data
 
