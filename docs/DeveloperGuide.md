@@ -204,37 +204,31 @@ The following sequence diagram models the interactions between the different com
 
 ### Note feature
 
-The note feature allows users to add notes to the specified contact.
+#### Overview
 
-#### Implementation
+The note command enables users to add notes to  existing contacts in PoochPlanner.
 
-The note command mechanism is facilitated by `NoteCommandParser` class which implements the `Parser` interface.
-
-`NoteCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
-
-`NoteCommandParser` implements the following operations:
-* `NoteCommandParser#parse()` — Parses the input arguments by storing the name and the prefix of its respective values as an `ArgumentMultimap`.
-  It creates a new `NoteCommand` object with the parsed name, note and the optional deadline field.
-
-The `NoteCommand` object then communicates with the `Model` API by calling the following methods:
-* `Model#findByName(name, errorMessage)` — to find the person with the specified name.
-* `Model#setPerson(Person, Person)` — Sets the person in the existing contact list to the new `Person` object which has been edited by `NoteCommand#execute()`.
-* `Model#updateFilteredPersonList(Predicate)` — Updates the view of the application to show all contacts.
-
-The method `NoteCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
-
-The following sequence diagram below shows how the note operation works:
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `note` command.
 
 ![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
 
+#### Details
 
-Given below is an example usage scenario for the command:
+1. The user inputs the command to add a note a specified contact by first stating the target name of the contact they want to add a note to. This is followed by the respective fields and new values they want to modify.
+2. `NoteCommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their respective values as an `ArgumentMultimap` object.
+ A `NoteCommand` object is created with the parsed name, note and optional deadline field.
+3. The `NoteCommandParser` returns the `NoteCommand` object.
+4. `LogicManager` invokes the `execute` method of `NoteCommand`. 
+5. The `execute` method of `NoteCommand` invokes the `findByName` method in `Model` property to find the person with the specified name. 
+6. The `execute` method of `NoteCommand` invokes the `setPerson` method in `Model` property to set the person in the existing contact list to the new `Person` object which has been edited the `execute` method of `NoteCommand`. 
+7. The `execute` method of `NoteCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
+8. The `execute` method of `NoteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Note` command.
 
-**Step 1**: The user launches the application.
+#### Example Usage
 
-**Step 2**: The user executes the `/note ; name : Janna ; note : get kibble` command in the CLI.
-
-**Step 3**: The given note will be added to the description of the contact with the given name.
+1. The user launches the application.
+2. The user inputs `/note ; name : Janna ; note : get kibble` into the CLI.
+3. The given note will be added to the description of the contact with the given name.
 
 **Aspect: How to store note field in Persons class and subclasses:**
 
@@ -252,29 +246,28 @@ Given below is an example usage scenario for the command:
 
 The help feature receive help for all commands.
 
-#### Implementation
+#### Overview
 
-The note command mechanism is facilitated by `HelpCommandParser` class which implements the `Parser` interface.
+The help command enables users to view help for all.
 
-`HelpCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
-
-`HelpCommandParser` implements the following operations:
-* `HelpCommandParserr#parse()` — Parses the input arguments by storing the the prefix of its respective values as an `ArgumentMultimap`.
-  It creates a new `HelpCommand` object with the command type field.
-
-The method `HelpCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
-
-The following sequence diagram below shows how the add help operation works:
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `help` command.
 
 ![Help Sequence Diagram](images/HelpCommandSequenceDiagram.png)
 
-Given below is an example usage scenario for the command:
+#### Details
 
-**Step 1**: The user launches the application.
+1. The user inputs the command to view help for a specific command. This is followed by the command field specifying the command they want to view help for.
+2. `HelpCommandParser` invokes the `parse` method which parses the user input by storing the prefix of its respective values as an `ArgumentMultimap` object.
+   A `HelpCommand` object is created with the command type specified in the command field. 
+3. The `HelpCommandParser` returns the `HelpCommand` object.
+4. `LogicManager` invokes the `execute` method of `HelpCommand`. 
+5. The `execute` method of `HelpCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Help` command.
 
-**Step 2**: The user executes the `/help ; command : delete` command in the CLI.
+#### Example Usage
 
-**Step 3**: Help for the delete command will be displayed.
+1. The user launches the application.
+2. The user inputs `/help ; command : delete` into the CLI.
+3. Help for the delete command will be displayed.
 
 **Aspect: How to display different help command windows:**
 
@@ -289,29 +282,69 @@ Given below is an example usage scenario for the command:
 
 ### Remind feature
 
-The remind feature allows users to view all contacts with note deadlines from today onwards.
+The remind command enables users to view all contacts with note deadlines from today onwards.
 
-#### Implementation
-
-The `RemindCommand` object then communicates with the `Model` API by calling the following methods:
-* `Model#updateFilteredPersonList(Predicate)` — Updates the view of the application to show contacts
-with note deadlines from today onwards.
-
-The method `RemindCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
-
-The following sequence diagram below shows how the remind operation works:
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `remind` command.
 
 ![Remind Sequence Diagram](images/RemindCommandSequenceDiagram.png)
 
-Given below is an example usage scenario for the command:
+#### Details
 
-**Step 1**: The user launches the application.
+1. The user inputs the command to view reminders.
+2. `LogicManager` invokes the `execute` method of `RemindCommand`. 
+3. The `execute` method of `RemindCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of the application to show contacts
+   with note deadlines from today onwards. 
+4. The `execute` method of `NoteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `remind` command.
 
-**Step 2**: The user executes the `/remind` command in the CLI.
+#### Example Usage
 
-**Step 3**: Contacts that have deadline notes from today onwards will be displayed.
+1. The user launches the application.
+2. The user inputs `/remind` into the CLI.
+3. Contacts that have deadline notes from today onwards will be displayed.
 
-**Aspect: How to store note field in Persons class and subclasses:**
+
+### Clear feature
+
+The clear command enables users to remove all existing contacts from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `clear` command.
+
+![Clear Sequence Diagram](images/ClearCommandSequenceDiagram.png)
+
+#### Details
+
+1. The user inputs the command to clear all contacts.
+2. `LogicManager` invokes the `execute` method of `ClearCommand`.
+3. The `execute` method of `ClearCommand` method invokes the `setAddressBook` method in `Model` property with a new `AddressBook` object which contains an empty `UniquePersonList`.
+4. The `execute` method of `ClearCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Clear` command.
+
+#### Example Usage
+
+1. The user launches the application.
+2. The user inputs `/clear` into the CLI.
+3. The address book is emptied.
+
+### List feature
+
+The list command enables users to view all existing contacts from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `list` command.
+
+![List Sequence Diagram](images/ListCommandSequenceDiagram.png)
+
+#### Details
+
+1. The user inputs the command to list all contacts.
+2. `LogicManager` invokes the `execute` method of `ListCommand`.
+3. The `execute` method of `ListCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of the application to show all contacts.
+4. The `execute` method of `ListCommand` returns a `CommandResult` object which stores the data regarding the completion of the `List` command.
+
+#### Example Usage
+
+1. The user launches the application.
+2. The user inputs `/list` into the CLI.
+3. All contacts in PoochPlanner are displayed.
+
 
 ### Undo/redo feature
 
@@ -430,25 +463,23 @@ The app is optimised for use using Command Line Interface (CLI) while still enco
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority      | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                          |
-|---------------|---------------------------------------|------------------------------------------------------------|----------------------------------------------------------|
-| `* * *`       | well connected user                   | search contacts                                            | save time                                                |
-| `* * *`       | well connected user                   | add contacts                                               | have the address to contact others in the future         |
-| `* * *`       | cafe owner user                       | delete the contacts                                        | keep my contacts updated and remove outdated contacts    |
-| `* * *`       | long-term user                        | edit contacts                                              | update some contact information                          |
-| `* * *`       | first-time user                       | get help about what commnads I can use on the contact book | easily know how to navigate the system                   |
-| `**`          | frugal user                           | sort my vendors in ascending order of price                | view the vendors selling the cheapest products easily    |
-| `**`          | careless user                         | undo my commands                                           | fix mistakes easily                                      |
-| `**`          | forgetful user                        | star contacts that are important                           | remember to contact them easily                          |
-| `**`          | careless user                         | undo previous command                                      | fix my mistakes easily                                   |
-| `**`          | careless user                         | retrieve state before undo                                 | fix my mistakes easily                                   |
-| `**`          | well connected user                   | pin contacts                                               | easily view frequent contacts                            |
-| `**`          | well connected user                   | unpin contacts                                             | focus on my frequent contacts                            |
-| `**`          | profit-maximising user                | rate the efficiency/productivity/performance of contacts   | evaluate and justify my business expenses                |
-| `**`          | busy user                             | note down all details about my contacts                    | keep track of all important details and deadlines easily |
-| `**`          | forgetful user                        | be reminded of my deadlines                                | complete all my tasks on time                            |
+| Priority      | <div style="width:50px">As a …​</div> | I want to …​                                                 | So that I can…​                                                                             |
+|---------------|---------------------------------------|--------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`       | well connected user                   | search through my many contacts by different specific fields | find my contacts efficiently                                                                |
+| `* * *`       | well connected user                   | add new contacts to my contact list                          | have the contact of all new people in my contact list                                       |
+| `* * *`       | cafe owner user                       | delete contacts                                              | remove outdated contacts such as fired staff                                                |
+| `* * *`       | cafe owner user                       | edit contacts                                                | update contact information such as the new phone number of my staff member                  |
+| `* * *`       | first-time user                       | get help about what commands to use                          | easily know how to navigate the system                                                      |
+| `**`          | frugal user                           | sort vendors in ascending order of price                     | view the vendors selling the cheapest products easily                                       |
+| `**`          | careless user                         | undo my commands                                             | reverse my accidental commands easily                                                       |
+| `**`          | forgetful user                        | star contacts that are important                             | remember to contact them easily                                                             |
+| `**`          | careless user                         | redo my commands                                             | reverse my accidental undo commands easily                                                  |
+| `**`          | well connected user                   | pin contacts                                                 | easily view frequent contacts                                                               |
+| `**`          | well connected user                   | unpin contacts                                               | remove my less frequent contacts from the top of my list                                    |
+| `**`          | profit-maximising user                | rate the efficiency of contacts                              | view the efficiency of my contacts easily and only conduct business with efficient contacts |
+| `**`          | forgetful user                        | note down all details about my contacts                      | track and remember of all important details and deadlines easily                            |
+| `**`          | forgetful user                        | be reminded of my deadlines                                  | complete all my tasks on time                                                               |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -680,7 +711,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 * 1a. User requests to learn about an invalid command(a command not offered by PoochPlanner).
-
    * 1a1. PoochPlanner displays the error message.
    * 1a2. User re-enters the command and request to learn about a valid command.
    * Steps 1a1 - 1a2 are repeated until a valid command is inputted by the User.
@@ -810,7 +840,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 1a1 - 1a2 are repeated until a valid name is inputted by the User.
     * Use case resumes from step 2.
 
-* 1b. PoochPlanner detects an invalid note in the entered input.
+* 1b. PoochPlanner detects an missing/invalid note in the entered input.
 
     * 1b1. PoochPlanner displays the error message.
     * 1b2. User re-enters the correct command with a new note value.
@@ -845,16 +875,17 @@ deadlines are relevant if they are on and after today's current date).
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  All code snippets presented in the developer guides shall follow a consistent coding style and formatting, adhering to the company's coding standards and best practices.
-5.  The developer guides shall undergo regular content audits, with outdated or deprecated information flagged for removal or revision, and new features or updates documented within one week of release.
-6.  The system should respond within 2 seconds.
-7.  The data should store locally and not accessible from other device for privacy issue.
-8.  The project is expected to adhere to schedule closely to deliver new feature.
-
-*{More to be added}*
+1. The application needs to be compatible across major operating systems, including Windows, MacOS, and Linux, supporting at least Java 11.
+2. User-managed transactions and budgets should be locally saved and backed up, ensuring restoration in subsequent sessions unless the data integrity is compromised.
+3. Thorough documentation of all non-private methods is imperative to ensure the maintainability of the codebase.
+4. The application should function completely offline. 
+5. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+6. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+7. All code snippets presented in the developer guides shall follow a consistent coding style and formatting, adhering to the company's coding standards and best practices. 
+8. The developer guides shall undergo regular content audits, with outdated or deprecated information flagged for removal or revision, and new features or updates documented within one week of release. 
+9. The system should respond within 2 seconds. 
+10. The data should store locally and not accessible from other device for privacy issue. 
+11. The project is expected to adhere to schedule closely to deliver new feature.
 
 ### Glossary
 
@@ -865,6 +896,11 @@ deadlines are relevant if they are on and after today's current date).
 * **Pooch Supplier**: External suppliers that sell the logistics required for the sustenance of Dog Cafe operations, for example Pooch Food, to the Pooch Cafe Owners at a fixed price.
 * **Pooch Staff**: Employees of the Dog Cafe that handle the running of the cafe.
 * **Pooch Maintainer**: Specialised external workers that take special care and maintenance of dogs.
+* **CLI**: Command Line Interface.
+* **GUI**: Graphical User Interface.
+* **MSS**: Main Success Scenario.
+* **JSON**: JavaScript Object Notation.
+* **API**: Application Programming Interface.
 
 --------------------------------------------------------------------------------------------------------------------
 

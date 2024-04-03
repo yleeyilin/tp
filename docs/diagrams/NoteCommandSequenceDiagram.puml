@@ -47,8 +47,12 @@ deactivate AddressBookParser
 LogicManager -> NoteCommand : execute()
 activate NoteCommand
 
-NoteCommand -> Model : setPerson(personToEdit, editedPerson)
+NoteCommand -> Model : findByName(name)
 activate Model
+Model --> NoteCommand
+
+NoteCommand -> Model : setPerson(personToEdit, editedPerson)
+
 
 Model --> NoteCommand
 
