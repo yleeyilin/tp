@@ -24,7 +24,7 @@ Get started by following the steps in this user guide! Experience the difference
 
 --------------------------------------------------------------------------------------------------------------------
 ## Introducing PoochPlanner
-PoochPlanner is your go-to address book, tailor-made for dog cafe owners like you. With four main contact types—**person, staff, supplier, maintainer**—each equipped with its own set of attributes and functions, managing your contacts has never been easier. 
+PoochPlanner is your go-to address book, tailor-made for dog cafe owners like you. With four main contact types—**person, staff, supplier, maintainer**—each equipped with its own set of attributes and functions, managing your contacts has never been easier.
 
 Contact | Definition and Examples
 --------|------------------
@@ -376,7 +376,7 @@ PoochPlanner updates the rating for Janna to 5 stars.
 
 More Examples:
 * `/rate ; name : Poochie ; rating : 3`
-  
+
   The above command rates the contact with the name **_Poochie_** with a rating of `3`.
 
 
@@ -473,7 +473,7 @@ More Examples:
 * Name must be present in Pooch Planner.<br>
 
 * Using unpin command on a contact that has been unpinned do not make any changes to Pooch Planner.<br>
-</div> 
+</div>
 
 #### Sorting the address book : `sort`
 
@@ -502,7 +502,7 @@ PoochPlanner sorts the contacts in ascending order.
 More Examples:
 * `/sort ; field : phone`
 
-  The above command sorts the contacts by phone number in ascending order, from smallest to largest. 
+  The above command sorts the contacts by phone number in ascending order, from smallest to largest.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
@@ -517,7 +517,7 @@ More Examples:
 
 Adds a note to a specified person from the Pooch Planner so that you can keep track of any details regarding the contact.
 
-Format: 
+Format:
 `/note ; name : [name] ; note : [note message]`
 `/note ; name : [name] ; note : [note message] ; deadline : [date]`
 
@@ -542,7 +542,7 @@ PoochPlanner adds the note to `Poochie` within the contact card.
 More Examples:
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie`
 
-  The above command adds the note "get 10kg of matcha from moochie" to 
+  The above command adds the note "get 10kg of matcha from moochie" to
   the contact with name **_Moochie_**.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
@@ -585,7 +585,7 @@ PoochPlanner undoes the accidental deletion of `Poochie`
 
 Examples:
 * `/undo`
-    
+
     The above command undoes the most recent command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
@@ -595,7 +595,7 @@ Examples:
 * Any unnecessary parameter or value after /undo will simply be ignored.<br>
 
 * This command can only be executed when at least one changes have been made.<br>
-</div> 
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
@@ -863,4 +863,4 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 | **Unpin**                | Format : <br>`/unpin ; name : [name]`                                                                                                                  <br> <br> Example : <br> `/unpin ; name : Poochie`                                                                                                                                     |
 | **Sort**                 | Format : <br>`/sort ; target-field`                                                                                                                    <br> <br> Example : <br> `/sort ; name`                                                                                                                                                |
 | **Note**                 | Format : <br>`/note ; name : [name] ; note : [note]` or `/note ; name : [name] ; note : [note] ; deadline : [deadline]`                                <br> <br> Example : <br> `/note ; name : Poochie ; note : get dog for groomers ; deadline : 2020-10-10`                                                                                |
-| **Exit**                 | Format : <br>`exit`                                                                                                                                    <br> <br> Example : <br> `exit`                                                                                                                                                        | 
+| **Exit**                 | Format : <br>`exit`                                                                                                                                    <br> <br> Example : <br> `exit`                                                                                                                                                        |
