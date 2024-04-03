@@ -5,8 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.messages.DeleteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,6 +20,7 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -23,6 +28,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
+        assert (args != null) : "`argument` to pass for delete command is null";
+        logger.log(Level.INFO, "Going to start parsing for delete command.");
+
+        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args, PREFIX_NAME);
+
+        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, DeleteCommand.MESSAGE_USAGE);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
@@ -31,9 +43,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new DeleteCommand(name);
+        try {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
+            return new DeleteCommand(name);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(DeleteMessages.MESSAGE_DELETE_INVALID_PARAMETERS, pe.getMessage()));
+        }
+
     }
 
     /**
