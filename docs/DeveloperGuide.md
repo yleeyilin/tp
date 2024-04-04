@@ -1100,9 +1100,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancement**
+
+1. `parse` for all command parsers
+   1. Currently, we do not allow for incorrect spacing in commands. 
+   2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com``` 
+   3. The above example will be considered as invalid since there is no spacing before the `phone` and `address` prefixes and are not parsed as valid prefixes. 
+   4. We plan to extend PoochPlanner to accept this alternative possible input to cater to fast typists.
+
+2. `parseXYZ` for all paramters
+   1. Currently, we have stricter parameter validation for all parameters such as `name`, `phone number`. 
+   2. These functions includes `parseName` etc.
+   3. Paramters that do not satisfy validation checks will not be accepted by PoochPlanner.
+   4. We plan to add a warning rather than an error message to improve usability for users. 
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -1117,14 +1133,12 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Editing a contact
 
@@ -1143,7 +1157,7 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
       Expected: The phone and email field of contact named 'Person1' is edited to `99990520` and `impooch@gmail13.com` respectively. Details of the edited contact shown in the status message.
 
-1. Edting a `Staff` contact
+2. Edting a `Staff` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Staff` type. You can run the following command to add in a contact to edit:
       ```
@@ -1161,7 +1175,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time }`<br>
       Expected: The salary and employment field of contact named 'Staff1' is edited to `40/hr` and `part-time` respectively. Details of the edited contact shown in the status message.
 
-1. Edting a `Supplier` contact
+3. Edting a `Supplier` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Supplier` type. You can run the following command to add in a contact to edit:
       ```
@@ -1179,7 +1193,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag }`<br>
       Expected: The product and price field of contact named 'Supplier1' is edited to `kibbles` and `$75/bag` respectively. Details of the edited contact shown in the status message.
 
-1. Edting a `Maintainer` contact
+4. Edting a `Maintainer` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Maintainer` type. You can run the following command to add in a contact to edit:
       ```
@@ -1218,8 +1232,6 @@ testers are expected to do more *exploratory* testing.
    5. Other incorrect delete commands to try: `/delete`, `delete ; name :`<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Pinning a person
 
 1. Pinning a person while all persons are being shown
@@ -1231,8 +1243,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `/pin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is pinned at the top of the contact list.
-
-1. _{ more test cases …​ }_
 
 ### Unpinning a person
 
@@ -1246,8 +1256,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `/unpin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is no longer pinned at the top of the contact list.
-
-1. _{ more test cases …​ }_
 
 ### Rating a person
 
@@ -1266,8 +1274,6 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `/rate ; name : Poochie ; rating : 6`<br>
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
-
-1. _{ more test cases …​ }_
 
 ### Adding a note to a contact
 
@@ -1293,7 +1299,6 @@ testers are expected to do more *exploratory* testing.
      ```
   2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
-
 
 ### Saving data
 
