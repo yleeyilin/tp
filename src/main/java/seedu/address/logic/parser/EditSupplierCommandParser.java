@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -40,6 +41,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
 
 
         ParserUtil.verifyNoUnknownPrefix(args, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
+                FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
 
@@ -51,6 +53,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
 
         // check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
+                FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);

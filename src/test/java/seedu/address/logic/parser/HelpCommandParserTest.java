@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
+import static seedu.address.logic.messages.Messages.FAILED_TO_HELP;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
@@ -37,7 +39,7 @@ public class HelpCommandParserTest {
     public void parse_missingCommand_throwsParseException() {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("command");
-        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String exception = FAILED_TO_HELP + String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         String expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "/help ; command :",

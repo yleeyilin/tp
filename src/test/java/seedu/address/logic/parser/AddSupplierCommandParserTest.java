@@ -27,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_BOB;
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
@@ -146,7 +147,7 @@ public class AddSupplierCommandParserTest {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
         String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        String expectedMessage = exception + "\n"
+        String expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
 
         // missing name prefix
@@ -158,7 +159,7 @@ public class AddSupplierCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("phone");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + PRODUCT_DESC_BOB + PRICE_DESC_BOB,
@@ -168,7 +169,7 @@ public class AddSupplierCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("email");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
                         + PRODUCT_DESC_BOB + PRICE_DESC_BOB,
@@ -178,7 +179,7 @@ public class AddSupplierCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("address");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                         + PRODUCT_DESC_BOB + PRICE_DESC_BOB,
@@ -188,7 +189,7 @@ public class AddSupplierCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("product");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_PRODUCT_BOB + PRICE_DESC_BOB,
@@ -198,7 +199,7 @@ public class AddSupplierCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("price");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + PRODUCT_DESC_BOB + VALID_PRICE_BOB,
@@ -213,7 +214,7 @@ public class AddSupplierCommandParserTest {
         undetectedFields.add("product");
         undetectedFields.add("price");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                         + VALID_PRODUCT_BOB + VALID_PRICE_BOB,
@@ -271,7 +272,7 @@ public class AddSupplierCommandParserTest {
 
     @Test
     public void parse_invalidField_failure() {
-        String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission]");
+        String exception = FAILED_TO_ADD + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + COMMISSION_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + PRODUCT_DESC_BOB + PRICE_DESC_BOB,

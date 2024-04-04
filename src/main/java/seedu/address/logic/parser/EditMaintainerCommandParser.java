@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
@@ -39,6 +40,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
 
         ParserUtil.verifyNoUnknownPrefix(args, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
+                FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
@@ -50,6 +52,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
 
         // check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
+                FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
