@@ -191,6 +191,10 @@ PoochPlanner allows you to add staff (`add-staff`), supplier (`add-supplier`) an
 
 * Name is case-insensitive but space-sensitive.<br>
 
+* Phone number must be in format {Number} and at least 3 digits long. 
+
+* Only one phone number is allowed to be inserted. <br>
+
 * Salary and commission must be in format ${Number}/hr.<br>
 
 * Price must be in format ${Number}/{quantity}.<br>
@@ -599,7 +603,8 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* `Undo` works on all commands except except `Search` and `Help` commands! <br>
+* `Undo` works on all commands that modified the address book.
+* `Undo` will not work on commands that do not modify the address book such as `Search`, `List` and `Help` commands! <br>
 
 </div>
 
@@ -642,7 +647,8 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* `Redo` works on all commands except `Search` and `Help` commands! <br>
+* `Redo` works on all commands that modified the address book.
+* `Redo` will not work on commands that do not modify the address book such as `Search`, `List` and `Help` commands! <br>
 
 </div>
 
@@ -779,7 +785,7 @@ Examples:
 ### Loading Data from Another Computer
 
 **Q**: How can I transfer my PoochContacts to another Computer?<br>
-**A**: Install PoochPlanner in your target computer and and overwrite the empty data file it creates with the file that contains the data of your previous PoochPlanner home folder by copying the contents of the `PoochPlanner.json` file from your current computer and pasting it inside the `PoochPlanner.json` file of your target computer.
+**A**: Install PoochPlanner in your target computer and overwrite the empty data file it creates with the file that contains the data of your previous PoochPlanner home folder by copying the contents of the `PoochPlanner.json` file from your current computer and pasting it inside the `PoochPlanner.json` file of your target computer.
 
 ### Using PoochPlanner
 
