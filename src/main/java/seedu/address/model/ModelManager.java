@@ -190,6 +190,7 @@ public class ModelManager implements Model {
      */
     public void updatePinnedPersonList() {
         addressBook.updatePinnedList();
+        commitAddressBook();
     }
 
     /**
@@ -197,6 +198,7 @@ public class ModelManager implements Model {
      */
     public void updateSortedPersonList(Prefix prefix) {
         addressBook.updateSortedList(prefix);
+        commitAddressBook();
     }
 
     /**
