@@ -5,8 +5,6 @@ import static seedu.address.logic.messages.Messages.FAILED_TO_SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_COLLECTION;
 
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
