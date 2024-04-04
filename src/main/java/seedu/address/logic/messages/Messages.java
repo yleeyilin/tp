@@ -35,6 +35,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EMPTY_FIELDS =
+            "No values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EXTRA_FIELDS =
             "%1$s does not contain the following field(s): %2$s";
 
@@ -83,5 +85,17 @@ public class Messages {
         }
         builder.append(person.getName());
         return builder.toString();
+    }
+
+    /**
+     * Returns an error message indicating the prefixes with no values.
+     */
+    public static String getErrorMessageForEmptyPrefixes(Prefix... emptyPrefixes) {
+        assert emptyPrefixes.length > 0;
+
+        Set<String> emptyFields =
+                Stream.of(emptyPrefixes).map(Prefix::getTrimmedPrefix).collect(Collectors.toSet());
+
+        return MESSAGE_EMPTY_FIELDS + "[" + String.join(", ", emptyFields) + "]";
     }
 }

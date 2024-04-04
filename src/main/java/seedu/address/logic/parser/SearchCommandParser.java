@@ -1,23 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.Messages.FAILED_TO_SEARCH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PIN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_FIELD;
 
 import java.util.stream.Stream;
 
@@ -38,11 +22,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      */
     public SearchCommand parse(String args) throws ParseException {
 
-        ParserUtil.verifyNoUnknownPrefix(args, SearchCommand.MESSAGE_USAGE, "search",
+        ParserUtil.verifyNoUnknownPrefix(
+                args,
+                SearchCommand.MESSAGE_USAGE,
+                "search",
                 FAILED_TO_SEARCH,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG_FIELD, PREFIX_SALARY,
-                PREFIX_EMPLOYMENT, PREFIX_PRICE, PREFIX_PRODUCT, PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_NOTE,
-                PREFIX_PIN, PREFIX_RATING, PREFIX_DEADLINE, PREFIX_HELP);
+                PREFIX_SEARCH_COLLECTION);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_COLLECTION);
 
@@ -56,8 +41,11 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             throw new ParseException(SearchMessages.MESSAGE_SEARCH_MISSING_FIELD);
         }
 
-        // check for duplicate field entries
+        // duplicate field entries
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SEARCH_COLLECTION);
+
+        // empty entries
+        argMultimap.verifyNoEmptyEntries();
 
         return new SearchCommand(new KeywordPredicate(argMultimap));
     }
