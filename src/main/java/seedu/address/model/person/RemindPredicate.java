@@ -23,7 +23,7 @@ public class RemindPredicate implements Predicate<Person> {
 
         try {
 
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
 
             LocalDate convertedDate = LocalDate.parse(noteAndDate[1], inputFormat);
 

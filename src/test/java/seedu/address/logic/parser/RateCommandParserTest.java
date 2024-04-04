@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATING_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_BOB;
+import static seedu.address.logic.messages.Messages.FAILED_TO_RATE;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -39,7 +40,7 @@ public class RateCommandParserTest {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
         String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        String expectedMessage = exception + "\n"
+        String expectedMessage = FAILED_TO_RATE + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE);
         assertParseFailure(parser, PREAMBLE_WHITESPACE + RATING_DESC_BOB,
                 expectedMessage);
@@ -51,7 +52,7 @@ public class RateCommandParserTest {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("rating");
         String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        String expectedMessage = exception + "\n"
+        String expectedMessage = FAILED_TO_RATE + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE);
         assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB,
                 expectedMessage);

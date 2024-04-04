@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
@@ -44,6 +45,7 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
     public AddMaintainerCommand parse(String args) throws ParseException {
         logger.log(Level.INFO, "Going to start parsing for add maintainer command.");
         ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+                FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
@@ -52,6 +54,7 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
                         PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
         ParserUtil.verifyNoMissingField(argMultimap, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+                FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SKILL, PREFIX_COMMISSION);
 
         if (!argMultimap.getPreamble().isEmpty()) {

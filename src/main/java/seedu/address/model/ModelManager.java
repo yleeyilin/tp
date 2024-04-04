@@ -118,7 +118,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-        commitAddressBook();
     }
 
     @Override
