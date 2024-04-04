@@ -17,8 +17,9 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command. Use command `/help` to see command list";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_FIELD_FORMAT = "Invalid field detected : %1$s";
-    public static final String MESSAGE_MISSING_FIELD_FORMAT = "Missing field detected : %1$s";
+    public static final String MESSAGE_INVALID_FIELD_FORMAT = "Invalid field detected : %1$s \uD83D\uDC3E";
+    public static final String MESSAGE_UNKNOWN_FIELD_FORMAT = "Unknown field detected : %1$s \uD83D\uDC3E";
+    public static final String MESSAGE_MISSING_FIELD_FORMAT = "Missing field detected : %1$s \uD83D\uDC3E";
     public static final String FAILED_TO_ADD = "Failed to add Pooch Contact - \n";
     public static final String FAILED_TO_EDIT = "Failed to edit Pooch Contact - \n";
     public static final String FAILED_TO_EDIT_WITH_NAME = "Failed to edit Pooch Contact - \n"

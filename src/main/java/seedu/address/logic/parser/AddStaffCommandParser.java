@@ -19,6 +19,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddStaffCommand;
+import seedu.address.logic.messages.AddMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -63,22 +64,27 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SALARY, PREFIX_EMPLOYMENT);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse("No note here");
-        Note note = noteContent.equals("No note here") ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
-        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse("0"));
-        Tag tag = new Tag("staff");
-        Set<Tag> tags = new HashSet<>();
-        tags.add(tag);
-        Employment employment = ParserUtil.parseEmployment(argMultimap.getValue(PREFIX_EMPLOYMENT).get());
-        Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
 
-        Staff person = new Staff(name, phone, email, address, note, tags, salary, employment, rating);
+        try {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElseThrow());
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElseThrow());
+            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElseThrow());
+            String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse("No note here");
+            Note note = noteContent.equals("No note here") ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
+            Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse("0"));
+            Tag tag = new Tag("staff");
+            Set<Tag> tags = new HashSet<>();
+            tags.add(tag);
+            Employment employment = ParserUtil.parseEmployment(argMultimap.getValue(PREFIX_EMPLOYMENT).orElseThrow());
+            Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).orElseThrow());
 
-        return new AddStaffCommand(person);
+            Staff person = new Staff(name, phone, email, address, note, tags, salary, employment, rating);
+
+            return new AddStaffCommand(person);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, pe.getMessage()));
+        }
     }
 
     /**

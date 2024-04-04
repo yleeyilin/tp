@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.messages.NoteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -55,14 +56,18 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        if (!isContainingDeadlinePrefix) {
-            note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
-        } else {
-            note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
-                    argMultimap.getValue(PREFIX_DEADLINE).get());
+        try {
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            if (!isContainingDeadlinePrefix) {
+                note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+            } else {
+                note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
+                        argMultimap.getValue(PREFIX_DEADLINE).get());
+            }
+            return new NoteCommand(name, note);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(NoteMessages.MESSAGE_NOTE_INVALID_PARAMETERS, pe.getMessage()));
         }
-        return new NoteCommand(name, note);
     }
 
     //method repeated, need to abstract somewhere
