@@ -5,8 +5,6 @@ import static seedu.address.logic.messages.Messages.FAILED_TO_SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_COLLECTION;
 
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,8 +29,12 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 
+        // missing fields
         ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, "sort",
                 FAILED_TO_SORT, PREFIX_FIELD);
+
+        // duplicate field entries
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_COLLECTION);
 
         prefix = mapName(argMultimap);
 
@@ -61,13 +63,5 @@ public class SortCommandParser implements Parser<SortCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(SortMessages.MESSAGE_SORT_INVALID_FIELD, pe.getMessage()));
         }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
