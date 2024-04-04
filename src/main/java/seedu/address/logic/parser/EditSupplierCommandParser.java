@@ -52,7 +52,6 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
                     EditSupplierCommand.MESSAGE_USAGE));
         }
 
-        // check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD);

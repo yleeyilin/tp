@@ -44,7 +44,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         ParserUtil.verifyNoUnknownPrefix(args, EditStaffCommand.MESSAGE_USAGE, "edit-staff",
                 FAILED_TO_EDIT, PREFIX_NAME,
                 PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT, PREFIX_SALARY);
-    
+
         boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
         if (hasDuplicateNamePrefix) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_NAME,
