@@ -3,15 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.DeleteMessages;
-import seedu.address.logic.messages.SearchMessages;
 import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
-
-import java.util.logging.Logger;
 
 /**
  * Format full help instructions for every command for display.
