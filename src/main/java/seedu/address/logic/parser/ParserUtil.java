@@ -345,6 +345,30 @@ public class ParserUtil {
     }
 
     /**
+     * Standardises all prefixes input by users to lower case.
+     * @param argsString The input string to parse.
+     * @return The formatted input string to fix.
+     */
+    public static String normalisePrefixes(String argsString) {
+        String[] parts = argsString.split(";");
+        StringBuilder result = new StringBuilder(parts[0]);
+
+        for (int i = 1; i < parts.length; i++) {
+            String part = parts[i];
+            int colonIndex = part.indexOf(":");
+            if (colonIndex != -1) {
+                String prefix = part.substring(0, colonIndex).trim();
+                String value = part.substring(colonIndex + 1).trim();
+                result.append(" ; ").append(prefix.toLowerCase()).append(" : ").append(value);
+            } else {
+                result.append(" ; ").append(part.trim());
+            }
+        }
+
+        return result.toString();
+    }
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */

@@ -328,18 +328,18 @@ public class UniquePersonListTest {
     public void sortInternalListByPrice() {
         Supplier supplierWithSmallerPrice =
                 new SupplierBuilder(ALICESUPPLIER).withPrice("$10/bag").build();
-        Supplier supplierWithlargerPrice =
+        Supplier supplierWithLargerPrice =
                 new SupplierBuilder(BOBSUPPLIER).withPrice("$50/bag").build();
         Person nonSupplier = CARL;
 
         uniquePersonList.add(nonSupplier);
-        uniquePersonList.add(supplierWithlargerPrice);
+        uniquePersonList.add(supplierWithLargerPrice);
         uniquePersonList.add(supplierWithSmallerPrice);
         uniquePersonList.sortBy(new Prefix("price"));
 
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(supplierWithSmallerPrice);
-        expectedUniquePersonList.add(supplierWithlargerPrice);
+        expectedUniquePersonList.add(supplierWithLargerPrice);
         expectedUniquePersonList.add(nonSupplier);
 
         assertEquals(expectedUniquePersonList, uniquePersonList);
