@@ -18,8 +18,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_FIELD;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.messages.SearchMessages;
 import seedu.address.logic.parser.exceptions.ParseException;

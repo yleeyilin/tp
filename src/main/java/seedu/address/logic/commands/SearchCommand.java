@@ -2,10 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.messages.EditMessages;
 import seedu.address.logic.messages.SearchMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.KeywordPredicate;
+
+import java.util.logging.Logger;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -28,6 +32,8 @@ public class SearchCommand extends Command {
 
     private final KeywordPredicate predicate;
 
+    private static final Logger logger = LogsCenter.getLogger(SearchCommand.class);
+
     public SearchCommand(KeywordPredicate predicate) {
         this.predicate = predicate;
     }
@@ -35,7 +41,12 @@ public class SearchCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.updateFilteredPersonList(predicate);
+
+        logger.fine(String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS,
+                model.getFilteredPersonList().size()));
+
         return new CommandResult(
                 String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS, model.getFilteredPersonList().size()));
     }
