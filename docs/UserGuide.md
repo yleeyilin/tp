@@ -41,8 +41,8 @@ Feature | Purpose
 --------|------------------
 Pin/Unpin | Pin/Unpin all your important contacts so that you can easily access frequent contacts.
 Note | Add additional information so that you can easily view all contact details.
-Remind | Add any reminders to a contact so that you will never miss out any tasks.
-Rate | Rate any of the contacts so that you can easily track their performance.
+Remind | Add reminder to your contacts so that you will never miss out any tasks.
+Rate | Add rating to your contacts so that you can easily track their performance.
 Sort | View your contacts in a sorted list so that you can locate your contacts easily.
 
 ## Navigating this User Guide
@@ -137,9 +137,10 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `[parameter name]` are the parameters to be supplied by the user.<br>
+* Words in `[parameter name]` are the parameter values to be supplied by the user.<br>
   For example, `/add-staff ; name : [name]`, `[name]` is a parameter to be supplied by the user.
   The actual command that the user inputs can be `/add-staff ; name : Poochie`.
+  If no parameter values are supplied, the parameter field cannot be detected.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `address : [address] ; phone : [phone]`, `phone : [phone] ; address : [address]` is also acceptable.
@@ -153,7 +154,7 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 
 #### Adding a contact: `add`
 
-Adds a **person / staff / supplier / maintainer** contact to PoochPlanner to consistently update your planner with new contacts.
+Adds a **person / staff / supplier / maintainer** contact so that your contact list is updated with new contacts.
 
 The table below summarises the add command, format and examples for each contact type.
 
@@ -183,9 +184,9 @@ The table below summarises the add command, format and examples for each contact
 
 * Name is case-insensitive but space-sensitive.<br>
 
-* Phone number must be in format {Number} and at least 3 digits long. 
+* Phone number must be in format {Number} and at least 3 digits long.<br>
 
-* Only one phone number is allowed to be inserted. <br>
+* Only one phone number is allowed to be inserted.<br>
 
 * Salary and commission must be in format ${Number}/hr.<br>
 
@@ -201,16 +202,16 @@ The table below summarises the add command, format and examples for each contact
 
 #### Editing a contact : `edit`
 
-Edits a **person / staff / supplier / maintainer** contact in the Pooch Planner so that you can consistently modify and update your contacts with new details.
+Edits a **person / staff / supplier / maintainer** contact so that you can consistently modify and update your contact list with new details.
 
 The table below summarises the edit command, format and examples for each contact type.
 
 | Edits a ...    | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit-person ; name : Mochie ; field : { address : Pooch Street 31}`<br> The above command edits the **address** field of **_Mochie_** to **_Pooch Street 31_**.                                                                                                                                     |
-| **Staff**      | Format : <br>`/edit-staff ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part/full] }` <br><br> Example: <br>`/edit-staff ; name : Thomas ; field : { address : Poochie Street 25 ; employment : full-time }` <br> The above command edits the **address and employment** field of **_Thomas_** to **_Poochie Street 25_** and **_full-time_** respectively. |
-| **Supplier**   | Format : <br>`/edit-supplier ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price] }` <br><br> Example: <br>`/edit-supplier ; name : Supplier1 ; field : { product : kibble ; price : $75/bag}` <br>The above command edits the **product and price** field of **_Supplier1_** to **_kibble_** and **_$75/bag_** respectively.                                   |
-| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of **_Maintainer1_** to **_$10/hr_**.                                                                           |
+| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit-person ; name : Mochie ; field : { address : Pooch Street 31}`<br> The above command edits the **address** field of `Mochie` to `Pooch Street31`.                                                                                                                                     |
+| **Staff**      | Format : <br>`/edit-staff ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part/full] }` <br><br> Example: <br>`/edit-staff ; name : Thomas ; field : { address : Poochie Street 25 ; employment : full-time }` <br> The above command edits the **address and employment** field of `Thomas` to `Poochie Street 25` and `full-time` respectively. |
+| **Supplier**   | Format : <br>`/edit-supplier ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price] }` <br><br> Example: <br>`/edit-supplier ; name : Supplier1 ; field : { product : kibble ; price : $75/bag}` <br>The above command edits the **product and price** field of `Supplier1` to `kibble` and `$75/bag` respectively.                                   |
+| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of `Maintainer1` to `$10/hr`.                                                                           |
 
 <br> 
 
@@ -258,17 +259,17 @@ Format: <br>
 Examples: <br>
 * `/search ; phone : 98765432`
 
-  The above command searches for all contacts with phone number **_98765432_**.
+  The above command searches for all contacts with phone number `98765432`.
 
 
 * `/search ; salary : $50/hr`
 
-  The above command searches for all staff with salary **_$50 per hour_**.
+  The above command searches for all staff with salary `$50 per hour`.
 
 
 * `/search ; name : Poochie ; phone : 98765432`
 
-  The above command searches for all contacts with name **_Poochie_** and phone number **_98765432_**.
+  The above command searches for all contacts with name `Poochie` and phone number `98765432`.
 
 <br> 
 
@@ -352,7 +353,7 @@ Example:
     <img src="images/ug-images/command-images/ratecommand.png" alt="Add before" style="width:100%;"/>
     <medium>Input: `/rate ; name : Janna ; rating : 5` </medium>
     <br>
-    <medium>Output: Rate the contact named `Janna` 5 in the contact list. </medium>
+    <medium>Output: Rate the contact named `Janna` with a rating of `5` in the contact list. </medium>
     <br>
 </div>
 
@@ -409,6 +410,8 @@ Example: <br>
 * Name must be present in Pooch Planner.<br>
 
 * Using pin command on a contact that has been pinned do not make any changes to Pooch Planner.<br>
+
+* A contact will still remain pinned if you use the undo command once on a contact that has been pinned twice or more.<br>
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
@@ -449,6 +452,8 @@ Example: <br>
 * Name must be present in Pooch Planner.<br>
 
 * Using unpin command on a contact that has been unpinned do not make any changes to Pooch Planner.<br>
+
+* A contact will still remain unpinned if you use the undo command once on a contact that has been unpinned twice or more.<br>
 </div>
 
 #### Sorting the address book : `sort`
@@ -499,12 +504,12 @@ Formats: <br>
 Examples: <br>
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie`
 
-  The above command adds the note "get 10kg of matcha from moochie" to the contact with name **_Moochie_**.
+  The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`.
 
 
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie ; deadline : 2020-10-10`
 
-  The above command adds the note "get 10kg of matcha from moochie" to the contact with name **_Moochie_**.
+  The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`.
   It also sets a deadline of the note to Nov 10 2020.
 
 <br> 
@@ -754,7 +759,7 @@ Example: <br>
 
 #### Listing contacts : `list`
 
-Lists all contacts in contact list so that you can view all contacts at once.
+Lists all contacts in contact list so that you can view all contacts in the contact list at once.
 
 Format: <br>
 `/list`
