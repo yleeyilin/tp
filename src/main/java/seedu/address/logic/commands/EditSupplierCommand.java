@@ -89,10 +89,10 @@ public class EditSupplierCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.format(editedSupplier)));
+                EditMessages.formatPerson(editedSupplier)));
 
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.format(editedSupplier)));
+                EditMessages.formatPerson(editedSupplier)));
     }
 
     /**

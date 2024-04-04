@@ -32,7 +32,7 @@ public class AddSupplierCommandTest {
 
         CommandResult commandResult = new AddSupplierCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.format(validPerson)),
+        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.formatPerson(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }

@@ -5,14 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.NoteCommand;
-import seedu.address.logic.messages.NoteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -38,25 +36,16 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         Note note;
 
         //check for unknown prefixes
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+        ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, "note",
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, NoteCommand.MESSAGE_USAGE);
 
-        boolean isContainingNamePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME);
-        boolean isContainingNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NOTE);
+        // check for missing fields
+        ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",
+                PREFIX_NAME, PREFIX_NOTE);
+
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
         boolean isContainingNameNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
-
-        if (!isContainingNamePrefix) {
-            logger.log(Level.WARNING, "Parsing error while parsing for note command.");
-            throw new ParseException(NoteMessages.MESSAGE_NAME_NOT_SPECIFIED);
-        }
-
-        if (!isContainingNotePrefix) {
-            logger.log(Level.WARNING, "Parsing error while parsing for note command.");
-            throw new ParseException(NoteMessages.MESSAGE_NOTE_NOT_SPECIFIED);
-        }
 
         if (!isContainingNameNotePrefix || !isPreambleEmpty) {
             logger.log(Level.WARNING, "Parsing error while parsing for note command.");

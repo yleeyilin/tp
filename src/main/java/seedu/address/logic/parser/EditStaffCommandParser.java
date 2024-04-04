@@ -10,11 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.commands.EditMaintainerCommand;
 import seedu.address.logic.commands.EditStaffCommand;
 import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -38,35 +36,24 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         Name name;
         String fieldArgs;
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args, PREFIX_NAME,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
+
+        ParserUtil.verifyNoUnknownPrefix(args, EditStaffCommand.MESSAGE_USAGE, "edit-staff", PREFIX_NAME,
                 PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT, PREFIX_SALARY);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
         boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
         if (hasDuplicateNamePrefix) {
-            unknownPrefixes.add("name");
-        }
-
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, EditStaffCommand.MESSAGE_USAGE);
-
-        // check for missing name
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
+            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_NAME,
                     EditStaffCommand.MESSAGE_USAGE));
         }
 
-        // check for missing field
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
-                    EditStaffCommand.MESSAGE_USAGE));
-        }
+        // check for missing fields
+        ParserUtil.verifyNoMissingField(argMultimap, EditStaffCommand.MESSAGE_USAGE, "edit-staff",
+                PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditStaffCommand.MESSAGE_USAGE));
-        ArrayList<String> unknownFieldPrefixes = ArgumentTokenizer.checkUnknownPrefix(fieldArgs,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT, PREFIX_SALARY);
-        ParserUtil.verifyNoUnknownPrefix(unknownFieldPrefixes, EditMaintainerCommand.MESSAGE_USAGE);
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.NoteMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -55,7 +56,7 @@ public class NoteCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(NoteMessages.MESSAGE_ADD_NOTE_SUCCESS,
-                NoteMessages.format(editedPerson)));
+                Messages.formatPerson(editedPerson)));
     }
 
     @Override

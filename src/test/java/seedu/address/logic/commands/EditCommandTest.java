@@ -46,7 +46,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(ALICE.getName(), descriptor);
 
         String expectedMessage = String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.format(editedPerson));
+                EditMessages.formatPerson(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
@@ -68,7 +68,7 @@ public class EditCommandTest {
             EditCommand editCommand = new EditCommand(lastPerson.getName(), descriptor);
 
             String expectedMessage = String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                    EditMessages.format(editedPerson));
+                    EditMessages.formatPerson(editedPerson));
 
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
             expectedModel.setPerson(lastPerson, editedPerson);
@@ -104,7 +104,7 @@ public class EditCommandTest {
                     new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
             String expectedMessage = String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                    EditMessages.format(editedPerson));
+                    EditMessages.formatPerson(editedPerson));
 
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
             expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.UnpinMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -43,7 +44,7 @@ public class UnpinCommand extends Command {
         model.updatePinnedPersonList();
 
         return new CommandResult(String.format(UnpinMessages.MESSAGE_UNPIN_PERSON_SUCCESS,
-                UnpinMessages.format(personToUnpin)));
+                Messages.formatPerson(personToUnpin)));
     }
 
     @Override

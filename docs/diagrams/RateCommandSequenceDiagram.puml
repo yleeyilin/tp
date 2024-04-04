@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RateCommandParser" as RateCommandParser LOGIC_COLOR
+participant "r:RateCommand" as RateCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("/rate ; name : Poochie ; rating : 5")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("/rate ; name : Poochie ; rating : 5")
+activate AddressBookParser
+
+create RateCommandParser
+AddressBookParser -> RateCommandParser
+activate RateCommandParser
+
+RateCommandParser --> AddressBookParser
+deactivate RateCommandParser
+
+AddressBookParser -> RateCommandParser : parse(" ; name : Poochie ; rating : 5")
+activate RateCommandParser
+
+create RateCommand
+RateCommandParser -> RateCommand
+activate RateCommand
+
+RateCommand --> RateCommandParser : r
+deactivate RateCommand
+
+RateCommandParser --> AddressBookParser : r
+deactivate RateCommandParser
+
+RateCommandParser -[hidden]-> AddressBookParser
+destroy RateCommandParser
+
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
+
+LogicManager -> RateCommand : execute()
+activate RateCommand
+
+RateCommand -> Model : findByName(name)
+activate Model
+
+RateCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+
+Model --> RateCommand
+
+RateCommand -> Model : updateFilteredPersonList()
+
+Model --> RateCommand
+deactivate Model
+
+create CommandResult
+RateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RateCommand
+deactivate CommandResult
+
+RateCommand --> LogicManager : result
+deactivate RateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

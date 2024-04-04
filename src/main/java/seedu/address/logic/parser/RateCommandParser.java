@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -34,22 +33,13 @@ public class RateCommandParser implements Parser<RateCommand> {
         assert (args != null) : "`argument` to pass for rate command is null";
         logger.log(Level.INFO, "Going to start parsing for rate command.");
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+        ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE, "rate",
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);
-
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, RateCommand.MESSAGE_USAGE);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_RATING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(RateMessages.MESSAGE_RATE_MISSING_NAME,
-                    RateCommand.MESSAGE_USAGE));
-        }
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_RATING)) {
-            throw new ParseException(String.format(RateMessages.MESSAGE_RATE_MISSING_RATING,
-                    RateCommand.MESSAGE_USAGE));
-        }
+        ParserUtil.verifyNoMissingField(argMultimap, RateCommand.MESSAGE_USAGE, "rate",
+                PREFIX_NAME, PREFIX_RATING);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
