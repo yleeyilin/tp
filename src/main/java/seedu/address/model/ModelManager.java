@@ -118,7 +118,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-        commitAddressBook();
     }
 
     @Override
@@ -166,6 +165,13 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredPersonListWithCommit(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
+        commitAddressBook();
     }
 
     @Override

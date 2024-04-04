@@ -28,6 +28,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMPLOYMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
@@ -149,7 +150,7 @@ public class AddStaffCommandParserTest {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
         String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        String expectedMessage = exception + "\n"
+        String expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
 
         // missing name prefix
@@ -161,7 +162,7 @@ public class AddStaffCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("phone");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
@@ -171,7 +172,7 @@ public class AddStaffCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("email");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
                         + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
@@ -181,7 +182,7 @@ public class AddStaffCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("address");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                         + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
@@ -191,7 +192,7 @@ public class AddStaffCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("salary");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_SALARY_BOB + EMPLOYMENT_DESC_BOB,
@@ -201,7 +202,7 @@ public class AddStaffCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("employment");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SALARY_DESC_BOB + VALID_EMPLOYMENT_BOB,
@@ -216,7 +217,7 @@ public class AddStaffCommandParserTest {
         undetectedFields.add("employment");
         undetectedFields.add("salary");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                         + VALID_SALARY_BOB + VALID_EMPLOYMENT_BOB,
@@ -268,7 +269,7 @@ public class AddStaffCommandParserTest {
 
     @Test
     public void parse_invalidField_failure() {
-        String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission]");
+        String exception = FAILED_TO_ADD + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + COMMISSION_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,

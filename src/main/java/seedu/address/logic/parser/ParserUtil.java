@@ -73,6 +73,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String arg} into a {@code arg}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseArg(String arg) throws ParseException {
+        requireNonNull(arg);
+        String parserArg = arg.replaceAll("field : \\{ ", "field : { ; ");
+        return parserArg;
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -241,7 +253,7 @@ public class ParserUtil {
     public static String parseField(String args) throws ParseException {
         requireNonNull(args);
         String trimmedFields = args.replaceAll("[{}]", "").trim();
-        return " ; " + trimmedFields;
+        return trimmedFields;
     }
 
     /**
@@ -333,6 +345,30 @@ public class ParserUtil {
     }
 
     /**
+     * Standardises all prefixes input by users to lower case.
+     * @param argsString The input string to parse.
+     * @return The formatted input string to fix.
+     */
+    public static String normalisePrefixes(String argsString) {
+        String[] parts = argsString.split(";");
+        StringBuilder result = new StringBuilder(parts[0]);
+
+        for (int i = 1; i < parts.length; i++) {
+            String part = parts[i];
+            int colonIndex = part.indexOf(":");
+            if (colonIndex != -1) {
+                String prefix = part.substring(0, colonIndex).trim();
+                String value = part.substring(colonIndex + 1).trim();
+                result.append(" ; ").append(prefix.toLowerCase()).append(" : ").append(value);
+            } else {
+                result.append(" ; ").append(part.trim());
+            }
+        }
+
+        return result.toString();
+    }
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
@@ -375,16 +411,18 @@ public class ParserUtil {
      * @param args Arguments.
      * @param message Error messages to be displayed.
      * @param commandType Command Type.
+     * @param headerMessage Header of error messages.
      * @param prefixes Required prefixes in the command.
      * @throws ParseException Thrown when there are invalid prefixes.
      */
-    public static void verifyNoUnknownPrefix(String args, String message, String commandType, Prefix... prefixes)
+    public static void verifyNoUnknownPrefix(String args, String message, String commandType,
+                                             String headerMessage, Prefix... prefixes)
             throws ParseException {
         ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
                 prefixes);
         logger.log(Level.WARNING, "Parsing error while parsing for " + commandType + " command.");
         if (unknownPrefixes.size() > 0) {
-            String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
+            String exception = headerMessage + String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
             throw new ParseException(exception);
         }
@@ -395,17 +433,18 @@ public class ParserUtil {
      * @param argMultimap Arguments.
      * @param message Error messages to be displayed.
      * @param commandType Command Type.
+     * @param headerMessage Header of error messages.
      * @param prefixes Required prefixes in the command.
      * @throws ParseException Thrown when there are missing prefixes.
      */
     public static void verifyNoMissingField(ArgumentMultimap argMultimap, String message, String commandType,
-                                            Prefix... prefixes) throws
+                                            String headerMessage, Prefix... prefixes) throws
             ParseException {
         if (!arePrefixesPresent(argMultimap, prefixes)) {
             logger.log(Level.WARNING, "Parsing error while parsing for " + commandType + " command.");
             ArrayList<String> missingFields = ArgumentTokenizer.checkUndetectedPrefix(argMultimap,
                     prefixes);
-            String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, missingFields);
+            String exception = headerMessage + String.format(MESSAGE_MISSING_FIELD_FORMAT, missingFields);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
             throw new ParseException(exception);
         }

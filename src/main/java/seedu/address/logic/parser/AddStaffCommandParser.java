@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -14,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddStaffCommand;
@@ -44,6 +44,7 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
     public AddStaffCommand parse(String args) throws ParseException {
         logger.log(Level.INFO, "Going to start parsing for add staff command.");
         ParserUtil.verifyNoUnknownPrefix(args, AddStaffCommand.MESSAGE_USAGE, "add-staff",
+                FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
 
@@ -52,6 +53,7 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
                         PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
 
         ParserUtil.verifyNoMissingField(argMultimap, AddStaffCommand.MESSAGE_USAGE, "add-staff",
+                FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_EMPLOYMENT, PREFIX_SALARY);
 
         if (!argMultimap.getPreamble().isEmpty()) {
@@ -77,13 +79,4 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
 
         return new AddStaffCommand(person);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

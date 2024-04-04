@@ -64,7 +64,7 @@ EditCommand -> Model : setPerson(personToEdit, editedPerson)
 
 Model --> EditCommand
 
-EditCommand -> Model : updateFilteredPersonList()
+EditCommand -> Model : updateFilteredPersonListWithCommit()
 
 Model --> EditCommand
 deactivate Model
