@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.messages.SearchMessages;
 import seedu.address.model.Model;
@@ -26,6 +29,8 @@ public class SearchCommand extends Command {
             + "/search ; product : [full/partial product name]\n"
             + "/search ; employment : [employment]";
 
+    private static final Logger logger = LogsCenter.getLogger(SearchCommand.class);
+
     private final KeywordPredicate predicate;
 
     public SearchCommand(KeywordPredicate predicate) {
@@ -35,7 +40,12 @@ public class SearchCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.updateFilteredPersonList(predicate);
+
+        logger.fine(String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS,
+                model.getFilteredPersonList().size()));
+
         return new CommandResult(
                 String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS, model.getFilteredPersonList().size()));
     }
