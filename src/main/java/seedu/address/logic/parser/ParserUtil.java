@@ -73,6 +73,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String arg} into a {@code arg}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseArg(String arg) throws ParseException {
+        requireNonNull(arg);
+        String parserArg = arg.replaceAll("field : \\{ ", "field : { ; ");
+        return parserArg;
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -241,7 +253,7 @@ public class ParserUtil {
     public static String parseField(String args) throws ParseException {
         requireNonNull(args);
         String trimmedFields = args.replaceAll("[{}]", "").trim();
-        return " ; " + trimmedFields;
+        return trimmedFields;
     }
 
     /**
