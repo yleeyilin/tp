@@ -31,8 +31,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT;
@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStaffCommand;
+import seedu.address.logic.messages.AddMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -229,37 +230,37 @@ public class AddStaffCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
-                Name.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Name.MESSAGE_CONSTRAINTS));
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
-                Phone.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Phone.MESSAGE_CONSTRAINTS));
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                         + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
-                Email.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Email.MESSAGE_CONSTRAINTS));
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                         + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
-                Address.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Address.MESSAGE_CONSTRAINTS));
 
         // invalid salary
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + INVALID_SALARY_DESC + EMPLOYMENT_DESC_BOB,
-                Salary.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Salary.MESSAGE_CONSTRAINTS));
 
         // invalid employment
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SALARY_DESC_BOB + INVALID_EMPLOYMENT_DESC,
-                Employment.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Employment.MESSAGE_CONSTRAINTS));
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                         + INVALID_SALARY_DESC + INVALID_EMPLOYMENT_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Name.MESSAGE_CONSTRAINTS));
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -269,7 +270,7 @@ public class AddStaffCommandParserTest {
 
     @Test
     public void parse_invalidField_failure() {
-        String exception = FAILED_TO_ADD + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission]");
+        String exception = FAILED_TO_ADD + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[commission]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + COMMISSION_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB,
