@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
+import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT_WITH_NAME;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
@@ -14,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditMaintainerCommand;
 import seedu.address.logic.commands.EditMaintainerCommand.EditMaintainerDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -61,6 +63,10 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_SKILL, PREFIX_COMMISSION);
+
+        ParserUtil.verifyNoUnknownPrefix(fieldArgs, EditMaintainerCommand.MESSAGE_USAGE, "edit",
+                FAILED_TO_EDIT_WITH_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

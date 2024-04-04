@@ -21,6 +21,8 @@ public class Messages {
     public static final String MESSAGE_MISSING_FIELD_FORMAT = "Missing field detected : %1$s";
     public static final String FAILED_TO_ADD = "Failed to add Pooch Contact - \n";
     public static final String FAILED_TO_EDIT = "Failed to edit Pooch Contact - \n";
+    public static final String FAILED_TO_EDIT_WITH_NAME = "Failed to edit Pooch Contact - \n"
+            + "Editing Pooch Contact Name is not allowed.\n";
     public static final String FAILED_TO_ADD_NOTE = "Failed to add note to Pooch Contact - \n";
     public static final String FAILED_TO_SORT = "Failed to sort Pooch Contact - \n";
     public static final String FAILED_TO_PIN = "Failed to pin Pooch Contact - \n";
