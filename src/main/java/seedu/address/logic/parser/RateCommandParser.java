@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.RateCommand;
@@ -53,13 +52,5 @@ public class RateCommandParser implements Parser<RateCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(RateMessages.MESSAGE_RATE_INVALID_PARAMETERS, pe.getMessage()));
         }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
