@@ -70,9 +70,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, pe.getMessage()));
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditMessages.MESSAGE_EDIT_EMPTY_FIELD);
-        }
+         if (!editPersonDescriptor.isAnyFieldEdited()) {
+             throw new ParseException(EditMessages.MESSAGE_EDIT_EMPTY_FIELD);
+         }
 
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("other"));
