@@ -115,12 +115,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean canRedo() {
+    public boolean canRedoAddressBook() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public boolean canUndo() {
+    public boolean canUndoAddressBook() {
         throw new AssertionError("This method should not be called.");
     }
 

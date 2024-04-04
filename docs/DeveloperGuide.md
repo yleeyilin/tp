@@ -51,11 +51,11 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/delete ; name : Poochie`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="750" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the five main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
@@ -91,9 +91,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("/delete ; name : Poochie")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `/delete ; name : Poochie` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -117,28 +117,22 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="700" />
 
 
 The `Model` component,
 
+* stores different states of address book inside versioned address book.
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="6000" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -163,7 +157,7 @@ The `search` command enables users to find contacts in PoochPlanner that match t
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `search` command.
 
-![Search Command Sequence Diagram](images/dg-images/search-command-sequence-diagram.png)
+<img src="images/dg-images/search-command-sequence-diagram.png" width="900" />
 
 #### Details
 
@@ -188,6 +182,8 @@ The `sort` command enables users to sort contacts in PoochPlanner by a target fi
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `sort` command.
 
+<img src="images/dg-images/sort-command-sequence-diagram.png" width="900" />
+
 #### Details
 
 1. The user inputs the command to sort contacts with the target field.
@@ -206,11 +202,11 @@ The following sequence diagram models the interactions between the different com
 
 #### Overview
 
-The note command enables users to add notes to  existing contacts in PoochPlanner.
+The note command enables users to add notes to existing contacts in PoochPlanner.
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `note` command.
 
-![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
+<img src="images/NoteCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -251,7 +247,7 @@ The rate command enables users to rate a specific contact from PoochPlanner.
 The following sequence diagram models the interactions between the different components of PoochPlanner for the
 execution of the `rate` command.
 
-![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
+<img src="images/RateCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -292,7 +288,7 @@ The delete command enables users to delete a specific contact from PoochPlanner.
 The following sequence diagram models the interactions between the different components of PoochPlanner for the
 execution of the `delete` command.
 
-![Delete Sequence Diagram](images/DeleteSequenceDiagram.png)
+<img src="images/DeleteSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -331,7 +327,7 @@ The help command enables users to view help for all.
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `help` command.
 
-![Help Sequence Diagram](images/HelpCommandSequenceDiagram.png)
+<img src="images/HelpCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -366,6 +362,7 @@ The remind command enables users to view all contacts with note deadlines from t
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `remind` command.
 
 ![Remind Sequence Diagram](images/RemindCommandSequenceDiagram.png)
+
 
 #### Details
 
@@ -443,11 +440,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `/delete ; name : Poochie` command to delete the Person named Poochie in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `/delete ; name : Poochie` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `/add-person ; name : John …​` to add a new person. The `/add-person` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -482,11 +479,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `/list`. Commands that do not modify the address book, such as `/list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `/clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `/add-person ; name : John...` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
