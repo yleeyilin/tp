@@ -36,9 +36,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         Name name;
         String fieldArgs;
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
+        String parsedArgs = ParserUtil.parseArg(args);
 
-        ParserUtil.verifyNoUnknownPrefix(args, EditCommand.MESSAGE_USAGE, "edit",
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
+
+        ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditCommand.MESSAGE_USAGE, "edit",
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 

@@ -38,10 +38,11 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         Name name;
         String fieldArgs;
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
+        String parsedArgs = ParserUtil.parseArg(args);
 
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
-        ParserUtil.verifyNoUnknownPrefix(args, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
+        ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
