@@ -62,9 +62,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        ParserUtil.verifyNoUnknownPrefix(fieldArgs, EditCommand.MESSAGE_USAGE, "edit",
-                FAILED_TO_EDIT_WITH_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         EditPersonDescriptor editPersonDescriptor;
 

@@ -66,10 +66,6 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
-        ParserUtil.verifyNoUnknownPrefix(fieldArgs, EditMaintainerCommand.MESSAGE_USAGE, "edit",
-                FAILED_TO_EDIT_WITH_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SKILL, PREFIX_COMMISSION);
-
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
