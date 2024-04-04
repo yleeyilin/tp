@@ -193,6 +193,9 @@ public class UniquePersonList implements Iterable<Person> {
         } else {
             internalList.sort(Comparator.comparing(p -> p.getName().toString()));
         }
+
+        internalList.sort(Comparator.comparing((Person p) ->
+                p.getPin().toString()).reversed());
     }
 
     @Override
