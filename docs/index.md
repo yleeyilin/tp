@@ -8,10 +8,10 @@ title: PoochPlanner
 
 ![Ui](images/Ui.png)
 
-**PoochPlanner is a desktop application track details of various groups (vendors, staff) that dog cafe owners have to regularly interact with.** The app is optimised for use using Command Line Interface (CLI) while still encompassing a user-friend Graphical User Interface (GUI).
+**PoochPlanner is a desktop application crafted specially for dog cafe owners. PoochPlanner track details of various contact types (general contact, supplier, staff, maintainer) that dog cafe owners have to regularly interact with.** The app is optimised for use using Command Line Interface (CLI) while still encompassing a user-friend Graphical User Interface (GUI).
 
 * If you are interested in using PoochPlanner, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing PoochPlanner, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in working with us to develop PoochPlanner, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
