@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -28,16 +27,15 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         assert (args != null) : "argument to pass for help command is null";
         logger.log(Level.INFO, "Going to start parsing for help command.");
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
-                PREFIX_HELP);
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, HelpCommand.MESSAGE_USAGE);
+        ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help", PREFIX_HELP);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
-        String commandType;
-        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
-        boolean isContainingHelpPrefix = arePrefixesPresent(argMultimap, PREFIX_HELP);
 
-        if (!isContainingHelpPrefix || !isPreambleEmpty) {
+        ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help", PREFIX_HELP);
+
+        String commandType;
+
+        if (!argMultimap.isPreambleEmpty()) {
             logger.log(Level.WARNING, "Parsing error while parsing for help command.");
             throw new ParseException(String.format(HelpMessages.MESSAGE_HELP_MISSING_COMMAND,
                     HelpCommand.MESSAGE_USAGE));

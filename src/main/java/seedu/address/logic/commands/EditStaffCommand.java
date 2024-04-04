@@ -92,10 +92,10 @@ public class EditStaffCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.format(editedStaff)));
+                EditMessages.formatPerson(editedStaff)));
 
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.format(editedStaff)));
+                EditMessages.formatPerson(editedStaff)));
     }
 
 

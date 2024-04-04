@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -31,9 +30,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         assert (args != null) : "`argument` to pass for delete command is null";
         logger.log(Level.INFO, "Going to start parsing for delete command.");
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args, PREFIX_NAME);
-
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, DeleteCommand.MESSAGE_USAGE);
+        ParserUtil.verifyNoUnknownPrefix(args, DeleteCommand.MESSAGE_USAGE, "delete", PREFIX_NAME);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
@@ -50,7 +47,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(DeleteMessages.MESSAGE_DELETE_INVALID_PARAMETERS, pe.getMessage()));
         }
-
     }
 
     /**

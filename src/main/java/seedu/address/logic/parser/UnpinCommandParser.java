@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
-
 import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.messages.UnpinMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,17 +21,13 @@ public class UnpinCommandParser implements Parser<UnpinCommand> {
     public UnpinCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args, PREFIX_NAME);
-
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, UnpinCommand.MESSAGE_USAGE);
+        ParserUtil.verifyNoUnknownPrefix(args, UnpinCommand.MESSAGE_USAGE, "unpin", PREFIX_NAME);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(UnpinMessages.MESSAGE_UNPIN_MISSING_NAME,
-                    UnpinCommand.MESSAGE_USAGE));
-        }
+        ParserUtil.verifyNoMissingField(argMultimap, UnpinCommand.MESSAGE_USAGE, "unpin",
+                PREFIX_NAME);
 
         Name name = ParserUtil.mapName(argMultimap, UnpinMessages.MESSAGE_UNPIN_INVALID_NAME);
 

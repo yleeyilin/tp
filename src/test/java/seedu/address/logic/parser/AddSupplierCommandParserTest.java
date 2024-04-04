@@ -30,7 +30,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PRODUCT_BOB;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_UNDETECTED_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -145,7 +145,7 @@ public class AddSupplierCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
-        String exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
+        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         String expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
 
@@ -157,7 +157,7 @@ public class AddSupplierCommandParserTest {
         // missing phone prefix
         undetectedFields = new ArrayList<>();
         undetectedFields.add("phone");
-        exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
+        exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -167,7 +167,7 @@ public class AddSupplierCommandParserTest {
         // missing email prefix
         undetectedFields = new ArrayList<>();
         undetectedFields.add("email");
-        exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
+        exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
@@ -177,7 +177,7 @@ public class AddSupplierCommandParserTest {
         // missing address prefix
         undetectedFields = new ArrayList<>();
         undetectedFields.add("address");
-        exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
+        exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
@@ -187,7 +187,7 @@ public class AddSupplierCommandParserTest {
         // missing product prefix
         undetectedFields = new ArrayList<>();
         undetectedFields.add("product");
-        exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
+        exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -197,7 +197,7 @@ public class AddSupplierCommandParserTest {
         // missing price prefix
         undetectedFields = new ArrayList<>();
         undetectedFields.add("price");
-        exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
+        exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -212,7 +212,7 @@ public class AddSupplierCommandParserTest {
         undetectedFields.add("email");
         undetectedFields.add("product");
         undetectedFields.add("price");
-        exception = String.format(MESSAGE_UNDETECTED_FIELD_FORMAT, undetectedFields);
+        exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE);
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
