@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STAFF;
+import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
@@ -60,7 +61,7 @@ public class EditStaffCommandParserTest {
     public void parse_missingName_failure() {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
-        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String exception = FAILED_TO_EDIT + String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         String expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         String userInput = EditStaffCommand.COMMAND_WORD + " "
@@ -73,7 +74,7 @@ public class EditStaffCommandParserTest {
         // no field specified
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("field");
-        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String exception = FAILED_TO_EDIT + String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         String expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         String userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME;
@@ -92,28 +93,28 @@ public class EditStaffCommandParserTest {
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + PRODUCT_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[product]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[product]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (price)
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + PRICE_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[price]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[price]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (skill)
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + SKILL_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[skill]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[skill]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (commission)
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
     }
@@ -124,21 +125,21 @@ public class EditStaffCommandParserTest {
         String userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + PRICE_DESC_AMY + COMMISSION_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[price, commission]");
+        String exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[price, commission]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified three invalid field (name, price and commission)
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY + PRICE_DESC_AMY + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, price]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, price]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified three invalid field (skill, price and commission)
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY + PRICE_DESC_AMY + SKILL_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, price, skill]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, price, skill]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
     }

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_DELETE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -30,11 +31,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         assert (args != null) : "`argument` to pass for delete command is null";
         logger.log(Level.INFO, "Going to start parsing for delete command.");
 
-        ParserUtil.verifyNoUnknownPrefix(args, DeleteCommand.MESSAGE_USAGE, "delete", PREFIX_NAME);
+        ParserUtil.verifyNoUnknownPrefix(args, DeleteCommand.MESSAGE_USAGE, "delete",
+                FAILED_TO_DELETE, PREFIX_NAME);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        ParserUtil.verifyNoMissingField(argMultimap, DeleteCommand.MESSAGE_USAGE, "delete",
+                FAILED_TO_DELETE, PREFIX_NAME);
+
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(DeleteMessages.MESSAGE_DELETE_MISSING_NAME,
                     DeleteCommand.MESSAGE_USAGE));
         }
