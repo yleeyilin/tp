@@ -34,9 +34,10 @@ public class HelpMessages extends Messages {
     public static final String MESSAGES_SHOWING_CLEAR_HELP_MESSAGE =
             "Opened help window for clear command.";
     public static final String MESSAGES_INVALID_COMMAND_TYPE = "Invalid command type given.";
-
     public static final String MESSAGE_HELP_MISSING_COMMAND = "Failed to give help - "
-            + "Help requires a command field. \uD83D\uDC3E";
+            + "Help requires a command field. %1$s\uD83D\uDC3E";
+    public static final String MESSAGE_HELP_INVALID_PARAMETERS = "Failed to display help window - "
+            + "%1$s \uD83D\uDC3E";
 
     public static final String USERGUIDE_URL = "https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";
 
