@@ -43,7 +43,12 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             throw new ParseException(String.format(HelpMessages.MESSAGE_HELP_MISSING_COMMAND,
                     HelpCommand.MESSAGE_USAGE));
         }
-        commandType = ParserUtil.parseHelp(argMultimap.getValue(PREFIX_HELP).get());
+
+        try {
+            commandType = ParserUtil.parseHelp(argMultimap.getValue(PREFIX_HELP).orElseThrow());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(HelpMessages.MESSAGE_HELP_INVALID_PARAMETERS, pe.getMessage()));
+        }
         return new HelpCommand(commandType);
     }
 

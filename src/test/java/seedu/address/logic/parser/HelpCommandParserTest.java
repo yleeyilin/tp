@@ -13,12 +13,13 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.messages.HelpMessages;
 
 public class HelpCommandParserTest {
 
-    private HelpCommandParser parser = new HelpCommandParser();
-    private String validCommand = "delete";
-    private String invalidCommand = "poodle";
+    private final HelpCommandParser parser = new HelpCommandParser();
+    private final String validCommand = "delete";
+    private final String invalidCommand = "poodle";
     public final String validHelpDesc = " " + PREFIX_HELP + validCommand;
     public final String invalidCommandHelpDesc = " " + PREFIX_HELP + invalidCommand;
 
@@ -31,7 +32,7 @@ public class HelpCommandParserTest {
     @Test
     public void parse_invalidCommand_throwsParseException() {
         assertParseFailure(parser, PREAMBLE_WHITESPACE + invalidCommandHelpDesc,
-                String.format(HelpCommand.MESSAGE_CONSTRAINTS, HelpCommand.MESSAGE_USAGE));
+                String.format(HelpMessages.MESSAGE_HELP_INVALID_PARAMETERS, HelpCommand.MESSAGE_CONSTRAINTS));
     }
 
     @Test
