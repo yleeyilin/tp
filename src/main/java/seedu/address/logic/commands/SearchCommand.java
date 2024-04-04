@@ -22,7 +22,7 @@ public class SearchCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD \n"
             + "Example: " + COMMAND_WORD
-            + " /search ; name : [full/partial name]\n"
+            + "/search ; name : [full/partial name]\n"
             + "/search ; phone : [full/partial phone]\n"
             + "/search ; address : [full/partial address]\n"
             + "/search ; email : [full/partial email]\n"

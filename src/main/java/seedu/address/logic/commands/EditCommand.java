@@ -37,8 +37,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "/edit-person";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\nEdits the details of the person identified "
-            + "by the name used in the displayed person list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_FIELD + "FIELD] \n"
