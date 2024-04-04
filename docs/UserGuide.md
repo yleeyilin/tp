@@ -30,24 +30,25 @@ Contact | Definition and Examples
 --------|------------------
 Person | Any persons that do not hold a special relationship.<br> E.g. Neighbours, Work Friends.
 Staff | Any full-time or part-time employees that do not do any specialised work.<br> E.g. Waiters, Waitresses, Dishwashers.
-Supplier | Add logistics partner that supplies stocks for your dog cafe.<br> E.g. Kibbles Supplier, Coffee Beans Supplier.
+Supplier | Any logistics partner that supplies stock for your dog cafe.<br> E.g. Kibbles Supplier, Coffee Beans Supplier.
 Maintainer | Any externally hired specialised persons who take care of the dogs.<br> E.g. Dog Groomers, Vet.
 
 
-But our commitment to improving your contact management experience doesn't end there. In addition to the essential functionalities like adding, searching, editing, deleting, undoing, and redoing, **PoochPlanner** comes loaded with extra features. You can now pin important contacts, jot down notes, set reminders, and even rate your contacts - all to ensure a seamless and efficient workflow tailored to your needs.
+But our commitment to improving your contact management experience doesn't end there. In addition to the essential functionalities like adding, searching, editing, deleting, help, list, clear, undoing, and redoing, **PoochPlanner** comes loaded with extra features. You can now pin important contacts, jot down notes, set reminders, rate and even sort your contacts - all to ensure a seamless and efficient workflow tailored to your needs.
 
 
 Feature | Purpose
 --------|------------------
-Pin | Pin all your important contacts so that you can easily access frequent contacts.
+Pin/Unpin | Pin/Unpin all your important contacts so that you can easily access frequent contacts.
 Note | Add additional information so that you can easily view all contact details.
 Remind | Add any reminders to a contact so that you will never miss out any tasks.
-Rating | Rate any of the contacts so that you can easily track their performance.
+Rate | Rate any of the contacts so that you can easily track their performance.
+Sort | View your contacts in a sorted list so that you can locate your contacts easily.
 
 ## Navigating this User Guide
 This user guide is designed to help you make the most of PoochPlanner, whether you are a beginner or an experienced user.
 
-To get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
+- If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
 - If you are a new user, explore the following sections to familiarise yourself with the basics:<br>
     1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the command box and contact cards.<br>
     2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
@@ -56,6 +57,7 @@ To get started with PoochPlanner, head over to **[Quick Start](https://github.co
     2. **[Pin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#pinning-a-contact--pin)** & **[Unpin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
     3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
     4. **[Note](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : Add notes to your contacts.<br>
+    5. **[Remind](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : View your contacts with notes with impending deadlines.<br>
 
 Check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)** for a quick reference to all available commands.
 
@@ -64,18 +66,17 @@ Encountering issues or have questions about PoochPlanner? Check out our **[FAQ](
 
 ## Useful Notations and Glossary
 
-While exploring PoochPlanner’s features with this user guide, you take note of these symbols used and what they represent.
+While exploring PoochPlanner’s features with this user guide, you can take note of these symbols used and what they represent.
 
 Symbol | Meaning
 --------|------------------
 :information_source: | Important Information
 :exclamation: | Warning or Caution
 :bulb: | Additional Information such as Tips or Notes
-:x: | Error Handling or Incorrect Action
 
 The following glossary table provides clarification on commonly-used terms as well as terminology that is possibly unknown to you.
 
-Abbreviation/Nomenclature | Meaning
+Phrases | Meaning
 --------|------------------
 GUI | GUI stands for Graphical User Interface and it represents the visual display of PoochPlanner that you can see when the application is run.
 GUI Component | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-gui).
@@ -101,13 +102,9 @@ Case-Insensitive | The casing of the alphabetic characters does not matter (e.g.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`/help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `/add-staff ; name : Poochie ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time`  : Adds a staff contact named `Poochie` to the Pooch Planner.
+   * `/add-person ; name : Janna  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com` : Adds a general contact named `Janna` to the Pooch Planner.
 
-   * `/add-supplier ; name : PetCo ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag`  : Adds a supplier contact named `PetCo` to the Pooch Planner.
-
-   * `/add-maintenance ; name : Tom Tan  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr`  : Adds a helper contact named `Tom Tan` to the Pooch Planner.
-
-   * `/delete ; name : Poochie` : Deletes the contact with associated contact name.
+   * `/delete ; name : Janna` : Deletes the contact named Janna from Pooch Planner.
 
    * `/exit` : Exits the app.
 
@@ -151,6 +148,7 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
   e.g. if the command word specifies `/add`, then `/ADD` is invalid.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* Commands are space-sensitive so you should take caution when entering the commands.
 </div>
 
 #### Adding a contact: `add`
@@ -494,7 +492,8 @@ Adds a note to a specified person from the Pooch Planner so that you can keep tr
 You can specify an optional deadline for the note.
 
 Formats: <br>
-`/note ; name : [name] ; note : [note message]`
+`/note ; name : [name] ; note : [note message]` 
+<br>
 `/note ; name : [name] ; note : [note message] ; deadline : [date]`
 
 Examples: <br>
@@ -523,9 +522,10 @@ Examples: <br>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
-* Name and Note are compulsory fields that are case-insensitive but space-sensitive.<br>
-
+* Name and Note are compulsory fields.<br>
+* Name is case-insensitive but space-sensitive <br>
 * Name must be present in Pooch Planner.<br>
+* Note cannot be empty 
 
 </div>
 
@@ -533,22 +533,6 @@ Examples: <br>
 
 * Notes added are intended to be short details! <br>
 * To remove a note, specify in the note field "No note here". This note is case-sensitive.
-
-</div>
-
-
-<div markdown="span" class="alert alert-danger">:x: **Error Handling:**<br>
-
-* If you receive the error message "Failed to add note to Pooch Contact - Name is not specified 🐾",
-  ensure you have specified a name in the name field. <br>
-* If you receive the error message "Failed to add note to Pooch Contact - Name does not exist in our address book 🐾",
-  ensure you have specified a name of a contact that is already exists in the planner. <br>
-* If you receive the error message "Failed to add note to Pooch Contact - Note is not specified 🐾",
-  ensure you have specified a name of a non-empty note in the note field.
-* If you receive the error message "Failed to add note to Pooch Contact - Deadline is not specified 🐾",
-  ensure you have specified a deadline in the deadline field.
-* If you receive the error message "Date must be in the format yyyy-mm-dd (e.g., 2019-10-15)",
-  ensure you have specified a deadline in the correct format as stated in the error message.
 
 </div>
 
@@ -704,12 +688,6 @@ Examples: <br>
 
 </div>
 
-<div markdown="span" class="alert alert-danger">:x: **Error Handling:**<br>
-
-* If you receive the error message "Failed to give help - Help requires a command field. 🐾",
-  ensure you have specified a valid command in the command field <br>
-
-</div>
 
 #### Viewing reminders : `remind`
 
@@ -730,7 +708,7 @@ Example: <br>
     <img src="images/ug-images/command-images/remindcommand.png" alt="Add before" style="width:100%;"/>
     <medium>Input: `/remind` </medium>
     <br>
-    <medium>Output: Shows all contacts with reminders from the contact list.</medium>
+    <medium>Output: Shows all contacts with note deadlines from today onwards.</medium>
     <br>
 </div>
 
@@ -818,7 +796,7 @@ Pooch Planner data are saved in the hard disk automatically after any command th
 
 ### Editing the data file
 
-Pooch Planner data are saved automatically as a JSON file `[JAR file location]/data/PoochPlanner.json`. Advanced users are welcome to update data directly by editing that data file.
+Pooch Planner data are saved automatically as a JSON file `[JAR file location]/data/poochplanner.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br>
 
@@ -826,42 +804,36 @@ If your changes to the data file makes its format invalid, PoochPlanner will dis
 Furthermore, certain edits can cause the PoochPlanner to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Common Errors
 
 ### Unknown Command
 
-![Unknown Command](images/ug-images/error-images/unknown-command.png)
-Image depicting unkown command error
+If you encounter an unknown command error, please ensure the command entered is a valid command mentioned
+in our feature list.
+<br>
 
-Key in only valid commands as mentioned in this User Guide (eg. `/add`, `/edit`, etc.)
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/error-images/unknownCommand.png" alt="Add before" style="width:100%;"/>
+    <medium>Image depicting unknown command error.</medium>
+    <br>
+</div>
+
 
 ### Invalid Field
 
-![img.png](images/ug-images/error-images/invalid-field.png)
-Image depicting invalid field error
+If you encounter an invalid field error, please ensure the field entered is a valid field for the command you
+are using
+<br>
 
-Key in only valid field parameters within the command (e.g. `name`, `phone`, `email` etc.)
-
-### Incorrect formatting
-
-![img.png](images/ug-images/error-images/incorrect-phone-format.png)
-Image depicting incorrect phone formatting error
-
-![img.png](images/ug-images/error-images/incorrect-salary-format.png)
-Image depicting incorrect salary formatting error
-
-To fix the formatting errors, key in the appropiate syntax based on the error message
-
-Examples:
-- `Phone` field accepts only numbers that are at least 3 digits long
-- `Salary` field must follow the format `$___/hr`
+<div style="text-align:center;">
+    <br>
+    <img src="images/ug-images/error-images/invalidField.png" alt="Add before" style="width:100%;"/>
+    <medium>Image depicting invalid field error.</medium>
+    <br>
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -875,14 +847,14 @@ Examples:
 **Method 1**: Using the Command Line
 1. Open the command line in your operating system's terminal software.
 2. Navigate to the directory where the JAR file is located.
-3. Enter `java -jar PoochPlanner.jar` and the PoochPlanner Application should launch.
+3. Enter `java -jar poochplanner.jar` and the PoochPlanner Application should launch.
 
 **Method 2**: Using `.bat/.sh` Scripts
 1. Create a new text file and paste the following line into the file:
    ```
-   java -jar [JAR file location]/PoochPlanner.jar
+   java -jar [JAR file location]/poochplanner.jar
    ```
-2. Save the file as `PoochPlanner.bat` (Windows) or `PoochPlanner.sh` (macOS/Linux).
+2. Save the file as `poochplanner.bat` (Windows) or `poochplanner.sh` (macOS/Linux).
 3. Change the admin settings of the script to allow it to run as a program:
    - Windows: Right-click on the script and select Properties. Under General, check the box that says `Allow this file to run as a program`.
    - macOS/Linux: Open the Terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press `Enter`.<br>Note: (`chmod +x` changes permissions of the script to allow it to be executed)
@@ -896,7 +868,7 @@ Examples:
 ### Loading Data from Another Computer
 
 **Q**: How can I transfer my PoochContacts to another Computer?<br>
-**A**: Install PoochPlanner in your target computer and overwrite the empty data file it creates with the file that contains the data of your previous PoochPlanner home folder by copying the contents of the `PoochPlanner.json` file from your current computer and pasting it inside the `PoochPlanner.json` file of your target computer.
+**A**: Install PoochPlanner in your target computer and overwrite the empty data file it creates with the file that contains the data of your previous poochplanner home folder by copying the contents of the `poochplanner.json` file from your current computer and pasting it inside the `poochplanner.json` file of your target computer.
 
 ### Using PoochPlanner
 
@@ -979,5 +951,6 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 | **Pin**                  | Format : <br>`/pin ; name : [name]`                                                                                                                    <br> <br> Example : <br> `/pin ; name : Poochie`                                                                                                                                       |
 | **Unpin**                | Format : <br>`/unpin ; name : [name]`                                                                                                                  <br> <br> Example : <br> `/unpin ; name : Poochie`                                                                                                                                     |
 | **Sort**                 | Format : <br>`/sort ; target-field`                                                                                                                    <br> <br> Example : <br> `/sort ; name`                                                                                                                                                |
-| **Note**                 | Format : <br>`/note ; name : [name] ; note : [note]` or `/note ; name : [name] ; note : [note] ; deadline : [deadline]`                                <br> <br> Example : <br> `/note ; name : Poochie ; note : get dog for groomers ; deadline : 2020-10-10`                                                                                |
-| **Exit**                 | Format : <br>`exit`                                                                                                                                    <br> <br> Example : <br> `exit`                                                                                                                                                        |
+| **Note**                 | Format : <br>`/note ; name : [name] ; note : [note]` <br> or <br> `/note ; name : [name] ; note : [note] ; deadline : [deadline]`                                <br> <br> Example : <br> `/note ; name : Poochie ; note : get dog for groomers ; deadline : 2020-10-10`                                                                      |
+| **Remind**               | Format : <br>`/remind`                                                                                                                                    <br> <br> Example : <br> `/remind`                                                                                                                                                  |
+| **Exit**                 | Format : <br>`/exit`                                                                                                                                    <br> <br> Example : <br> `/exit`                                                                                                                                                      |
