@@ -1,10 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.Messages.FAILED_TO_DELETE;
-import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -14,7 +12,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.messages.DeleteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;

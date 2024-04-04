@@ -108,7 +108,7 @@ public class EditCommandParserTest {
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + EMPLOYMENT_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = FAILED_TO_EDIT +  String.format(MESSAGE_INVALID_FIELD_FORMAT, "[employment]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[employment]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (salary)

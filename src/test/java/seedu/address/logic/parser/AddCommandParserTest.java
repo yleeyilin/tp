@@ -146,7 +146,7 @@ public class AddCommandParserTest {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
         String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        String expectedMessage = FAILED_TO_ADD +  exception + "\n"
+        String expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix

@@ -29,7 +29,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         logger.log(Level.INFO, "Going to start parsing for help command.");
 
         ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help",
-                FAILED_TO_HELP ,PREFIX_HELP);
+                FAILED_TO_HELP, PREFIX_HELP);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
 
