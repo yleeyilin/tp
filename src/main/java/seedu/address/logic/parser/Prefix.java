@@ -15,6 +15,12 @@ public class Prefix {
         return prefix;
     }
 
+    public String getTrimmedPrefix() {
+        return prefix
+                .replace("; ", "")
+                .replace(" : ", "");
+    }
+
     @Override
     public String toString() {
         return getPrefix();

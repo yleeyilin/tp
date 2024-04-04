@@ -29,8 +29,12 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 
+        // missing fields
         ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, "sort",
                 FAILED_TO_SORT, PREFIX_FIELD);
+
+        // duplicate field entries
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_COLLECTION);
 
         prefix = mapName(argMultimap);
 
