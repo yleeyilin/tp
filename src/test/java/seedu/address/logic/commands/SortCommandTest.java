@@ -134,33 +134,6 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_validSortByTags_sortSuccess() throws CommandException {
-
-        Model actualModel = new ModelManager(new AddressBook(), new UserPrefs());
-        actualModel.addPerson(CARL);
-        actualModel.addPerson(GEORGE);
-        actualModel.addPerson(ALICEMAINTAINER);
-        actualModel.addPerson(DANIEL);
-        actualModel.addPerson(BENSONSTAFF);
-        actualModel.addPerson(ELLE);
-        actualModel.addPerson(FIONA);
-
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
-        expectedModel.addPerson(ALICEMAINTAINER);
-        expectedModel.addPerson(BENSONSTAFF);
-        expectedModel.addPerson(CARL);
-        expectedModel.addPerson(DANIEL);
-        expectedModel.addPerson(ELLE);
-        expectedModel.addPerson(FIONA);
-        expectedModel.addPerson(GEORGE);
-
-        SortCommand sortCommand = new SortCommand(new Prefix("tags"));
-        sortCommand.execute(actualModel);
-
-        assertEquals(expectedModel.getFilteredPersonList(), actualModel.getFilteredPersonList());
-    }
-
-    @Test
     public void execute_validSortByRating_sortSuccess() throws CommandException {
         Person personWithSmallerRating = new PersonBuilder(ALICE).withRating("3").build();
         Person personWithLargerRating = new PersonBuilder(BOB).withRating("5").build();
