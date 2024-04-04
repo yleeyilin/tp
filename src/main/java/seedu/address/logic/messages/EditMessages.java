@@ -15,8 +15,8 @@ public class EditMessages extends Messages {
     public static final String MESSAGE_EDIT_NAME = "Failed to edit Pooch Contact - "
             + "Edit detect duplicate name fields. %1$s \uD83D\uDC3E";
     public static final String MESSAGE_EDIT_INVALID_NAME = "Failed to edit Pooch Contact. %1$s \uD83D\uDC3E";
-    public static final String MESSAGE_EDITING_NAME = "Failed to edit Pooch Contact."
-            + "Editing Pooch Contact names is not allowed \uD83D\uDC3E";
+    public static final String MESSAGE_EDITING_NAME = "Failed to edit Pooch Contact - "
+            + "Editing Pooch Contact names is not allowed . %1$s \uD83D\uDC3E";
     public static final String MESSAGE_EDIT_INVALID_FIELD = "Failed to edit Pooch Contact - "
             + "%1$s \uD83D\uDC3E";
     public static final String MESSAGE_EDIT_NO_DIFFERENCE = "Failed to edit Pooch Contact - "
