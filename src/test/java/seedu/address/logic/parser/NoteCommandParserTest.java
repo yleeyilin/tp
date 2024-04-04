@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.messages.NoteMessages;
 import seedu.address.model.person.DeadlineNote;
 import seedu.address.model.person.Note;
 
@@ -30,7 +31,7 @@ public class NoteCommandParserTest {
     @Test
     public void parse_invalidArgsDeadline_throwsParseException() {
         assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + INVALID_DESC_BOB,
-                String.format(Note.MESSAGE_CONSTRAINTS, NoteCommand.MESSAGE_USAGE));
+                String.format(NoteMessages.MESSAGE_NOTE_INVALID_PARAMETERS, Note.MESSAGE_CONSTRAINTS));
     }
 
     @Test

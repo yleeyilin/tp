@@ -25,7 +25,7 @@ public class NoteCommand extends Command {
     public static final String COMMAND_WORD = "/note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds note to person.\n"
+            + ": Adds note to a contact in PoochPlanner.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME"
             + PREFIX_NOTE + "NOTE"
