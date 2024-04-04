@@ -73,6 +73,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String arg} into a {@code arg}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseArg(String arg) throws ParseException {
+        requireNonNull(arg);
+        String parserArg = arg.replaceAll("field : \\{ ", "field : { ; ");
+        return parserArg;
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -241,7 +253,7 @@ public class ParserUtil {
     public static String parseField(String args) throws ParseException {
         requireNonNull(args);
         String trimmedFields = args.replaceAll("[{}]", "").trim();
-        return " ; " + trimmedFields;
+        return trimmedFields;
     }
 
     /**
@@ -330,6 +342,30 @@ public class ParserUtil {
         String trimmedSortField = removedSemicolon.replaceAll(" : ", "");
 
         return trimmedSortField;
+    }
+
+    /**
+     * Standardises all prefixes input by users to lower case.
+     * @param argsString The input string to parse.
+     * @return The formatted input string to fix.
+     */
+    public static String normalisePrefixes(String argsString) {
+        String[] parts = argsString.split(";");
+        StringBuilder result = new StringBuilder(parts[0]);
+
+        for (int i = 1; i < parts.length; i++) {
+            String part = parts[i];
+            int colonIndex = part.indexOf(":");
+            if (colonIndex != -1) {
+                String prefix = part.substring(0, colonIndex).trim();
+                String value = part.substring(colonIndex + 1).trim();
+                result.append(" ; ").append(prefix.toLowerCase()).append(" : ").append(value);
+            } else {
+                result.append(" ; ").append(part.trim());
+            }
+        }
+
+        return result.toString();
     }
 
     /**

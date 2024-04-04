@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.messages.SearchMessages;
 import seedu.address.model.Model;
@@ -19,12 +22,14 @@ public class SearchCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD \n"
             + "Example: " + COMMAND_WORD
-            + " /search ; name : [full/partial name]\n"
+            + "/search ; name : [full/partial name]\n"
             + "/search ; phone : [full/partial phone]\n"
             + "/search ; address : [full/partial address]\n"
             + "/search ; email : [full/partial email]\n"
             + "/search ; product : [full/partial product name]\n"
             + "/search ; employment : [employment]";
+
+    private static final Logger logger = LogsCenter.getLogger(SearchCommand.class);
 
     private final KeywordPredicate predicate;
 
@@ -35,7 +40,12 @@ public class SearchCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.updateFilteredPersonList(predicate);
+
+        logger.fine(String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS,
+                model.getFilteredPersonList().size()));
+
         return new CommandResult(
                 String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS, model.getFilteredPersonList().size()));
     }
