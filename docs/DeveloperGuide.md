@@ -1115,13 +1115,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -1134,13 +1134,13 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-person ; name : Person1 ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com
       ```
-   1. Test case: `/edit ; name : Person1 ; field : { phone : 99820520}`<br>
+   2. Test case: `/edit ; name : Person1 ; field : { phone : 99820520 }`<br>
       Expected: The phone field of contact named 'Person1' is edited to `99820520`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit ; name : Person1 ; field : { address : Pooch Street 31}`<br>
+   3. Test case: `/edit ; name : Person1 ; field : { address : Pooch Street 31 }`<br>
       Expected: The address field of contact named 'Person1' is edited to `Pooch Street 31`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com}`<br>
+   4. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
       Expected: The phone and email field of contact named 'Person1' is edited to `99990520` and `impooch@gmail13.com` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Staff` contact
@@ -1149,16 +1149,16 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-staff ; name : Staff1 ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time
       ```
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { phone : 99820520}`<br>
+   2. Test case: `/edit-staff ; name : Staff1 ; field : { phone : 99820520 }`<br>
       Expected: The phone field of contact named 'Staff1' is edited to `99820520`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $55/hr}`<br>
+   3. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $55/hr }`<br>
       Expected: The salary field of contact named 'Staff1' is edited to `$55/hr`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { employment : full-time}`<br>
+   4. Test case: `/edit-staff ; name : Staff1 ; field : { employment : full-time }`<br>
       Expected: The employment field of contact named 'Staff1' is edited to `full-time`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time}`<br>
+   5. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time }`<br>
       Expected: The salary and employment field of contact named 'Staff1' is edited to `40/hr` and `part-time` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Supplier` contact
@@ -1167,16 +1167,16 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-supplier ; name : Supplier1 ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag
       ```
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { phone : 9994555}`<br>
+   2. Test case: `/edit-supplier ; name : Supplier1 ; field : { phone : 9994555 }`<br>
       Expected: The phone field of contact named 'Supplier1' is edited to `9994555`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : dogdiapers}`<br>
+   3. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : dogdiapers }`<br>
       Expected: The product field of contact named 'Supplier1' is edited to `dogdiapers`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { price : $10/bag}`<br>
+   4. Test case: `/edit-supplier ; name : Supplier1 ; field : { price : $10/bag }`<br>
       Expected: The price field of contact named 'Supplier1' is edited to `$10/bag`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag}`<br>
+   5. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag }`<br>
       Expected: The product and price field of contact named 'Supplier1' is edited to `kibbles` and `$75/bag` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Maintainer` contact
@@ -1185,16 +1185,16 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-maintainer ; name : Maintainer1  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr
       ```
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { phone : 84444555}`<br>
+   2. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { phone : 84444555 }`<br>
       Expected: The phone field of contact named 'Maintainer1' is edited to `84444555`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>
+   3. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr }`<br>
       Expected: The commission field of contact named 'Maintainer1' is edited to `$10/hr`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { skill : cleaner}`<br>
+   4. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { skill : cleaner }`<br>
       Expected: The skill field of contact named 'Maintainer1' is edited to `cleaner`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $12/hr ; skill : janitor}`<br>
+   5. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $12/hr ; skill : janitor }`<br>
       Expected: The commission and skill field of contact named 'Maintainer1' is edited to `$12/hr` and `janitor` respectively. Details of the edited contact shown in the status message.
 
 ### Deleting a contact
@@ -1206,17 +1206,46 @@ testers are expected to do more *exploratory* testing.
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
 
-   1. Test case: `/delete ; name : Poochie`<br>
+   2. Test case: `/delete ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is deleted from the list. Contact type and name of the deleted contact is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `/delete ; name : Moochie`<br>
+   3. Test case: `/delete ; name : Moochie`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `/delete`<br>
+   4. Test case: `/delete`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `/delete`, `delete ; name :`<br>
+   5. Other incorrect delete commands to try: `/delete`, `delete ; name :`<br>
       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Pinning a person
+
+1. Pinning a person while all persons are being shown
+
+   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+
+   2. Test case: `/pin ; name : Poochie`<br>
+      Expected: Contact named **_Poochie_** is pinned at the top of the contact list.
+
+1. _{ more test cases …​ }_
+
+### Unpinning a person
+
+1. Unpinning a person while all persons are being shown
+
+   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /pin ; name : Poochie
+      ```
+
+   2. Test case: `/unpin ; name : Poochie`<br>
+      Expected: Contact named **_Poochie_** is no longer pinned at the top of the contact list.
 
 1. _{ more test cases …​ }_
 
@@ -1229,13 +1258,13 @@ testers are expected to do more *exploratory* testing.
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
 
-   1. Test case: `/rate ; name : Poochie ; rating : 5`<br>
+   2. Test case: `/rate ; name : Poochie ; rating : 5`<br>
       Expected: Contact named **_Poochie_** is updated with a rating of 5. Contact type and name of the rated contact is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `/rate ; name : Moochie ; rating : 5`<br>
+   3. Test case: `/rate ; name : Moochie ; rating : 5`<br>
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `/rate ; name : Poochie ; rating : 6`<br>
+   4. Test case: `/rate ; name : Poochie ; rating : 6`<br>
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
 
 1. _{ more test cases …​ }_
@@ -1248,11 +1277,11 @@ testers are expected to do more *exploratory* testing.
      ```
      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
      ```
-  1. Test case: `/note ; name : Poochie ; note : get kibble`<br>
+  2. Test case: `/note ; name : Poochie ; note : get kibble`<br>
      Expected: Woof! Added note to Pooch Contact Other Contact Janna successfully! 🐶
-  2. Test case: `/note ; name : ; note : get kibble`<br>
+  3. Test case: `/note ; name : ; note : get kibble`<br>
      Expected : Names should only contain alphanumeric characters and spaces, and it should not be blank
-  3. Test case: `/note ; name : Poochie ; note : `<br>
+  4. Test case: `/note ; name : Poochie ; note : `<br>
      Expected : Failed to add note to Pooch Contact - Note is not specified 🐾
 
 
@@ -1262,7 +1291,7 @@ testers are expected to do more *exploratory* testing.
      ```
      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
      ```
-  1. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
+  2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
 
 
