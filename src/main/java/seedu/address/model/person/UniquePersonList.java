@@ -123,7 +123,7 @@ public class UniquePersonList implements Iterable<Person> {
         if (field.equalsIgnoreCase("name")) {
             internalList.sort(Comparator.comparing(p -> p.getName().toString()));
         } else if (field.equalsIgnoreCase("phone")) {
-            internalList.sort(Comparator.comparing(p -> p.getPhone().toString()));
+            internalList.sort(Comparator.comparing(p -> Integer.parseInt(p.getPhone().toString())));
         } else if (field.equalsIgnoreCase("email")) {
             internalList.sort(Comparator.comparing(p -> p.getEmail().toString()));
         } else if (field.equalsIgnoreCase("address")) {
