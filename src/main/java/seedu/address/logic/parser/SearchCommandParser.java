@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.Messages.FAILED_TO_SEARCH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
+import static seedu.address.logic.messages.Messages.FAILED_TO_SORT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.messages.SearchMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.KeywordPredicate;
@@ -41,8 +43,11 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             throw new ParseException(SearchMessages.MESSAGE_SEARCH_MISSING_FIELD);
         }
 
-        // check for duplicate field entries
+        // duplicate field entries
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SEARCH_COLLECTION);
+
+        // empty entries
+        argMultimap.verifyNoEmptyEntries();
 
         return new SearchCommand(new KeywordPredicate(argMultimap));
     }

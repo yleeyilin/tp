@@ -2,11 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 import seedu.address.logic.messages.Messages;
@@ -114,6 +110,32 @@ public class ArgumentMultimap {
 
     public boolean isPreambleEmpty() {
         return this.getPreamble().isEmpty();
+    }
+
+    /**
+     * Gets all the prefixes
+     * @return an array of prefixes in the hashmap
+     */
+    public Prefix[] getAllPrefixes() {
+        return argMultimap.keySet().toArray(new Prefix[0]);
+    }
+
+    /**
+     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
+     * once among the arguments.
+     */
+    public void verifyNoEmptyEntries() throws ParseException {
+        List<Prefix> emptyPrefixes = new ArrayList<>();
+        for (Prefix prefix : getAllPrefixes()) {
+            if (!prefix.toString().isEmpty() && Objects.equals(argMultimap.get(prefix).get(0), "")) {
+                emptyPrefixes.add(prefix);
+            }
+        }
+
+        if (!emptyPrefixes.isEmpty()) {
+            throw new ParseException(Messages.getErrorMessageForEmptyPrefixes(
+                    emptyPrefixes.toArray(new Prefix[0])));
+        }
     }
 
     /**
