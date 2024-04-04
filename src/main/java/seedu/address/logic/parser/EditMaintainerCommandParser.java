@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,36 +36,25 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         Name name;
         String fieldArgs;
 
-        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
+
+        ParserUtil.verifyNoUnknownPrefix(args, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
         boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
         if (hasDuplicateNamePrefix) {
-            unknownPrefixes.add("name");
-        }
-        ParserUtil.verifyNoUnknownPrefix(unknownPrefixes, EditMaintainerCommand.MESSAGE_USAGE);
-
-        // check for missing name
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
+            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_NAME,
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 
-        // check for missing field
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_FIELD)) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
-                    EditMaintainerCommand.MESSAGE_USAGE));
-        }
+        // check for missing fields
+        ParserUtil.verifyNoMissingField(argMultimap, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
+                PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditMaintainerCommand.MESSAGE_USAGE));
-        ArrayList<String> unknownFieldPrefixes = ArgumentTokenizer.checkUnknownPrefix(fieldArgs,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SKILL, PREFIX_COMMISSION);
-        ParserUtil.verifyNoUnknownPrefix(unknownFieldPrefixes, EditMaintainerCommand.MESSAGE_USAGE);
 
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

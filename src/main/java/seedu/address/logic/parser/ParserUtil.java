@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -10,8 +11,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.HelpCommand;
@@ -36,8 +40,8 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final Logger logger = LogsCenter.getLogger("ParselUtil");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -368,10 +372,17 @@ public class ParserUtil {
 
     /**
      * Verifies that there are no invalid prefixes.
-     * @param unknownPrefixes List of unknown prefixes.
-     * @throws ParseException Thrown when there are valid prefixes.
+     * @param args Arguments.
+     * @param message Error messages to be displayed.
+     * @param commandType Command Type.
+     * @param prefixes Required prefixes in the command.
+     * @throws ParseException Thrown when there are invalid prefixes.
      */
-    public static void verifyNoUnknownPrefix(ArrayList<String> unknownPrefixes, String message) throws ParseException {
+    public static void verifyNoUnknownPrefix(String args, String message, String commandType, Prefix... prefixes)
+            throws ParseException {
+        ArrayList<String> unknownPrefixes = ArgumentTokenizer.checkUnknownPrefix(args,
+                prefixes);
+        logger.log(Level.WARNING, "Parsing error while parsing for " + commandType + " command.");
         if (unknownPrefixes.size() > 0) {
             String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
@@ -379,5 +390,25 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Verifies that there are no missing prefixes.
+     * @param argMultimap Arguments.
+     * @param message Error messages to be displayed.
+     * @param commandType Command Type.
+     * @param prefixes Required prefixes in the command.
+     * @throws ParseException Thrown when there are missing prefixes.
+     */
+    public static void verifyNoMissingField(ArgumentMultimap argMultimap, String message, String commandType,
+                                            Prefix... prefixes) throws
+            ParseException {
+        if (!arePrefixesPresent(argMultimap, prefixes)) {
+            logger.log(Level.WARNING, "Parsing error while parsing for " + commandType + " command.");
+            ArrayList<String> missingFields = ArgumentTokenizer.checkUndetectedPrefix(argMultimap,
+                    prefixes);
+            String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, missingFields);
+            exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
+            throw new ParseException(exception);
+        }
+    }
 
 }

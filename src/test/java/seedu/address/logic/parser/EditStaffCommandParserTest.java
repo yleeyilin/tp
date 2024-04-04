@@ -19,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STAFF;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
@@ -28,6 +29,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICESTAFF;
 import static seedu.address.testutil.TypicalPersons.CARL;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -55,19 +58,26 @@ public class EditStaffCommandParserTest {
 
     @Test
     public void parse_missingName_failure() {
-        // no field specified
+        ArrayList<String> undetectedFields = new ArrayList<>();
+        undetectedFields.add("name");
+        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String expectedMessage = exception + "\n"
+                + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         String userInput = EditStaffCommand.COMMAND_WORD + " "
                 + " " + PREFIX_FIELD + "{" + " }";
-        assertParseFailure(parser, userInput, String.format(EditMessages.MESSAGE_EDIT_MISSING_NAME,
-                EditStaffCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_missingField_failure() {
         // no field specified
+        ArrayList<String> undetectedFields = new ArrayList<>();
+        undetectedFields.add("field");
+        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String expectedMessage = exception + "\n"
+                + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         String userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME;
-        assertParseFailure(parser, userInput, String.format(EditMessages.MESSAGE_EDIT_MISSING_FIELD,
-                EditStaffCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
@@ -76,8 +86,7 @@ public class EditStaffCommandParserTest {
         String userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[name]");
-        exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
+        String exception = String.format(EditMessages.MESSAGE_EDIT_NAME, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (product)
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
@@ -122,7 +131,7 @@ public class EditStaffCommandParserTest {
         userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY + PRICE_DESC_AMY + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, price, name]");
+        exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[commission, price]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified three invalid field (skill, price and commission)
