@@ -400,7 +400,7 @@ public class ParserUtil {
      */
     public static String mapFields(ArgumentMultimap argMultimap, String message) throws ParseException {
         try {
-            return ParserUtil.parseField(argMultimap.getValue(PREFIX_FIELD).get());
+            return " " + ParserUtil.parseField(argMultimap.getValue(PREFIX_FIELD).get());
         } catch (ParseException pe) {
             throw new ParseException(message, pe);
         }
