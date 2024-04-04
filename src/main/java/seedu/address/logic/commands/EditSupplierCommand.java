@@ -86,7 +86,7 @@ public class EditSupplierCommand extends Command {
         Supplier editedSupplier = createEditedSupplier(supplierToEdit, editSupplierDescriptor);
 
         model.setPerson(supplierToEdit, editedSupplier);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonListWithCommit(PREDICATE_SHOW_ALL_PERSONS);
 
         logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.formatPerson(editedSupplier)));

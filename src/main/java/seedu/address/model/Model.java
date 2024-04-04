@@ -92,6 +92,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate} with commit.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonListWithCommit(Predicate<Person> predicate);
+
+    /**
      * Update the person list to display pinned contacts first.
      */
     void updatePinnedPersonList();

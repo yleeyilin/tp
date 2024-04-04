@@ -47,7 +47,7 @@ public class RateCommand extends Command {
         Person ratedPerson = personToRate.updateRating(rating);
 
         model.setPerson(personToRate, ratedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonListWithCommit(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(RateMessages.MESSAGE_RATE_PERSON_SUCCESS,
                 Messages.formatPerson(personToRate)));
