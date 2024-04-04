@@ -53,7 +53,7 @@ public class NoteCommand extends Command {
         Person personToEdit = model.findByName(name, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);
         Person editedPerson = personToEdit.updateNote(note);
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonListWithCommit(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(NoteMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 Messages.formatPerson(editedPerson)));

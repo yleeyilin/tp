@@ -84,7 +84,7 @@ public class EditMaintainerCommand extends Command {
         Maintainer editedMaintainer = createEditedMaintainer(maintainerToEdit, editMaintainerDescriptor);
 
         model.setPerson(maintainerToEdit, editedMaintainer);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonListWithCommit(PREDICATE_SHOW_ALL_PERSONS);
 
         logger.fine(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.formatPerson(editedMaintainer)));

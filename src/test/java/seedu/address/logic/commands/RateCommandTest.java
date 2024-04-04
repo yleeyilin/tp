@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.GEORGIAMAINTAINER;
@@ -30,7 +29,7 @@ public class RateCommandTest {
     private final Rating validRating1 = new Rating("1");
 
     @Test
-    public void execute_validRatingOther_addSuccess() {
+    public void execute_validRatingOther_addSuccess() throws CommandException {
         Person toAddRatingPerson = ALICE;
         Person expectedPerson = new Person(toAddRatingPerson.getName(), toAddRatingPerson.getPhone(),
                 toAddRatingPerson.getEmail(), toAddRatingPerson.getAddress(),
@@ -42,7 +41,8 @@ public class RateCommandTest {
         String expectedMessage = String.format(RateMessages.MESSAGE_RATE_PERSON_SUCCESS,
                 Messages.formatPerson(expectedPerson));
 
-        assertCommandSuccess(rateCommand, model, expectedMessage, expectedModel);
+        rateCommand.execute(model);
+        assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
     @Test

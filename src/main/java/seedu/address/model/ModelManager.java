@@ -168,6 +168,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonListWithCommit(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
+        commitAddressBook();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
