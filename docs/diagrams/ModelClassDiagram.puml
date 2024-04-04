@@ -10,6 +10,7 @@ Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
+Class VersionedAddressBook
 Class UserPrefs
 
 Class UniquePersonList
@@ -40,7 +41,8 @@ AddressBook .up.|> ReadOnlyAddressBook
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" VersionedAddressBook
+VersionedAddressBook -left-|> AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
@@ -50,7 +52,7 @@ Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" Address
-Person *--> "*" Tag
+Person *--> "1" Tag
 
 Person <|-- Staff
 Person <|-- Supplier

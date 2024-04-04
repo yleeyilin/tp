@@ -1,11 +1,16 @@
 package seedu.address.model;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Extended version of Address Book storing History of Address Book.
  */
 public class VersionedAddressBook extends AddressBook {
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private ArrayList<ReadOnlyAddressBook> addressBookStateList;
     private int currentStatePointer;
 
@@ -45,6 +50,7 @@ public class VersionedAddressBook extends AddressBook {
     public boolean canUndo() {
         if (currentStatePointer <= 0) {
             // cannot undo, no more address book behind the list.
+            logger.log(Level.WARNING, "No more previous state, unable to undo.");
             return false;
         }
         return true;
@@ -65,6 +71,7 @@ public class VersionedAddressBook extends AddressBook {
     public boolean canRedo() {
         if (currentStatePointer >= addressBookStateList.size() - 1) {
             // cannot redo, no more address book in front of list.
+            logger.log(Level.WARNING, "No more undo state, unable to redo.");
             return false;
         }
         return true;
