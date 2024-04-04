@@ -55,7 +55,7 @@ activate Model
 
 Model --> RateCommand
 
-RateCommand -> Model : updateFilteredPersonList()
+RateCommand -> Model : updateFilteredPersonListWithCommit()
 
 Model --> RateCommand
 deactivate Model
