@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalPersons.ALICEMAINTAINER;
 import static seedu.address.testutil.TypicalPersons.ALICESTAFF;
 import static seedu.address.testutil.TypicalPersons.ALICESUPPLIER;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.BENSONSTAFF;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.BOBMAINTAINER;
 import static seedu.address.testutil.TypicalPersons.BOBSTAFF;
