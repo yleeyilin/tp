@@ -27,7 +27,7 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canRedo()) {
+        if (!model.canRedoAddressBook()) {
             throw new CommandException(RedoMessages.MESSAGE_REDO_FAIL);
         }
 

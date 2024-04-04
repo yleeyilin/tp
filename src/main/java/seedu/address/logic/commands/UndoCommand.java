@@ -27,7 +27,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndo()) {
+        if (!model.canUndoAddressBook()) {
             throw new CommandException(UndoMessages.MESSAGE_UNDO_FAIL);
         }
 

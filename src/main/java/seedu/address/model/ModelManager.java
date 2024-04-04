@@ -142,12 +142,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean canUndo() {
+    public boolean canUndoAddressBook() {
         return addressBook.canUndo();
     }
 
     @Override
-    public boolean canRedo() {
+    public boolean canRedoAddressBook() {
         return addressBook.canRedo();
     }
 
