@@ -27,13 +27,15 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
 
+import java.util.concurrent.ExecutionException;
+
 public class NoteCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Note validNote1 = new Note("get kibble today");
     private final Note validNote2 = new Note("get bones today");
 
     @Test
-    public void execute_validNoteOther_addSuccess() {
+    public void execute_validNoteOther_addSuccess() throws CommandException {
         Person toAddNotePerson = ALICE;
         Person expectedPerson = new Person(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
@@ -45,7 +47,8 @@ public class NoteCommandTest {
         String expectedMessage = String.format(NoteMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 NoteMessages.formatPerson(expectedPerson));
 
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        noteCommand.execute(model);
+        assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
     @Test

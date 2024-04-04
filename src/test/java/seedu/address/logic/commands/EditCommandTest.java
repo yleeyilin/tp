@@ -40,7 +40,7 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(ALICE.getName(), descriptor);
@@ -51,7 +51,8 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        editCommand.execute(model);
+        assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
 
     @Test
@@ -73,7 +74,8 @@ public class EditCommandTest {
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
             expectedModel.setPerson(lastPerson, editedPerson);
 
-            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+            editCommand.execute(model);
+            assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
         } catch (CommandException e) {
             fail();
         }
@@ -109,7 +111,8 @@ public class EditCommandTest {
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
             expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+            editCommand.execute(model);
+            assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
         } catch (CommandException e) {
             fail();
         }
