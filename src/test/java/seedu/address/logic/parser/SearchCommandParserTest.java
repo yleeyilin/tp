@@ -25,7 +25,7 @@ public class SearchCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsSearchCommand() {
         String keyword = " ; name : Poochie";
         ArgumentMultimap token = ArgumentTokenizer.tokenize(keyword, PREFIX_NAME);
 
