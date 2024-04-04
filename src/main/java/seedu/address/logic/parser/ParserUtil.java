@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -422,7 +422,7 @@ public class ParserUtil {
                 prefixes);
         logger.log(Level.WARNING, "Parsing error while parsing for " + commandType + " command.");
         if (unknownPrefixes.size() > 0) {
-            String exception = headerMessage + String.format(MESSAGE_INVALID_FIELD_FORMAT, unknownPrefixes);
+            String exception = headerMessage + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, unknownPrefixes);
             exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, message);
             throw new ParseException(exception);
         }

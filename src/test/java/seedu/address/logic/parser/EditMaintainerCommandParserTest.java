@@ -19,8 +19,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MAINTAINER;
 import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
@@ -88,59 +88,59 @@ public class EditMaintainerCommandParserTest {
         String userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        String exception = String.format(EditMessages.MESSAGE_EDIT_NAME, EditMaintainerCommand.MESSAGE_USAGE);
+        String exception = String.format(EditMessages.MESSAGE_EDITING_NAME, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (product)
         userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + PRODUCT_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[product]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[product]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (price)
         userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + PRICE_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[price]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[price]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (employment)
         userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + EMPLOYMENT_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[employment]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[employment]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified invalid field (salary)
         userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + SALARY_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[salary]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[salary]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
     }
 
     @Test
-    public void checkMutipleInvalidField() {
+    public void checkMultipleInvalidField() {
         // specified two invalid field (price and employment)
         String userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + PRICE_DESC_AMY + EMPLOYMENT_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        String exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[price, employment]");
+        String exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[price, employment]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified three invalid field (name, price and employment)
         userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + EMPLOYMENT_DESC_AMY + PRICE_DESC_AMY + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[employment, price]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[employment, price]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
         // specified three invalid field (salary, price and employment)
         userInput = EditMaintainerCommand.COMMAND_WORD + " " + PREFIX_NAME + "Maintainer1"
             + " " + PREFIX_FIELD + "{" + EMPLOYMENT_DESC_AMY + PRICE_DESC_AMY + SALARY_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        exception = FAILED_TO_EDIT + String.format(MESSAGE_INVALID_FIELD_FORMAT, "[employment, price, salary]");
+        exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[employment, price, salary]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
     }

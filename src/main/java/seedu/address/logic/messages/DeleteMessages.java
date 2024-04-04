@@ -12,6 +12,4 @@ public class DeleteMessages extends Messages {
             + "Delete requires a name field. %1$s\uD83D\uDC3E";
     public static final String MESSAGE_DELETE_INVALID_PARAMETERS = "Failed to delete Pooch Contact - "
             + "%1$s \uD83D\uDC3E";
-
-
 }
