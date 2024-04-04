@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_SEARCH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
@@ -38,6 +39,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     public SearchCommand parse(String args) throws ParseException {
 
         ParserUtil.verifyNoUnknownPrefix(args, SearchCommand.MESSAGE_USAGE, "search",
+                FAILED_TO_SEARCH,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG_FIELD, PREFIX_SALARY,
                 PREFIX_EMPLOYMENT, PREFIX_PRICE, PREFIX_PRODUCT, PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_NOTE,
                 PREFIX_PIN, PREFIX_RATING, PREFIX_DEADLINE, PREFIX_HELP);

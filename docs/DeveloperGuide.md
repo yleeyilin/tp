@@ -51,11 +51,11 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/delete ; name : Poochie`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="750" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the five main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
@@ -91,9 +91,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("/delete ; name : Poochie")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `/delete ; name : Poochie` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -117,28 +117,22 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="700" />
 
 
 The `Model` component,
 
+* stores different states of address book inside versioned address book.
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="6000" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -163,7 +157,7 @@ The `search` command enables users to find contacts in PoochPlanner that match t
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `search` command.
 
-![Search Command Sequence Diagram](images/dg-images/search-command-sequence-diagram.png)
+<img src="images/dg-images/search-command-sequence-diagram.png" width="900" />
 
 #### Details
 
@@ -188,6 +182,8 @@ The `sort` command enables users to sort contacts in PoochPlanner by a target fi
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `sort` command.
 
+<img src="images/dg-images/sort-command-sequence-diagram.png" width="900" />
+
 #### Details
 
 1. The user inputs the command to sort contacts with the target field.
@@ -206,11 +202,11 @@ The following sequence diagram models the interactions between the different com
 
 #### Overview
 
-The note command enables users to add notes to  existing contacts in PoochPlanner.
+The note command enables users to add notes to existing contacts in PoochPlanner.
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `note` command.
 
-![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
+<img src="images/NoteCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -251,7 +247,7 @@ The rate command enables users to rate a specific contact from PoochPlanner.
 The following sequence diagram models the interactions between the different components of PoochPlanner for the
 execution of the `rate` command.
 
-![Note Sequence Diagram](images/NoteCommandSequenceDiagram.png)
+<img src="images/RateCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -292,7 +288,7 @@ The delete command enables users to delete a specific contact from PoochPlanner.
 The following sequence diagram models the interactions between the different components of PoochPlanner for the
 execution of the `delete` command.
 
-![Delete Sequence Diagram](images/DeleteSequenceDiagram.png)
+<img src="images/DeleteSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -331,7 +327,7 @@ The help command enables users to view help for all.
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `help` command.
 
-![Help Sequence Diagram](images/HelpCommandSequenceDiagram.png)
+<img src="images/HelpCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -366,6 +362,7 @@ The remind command enables users to view all contacts with note deadlines from t
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `remind` command.
 
 ![Remind Sequence Diagram](images/RemindCommandSequenceDiagram.png)
+
 
 #### Details
 
@@ -443,11 +440,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `/delete ; name : Poochie` command to delete the Person named Poochie in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `/delete ; name : Poochie` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `/add-person ; name : John …​` to add a new person. The `/add-person` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -482,11 +479,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `/list`. Commands that do not modify the address book, such as `/list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `/clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `/add-person ; name : John...` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -1118,13 +1115,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -1137,13 +1134,13 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-person ; name : Person1 ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com
       ```
-   1. Test case: `/edit ; name : Person1 ; field : { phone : 99820520}`<br>
+   2. Test case: `/edit ; name : Person1 ; field : { phone : 99820520 }`<br>
       Expected: The phone field of contact named 'Person1' is edited to `99820520`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit ; name : Person1 ; field : { address : Pooch Street 31}`<br>
+   3. Test case: `/edit ; name : Person1 ; field : { address : Pooch Street 31 }`<br>
       Expected: The address field of contact named 'Person1' is edited to `Pooch Street 31`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com}`<br>
+   4. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
       Expected: The phone and email field of contact named 'Person1' is edited to `99990520` and `impooch@gmail13.com` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Staff` contact
@@ -1152,16 +1149,16 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-staff ; name : Staff1 ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time
       ```
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { phone : 99820520}`<br>
+   2. Test case: `/edit-staff ; name : Staff1 ; field : { phone : 99820520 }`<br>
       Expected: The phone field of contact named 'Staff1' is edited to `99820520`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $55/hr}`<br>
+   3. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $55/hr }`<br>
       Expected: The salary field of contact named 'Staff1' is edited to `$55/hr`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { employment : full-time}`<br>
+   4. Test case: `/edit-staff ; name : Staff1 ; field : { employment : full-time }`<br>
       Expected: The employment field of contact named 'Staff1' is edited to `full-time`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time}`<br>
+   5. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time }`<br>
       Expected: The salary and employment field of contact named 'Staff1' is edited to `40/hr` and `part-time` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Supplier` contact
@@ -1170,16 +1167,16 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-supplier ; name : Supplier1 ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag
       ```
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { phone : 9994555}`<br>
+   2. Test case: `/edit-supplier ; name : Supplier1 ; field : { phone : 9994555 }`<br>
       Expected: The phone field of contact named 'Supplier1' is edited to `9994555`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : dogdiapers}`<br>
+   3. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : dogdiapers }`<br>
       Expected: The product field of contact named 'Supplier1' is edited to `dogdiapers`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { price : $10/bag}`<br>
+   4. Test case: `/edit-supplier ; name : Supplier1 ; field : { price : $10/bag }`<br>
       Expected: The price field of contact named 'Supplier1' is edited to `$10/bag`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag}`<br>
+   5. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag }`<br>
       Expected: The product and price field of contact named 'Supplier1' is edited to `kibbles` and `$75/bag` respectively. Details of the edited contact shown in the status message.
 
 1. Edting a `Maintainer` contact
@@ -1188,16 +1185,16 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-maintainer ; name : Maintainer1  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr
       ```
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { phone : 84444555}`<br>
+   2. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { phone : 84444555 }`<br>
       Expected: The phone field of contact named 'Maintainer1' is edited to `84444555`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>
+   3. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr }`<br>
       Expected: The commission field of contact named 'Maintainer1' is edited to `$10/hr`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { skill : cleaner}`<br>
+   4. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { skill : cleaner }`<br>
       Expected: The skill field of contact named 'Maintainer1' is edited to `cleaner`. Details of the edited contact shown in the status message.
 
-   1. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $12/hr ; skill : janitor}`<br>
+   5. Test case: `/edit-maintainer ; name : Maintainer1 ; field : { commission : $12/hr ; skill : janitor }`<br>
       Expected: The commission and skill field of contact named 'Maintainer1' is edited to `$12/hr` and `janitor` respectively. Details of the edited contact shown in the status message.
 
 ### Deleting a contact
@@ -1209,17 +1206,46 @@ testers are expected to do more *exploratory* testing.
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
 
-   1. Test case: `/delete ; name : Poochie`<br>
+   2. Test case: `/delete ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is deleted from the list. Contact type and name of the deleted contact is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `/delete ; name : Moochie`<br>
+   3. Test case: `/delete ; name : Moochie`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `/delete`<br>
+   4. Test case: `/delete`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `/delete`, `delete ; name :`<br>
+   5. Other incorrect delete commands to try: `/delete`, `delete ; name :`<br>
       Expected: Similar to previous.
+
+1. _{ more test cases …​ }_
+
+### Pinning a person
+
+1. Pinning a person while all persons are being shown
+
+   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+
+   2. Test case: `/pin ; name : Poochie`<br>
+      Expected: Contact named **_Poochie_** is pinned at the top of the contact list.
+
+1. _{ more test cases …​ }_
+
+### Unpinning a person
+
+1. Unpinning a person while all persons are being shown
+
+   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /pin ; name : Poochie
+      ```
+
+   2. Test case: `/unpin ; name : Poochie`<br>
+      Expected: Contact named **_Poochie_** is no longer pinned at the top of the contact list.
 
 1. _{ more test cases …​ }_
 
@@ -1232,13 +1258,13 @@ testers are expected to do more *exploratory* testing.
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
 
-   1. Test case: `/rate ; name : Poochie ; rating : 5`<br>
+   2. Test case: `/rate ; name : Poochie ; rating : 5`<br>
       Expected: Contact named **_Poochie_** is updated with a rating of 5. Contact type and name of the rated contact is shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `/rate ; name : Moochie ; rating : 5`<br>
+   3. Test case: `/rate ; name : Moochie ; rating : 5`<br>
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `/rate ; name : Poochie ; rating : 6`<br>
+   4. Test case: `/rate ; name : Poochie ; rating : 6`<br>
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
 
 1. _{ more test cases …​ }_
@@ -1251,11 +1277,11 @@ testers are expected to do more *exploratory* testing.
      ```
      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
      ```
-  1. Test case: `/note ; name : Poochie ; note : get kibble`<br>
+  2. Test case: `/note ; name : Poochie ; note : get kibble`<br>
      Expected: Woof! Added note to Pooch Contact Other Contact Janna successfully! 🐶
-  2. Test case: `/note ; name : ; note : get kibble`<br>
+  3. Test case: `/note ; name : ; note : get kibble`<br>
      Expected : Names should only contain alphanumeric characters and spaces, and it should not be blank
-  3. Test case: `/note ; name : Poochie ; note : `<br>
+  4. Test case: `/note ; name : Poochie ; note : `<br>
      Expected : Failed to add note to Pooch Contact - Note is not specified 🐾
 
 
@@ -1265,7 +1291,7 @@ testers are expected to do more *exploratory* testing.
      ```
      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
      ```
-  1. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
+  2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
 
 

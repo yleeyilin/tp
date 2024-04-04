@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
@@ -12,8 +13,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddMaintainerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -32,13 +36,16 @@ import seedu.address.model.tag.Tag;
  */
 public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> {
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMaintainerCommand parse(String args) throws ParseException {
+        logger.log(Level.INFO, "Going to start parsing for add maintainer command.");
         ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+                FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
@@ -47,6 +54,7 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
                         PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
         ParserUtil.verifyNoMissingField(argMultimap, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+                FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SKILL, PREFIX_COMMISSION);
 
         if (!argMultimap.getPreamble().isEmpty()) {

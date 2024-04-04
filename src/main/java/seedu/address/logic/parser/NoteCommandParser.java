@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD_NOTE;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -37,10 +38,12 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         //check for unknown prefixes
         ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, "note",
+                FAILED_TO_ADD_NOTE,
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
         // check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",
+                FAILED_TO_ADD_NOTE,
                 PREFIX_NAME, PREFIX_NOTE);
 
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);

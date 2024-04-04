@@ -90,6 +90,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void updateFilteredPersonListWithCommit(Predicate<Person> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public Person findByName(Name targetName, String message) {
         throw new AssertionError("This method should not be called.");
     }
@@ -115,12 +120,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean canRedo() {
+    public boolean canRedoAddressBook() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public boolean canUndo() {
+    public boolean canUndoAddressBook() {
         throw new AssertionError("This method should not be called.");
     }
 

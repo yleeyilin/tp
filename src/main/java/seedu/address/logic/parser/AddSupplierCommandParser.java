@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,8 +13,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -31,15 +35,16 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddStaffCommand object
  */
 public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
-
+    private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddSupplierCommand parse(String args) throws ParseException {
+        logger.log(Level.INFO, "Going to start parsing for supplier command.");
         ParserUtil.verifyNoUnknownPrefix(args, AddSupplierCommand.MESSAGE_USAGE, "add-supplier",
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                FAILED_TO_ADD, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_RATING);
 
         ArgumentMultimap argMultimap =
@@ -47,7 +52,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
                         PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_RATING);
 
         ParserUtil.verifyNoMissingField(argMultimap, AddSupplierCommand.MESSAGE_USAGE, "add-supplier",
-                PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PRODUCT, PREFIX_PRICE);
+                FAILED_TO_ADD, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PRODUCT, PREFIX_PRICE);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE));

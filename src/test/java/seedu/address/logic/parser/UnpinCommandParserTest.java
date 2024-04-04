@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_UNPIN;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -21,7 +22,7 @@ public class UnpinCommandParserTest {
         // no field specified
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
-        String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
+        String exception = FAILED_TO_UNPIN + String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
         String expectedMessage = exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, UnpinCommand.MESSAGE_USAGE);
         String userInput = UnpinCommand.COMMAND_WORD + " "
