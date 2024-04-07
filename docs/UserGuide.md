@@ -89,7 +89,7 @@ Case-Insensitive | The casing of the alphabetic characters does not matter (e.g.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` installed in your Computer.
 
 1. Download the latest `poochplanner.jar` from [here](https://github.com/AY2324S2-CS2103T-W10-2/tp/releases).
 
@@ -206,12 +206,12 @@ Edits a **person / staff / supplier / maintainer** contact so that you can consi
 
 The table below summarises the edit command, format and examples for each contact type.
 
-| Edits a ...    | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit-person ; name : Mochie ; field : { address : Pooch Street 31}`<br> The above command edits the **address** field of `Mochie` to `Pooch Street31`.                                                                                                                                     |
+| Edits a ...    | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                          |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit-person ; name : Mochie ; field : { address : Pooch Street 31}`<br> The above command edits the **address** field of `Mochie` to `Pooch Street 31`.                                                                                                                          |
 | **Staff**      | Format : <br>`/edit-staff ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part/full] }` <br><br> Example: <br>`/edit-staff ; name : Thomas ; field : { address : Poochie Street 25 ; employment : full-time }` <br> The above command edits the **address and employment** field of `Thomas` to `Poochie Street 25` and `full-time` respectively. |
 | **Supplier**   | Format : <br>`/edit-supplier ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price] }` <br><br> Example: <br>`/edit-supplier ; name : Supplier1 ; field : { product : kibble ; price : $75/bag}` <br>The above command edits the **product and price** field of `Supplier1` to `kibble` and `$75/bag` respectively.                                   |
-| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of `Maintainer1` to `$10/hr`.                                                                           |
+| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of `Maintainer1` to `$10/hr`.                                                                       |
 
 <br> 
 
@@ -479,7 +479,7 @@ Example: <br>
     <br>
 </div>
 
-<br> 
+<br>
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
@@ -510,7 +510,7 @@ Examples: <br>
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie ; deadline : 2020-10-10`
 
   The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`.
-  It also sets a deadline of the note to Nov 10 2020.
+  It also sets a deadline of the note to Oct 10 2020.
 
 <br> 
 
@@ -946,7 +946,7 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 | **Edit Staff**           | Format : <br>`/edit-staff ; name : [name] ; field : { target-field : [value] }`                                                                        <br> <br> Example : <br> `/edit-staff ; name : Poochie ; field : { salary : $40/hr ; employment : part-time }`                                                                         |
 | **Edit Supplier**        | Format : <br>`/edit-supplier ; name : [name] ; field : { target-field : [value] }`                                                                     <br> <br> Example : <br> `/edit-supplier ; name : Poochie ; field : { product : kibble ; price : $75/bag }`                                                                            |
 | **Edit Maintainer**      | Format : <br>`/edit-maintainer ; name : [name] ; field : { target-field : [value] }`                                                                   <br> <br> Example : <br> `/edit-maintainer ; name : Poochie ; field : { commission : $10/hr }`                                                                                         |
-| **Delete**               | Format : <br>`/delete name : [name] `                                                                                                                  <br> <br> Example : <br> `/delete ; name : Poochie`                                                                                                                                    |
+| **Delete**               | Format : <br>`/delete ; name : [name] `                                                                                                                  <br> <br> Example : <br> `/delete ; name : Poochie`                                                                                                                                  |
 | **Search**               | Format : <br>`/search ; target-field : [value]`                                                                                                        <br> <br> Example : <br> `/search ; name : Poochie`                                                                                                                                    |
 | **List**                 | Format : <br>`/list`                                                                                                                                   <br> <br> Example : <br> `/list`                                                                                                                                                       |
 | **Help**                 | Format : <br>`/help ; command : [command type]`                                                                                                        <br> <br> Example : <br> `/help ; command : delete`                                                                                                                                    |
