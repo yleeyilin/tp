@@ -36,6 +36,9 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help",
                 FAILED_TO_HELP, PREFIX_HELP);
 
+        //check for duplicate field entries
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HELP);
+
         String commandType;
 
         if (!argMultimap.isPreambleEmpty()) {

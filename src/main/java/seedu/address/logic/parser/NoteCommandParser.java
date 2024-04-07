@@ -47,6 +47,9 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 FAILED_TO_ADD_NOTE,
                 PREFIX_NAME, PREFIX_NOTE);
 
+        //check for duplicate field entries
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
+
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
         boolean isContainingNameNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
