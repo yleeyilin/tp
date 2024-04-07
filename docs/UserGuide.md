@@ -367,7 +367,7 @@ Example:
 
 * Name and Rating is a compulsory field that is **case-insensitive** but **space-sensitive**.<br>
 
-* Rating of 0 will automatically display `No rating given yet`.<br>
+* Rating of 0 is equivalent to no rating given and will not display any rating.<br>
 
 </div>
 
