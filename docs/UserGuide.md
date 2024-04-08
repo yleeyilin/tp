@@ -48,7 +48,7 @@ Sort | View your contacts in a sorted list so that you can locate your contacts 
 ## Navigating this User Guide
 This user guide is designed to help you make the most of PoochPlanner, whether you are a beginner or an experienced user.
 
-- If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
+- If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
 - If you are a new user, explore the following sections to familiarise yourself with the basics:<br>
     1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the command box and contact cards.<br>
     2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
@@ -145,9 +145,6 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 * Parameters can be in any order.<br>
   e.g. if the command specifies `address : [address] ; phone : [phone]`, `phone : [phone] ; address : [address]` is also acceptable.
 
-* All command words are case-sensitive.<br>
-  e.g. if the command word specifies `/add`, then `/ADD` is invalid.
-
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 * Commands are space-sensitive so you should take caution when entering the commands.
 </div>
@@ -232,9 +229,9 @@ The table below summarises the edit command, format and examples for each contac
 
 * Name must be present in Pooch Planner.<br>
 
-* Contact type, i.e. Person / Staff / Supplier / Maintainer, must match command used. i.e. `/edit`, `/edit-staff`, `/edit-supplier` and `/edit-maintainer` respectively.<br>
+* Contact type, i.e. Person / Staff / Supplier / Maintainer, must match command used. i.e. `/edit-person`, `/edit-staff`, `/edit-supplier` and `/edit-maintainer` respectively.<br>
 
-* The field(s) to be edited must be a valid field within their contact type, i.e. Person / Staff / Supplier / Maintainer.<br>
+* The field(s) to be edited must be a valid field (excluding name) within their contact type, i.e. Person / Staff / Supplier / Maintainer.<br>
 
 * At least one field must be provided.<br>
 

@@ -110,8 +110,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the list based on the isPinned field.
      */
     public void sortByPinnedStatus() {
-        internalList.sort(Comparator.comparing(Person::isPinned).reversed()
-                .thenComparing(p -> p.getName().toString()));
+        internalList.sort(Comparator.comparing(Person::isPinned).reversed());
     }
 
     /**
