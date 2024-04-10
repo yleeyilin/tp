@@ -209,6 +209,15 @@ The following sequence diagram models the interactions between the different com
 2. The user inputs `/edit-person ; name : Alice Tan ; field : { phone : 9990520 ; email : impooch@gmail12.com }`
 3. The contact card for `Alice Tan` is updated for the `phone` and `email` field respectively. This change should be reflected on the contact list page on PoochPlanner.
 
+**Aspect: How to implement edit command in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Create 4 different edit command for the 4 contact types (Person, Staff, Maintainer, Supplier).
+    * Pros: User friendly. Users will be less prone to error that involves trying to edit a field that does not exist for the specific contact type.
+    * Cons: Steeper learning curve for the users due to the higher number of commands.
+
+* **Alternative 2**: Combinng edit command into one edit command.
+    * Pros: Much simpler suite of features for users, which makes it easier to start using.
+    * Cons: Complex to implement due to the need to check the contact type at the point of parsing before splitting into the different separate edit commands to handle their edit separately. This will violate the abstract initial implementation of MVC as the model will have to be accessible at the parser class in order for the type checking to be done. 
 
 ### Delete feature
 
@@ -519,6 +528,15 @@ The following sequence diagram models the interactions between the different com
 2. The user inputs `/pin ; name : Alice Tan` or `unpin ; name : Alice Tan` into the CLI.
 3. The contact card for `Alice Tan` is now pinned / unpinned. This change should be reflected on the contact list page on PoochPlanner.
 
+**Aspect: How to implement pin/unpin command in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Only accept the name field, where only the last name field will be taken.
+    * Pros: User friendly. Users can easily correct the name field without deleting the previously incorrect name field entered. Since name cannot be edited, this ensures that the name will be consistent and the user do not have to check what to input everytime. 
+    * Cons: Less rigorous validation check on name as users may not intentionally enter a second name field. 
+
+* **Alternative 2**: Accept only one name field.
+    * Pros: Less prone to possible errors due to stricter validation checks on name fields.
+    * Cons: Less user friendly since users will have to put in more effort to fix their commands. 
 
 ### Undo/redo feature
 
