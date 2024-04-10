@@ -288,7 +288,7 @@ Examples: <br>
 
 * Any valid fields, such as `name`, `phone`, `address`, `email`, `salary`, `employment`, `price`, `product`, `skill`, `commission`, `tag` or `note`, can be provided.<br>
 
-* Only one field can be provided.<br>
+* Multiple fields can be provided.<br>
 
 * Query is case-insensitive but space-sensitive.<br>
 </div>
