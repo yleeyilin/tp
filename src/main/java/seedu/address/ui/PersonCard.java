@@ -87,9 +87,16 @@ public class PersonCard extends UiPart<Region> {
             pin.setText("📌    ");
             pin.setManaged(true);
         }
-        if (!"No note here".equals(person.getNote().toString())) {
-            note.setText(person.getNote().toString());
+
+        String currentNote = person.getNote().toString();
+        if (!"No note here".equals(currentNote)) {
+            note.setText(currentNote);
             note.setManaged(true);
+            // Set the preferred width of the note
+            note.setPrefWidth(currentNote.length() * 10);
+            note.setWrapText(true); // Allow text wrapping
+        } else {
+            note.setManaged(false);
         }
         email.setText(person.getEmail().value);
         person.getTags().stream()

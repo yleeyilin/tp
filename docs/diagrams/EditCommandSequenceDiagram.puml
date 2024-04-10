@@ -31,9 +31,9 @@ AddressBookParser -> EditCommandParser : parse(" ; name : Alice ; field : { phon
 activate EditCommandParser
 
 create EditPersonDescriptor
-AddressBookParser -> EditPersonDescriptor
+EditCommandParser -> EditPersonDescriptor
 activate EditPersonDescriptor
-EditPersonDescriptor -> AddressBookParser
+EditPersonDescriptor -> EditCommandParser
 deactivate EditPersonDescriptor
 
 create EditCommand
