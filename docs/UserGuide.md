@@ -293,6 +293,14 @@ Examples: <br>
 * Query is case-insensitive but space-sensitive.<br>
 </div>
 
+* For search queries regarding `salary`, `price` and `commission`:
+  * if you would like to search for exact `salary`/`price`/`commission`, you can follow this format (e.g. `$[Number]/hr`, `$[Number]/bag`). Only results that match the exact number will be shown. Examples:
+    * `/search ; salary : $50/hr`
+    * `/search ; price : $50/bag`
+  * If you want to search for `salaries`/`prices`/`commissions` within a specified range instead, you can follow this format `$[Query digits]` instead. In this case, query digits refer to the first few digits of a number.
+    * For instance, if you want to query for all salaries in the range `$50-59/hr`, you can key in `/search ; salary : $5`, with `$5` as the search query. This displays all staff that are paid from `$50/hr` to `$59/hr`.
+    * Note that this query also returns staff with salaries exactly `$5/hr`, from `$500/hr` to `$599/hr` as well, and even in larger ranges too. This same query type also applies to `price` and `commission`.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
 * You can use `/list` to see the full list again after searching for a contact! <br>
