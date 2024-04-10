@@ -118,7 +118,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-        commitAddressBook();
     }
 
     @Override
@@ -142,12 +141,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean canUndo() {
+    public boolean canUndoAddressBook() {
         return addressBook.canUndo();
     }
 
     @Override
-    public boolean canRedo() {
+    public boolean canRedoAddressBook() {
         return addressBook.canRedo();
     }
 
@@ -166,6 +165,13 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredPersonListWithCommit(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
+        commitAddressBook();
     }
 
     @Override
@@ -190,6 +196,7 @@ public class ModelManager implements Model {
      */
     public void updatePinnedPersonList() {
         addressBook.updatePinnedList();
+        commitAddressBook();
     }
 
     /**
@@ -197,6 +204,7 @@ public class ModelManager implements Model {
      */
     public void updateSortedPersonList(Prefix prefix) {
         addressBook.updateSortedList(prefix);
+        commitAddressBook();
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_HELP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
 
 import java.util.logging.Level;
@@ -27,11 +28,16 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         assert (args != null) : "argument to pass for help command is null";
         logger.log(Level.INFO, "Going to start parsing for help command.");
 
-        ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help", PREFIX_HELP);
+        ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help",
+                FAILED_TO_HELP, PREFIX_HELP);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
 
-        ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help", PREFIX_HELP);
+        ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help",
+                FAILED_TO_HELP, PREFIX_HELP);
+
+        //check for duplicate field entries
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HELP);
 
         String commandType;
 
@@ -40,7 +46,12 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             throw new ParseException(String.format(HelpMessages.MESSAGE_HELP_MISSING_COMMAND,
                     HelpCommand.MESSAGE_USAGE));
         }
-        commandType = ParserUtil.parseHelp(argMultimap.getValue(PREFIX_HELP).get());
+
+        try {
+            commandType = ParserUtil.parseHelp(argMultimap.getValue(PREFIX_HELP).orElseThrow());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(HelpMessages.MESSAGE_HELP_INVALID_PARAMETERS, pe.getMessage()));
+        }
         return new HelpCommand(commandType);
     }
 

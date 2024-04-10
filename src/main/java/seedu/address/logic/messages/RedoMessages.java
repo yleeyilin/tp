@@ -5,6 +5,5 @@ package seedu.address.logic.messages;
  */
 public class RedoMessages extends Messages {
     public static final String MESSAGE_REDO_SUCCESS = "Woof! Redo successfully! \uD83D\uDC36";
-    public static final String MESSAGE_REDO_FAIL = "Woof! There is no more future state to redo!";
-
+    public static final String MESSAGE_REDO_FAIL = "Woof! There is no more future version to redo!";
 }

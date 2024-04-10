@@ -27,10 +27,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SKILL_BOB;
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_FIELD_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_FIELD_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -46,6 +47,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddMaintainerCommand;
+import seedu.address.logic.messages.AddMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Commission;
@@ -57,7 +59,7 @@ import seedu.address.model.person.Skill;
 import seedu.address.testutil.MaintainerBuilder;
 
 public class AddMaintainerCommandParserTest {
-    private AddMaintainerCommandParser parser = new AddMaintainerCommandParser();
+    private final AddMaintainerCommandParser parser = new AddMaintainerCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -148,7 +150,7 @@ public class AddMaintainerCommandParserTest {
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
         String exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        String expectedMessage = exception + "\n"
+        String expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
 
         // missing name prefix
@@ -160,7 +162,7 @@ public class AddMaintainerCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("phone");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
@@ -170,7 +172,7 @@ public class AddMaintainerCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("email");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
@@ -180,7 +182,7 @@ public class AddMaintainerCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("address");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                         + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
@@ -190,7 +192,7 @@ public class AddMaintainerCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("skill");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_SKILL_BOB + COMMISSION_DESC_BOB,
@@ -200,7 +202,7 @@ public class AddMaintainerCommandParserTest {
         undetectedFields = new ArrayList<>();
         undetectedFields.add("commission");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + VALID_COMMISSION_BOB,
@@ -215,7 +217,7 @@ public class AddMaintainerCommandParserTest {
         undetectedFields.add("skill");
         undetectedFields.add("commission");
         exception = String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);
-        expectedMessage = exception + "\n"
+        expectedMessage = FAILED_TO_ADD + exception + "\n"
                 + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                         + VALID_SKILL_BOB + VALID_COMMISSION_BOB,
@@ -227,32 +229,32 @@ public class AddMaintainerCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
-                Name.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Name.MESSAGE_CONSTRAINTS));
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
-                Phone.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Phone.MESSAGE_CONSTRAINTS));
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
-                Email.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Email.MESSAGE_CONSTRAINTS));
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                         + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
-                Address.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Address.MESSAGE_CONSTRAINTS));
 
         // invalid skill
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + INVALID_SKILL_DESC + COMMISSION_DESC_BOB,
-                Skill.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Skill.MESSAGE_CONSTRAINTS));
 
         // invalid commission
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + INVALID_COMMISSION_DESC,
-                Commission.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Commission.MESSAGE_CONSTRAINTS));
 
         /*
          invalid tag
@@ -263,7 +265,7 @@ public class AddMaintainerCommandParserTest {
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                         + INVALID_SKILL_DESC + INVALID_COMMISSION_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+                String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Name.MESSAGE_CONSTRAINTS));
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -273,7 +275,7 @@ public class AddMaintainerCommandParserTest {
 
     @Test
     public void parse_invalidField_failure() {
-        String exception = String.format(MESSAGE_INVALID_FIELD_FORMAT, "[salary]");
+        String exception = FAILED_TO_ADD + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[salary]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + SALARY_DESC_BOB + PHONE_DESC_BOB
                         + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + COMMISSION_DESC_BOB + SKILL_DESC_BOB,

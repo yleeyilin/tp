@@ -16,10 +16,10 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "/help";
     public static final String MESSAGE_USAGE = "Shows program usage instructions.\n"
             + "Example: /help ; command : exit";
-    public static final String MESSAGE_CONSTRAINTS = "Only accepts general, add, delete, edit,"
+    public static final String MESSAGE_CONSTRAINTS = "PoochPlanner only accepts general, add, delete, edit,"
             + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort as"
             + " valid command type inputs.";
-    private String commandType;
+    private final String commandType;
     private final Logger logger = LogsCenter.getLogger(getClass());
 
 

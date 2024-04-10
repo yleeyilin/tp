@@ -17,12 +17,27 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command. Use command `/help` to see command list";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_FIELD_FORMAT = "Invalid field detected : %1$s";
-    public static final String MESSAGE_MISSING_FIELD_FORMAT = "Missing field detected : %1$s";
+    public static final String MESSAGE_INVALID_FIELD_FORMAT = "Invalid field detected : %1$s \uD83D\uDC3E";
+    public static final String MESSAGE_UNKNOWN_FIELD_FORMAT = "Unknown field detected : %1$s \uD83D\uDC3E";
+    public static final String MESSAGE_MISSING_FIELD_FORMAT = "Missing field detected : %1$s \uD83D\uDC3E";
+    public static final String FAILED_TO_ADD = "Failed to add Pooch Contact - \n";
+    public static final String FAILED_TO_EDIT = "Failed to edit Pooch Contact - \n";
+    public static final String FAILED_TO_EDIT_WITH_NAME = "Failed to edit Pooch Contact - \n"
+            + "Editing Pooch Contact Name is not allowed.\n";
+    public static final String FAILED_TO_ADD_NOTE = "Failed to add note to Pooch Contact - \n";
+    public static final String FAILED_TO_SORT = "Failed to sort Pooch Contact - \n";
+    public static final String FAILED_TO_PIN = "Failed to pin Pooch Contact - \n";
+    public static final String FAILED_TO_UNPIN = "Failed to unpin Pooch Contact - \n";
+    public static final String FAILED_TO_RATE = "Failed to rate Pooch Contact - \n";
+    public static final String FAILED_TO_HELP = "Failed to display help window - \n";
+    public static final String FAILED_TO_SEARCH = "Failed to search Pooch Contact - \n";
+    public static final String FAILED_TO_DELETE = "Failed to delete Pooch Contact - \n";
     public static final String MESSAGE_COMMAND_FORMAT = "Follow this command format! \n%1$s";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EMPTY_FIELDS =
+            "No values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EXTRA_FIELDS =
             "%1$s does not contain the following field(s): %2$s";
 
@@ -71,5 +86,17 @@ public class Messages {
         }
         builder.append(person.getName());
         return builder.toString();
+    }
+
+    /**
+     * Returns an error message indicating the prefixes with no values.
+     */
+    public static String getErrorMessageForEmptyPrefixes(Prefix... emptyPrefixes) {
+        assert emptyPrefixes.length > 0;
+
+        Set<String> emptyFields =
+                Stream.of(emptyPrefixes).map(Prefix::getTrimmedPrefix).collect(Collectors.toSet());
+
+        return MESSAGE_EMPTY_FIELDS + "[" + String.join(", ", emptyFields) + "]";
     }
 }

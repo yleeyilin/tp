@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.Messages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -34,19 +35,23 @@ public class EditCommandParser implements Parser<EditCommand> {
         Name name;
         String fieldArgs;
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_FIELD);
+        String parsedArgs = ParserUtil.parseArg(args);
 
-        ParserUtil.verifyNoUnknownPrefix(args, EditCommand.MESSAGE_USAGE, "edit",
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
+
+        ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditCommand.MESSAGE_USAGE, "edit",
+                FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
         if (hasDuplicateNamePrefix) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_NAME,
+            throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
                     EditCommand.MESSAGE_USAGE));
         }
 
         // check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, EditCommand.MESSAGE_USAGE, "edit",
+                FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD);
 
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);

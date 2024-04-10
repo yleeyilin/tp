@@ -11,7 +11,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s Note deadline is today or after today.
  */
 public class RemindPredicate implements Predicate<Person> {
-
     @Override
     public boolean test(Person person) {
         Note currNote = person.getNote();
@@ -20,10 +19,9 @@ public class RemindPredicate implements Predicate<Person> {
         }
         String[] noteAndDate = currNote.toString().split(" by: ");
 
-
         try {
 
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
 
             LocalDate convertedDate = LocalDate.parse(noteAndDate[1], inputFormat);
 

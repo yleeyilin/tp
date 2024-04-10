@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.Messages.FAILED_TO_ADD_NOTE;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -11,6 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.messages.NoteMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -37,11 +39,16 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         //check for unknown prefixes
         ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, "note",
+                FAILED_TO_ADD_NOTE,
                 PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
         // check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",
+                FAILED_TO_ADD_NOTE,
                 PREFIX_NAME, PREFIX_NOTE);
+
+        //check for duplicate field entries
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
         boolean isContainingNameNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE);
@@ -52,14 +59,18 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
-        name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        if (!isContainingDeadlinePrefix) {
-            note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
-        } else {
-            note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
-                    argMultimap.getValue(PREFIX_DEADLINE).get());
+        try {
+            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            if (!isContainingDeadlinePrefix) {
+                note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+            } else {
+                note = ParserUtil.parseDeadlineNote(argMultimap.getValue(PREFIX_NOTE).get(),
+                        argMultimap.getValue(PREFIX_DEADLINE).get());
+            }
+            return new NoteCommand(name, note);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(NoteMessages.MESSAGE_NOTE_INVALID_PARAMETERS, pe.getMessage()));
         }
-        return new NoteCommand(name, note);
     }
 
     //method repeated, need to abstract somewhere

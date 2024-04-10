@@ -92,6 +92,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate} with commit.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonListWithCommit(Predicate<Person> predicate);
+
+    /**
      * Update the person list to display pinned contacts first.
      */
     void updatePinnedPersonList();
@@ -165,11 +171,11 @@ public interface Model {
      * Returns a boolean value to indicate whether undo command is possible to be carried out.
      * @return True if possible to undo, else False.
      */
-    boolean canUndo();
+    boolean canUndoAddressBook();
 
     /**
      * Returns a boolean value to indicate whether redo command is possible to be carried out.
      * @return True if possible to redo, else False.
      */
-    boolean canRedo();
+    boolean canRedoAddressBook();
 }
