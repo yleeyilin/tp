@@ -149,6 +149,143 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+#### Overview
+
+The add-XYZ command enables users to add a new contact to PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `add-person` command.
+
+![Add Sequence Diagram](images/AddCommandSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`, `staff`, `suppliers`, `maintainers`. 
+</div>
+
+#### Details
+
+1. The user inputs the command to add a new contact.
+2. `AddCommandParser` parses the user input.
+3. An `AddCommand` object is created.
+4. The `AddCommandParser` returns the `AddCommand` object.
+5. The `LogicManager` invokes the `execute` method of `AddCommand`.
+6. The `execute` method of `AddCommand` invokes the `addPerson` method in `Model` property to create new contact with the new `Person` object.
+7. The `execute` method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Add` command.
+
+#### Example Usage
+1. The user launches the application.
+2. The user inputs `/add-person ; name : John Doe ; phone : 98765432 ; email : johnd@example.com ; address : 311, Clementi Ave 2, #02-25 `
+3. The contact card for `John Doe` is created. This change should be reflected on the contact list page on PoochPlanner.
+
+### Edit feature
+
+#### Overview
+
+The edit-XYZ command enables users to modify a specified field of an existing contact from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `edit-XYZ` command.
+
+![Edit Sequence Diagram](images/EditCommandSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`, `staff`, `suppliers`, `maintainers`. 
+</div>
+
+#### Details
+
+1. The user inputs the command to edit a specified contact by first stating the target name of the contact they want to edit. This is followed by the respective fields and new values the user wants to modify.
+2. `EditCommandParser` parses the user input and creates an `editPersonDescriptor` object which contains the new values to be edited for the specified contact.
+3. An `EditCommand` object is created with the name of the contact to edit and the`editPersonDescriptor` object.
+4. The `EditCommandParser` returns the `EditCommand` object.
+5. The `LogicManager` invokes the `execute` method of `EditCommand`.
+6. The `execute` method of `EditCommand` finds the specified contact by `name`. The `execute` method then calls `createEditedPerson` of `EditCommand` which creates a new `Person` object that contains the updated values of the contact.
+7. The `execute` method of `EditCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object.
+8. The `execute` method of `EditCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts.
+9. The `execute` method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Edit` command.
+
+#### Example Usage
+1. The user launches the application.
+2. The user inputs `/edit-person ; name : Alice Tan ; field : { phone : 9990520 ; email : impooch@gmail12.com }`
+3. The contact card for `Alice Tan` is updated for the `phone` and `email` field respectively. This change should be reflected on the contact list page on PoochPlanner.
+
+
+### Delete feature
+
+#### Overview
+
+The delete command enables users to delete a specific contact from PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the
+execution of the `delete` command.
+
+<img src="images/DeleteSequenceDiagram.png" width="900" />
+
+#### Details
+
+**1**: The user inputs the command to delete a contact by stating the target name of the contact they want to delete.
+
+**2**: `CommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their
+respective values as an `ArgumentMultimap` object.
+**3**: A `DeleteCommand` object is created with the name of the contact to delete.
+
+**4**: The `DeleteCommandParser` returns the `DeleteCommand` object.
+
+**5**: The `LogicManager` invokes the `execute` method of `DeleteCommand`.
+
+**6**: The `execute` method of `DeleteCommand` invokes the `deletePerson` method in the 'Model` property to remove the
+specified contact from the `addressBook` property in `ModelManager`.
+
+**7**: The `execute` method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the
+completion of the `Delete` command.
+
+#### Example Usage
+
+**1**: The user launches the application.
+
+**2**: The user inputs `/delete ; name : Poochie` into the CLI.
+
+**3**: The contact with the name ‘Poochie’ will be deleted from PoochPlanner.
+
+
+### Help feature
+
+The help feature receive help for all commands.
+
+#### Overview
+
+The help command enables users to view help for all.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `help` command.
+
+<img src="images/HelpCommandSequenceDiagram.png" width="900" />
+
+#### Details
+
+1. The user inputs the command to view help for a specific command. This is followed by the command field specifying the command they want to view help for.
+2. `HelpCommandParser` invokes the `parse` method which parses the user input by storing the prefix of its respective values as an `ArgumentMultimap` object.
+   A `HelpCommand` object is created with the command type specified in the command field.
+3. The `HelpCommandParser` returns the `HelpCommand` object.
+4. `LogicManager` invokes the `execute` method of `HelpCommand`.
+5. The `execute` method of `HelpCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Help` command.
+
+#### Example Usage
+
+1. The user launches the application.
+2. The user inputs `/help ; command : delete` into the CLI.
+3. Help for the delete command will be displayed.
+
+**Aspect: How to display different help command windows:**
+
+* **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Difference
+  in messages is created by displaying different strings.
+  * Pros: Code is made much more concise.
+  * Cons: Lengthy if-else statements are required to displayed the correct string.
+
+* **Alternative 2**: Create a different window for each type of command.
+  * Pros: All details relating to a single command is within its own page. Can be perceived as neater.
+  * Cons: Highly repetitive code. Even small mistakes made, would have to be fixed in over 10 windows.
+
 ### Search feature
 
 #### Overview
@@ -279,81 +416,6 @@ completion of the `Rate` command.
 
 **3**: The contact with the name `Poochie` is rated with rating 5.
 
-### Delete feature
-
-#### Overview
-
-The delete command enables users to delete a specific contact from PoochPlanner.
-
-The following sequence diagram models the interactions between the different components of PoochPlanner for the
-execution of the `delete` command.
-
-<img src="images/DeleteSequenceDiagram.png" width="900" />
-
-#### Details
-
-**1**: The user inputs the command to delete a contact by stating the target name of the contact they want to delete.
-
-**2**: `CommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their
-respective values as an `ArgumentMultimap` object.
-**3**: A `DeleteCommand` object is created with the name of the contact to delete.
-
-**4**: The `DeleteCommandParser` returns the `DeleteCommand` object.
-
-**5**: The `LogicManager` invokes the `execute` method of `DeleteCommand`.
-
-**6**: The `execute` method of `DeleteCommand` invokes the `deletePerson` method in the 'Model` property to remove the
-specified contact from the `addressBook` property in `ModelManager`.
-
-**7**: The `execute` method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the
-completion of the `Delete` command.
-
-#### Example Usage
-
-**1**: The user launches the application.
-
-**2**: The user inputs `/delete ; name : Poochie` into the CLI.
-
-**3**: The contact with the name ‘Poochie’ will be deleted from PoochPlanner.
-
-
-### Help feature
-
-The help feature receive help for all commands.
-
-#### Overview
-
-The help command enables users to view help for all.
-
-The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `help` command.
-
-<img src="images/HelpCommandSequenceDiagram.png" width="900" />
-
-#### Details
-
-1. The user inputs the command to view help for a specific command. This is followed by the command field specifying the command they want to view help for.
-2. `HelpCommandParser` invokes the `parse` method which parses the user input by storing the prefix of its respective values as an `ArgumentMultimap` object.
-   A `HelpCommand` object is created with the command type specified in the command field. 
-3. The `HelpCommandParser` returns the `HelpCommand` object.
-4. `LogicManager` invokes the `execute` method of `HelpCommand`. 
-5. The `execute` method of `HelpCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Help` command.
-
-#### Example Usage
-
-1. The user launches the application.
-2. The user inputs `/help ; command : delete` into the CLI.
-3. Help for the delete command will be displayed.
-
-**Aspect: How to display different help command windows:**
-
-* **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Difference
- in messages is created by displaying different strings.
-    * Pros: Code is made much more concise.
-    * Cons: Lengthy if-else statements are required to displayed the correct string.
-
-* **Alternative 2**: Create a different window for each type of command.
-    * Pros: All details relating to a single command is within its own page. Can be perceived as neater.
-    * Cons: Highly repetitive code. Even small mistakes made, would have to be fixed in over 10 windows.
 
 ### Remind feature
 
@@ -420,6 +482,42 @@ The following sequence diagram models the interactions between the different com
 1. The user launches the application.
 2. The user inputs `/list` into the CLI.
 3. All contacts in PoochPlanner are displayed.
+
+### Pin / Unpin feature
+
+#### Overview
+
+The `pin`/`unpin` command enables users to pin/unpin any existing contacts in PoochPlanner.
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `pin` command.
+
+![Pin Sequence Diagram](images/PinCommandSequenceDiagram.png)
+
+The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `unpin` command.
+
+![Unpin Sequence Diagram](images/UnpinCommandSequenceDiagram.png)
+
+<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
+**Note:** The implementation for person, staff, suppliers, maintainers are the same. Pin and Unpin are also implemented similarly as seen in the sequence diagrams. 
+</div>
+
+#### Details
+
+1. The user inputs the command to pin/unpin a specified contact by stating the target name of the contact they want to pin/unpin.
+2. `PinCommandParser`/`UnpinCommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their respective values as an `ArgumentMultimap` object. 
+3. A `PinCommand`/`UnpinCommand` object is created with the name of the contact to pin/unpin.
+4. The `PinCommandParser`/`UnpinCommandParser` returns the `PinCommand`/`UnpinCommand` object.
+5. The `LogicManager` invokes the `execute` method of `PinCommand`/`UnpinCommand`.
+6. The `execute` method of `PinCommand`/`UnpinCommand` finds the specified contact by `name`. The `updateToPinned`/`updateToUnpinned` method of `Person` which creates a new `Person` object that contains the updated pin boolean of the contact.
+7. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object. 
+8. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `updatePinnedPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
+9. The `execute` method of `PinCommand`/`UnpinCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Pin`/`Unpin` command.
+
+
+#### Example Usage
+1. The user launches the application.
+2. The user inputs `/pin ; name : Alice Tan` or `unpin ; name : Alice Tan` into the CLI.
+3. The contact card for `Alice Tan` is now pinned / unpinned. This change should be reflected on the contact list page on PoochPlanner.
 
 
 ### Undo/redo feature
@@ -498,104 +596,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
-
-### Add feature
-
-#### Overview
-
-The add-XYZ command enables users to add a new contact to PoochPlanner.
-
-The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `add-person` command.
-
-![Add Sequence Diagram](images/AddCommandSequenceDiagram.png)
-
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`, `staff`, `suppliers`, `maintainers`. 
-</div>
-
-#### Details
-
-1. The user inputs the command to add a new contact.
-2. `AddCommandParser` parses the user input.
-3. An `AddCommand` object is created.
-4. The `AddCommandParser` returns the `AddCommand` object.
-5. The `LogicManager` invokes the `execute` method of `AddCommand`.
-6. The `execute` method of `AddCommand` invokes the `addPerson` method in `Model` property to create new contact with the new `Person` object.
-7. The `execute` method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Add` command.
-
-#### Example Usage
-1. The user launches the application.
-2. The user inputs `/add-person ; name : John Doe ; phone : 98765432 ; email : johnd@example.com ; address : 311, Clementi Ave 2, #02-25 `
-3. The contact card for `John Doe` is created. This change should be reflected on the contact list page on PoochPlanner.
-
-### Edit feature
-
-#### Overview
-
-The edit-XYZ command enables users to modify a specified field of an existing contact from PoochPlanner.
-
-The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `edit-XYZ` command.
-
-![Edit Sequence Diagram](images/EditCommandSequenceDiagram.png)
-
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`, `staff`, `suppliers`, `maintainers`. 
-</div>
-
-#### Details
-
-1. The user inputs the command to edit a specified contact by first stating the target name of the contact they want to edit. This is followed by the respective fields and new values the user wants to modify. 
-2. `EditCommandParser` parses the user input and creates an `editPersonDescriptor` object which contains the new values to be edited for the specified contact.
-3. An `EditCommand` object is created with the name of the contact to edit and the`editPersonDescriptor` object. 
-4. The `EditCommandParser` returns the `EditCommand` object. 
-5. The `LogicManager` invokes the `execute` method of `EditCommand`.
-6. The `execute` method of `EditCommand` finds the specified contact by `name`. The `execute` method then calls `createEditedPerson` of `EditCommand` which creates a new `Person` object that contains the updated values of the contact.
-7. The `execute` method of `EditCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object. 
-8. The `execute` method of `EditCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
-9. The `execute` method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Edit` command.
-
-#### Example Usage
-1. The user launches the application. 
-2. The user inputs `/edit-person ; name : Alice Tan ; field : { phone : 9990520 ; email : impooch@gmail12.com }`
-3. The contact card for `Alice Tan` is updated for the `phone` and `email` field respectively. This change should be reflected on the contact list page on PoochPlanner.
-
-
-### Pin / Unpin feature
-
-#### Overview
-
-The `pin`/`unpin` command enables users to pin/unpin any existing contacts in PoochPlanner.
-
-The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `pin` command.
-
-![Pin Sequence Diagram](images/PinCommandSequenceDiagram.png)
-
-The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `unpin` command.
-
-![Unpin Sequence Diagram](images/UnpinCommandSequenceDiagram.png)
-
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-**Note:** The implementation for person, staff, suppliers, maintainers are the same. Pin and Unpin are also implemented similarly as seen in the sequence diagrams. 
-</div>
-
-#### Details
-
-1. The user inputs the command to pin/unpin a specified contact by stating the target name of the contact they want to pin/unpin.
-2. `PinCommandParser`/`UnpinCommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their respective values as an `ArgumentMultimap` object. 
-3. A `PinCommand`/`UnpinCommand` object is created with the name of the contact to pin/unpin.
-4. The `PinCommandParser`/`UnpinCommandParser` returns the `PinCommand`/`UnpinCommand` object.
-5. The `LogicManager` invokes the `execute` method of `PinCommand`/`UnpinCommand`.
-6. The `execute` method of `PinCommand`/`UnpinCommand` finds the specified contact by `name`. The `updateToPinned`/`updateToUnpinned` method of `Person` which creates a new `Person` object that contains the updated pin boolean of the contact.
-7. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `setPerson` method in `Model` property to replace the specified contact with the new `Person` object. 
-8. The `execute` method of `PinCommand`/`UnpinCommand` invokes the `updatePinnedPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
-9. The `execute` method of `PinCommand`/`UnpinCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Pin`/`Unpin` command.
-
-
-#### Example Usage
-1. The user launches the application.
-2. The user inputs `/pin ; name : Alice Tan` or `unpin ; name : Alice Tan` into the CLI.
-3. The contact card for `Alice Tan` is now pinned / unpinned. This change should be reflected on the contact list page on PoochPlanner.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
