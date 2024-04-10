@@ -15,7 +15,8 @@ import seedu.address.model.person.Supplier;
  */
 public class Messages {
 
-    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command. Use command `/help` to see command list";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command. \nPlease refer to the following URL for the User Guide to obtain further assistance and information.\n"
+            + "https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_FIELD_FORMAT = "Invalid field detected : %1$s \uD83D\uDC3E";
     public static final String MESSAGE_UNKNOWN_FIELD_FORMAT = "Unknown field detected : %1$s \uD83D\uDC3E";
