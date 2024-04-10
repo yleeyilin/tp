@@ -16,18 +16,15 @@ import seedu.address.model.person.RemindPredicate;
  */
 public class RemindCommand extends Command {
     public static final String COMMAND_WORD = "/remind";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all persons names"
-            + " with notes that have deadlines from"
-            + "the current day onwards.\n"
-            + "Example: " + COMMAND_WORD;
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @Override
     public CommandResult execute(Model model) {
         logger.info("started executing the remind command");
         requireNonNull(model);
+
         model.updateFilteredPersonList(new RemindPredicate());
+
         return new CommandResult(
                 String.format(RemindMessages.MESSAGE_REMIND_PERSON_SUCCESS, model.getFilteredPersonList().size()));
     }

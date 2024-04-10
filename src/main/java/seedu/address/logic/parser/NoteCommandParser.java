@@ -26,36 +26,28 @@ public class NoteCommandParser implements Parser<NoteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the NoteCommand
      * and returns a NoteCommand object for execution. Parameter args cannot be null.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public NoteCommand parse(String args) throws ParseException {
         assert (args != null) : "argument to pass for note command is null";
         logger.log(Level.INFO, "Going to start parsing for note command.");
-
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         Name name;
         Note note;
 
-        //check for unknown prefixes
         ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, "note",
-                FAILED_TO_ADD_NOTE,
-                PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
-
-        // check for missing fields
+                FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",
-                FAILED_TO_ADD_NOTE,
-                PREFIX_NAME, PREFIX_NOTE);
+                FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE);
 
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
-        boolean isContainingNameNotePrefix = arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NOTE);
+        boolean isContainingNameNotePrefix = isNameNotePrefixPresent(argMultimap);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
-
         if (!isContainingNameNotePrefix || !isPreambleEmpty) {
             logger.log(Level.WARNING, "Parsing error while parsing for note command.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
-
         try {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             if (!isContainingDeadlinePrefix) {
@@ -70,13 +62,13 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         }
     }
 
-    //method repeated, need to abstract somewhere
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Returns true if name and note prefixes are present in the argumentMultimap
+     *
+     * @param argumentMultimap ArgumentMultimap containing all prefixes and values.
+     * @return True if name and note prefix are present, false otherwise.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean isNameNotePrefixPresent(ArgumentMultimap argumentMultimap) {
+        return Stream.of(PREFIX_NAME, PREFIX_NOTE).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }
