@@ -27,7 +27,6 @@ public class Person {
     private final Note note;
     private final Rating rating;
     private Pin pin;
-    private boolean hasDeadlineNote;
 
     /**
      * Every field must be present and not null.
