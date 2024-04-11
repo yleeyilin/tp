@@ -19,7 +19,7 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly because a user may have many contacts and the app should provide a convenient way for the user to retrieve frequent contacts.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required handling the versioned address book and proper storage in the json file.
 
-* **New Feature : Pin**: Added the ability to unpin contacts. (Pull requests [\#128](https://github.com/AY2324S2-CS2103T-W10-2/tp/pull/128))
+* **New Feature : Unpin**: Added the ability to unpin contacts. (Pull requests [\#128](https://github.com/AY2324S2-CS2103T-W10-2/tp/pull/128))
   * What it does: This feature allows users to unpin pinned contacts.
   * Justification: This feature improves the product significantly because a user may want to pin a different contact as their priorities change and the app should provide a convenient way for the user to unpin contacts that are no longer as important..
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required handling the versioned address book and proper storage in the json file.
