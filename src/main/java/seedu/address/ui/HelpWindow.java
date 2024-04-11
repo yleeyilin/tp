@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a help page.
+ * Controller for all help pages for different commands.
  */
 public class HelpWindow extends UiPart<Stage> {
 
@@ -28,7 +28,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new HelpWindow with a set default message.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
@@ -67,6 +67,7 @@ public class HelpWindow extends UiPart<Stage> {
         logger.fine(loggerSuccessMsg);
         getRoot().show();
         getRoot().centerOnScreen();
+        getRoot().sizeToScene();
     }
 
     /**
@@ -84,10 +85,20 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the help window and updates the size of help window.
      */
     public void focus() {
         getRoot().requestFocus();
+        getRoot().sizeToScene();
+    }
+
+    /**
+     * Sets the help message based on command to give help for.
+     *
+     * @param message Help message based on command to give help for.
+     */
+    public void setHelpMessage(String message) {
+        helpMessage.setText(message);
     }
 
     /**

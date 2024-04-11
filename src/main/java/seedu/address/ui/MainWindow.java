@@ -37,9 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
 
-    // help windows for each command
     private HelpWindow helpWindow;
-    private HelpOtherWindow helpOtherWindow;
 
     @FXML
     private StackPane titlePlaceholder;
@@ -74,9 +72,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        // Instantiate all help windows
         helpWindow = new HelpWindow();
-        helpOtherWindow = new HelpOtherWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -152,11 +148,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleAllHelp(CommandResult commandResult) {
         String userFeedback = commandResult.getFeedbackToUser();
-
         if (!commandResult.isShowHelp()) {
             return;
         }
 
+        // to determine which command user needs help for
         Boolean isHelpGeneralCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE);
         Boolean isDeleteHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE);
         Boolean isEditHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE);
@@ -174,8 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         Boolean isSortHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE);
         Boolean isClearHelpCommand = userFeedback.equals(HelpMessages.MESSAGES_SHOWING_CLEAR_HELP_MESSAGE);
 
-
-
+        // set different help messages based on type of command to get help for
         if (isHelpGeneralCommand) {
             handleHelp();
         } else if (isDeleteHelpCommand) {
@@ -209,32 +204,33 @@ public class MainWindow extends UiPart<Stage> {
         } else if (isClearHelpCommand) {
             handleOtherHelp(HelpMessages.DISPLAYED_CLEAR_MESSAGE);
         } else {
-            // As particular command cannot be identified, display
-            // general help message.
+            // As particular command cannot be identified, display general help message.
             handleHelp();
         }
 
     }
 
     /**
-     * Opens the help delete window or focuses on it if it's already opened.
+     * Opens the help window for a specific command or focuses on it if it's already opened.
      */
     @FXML
     public void handleOtherHelp(String displayedMessage) {
-        helpOtherWindow.setHelpMessage(displayedMessage);
-        if (!helpOtherWindow.isShowing()) {
-            helpOtherWindow.show();
+        helpWindow.setHelpMessage(displayedMessage);
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
         } else {
-            helpOtherWindow.focus();
+            helpWindow.focus();
         }
     }
 
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the general help window or focuses on it if it's already opened.
      */
     @FXML
     public void handleHelp() {
+        String generalHelpMessage = "Refer to the user guide: https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";
+        helpWindow.setHelpMessage(generalHelpMessage);
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
