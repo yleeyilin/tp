@@ -7,7 +7,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.messages.SearchMessages;
+import seedu.address.logic.messages.RemindMessages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -16,10 +16,10 @@ import seedu.address.model.UserPrefs;
 public class RemindCommandTest {
 
     @Test
-    public void execute_redoSuccessful() throws Exception {
+    public void execute_remindSuccessful() throws Exception {
         Model modelManager = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
         CommandResult commandResult = new RemindCommand().execute(modelManager);
-        assertEquals(String.format(SearchMessages.MESSAGE_SEARCH_PERSON_SUCCESS,
+        assertEquals(String.format(RemindMessages.MESSAGE_REMIND_PERSON_SUCCESS,
                 modelManager.getFilteredPersonList().size()), commandResult.getFeedbackToUser());
     }
 

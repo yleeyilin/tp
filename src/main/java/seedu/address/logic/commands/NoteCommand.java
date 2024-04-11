@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -32,7 +31,7 @@ public class NoteCommand extends Command {
             + PREFIX_NOTE + "NOTE"
             + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME
-            + " Moochie"  + " " + PREFIX_NOTE + "Meet at 6pm Tuesday";
+            + " Moochie" + " " + PREFIX_NOTE + "Meet at 6pm Tuesday";
     private final Name name;
     private final Note note;
     private final Logger logger = LogsCenter.getLogger(getClass());

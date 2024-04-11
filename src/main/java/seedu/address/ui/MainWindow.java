@@ -229,7 +229,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        String generalHelpMessage = "Refer to the user guide: https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";
+        String generalHelpMessage =
+                "Refer to the user guide: https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";
         helpWindow.setHelpMessage(generalHelpMessage);
         if (!helpWindow.isShowing()) {
             helpWindow.show();
