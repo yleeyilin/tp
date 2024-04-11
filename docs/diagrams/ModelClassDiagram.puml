@@ -13,6 +13,8 @@ Class ModelManager
 Class VersionedAddressBook
 Class UserPrefs
 
+Class addressBookStateList
+Class currentStatePointer
 Class UniquePersonList
 Class Person
 Class Staff
@@ -43,6 +45,8 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" VersionedAddressBook
 VersionedAddressBook -left-|> AddressBook
+VersionedAddressBook *--> "1" addressBookStateList
+VersionedAddressBook *--> "1" currentStatePointer
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
