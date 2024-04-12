@@ -9,6 +9,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.NoteMessages;
@@ -18,27 +19,28 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a note of an existing person in the address book.
+ * Adds a note to an existing person in PoochPlanner.
  * A non-empty note must be specified.
  */
 public class NoteCommand extends Command {
     public static final String COMMAND_WORD = "/note";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds note to a contact in PoochPlanner.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME"
             + PREFIX_NOTE + "NOTE"
             + "\n"
-            + "Example: " + COMMAND_WORD + PREFIX_NAME
-            + " Moochie" + PREFIX_NOTE + "Meet at 6pm Tuesday";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME
+            + " Moochie" + " " + PREFIX_NOTE + "Meet at 6pm Tuesday";
     private final Name name;
     private final Note note;
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * @param name of the person in the filtered person list to edit the note.
-     * @param note of the person to be updated to.
+     * Constructs a NoteCommand object.
+     *
+     * @param name Name of the person in PoochPlanner to add note to.
+     * @param note Note to add to the specified person in PoochPlanner.
      */
     public NoteCommand(Name name, Note note) {
         requireAllNonNull(name, note);
@@ -50,6 +52,7 @@ public class NoteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         logger.info("started executing the note command");
         requireNonNull(model);
+
         Person personToEdit = model.findByName(name, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);
         Person editedPerson = personToEdit.updateNote(note);
         model.setPerson(personToEdit, editedPerson);
@@ -73,5 +76,13 @@ public class NoteCommand extends Command {
         NoteCommand e = (NoteCommand) other;
         return name.equals(e.name)
                 && note.equals(e.note);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("note", note)
+                .toString();
     }
 }

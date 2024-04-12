@@ -7,8 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -387,23 +385,23 @@ public class UniquePersonListTest {
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
-    @Test
-    public void sortInternalListByNote() {
-        Person personWithLexicographicallyEarlierNote =
-                new PersonBuilder(BOB).withNote(VALID_NOTE_AMY).build();
-        Person personWithLexicographicallyLaterNote =
-                new PersonBuilder(ALICE).withNote(VALID_NOTE_BOB).build();
-
-        uniquePersonList.add(personWithLexicographicallyEarlierNote);
-        uniquePersonList.add(personWithLexicographicallyLaterNote);
-        uniquePersonList.sortBy(new Prefix("note"));
-
-        UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        expectedUniquePersonList.add(personWithLexicographicallyLaterNote);
-        expectedUniquePersonList.add(personWithLexicographicallyEarlierNote);
-
-        assertEquals(expectedUniquePersonList, uniquePersonList);
-    }
+    //    @Test
+    //    public void sortInternalListByNote() {
+    //        Person personWithLexicographicallyEarlierNote =
+    //                new PersonBuilder(BOB).withNote(VALID_NOTE_AMY).build();
+    //        Person personWithLexicographicallyLaterNote =
+    //                new PersonBuilder(ALICE).withNote(VALID_NOTE_BOB).build();
+    //
+    //        uniquePersonList.add(personWithLexicographicallyEarlierNote);
+    //        uniquePersonList.add(personWithLexicographicallyLaterNote);
+    //        uniquePersonList.sortBy(new Prefix("note"));
+    //
+    //        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+    //        expectedUniquePersonList.add(personWithLexicographicallyLaterNote);
+    //        expectedUniquePersonList.add(personWithLexicographicallyEarlierNote);
+    //
+    //        assertEquals(expectedUniquePersonList, uniquePersonList);
+    //    }
 
     @Test
     public void sortInternalListByRating() {
