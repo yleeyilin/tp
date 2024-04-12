@@ -11,7 +11,6 @@ public class EditMessages extends Messages {
             + "Edit requires a field prefix. %1$s \uD83D\uDC3E";
     public static final String MESSAGE_EDIT_MISSING_NAME = "Failed to edit Pooch Contact - "
             + "Edit requires a name field. %1$s \uD83D\uDC3E";
-
     public static final String MESSAGE_EDIT_NAME = "Failed to edit Pooch Contact - "
             + "Edit detect duplicate name fields. %1$s \uD83D\uDC3E";
     public static final String MESSAGE_EDIT_INVALID_NAME = "Failed to edit Pooch Contact. %1$s \uD83D\uDC3E";
@@ -29,5 +28,4 @@ public class EditMessages extends Messages {
             + " Make sure that you are attempting to edit MAINTAINER.";
     public static final String MESSAGE_INVALID_EDIT_SUPPLIER = "Name does not exist in our address book \uD83D\uDC3E"
             + " Make sure that you are attempting to edit SUPPLIER.";
-
 }
