@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.NoteCommand;
@@ -42,9 +41,9 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE);
 
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
-        boolean isContainingNameNotePrefix = isNameNotePrefixPresent(argMultimap);
+
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
-        if (!isContainingNameNotePrefix || !isPreambleEmpty) {
+        if (!isPreambleEmpty) {
             logger.log(Level.WARNING, "Parsing error while parsing for note command.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
@@ -60,15 +59,5 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(NoteMessages.MESSAGE_NOTE_INVALID_PARAMETERS, pe.getMessage()));
         }
-    }
-
-    /**
-     * Returns true if name and note prefixes are present in the argumentMultimap
-     *
-     * @param argumentMultimap ArgumentMultimap containing all prefixes and values.
-     * @return True if name and note prefix are present, false otherwise.
-     */
-    private static boolean isNameNotePrefixPresent(ArgumentMultimap argumentMultimap) {
-        return Stream.of(PREFIX_NAME, PREFIX_NOTE).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
