@@ -35,7 +35,7 @@ public class HelpMessages extends Messages {
             "Opened help window for clear command.";
     public static final String MESSAGES_INVALID_COMMAND_TYPE = "Invalid command type given.";
     public static final String MESSAGE_HELP_MISSING_COMMAND = "Failed to give help - "
-            + "Help requires a command field. %1$s\uD83D\uDC3E";
+            + "Help requires a command type field. %1$s\uD83D\uDC3E";
     public static final String MESSAGE_HELP_INVALID_PARAMETERS = "Failed to display help window - "
             + "%1$s \uD83D\uDC3E";
 
@@ -50,14 +50,15 @@ public class HelpMessages extends Messages {
     public static final String DISPLAYED_ADD_MESSAGE = "Adds a other/maintainer/supplier/staff person."
             + "\n" + "" + "\n"
             + "Format:" + "\n"
-            + "/pooch-add ; name : [name] ; phone : [phone] ; address : [address] ; email : [email]" + "\n"
-            + "/pooch-maintainer ; name : [name] ; phone : [phone] ; address : [address] ;"
-            + " email : [email] ; skill : [skill] ; commission : [commission/hr]" + "\n"
-            + "/pooch-supplier ; name : [name] ; phone : [phone] ; address : [address] ;"
-            + " email : [email] ; product : [product] ; price : [price/(quantity)]" + "\n"
-            + "/pooch-staff ; name : [name] ; phone : [phone] ; address : [address] ;"
-            + " email : [email] ; salary : [salary/hr]  ; employment : [part/full]" + "\n"
-            + "\n" + "" + "\n"
+            + "/add-person ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ;"
+            + " skill : [skill] ; commission : [commission]" + "\n"
+            + "/add-maintainer ; name : [name] ; phone : [phone] ; address : [address] ;"
+            + " email : [email] ; skill : [skill] ; commission : [commission]" + "\n"
+            + "/add-supplier ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ;"
+            + " product : [product] ; price : [price]" + "\n"
+            + "/add-staff ; name : [name] ; phone : [phone] ; address : [address] ;"
+            + " email : [email] ; salary : [salary] ; employment : [part-time/full-time]" + "\n"
+            + "\n" + ""
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_EDIT_MESSAGE = "Edit the fields of the specified contact"
@@ -67,7 +68,7 @@ public class HelpMessages extends Messages {
             + "/edit-staff ; name : [name] ; field { [field] : [value] }" + "\n"
             + "/edit-supplier ; name : [name] ; field { [field] : [value] }" + "\n"
             + "/edit-maintainer ; name : [name] ; field { [field] : [value] }" + "\n"
-            + "\n" + "" + "\n"
+            + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
 
@@ -75,81 +76,77 @@ public class HelpMessages extends Messages {
             + " specified fields and keyword."
             + "\n" + "" + "\n"
             + "Format:" + "\n"
-            + "/search ; name : [full/partial name]" + "\n"
-            + "/search ; phone : [full/partial phone]" + "\n"
-            + "/search ; address : [full/partial address]" + "\n"
-            + "/search ; email : [full/partial email]" + "\n"
-            + "/search ; product : [full/partial product name]" + "\n"
-            + "/search ; employment : [employment]" + "\n"
-            + "\n" + "" + "\n"
+            + "/search ; target-field : [value]" + "\n"
+            + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_EXIT_MESSAGE = "Exits the program."
             + "\n" + "" + "\n"
-            + "Format:" + "/exit"
+            + "Format: " + "/exit"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_LIST_MESSAGE = "List all contacts."
             + "\n" + "" + "\n"
-            + "Format:" + "/list"
+            + "Format: " + "/list"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_NOTE_MESSAGE = "Adds a note to a contact."
             + "\n" + "" + "\n"
             + "Format:" + "\n"
-            + "/note ; name : [name] ; note : [note message]"
-            + "/note ; name : [name] ; note : [note message] ; deadline : [date]"
+            + "/note ; name : [name] ; note : [note message]" + "\n"
+            + "OR" + "\n"
+            + "/note ; name : [name] ; note : [note message] ; deadline : [deadline date]"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_PIN_MESSAGE = "Pin specified contact at the top of the planner."
             + "\n" + "" + "\n"
-            + "Format:" + "/pin ; name : [name]"
+            + "Format: " + "/pin ; name : [name]"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_UNPIN_MESSAGE = "Unpin specified contact at the top of the planner."
             + "\n" + "" + "\n"
-            + "Format:" + "/unpin ; name : [name]"
+            + "Format: " + "/unpin ; name : [name]"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_RATE_MESSAGE = "Adds a rating to a specified contact from 1-5."
             + "\n" + "" + "\n"
-            + "Format:" + "/rate ; name : [name] ; rating : [rating value from 1-5]"
+            + "Format: " + "/rate ; name : [name] ; rating : [rating value from 1-5]"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_REDO_MESSAGE = "Redoes your previous command."
             + "\n" + "" + "\n"
-            + "Format:" + "/redo"
+            + "Format: " + "/redo"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_UNDO_MESSAGE = "Undoes your previous command."
             + "\n" + "" + "\n"
-            + "Format:" + "/undo"
+            + "Format: " + "/undo"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_REMIND_MESSAGE = "Displays all contacts with note deadlines"
             + " from today onwards."
             + "\n" + "" + "\n"
-            + "Format:" + "/remind"
+            + "Format: " + "/remind"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_SORT_MESSAGE = "Sorts contacts because on specified field."
             + "\n" + "" + "\n"
-            + "Format:" + "/sort ; target-field"
+            + "Format: " + "/sort ; target-field : [target-field]"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
     public static final String DISPLAYED_CLEAR_MESSAGE = "Clear all contacts."
             + "\n" + "" + "\n"
-            + "Format:" + "/clear"
+            + "Format: " + "/clear"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 

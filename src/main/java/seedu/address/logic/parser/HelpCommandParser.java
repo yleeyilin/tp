@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.HelpCommand;
@@ -20,26 +19,23 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the HelpCommand
-     * Parameter args cannot be null.
-     * and returns a HelpCommand object for execution.
+     * and returns a HelpCommand object for execution. Parameter args cannot be null.
      * @throws ParseException if the user input does not conform the expected format
      */
     public HelpCommand parse(String args) throws ParseException {
         assert (args != null) : "argument to pass for help command is null";
-        logger.log(Level.INFO, "Going to start parsing for help command.");
+        logger.log(Level.INFO, "going to start parsing for help command.");
+        String commandType;
 
+        //check for unknown prefixes
         ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help",
                 FAILED_TO_HELP, PREFIX_HELP);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
 
+        //check for missing fields
         ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help",
                 FAILED_TO_HELP, PREFIX_HELP);
-
-        //check for duplicate field entries
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HELP);
-
-        String commandType;
 
         if (!argMultimap.isPreambleEmpty()) {
             logger.log(Level.WARNING, "Parsing error while parsing for help command.");
@@ -54,13 +50,4 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         }
         return new HelpCommand(commandType);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }
