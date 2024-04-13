@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.GEORGIAMAINTAINER;
@@ -28,11 +26,12 @@ import seedu.address.model.person.Supplier;
 
 public class NoteCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Note validNote1 = new Note("get kibble today");
+    private final Note validNote1 = new Note("get kibble today now");
     private final Note validNote2 = new Note("get bones today");
 
     @Test
     public void execute_validNoteOther_addSuccess() throws CommandException {
+        // set expected results
         Person toAddNotePerson = ALICE;
         Person expectedPerson = new Person(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
@@ -40,97 +39,89 @@ public class NoteCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedPerson);
 
+        // execute note command
         NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
-        String expectedMessage = String.format(NoteMessages.MESSAGE_ADD_NOTE_SUCCESS,
-                NoteMessages.formatPerson(expectedPerson));
-
         noteCommand.execute(model);
+
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+        assertEquals(model.findPersonByName(toAddNotePerson.getName(),
+                        NoteMessages.MESSAGE_INVALID_COMMAND_FORMAT).getNote(),
+                expectedModel.findPersonByName(toAddNotePerson.getName(),
+                        NoteMessages.MESSAGE_INVALID_COMMAND_FORMAT).getNote());
     }
+
+
 
     @Test
     public void execute_validNoteStaff_addSuccess() throws CommandException {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addPerson(GEORGIASTAFF);
-
+        Model modelStaff = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelStaff.addPerson(GEORGIASTAFF);
+        // set expected results
         Staff toAddNotePerson = GEORGIASTAFF;
         Staff expectedPerson = new Staff(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
-                toAddNotePerson.getEmail(), toAddNotePerson.getAddress(), toAddNotePerson.getNote(),
-                toAddNotePerson.getTags(), toAddNotePerson.getSalary(), toAddNotePerson.getEmployment(),
+                toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
+                validNote1, toAddNotePerson.getTags(), toAddNotePerson.getSalary(), toAddNotePerson.getEmployment(),
                 toAddNotePerson.getRating());
-        expectedPerson.setNoteContent(validNote1.toString());
-        expectedModel.addPerson(expectedPerson);
+        Model expectedModel = new ModelManager(modelStaff.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(modelStaff.getFilteredPersonList().get(7), expectedPerson);
 
+        // execute note command
         NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
+        noteCommand.execute(modelStaff);
 
-        try {
-            noteCommand.execute(model);
-        } catch (CommandException ce) {
-            fail();
-        }
-
-        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(modelStaff.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+        assertEquals(modelStaff.getFilteredPersonList().get(7).getNote(),
+                expectedModel.getFilteredPersonList().get(7).getNote());
     }
 
     @Test
     public void execute_validNoteSupplier_addSuccess() throws CommandException {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addPerson(GEORGIASUPPLIER);
-
+        Model modelSupplier = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelSupplier.addPerson(GEORGIASUPPLIER);
+        // set expected results
         Supplier toAddNotePerson = GEORGIASUPPLIER;
         Supplier expectedPerson = new Supplier(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
-                toAddNotePerson.getEmail(), toAddNotePerson.getAddress(), toAddNotePerson.getNote(),
-                toAddNotePerson.getTags(), toAddNotePerson.getProduct(), toAddNotePerson.getPrice(),
+                toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
+                validNote1, toAddNotePerson.getTags(), toAddNotePerson.getProduct(), toAddNotePerson.getPrice(),
                 toAddNotePerson.getRating());
-        expectedPerson.setNoteContent(validNote1.toString());
-        expectedModel.addPerson(expectedPerson);
+        Model expectedModel = new ModelManager(modelSupplier.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(modelSupplier.getFilteredPersonList().get(7), expectedPerson);
 
+        // execute note command
         NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
+        noteCommand.execute(modelSupplier);
 
-        try {
-            noteCommand.execute(model);
-        } catch (CommandException ce) {
-            fail();
-        }
-
-        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(modelSupplier.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+        assertEquals(modelSupplier.getFilteredPersonList().get(7).getNote(),
+                expectedModel.getFilteredPersonList().get(7).getNote());
     }
 
     @Test
     public void execute_validNoteMaintainer_addSuccess() throws CommandException {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addPerson(GEORGIAMAINTAINER);
-
+        Model modelMaintainer = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelMaintainer.addPerson(GEORGIAMAINTAINER);
+        // set expected results
         Maintainer toAddNotePerson = GEORGIAMAINTAINER;
         Maintainer expectedPerson = new Maintainer(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
-                toAddNotePerson.getEmail(), toAddNotePerson.getAddress(), toAddNotePerson.getNote(),
-                toAddNotePerson.getTags(), toAddNotePerson.getSkill(), toAddNotePerson.getCommission(),
+                toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
+                validNote1, toAddNotePerson.getTags(), toAddNotePerson.getSkill(), toAddNotePerson.getCommission(),
                 toAddNotePerson.getRating());
-        expectedPerson.setNoteContent(validNote1.toString());
-        expectedModel.addPerson(expectedPerson);
+        Model expectedModel = new ModelManager(modelMaintainer.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(modelMaintainer.getFilteredPersonList().get(7), expectedPerson);
 
+        // execute note command
         NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
+        noteCommand.execute(modelMaintainer);
 
-        try {
-            noteCommand.execute(model);
-        } catch (CommandException ce) {
-            fail();
-        }
-
-        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(modelMaintainer.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+        assertEquals(modelMaintainer.getFilteredPersonList().get(7).getNote(),
+                expectedModel.getFilteredPersonList().get(7).getNote());
     }
+
 
     @Test
     public void execute_invalidName_throwsCommandException() {
-        showPersonWithName(model, ALICE.getName());
-
         Name invalidName = new Name("patty");
-
-        // ensures that the invalid name is not equal to "Alice Pauline"
-        assertNotEquals(invalidName, ALICE.getName());
 
         NoteCommand noteCommand = new NoteCommand(invalidName, validNote1);
 
@@ -151,5 +142,14 @@ public class NoteCommandTest {
 
         // different notes -> returns false
         assertNotEquals(noteFirstCommand, noteThirdCommand);
+    }
+
+    @Test
+    public void toStringMethod() {
+        Name name = new Name("alice");
+        Note note = new Note("alice likes dogs");
+        NoteCommand noteCommand = new NoteCommand(name, note);
+        String expected = NoteCommand.class.getCanonicalName() + "{name=" + name + ", " + "note=" + note + "}";
+        assertEquals(expected, noteCommand.toString());
     }
 }

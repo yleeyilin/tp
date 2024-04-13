@@ -39,31 +39,46 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
     private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
-     * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an AddCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddMaintainerCommand parse(String args) throws ParseException {
+        assert (args != null) : "argument to pass for add maintainer command is null";
+
         logger.log(Level.INFO, "Going to start parsing for add maintainer command.");
-        ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
-                FAILED_TO_ADD,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
+        // validates user command fields
+        ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+                FAILED_TO_ADD,
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
         ParserUtil.verifyNoMissingField(argMultimap, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
                 FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SKILL, PREFIX_COMMISSION);
-
-        if (!argMultimap.getPreamble().isEmpty()) {
+        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
+        if (!isPreambleEmpty) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMaintainerCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
+        Maintainer person = createMaintainerContact(argMultimap);
+
+        return new AddMaintainerCommand(person);
+    }
+
+    /**
+     * Creates a maintainer contact based on the argument multimap.
+     * @param argMultimap Contains the mappings of values to the specific prefixes.
+     * @return A maintainer contact.
+     * @throws ParseException If the user enters invalid paramters.
+     */
+    private Maintainer createMaintainerContact(ArgumentMultimap argMultimap) throws ParseException {
         try {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElseThrow());
@@ -72,16 +87,12 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
             String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse("No note here");
             Note note = noteContent.equals("No note here") ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
             Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse("0"));
-
             Tag tag = new Tag("maintainer");
             Set<Tag> tags = new HashSet<>();
             tags.add(tag);
             Skill skill = ParserUtil.parseSkill(argMultimap.getValue(PREFIX_SKILL).orElseThrow());
             Commission commission = ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).orElseThrow());
-
-            Maintainer person = new Maintainer(name, phone, email, address, note, tags, skill, commission, rating);
-
-            return new AddMaintainerCommand(person);
+            return new Maintainer(name, phone, email, address, note, tags, skill, commission, rating);
         } catch (ParseException pe) {
             throw new ParseException(String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, pe.getMessage()));
         }

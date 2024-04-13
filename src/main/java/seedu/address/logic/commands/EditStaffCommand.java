@@ -115,8 +115,14 @@ public class EditStaffCommand extends Command {
         Salary updatedSalary = editStaffDescriptor.getSalary().orElse(staffToEdit.getSalary());
         Employment updatedEmployment = editStaffDescriptor.getEmployment().orElse(staffToEdit.getEmployment());
 
-        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote,
-                updatedTags, updatedSalary, updatedEmployment, presentRating);
+        Staff updatedStaff = new Staff(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                presentNote, updatedTags, updatedSalary, updatedEmployment, presentRating);
+
+        if (staffToEdit.isPinned()) {
+            updatedStaff.toPin();
+        }
+
+        return updatedStaff;
     }
 
     @Override
@@ -125,6 +131,7 @@ public class EditStaffCommand extends Command {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof EditStaffCommand)) {
             return false;
         }

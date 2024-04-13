@@ -13,7 +13,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -25,56 +28,52 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditSupplierCommand object
  */
 public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditSupplierCommand
-     * and returns an EditSupplierCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an EditSupplierCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format
      */
     public EditSupplierCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        assert (args != null) : "argument to pass for edit supplier command is null";
 
-        Name name;
-        String fieldArgs;
+        logger.log(Level.INFO, "Going to start parsing for edit supplier command.");
 
         String parsedArgs = ParserUtil.parseArg(args);
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
-
-        boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
-        if (hasDuplicateNamePrefix) {
+        ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
+                FAILED_TO_EDIT,
+                PREFIX_NAME, PREFIX_FIELD);
+        boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
+        if (isNamePrefixDuplicated) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
                     EditSupplierCommand.MESSAGE_USAGE));
         }
 
-        ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
-                FAILED_TO_EDIT,
-                PREFIX_NAME, PREFIX_FIELD);
-
-        name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
-        fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        // maps user commands to name and field
+        Name name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
+        String fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditSupplierCommand.MESSAGE_USAGE));
 
+        // maps fields to edit to their values
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
 
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        EditSupplierDescriptor editSupplierDescriptor;
+        EditSupplierDescriptor editSupplierDescriptor = editSupplierDescription(fieldArgMultimap);
 
-        try {
-            editSupplierDescriptor = editSupplierDescription(fieldArgMultimap);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, pe.getMessage()));
-        }
-
-        if (!editSupplierDescriptor.isAnyFieldEdited()) {
+        boolean isNoFieldEdited = !editSupplierDescriptor.isAnyFieldEdited();
+        if (isNoFieldEdited) {
             throw new ParseException(EditMessages.MESSAGE_EDIT_EMPTY_FIELD);
         }
 
@@ -90,29 +89,33 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditSupplierDescriptor that contains the new values from the user.
-     * @throws ParseException Indicates the invalid format that users might have entered.
+     * @throws ParseException If the user enters invalid paramters.
      */
     private EditSupplierDescriptor editSupplierDescription(ArgumentMultimap fieldArgMultimap) throws ParseException {
-        EditSupplierDescriptor editSupplierDescription = new EditSupplierDescriptor();
+        try {
+            EditSupplierDescriptor editSupplierDescriptor = new EditSupplierDescriptor();
 
-        if (fieldArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editSupplierDescription.setPhone(ParserUtil.parsePhone(fieldArgMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editSupplierDescription.setEmail(ParserUtil.parseEmail(fieldArgMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editSupplierDescription.setAddress(ParserUtil.parseAddress(
-                    fieldArgMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_PRODUCT).isPresent()) {
-            editSupplierDescription.setProduct(ParserUtil.parseProduct(
-                    fieldArgMultimap.getValue(PREFIX_PRODUCT).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            editSupplierDescription.setPrice(ParserUtil.parsePrice(fieldArgMultimap.getValue(PREFIX_PRICE).get()));
-        }
+            if (fieldArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
+                editSupplierDescriptor.setPhone(ParserUtil.parsePhone(fieldArgMultimap.getValue(PREFIX_PHONE).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+                editSupplierDescriptor.setEmail(ParserUtil.parseEmail(fieldArgMultimap.getValue(PREFIX_EMAIL).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+                editSupplierDescriptor.setAddress(ParserUtil.parseAddress(
+                        fieldArgMultimap.getValue(PREFIX_ADDRESS).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_PRODUCT).isPresent()) {
+                editSupplierDescriptor.setProduct(ParserUtil.parseProduct(
+                        fieldArgMultimap.getValue(PREFIX_PRODUCT).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_PRICE).isPresent()) {
+                editSupplierDescriptor.setPrice(ParserUtil.parsePrice(fieldArgMultimap.getValue(PREFIX_PRICE).get()));
+            }
 
-        return editSupplierDescription;
+            return editSupplierDescriptor;
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, pe.getMessage()));
+        }
     }
 }
