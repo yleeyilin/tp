@@ -23,15 +23,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution. Parameter args cannot be null.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns a DeleteCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public DeleteCommand parse(String args) throws ParseException {
-        assert (args != null) : "`argument` to pass for delete command is null";
+        assert (args != null) : "argument to pass for delete command is null";
 
         logger.log(Level.INFO, "Going to start parsing for delete command.");
 
-        Name name;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         // validates user command fields
@@ -48,7 +47,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
         try {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
             return new DeleteCommand(name);
         } catch (ParseException pe) {
             throw new ParseException(String.format(DeleteMessages.MESSAGE_DELETE_INVALID_PARAMETERS, pe.getMessage()));

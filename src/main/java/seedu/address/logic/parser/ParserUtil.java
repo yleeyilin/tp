@@ -46,7 +46,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException If the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -59,8 +59,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException If the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
@@ -75,8 +74,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String arg} into a {@code arg}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException If the given {@code name} is invalid.
      */
     public static String parseArg(String arg) throws ParseException {
         requireNonNull(arg);
@@ -87,8 +85,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException If the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
@@ -102,8 +99,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException If the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
@@ -117,8 +113,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException If the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
@@ -132,8 +127,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String employment} into an {@code Employment}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code employment} is invalid.
+     * @throws ParseException If the given {@code employment} is invalid.
      */
     public static Employment parseEmployment(String employment) throws ParseException {
         requireNonNull(employment);
@@ -147,8 +141,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String salary} into an {@code Salary}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code salary} is invalid.
+     * @throws ParseException If the given {@code salary} is invalid.
      */
     public static Salary parseSalary(String salary) throws ParseException {
         requireNonNull(salary);
@@ -162,8 +155,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String product} into an {@code Product}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code product} is invalid.
+     * @throws ParseException If the given {@code product} is invalid.
      */
     public static Product parseProduct(String product) throws ParseException {
         requireNonNull(product);
@@ -178,7 +170,7 @@ public class ParserUtil {
      * Parses a {@code String price} into an {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code price} is invalid.
+     * @throws ParseException If the given {@code price} is invalid.
      */
     public static Price parsePrice(String price) throws ParseException {
         requireNonNull(price);
@@ -192,8 +184,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String skill} into an {@code Skill}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code skill} is invalid.
+     * @throws ParseException If the given {@code skill} is invalid.
      */
     public static Skill parseSkill(String skill) throws ParseException {
         requireNonNull(skill);
@@ -207,8 +198,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String commission} into an {@code Commission}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code commission} is invalid.
+     * @throws ParseException If the given {@code commission} is invalid.
      */
     public static Commission parseCommission(String commission) throws ParseException {
         requireNonNull(commission);
@@ -222,8 +212,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException If the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
@@ -259,8 +248,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code note} is invalid.
+     * @throws ParseException If the given {@code note} is invalid.
      */
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
@@ -277,8 +265,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code note} is invalid.
+     * @throws ParseException If the given {@code note} is invalid.
      */
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
@@ -292,8 +279,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code note} is invalid.
+     * @throws ParseException If the given {@code note} is invalid.
      */
     public static DeadlineNote parseDeadlineNote(String note, String deadline) throws ParseException {
         requireNonNull(note, deadline);
@@ -312,8 +298,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String note}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code commandType} is invalid.
+     * @throws ParseException If the given {@code commandType} is invalid.
      */
     public static String parseHelp(String commandType) throws ParseException {
 
@@ -328,8 +313,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String sort field}.
      * Leading "; " and trailing " : " will be trimmed
-     *
-     * @throws ParseException if the given {@code commandType} is invalid.
+     * @throws ParseException If the given {@code commandType} is invalid.
      */
     public static String parseSortField(String sortField) throws ParseException {
 
@@ -381,7 +365,7 @@ public class ParserUtil {
      * @param argMultimap Object that contains mapping of prefix to value.
      * @param message Error message to throw if parse exception.
      * @return Returns object representing name.
-     * @throws ParseException Thrown when command is in invalid format.
+     * @throws ParseException If command is in invalid format.
      */
     public static Name mapName(ArgumentMultimap argMultimap, String message) throws ParseException {
         try {
@@ -396,7 +380,7 @@ public class ParserUtil {
      * @param argMultimap Object that contains mapping of prefix to value.
      * @param message Error message to throw if parse exception.
      * @return Returns object representing the respective fields.
-     * @throws ParseException Thrown when command is in invalid format.
+     * @throws ParseException If command is in invalid format.
      */
     public static String mapFields(ArgumentMultimap argMultimap, String message) throws ParseException {
         try {
@@ -413,7 +397,7 @@ public class ParserUtil {
      * @param commandType Command Type.
      * @param headerMessage Header of error messages.
      * @param prefixes Required prefixes in the command.
-     * @throws ParseException Thrown when there are invalid prefixes.
+     * @throws ParseException If there are invalid prefixes.
      */
     public static void verifyNoUnknownPrefix(String args, String message, String commandType,
                                              String headerMessage, Prefix... prefixes)
@@ -435,7 +419,7 @@ public class ParserUtil {
      * @param commandType Command Type.
      * @param headerMessage Header of error messages.
      * @param prefixes Required prefixes in the command.
-     * @throws ParseException Thrown when there are missing prefixes.
+     * @throws ParseException If there are missing prefixes.
      */
     public static void verifyNoMissingField(ArgumentMultimap argMultimap, String message, String commandType,
                                             String headerMessage, Prefix... prefixes) throws
