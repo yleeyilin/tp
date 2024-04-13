@@ -607,13 +607,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+### Design considerations:
 
-**Aspect: How undo & redo executes:**
+#### Aspect: How undo & redo executes :
 
-* Saves the entire address book.
+**Alternative 1 (current choice)** : Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
+
+**Alternative 2** : Individual command knows how to undo/redo by itself.
+* Pros: Will use less memory(e.g. for delete, just save the person being deleted).
+* Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
