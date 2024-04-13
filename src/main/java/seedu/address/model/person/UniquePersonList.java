@@ -116,92 +116,203 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Sorts the list based on the specified field.
+     *
+     * @param prefix The prefix representing the field to sort by.
      */
     public void sortBy(Prefix prefix) {
         String field = prefix.getPrefix();
 
-        if (field.equalsIgnoreCase("name")) {
-            internalList.sort(Comparator.comparing(p -> p.getName().toString()));
-        } else if (field.equalsIgnoreCase("phone")) {
-            internalList.sort(Comparator.comparing(p -> Integer.parseInt(p.getPhone().toString())));
-        } else if (field.equalsIgnoreCase("email")) {
-            internalList.sort(Comparator.comparing(p -> p.getEmail().toString()));
-        } else if (field.equalsIgnoreCase("address")) {
-            internalList.sort(Comparator.comparing(p -> p.getAddress().toString()));
-        } else if (field.equalsIgnoreCase("tag")) {
-            internalList.sort(Comparator.comparing(p -> p.getTags().toString()));
-        } else if (field.equalsIgnoreCase("salary")) {
-            internalList.sort(Comparator.comparing(p -> {
-                if (p instanceof Staff) {
-                    Staff staff = (Staff) p;
-                    String salary = staff.getSalary().toString();
-                    return "0" + salary.length() + salary;
-                }
-                return "1" + p.getName().toString();
-            }));
-        } else if (field.equalsIgnoreCase("employment")) {
-            internalList.sort(Comparator.comparing(p -> {
-                if (p instanceof Staff) {
-                    Staff staff = (Staff) p;
-                    return "0" + staff.getEmployment().toString();
-                }
-                return "1" + p.getName().toString();
-            }));
-        } else if (field.equalsIgnoreCase("product")) {
-            internalList.sort(Comparator.comparing(p -> {
-                if (p instanceof Supplier) {
-                    Supplier supplier = (Supplier) p;
-                    String product = supplier.getProduct().toString();
-                    return "0" + product.length() + product;
-                }
-                return "1" + p.getName().toString();
-            }));
-        } else if (field.equalsIgnoreCase("price")) {
-            internalList.sort(Comparator.comparing(p -> {
-                if (p instanceof Supplier) {
-                    Supplier supplier = (Supplier) p;
-                    return "0" + supplier.getPrice().toString();
-                }
-                return "1" + p.getName().toString();
-            }));
-        } else if (field.equalsIgnoreCase("commission")) {
-            internalList.sort(Comparator.comparing(p -> {
-                if (p instanceof Maintainer) {
-                    Maintainer maintainer = (Maintainer) p;
-                    String commission = maintainer.getCommission().toString();
-                    return "0" + commission.length() + commission;
-                }
-                return "1" + p.getName().toString();
-            }));
-        } else if (field.equalsIgnoreCase("skill")) {
-            internalList.sort(Comparator.comparing(p -> {
-                if (p instanceof Maintainer) {
-                    Maintainer maintainer = (Maintainer) p;
-                    return "0" + maintainer.getSkill().toString();
-                }
-                return "1" + p.getName().toString();
-            }));
-        } else if (field.equalsIgnoreCase("note")) {
-            internalList.sort(Comparator.comparing((Person p) -> {
-                        String note = p.getNote().toString();
-                        if (note.equals("No note here")) {
-                            return "1" + p.getName().toString();
-                        } else {
-                            return "0" + p.getNote().toString();
-                        }
-                    }));
-        } else if (field.equalsIgnoreCase("pin")) {
-            internalList.sort(Comparator.comparing((Person p) ->
-                    p.getPin().toString()).reversed());
-        } else if (field.equalsIgnoreCase("rating")) {
-            internalList.sort(Comparator.comparing((Person p) ->
-                    p.getRating().toString()).reversed());
-        } else {
-            internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+        switch (field.toLowerCase()) {
+            case "name":
+                sortByFieldName();
+                break;
+            case "phone":
+                sortByFieldPhone();
+                break;
+            case "email":
+                sortByFieldEmail();
+                break;
+            case "address":
+                sortByFieldAddress();
+                break;
+            case "tag":
+                sortByFieldTag();
+                break;
+            case "salary":
+                sortByFieldSalary();
+                break;
+            case "employment":
+                sortByFieldEmployment();
+                break;
+            case "product":
+                sortByFieldProduct();
+                break;
+            case "price":
+                sortByFieldPrice();
+                break;
+            case "commission":
+                sortByFieldCommission();
+                break;
+            case "skill":
+                sortByFieldSkill();
+                break;
+            case "note":
+                sortByFieldNote();
+                break;
+            case "pin":
+                sortByFieldPin();
+                break;
+            case "rating":
+                sortByFieldRating();
+                break;
+            default:
+                sortByFieldName(); // Default sorting by name
+                break;
         }
+    }
 
-        internalList.sort(Comparator.comparing((Person p) ->
-                p.getPin().toString()).reversed());
+    /**
+     * Sorts the list by name.
+     */
+    private void sortByFieldName() {
+        internalList.sort(Comparator.comparing(p -> p.getName().toString()));
+    }
+
+    /**
+     * Sorts the list by phone number.
+     */
+    private void sortByFieldPhone() {
+        internalList.sort(Comparator.comparing(p -> Integer.parseInt(p.getPhone().toString())));
+    }
+
+    /**
+     * Sorts the list by email address.
+     */
+    private void sortByFieldEmail() {
+        internalList.sort(Comparator.comparing(p -> p.getEmail().toString()));
+    }
+
+    /**
+     * Sorts the list by address.
+     */
+    private void sortByFieldAddress() {
+        internalList.sort(Comparator.comparing(p -> p.getAddress().toString()));
+    }
+
+    /**
+     * Sorts the list by tag.
+     */
+    private void sortByFieldTag() {
+        internalList.sort(Comparator.comparing(p -> p.getTags().toString()));
+    }
+
+    /**
+     * Sorts the list by salary.
+     */
+    private void sortByFieldSalary() {
+        internalList.sort(Comparator.comparing(p -> {
+            if (p instanceof Staff) {
+                Staff staff = (Staff) p;
+                String salary = staff.getSalary().toString();
+                return "0" + salary.length() + salary;
+            }
+            return "1" + p.getName().toString();
+        }));
+    }
+
+    /**
+     * Sorts the list by employment status.
+     */
+    private void sortByFieldEmployment() {
+        internalList.sort(Comparator.comparing(p -> {
+            if (p instanceof Staff) {
+                Staff staff = (Staff) p;
+                return "0" + staff.getEmployment().toString();
+            }
+            return "1" + p.getName().toString();
+        }));
+    }
+
+    /**
+     * Sorts the list by product.
+     */
+    private void sortByFieldProduct() {
+        internalList.sort(Comparator.comparing(p -> {
+            if (p instanceof Supplier) {
+                Supplier supplier = (Supplier) p;
+                String product = supplier.getProduct().toString();
+                return "0" + product.length() + product;
+            }
+            return "1" + p.getName().toString();
+        }));
+    }
+
+    /**
+     * Sorts the list by price.
+     */
+    private void sortByFieldPrice() {
+        internalList.sort(Comparator.comparing(p -> {
+            if (p instanceof Supplier) {
+                Supplier supplier = (Supplier) p;
+                return "0" + supplier.getPrice().toString();
+            }
+            return "1" + p.getName().toString();
+        }));
+    }
+
+    /**
+     * Sorts the list by commission.
+     */
+    private void sortByFieldCommission() {
+        internalList.sort(Comparator.comparing(p -> {
+            if (p instanceof Maintainer) {
+                Maintainer maintainer = (Maintainer) p;
+                String commission = maintainer.getCommission().toString();
+                return "0" + commission.length() + commission;
+            }
+            return "1" + p.getName().toString();
+        }));
+    }
+
+    /**
+     * Sorts the list by skill.
+     */
+    private void sortByFieldSkill() {
+        internalList.sort(Comparator.comparing(p -> {
+            if (p instanceof Maintainer) {
+                Maintainer maintainer = (Maintainer) p;
+                return "0" + maintainer.getSkill().toString();
+            }
+            return "1" + p.getName().toString();
+        }));
+    }
+
+    /**
+     * Sorts the list by note.
+     */
+    private void sortByFieldNote() {
+        internalList.sort(Comparator.comparing((Person p) -> {
+            String note = p.getNote().toString();
+            if (note.equals("No note here")) {
+                return "1" + p.getName().toString();
+            } else {
+                return "0" + p.getNote().toString();
+            }
+        }));
+    }
+
+    /**
+     * Sorts the list by PIN.
+     */
+    private void sortByFieldPin() {
+        internalList.sort(Comparator.comparing((Person p) -> p.getPin().toString()).reversed());
+    }
+
+    /**
+     * Sorts the list by rating.
+     */
+    private void sortByFieldRating() {
+        internalList.sort(Comparator.comparing((Person p) -> p.getRating().toString()).reversed());
     }
 
     @Override
