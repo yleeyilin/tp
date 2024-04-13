@@ -1414,6 +1414,50 @@ testers are expected to do more *exploratory* testing.
   2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
 
+### Search a contact
+1. Search contacts using field name.
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+      ``` 
+      /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+      /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+      ```
+   2. Test case: `/search ; name : John`
+      Expected: Woof! 2 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with name having `John` as substring.)
+
+2. Search contacts using field phone. 
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+   ``` 
+   /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+   /add-person ; name : John Doe ; phone : 8888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+   /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+   ```
+   
+   2. Test case: `/search ; phone : 12345678`
+      Expected: Woof! 1 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with phone number having `12345678` as substring.)
+
+
+### Sort contact list
+1. Sort contacts using field name.
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+      ``` 
+      /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+      /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+      ```
+   2. Test case: `/sort ; field : name`
+      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of contact book is omited. It should show the contacts with name in ascending order.)
+
+1. Sort contacts using field phone.
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+     ``` 
+     /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+     /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+     /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+     ```
+   2. Test case: `/sort ; field : phone`
+     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of contact book is omited. It should show the contacts with phone number in ascending order.)
+
 ### Undo a command
 1. Undo a command that modified the contact book
 
@@ -1456,6 +1500,34 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
+### Appendix : Effort
+#### Project Overview
+Our project aimed to enhance the functionality of a contact management system, building upon the foundation laid by AB3 (Address Book 3). Key improvements included accommodating multiple types of contacts, refining command formats for user-friendliness, introducing dynamic search and sorting capabilities, implementing note and reminder features, integrating pin/unpin functionality, and incorporating undo/redo functionality. These enhancements aimed to provide users with a more intuitive and efficient contact management experience.
+
+#### Difficulty Level and Challenges Faced
+The project faced significant challenges due to its complexity and the need to seamlessly integrate new features with the existing AB3 framework. One major challenge was accommodating multiple types of contacts (staff, maintainer, supplier) while ensuring compatibility with the original AB3 data model and commands. This required thorough understanding of the project structure and meticulous modification of existing components, particularly the `JsonAdaptedPerson` classes.
+
+Additionally, redesigning command formats and implementing new features such as dynamic search, sorting, note/reminder functionalities, and pin/unpin features demanded careful planning and detailed implementation. Adapting the undo/redo feature from AB4 to fit within the AB3 framework posed another challenge, as it necessitated significant modifications to the model manager and command execution flow while ensuring backward compatibility.
+
+#### Effort Required
+The effort required for the project was substantial, spanning analysis, design, development, testing, and documentation phases. The multidisciplinary team invested significant time and resources in understanding AB3's architecture, identifying areas for enhancement, and implementing new features while ensuring compatibility and stability. Agile methodologies were employed to iteratively address challenges and incorporate stakeholder feedback, resulting in an efficient development process.
+
+#### Achievements
+Despite the challenges, the project achieved several milestones that significantly enhanced the contact management system's functionality and user experience. Key achievements include:
+
+1. Successful integration of multiple contact types, providing users with greater flexibility and organization capabilities.
+2. Redesigning command formats for improved intuitiveness and ease of use, enhancing user interaction.
+3. Implementation of dynamic search and sorting functionalities, empowering users to efficiently navigate and manage their contacts.
+4. Introduction of note and reminder features, enabling users to add context and schedule tasks associated with contacts.
+5. Seamless integration of pin/unpin functionality, allowing users to prioritize contacts.
+6. Seamless integration of undo/redo functionality, allowing users to revert to previous states and improve data integrity.
+
+
+#### Effort Saved Through Reuse:
+Approximately 10% of the project effort was saved through strategic reuse of existing components and libraries. Notably, the redesign of command formats leveraged insights from previous projects and industry best practices, streamlining development and ensuring consistency. Additionally, adapting the undo/redo feature from AB4 involved reusing core concepts and methodologies, significantly reducing implementation complexity and effort.
+
+In summary, the project's successful implementation of advanced features within the AB3 framework demonstrates our team's proficiency in software development and problem-solving. Despite the inherent challenges, our strategic approach to reuse and adaptation resulted in a robust and feature-rich contact management system that meets the evolving needs of users.
 
 ### Acknowledgements
 1. The feature undo/redo (design and UML diagrams) was inspired and reused with minimal changes from [SE-addressbook](https://se-education.org/addressbook-level4/DeveloperGuide.html#undo-redo-feature).
