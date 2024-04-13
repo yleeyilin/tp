@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.FAILED_TO_RATE;
+import static seedu.address.logic.messages.RateMessages.FAILED_TO_RATE;
+import static seedu.address.logic.messages.RateMessages.RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -26,30 +27,28 @@ public class RateCommandParser implements Parser<RateCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RateCommand
-     * and returns a RateCommand object for execution. Parameter args cannot be null.
-     *
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns a RateCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public RateCommand parse(String args) throws ParseException {
         assert (args != null) : "argument to pass for rate command is null";
 
         logger.log(Level.INFO, "Going to start parsing for rate command.");
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_RATING);
-        Name name;
-        Rating rating;
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE, "rate",
+        ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE, RATE,
                 FAILED_TO_RATE,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);
-        ParserUtil.verifyNoMissingField(argMultimap, RateCommand.MESSAGE_USAGE, "rate",
+        ParserUtil.verifyNoMissingField(argMultimap, RateCommand.MESSAGE_USAGE, RATE,
                 FAILED_TO_RATE,
                 PREFIX_NAME, PREFIX_RATING);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         try {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
-            rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElseThrow());
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
+            Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElseThrow());
             return new RateCommand(name, rating);
         } catch (ParseException pe) {
             throw new ParseException(String.format(RateMessages.MESSAGE_RATE_INVALID_PARAMETERS, pe.getMessage()));

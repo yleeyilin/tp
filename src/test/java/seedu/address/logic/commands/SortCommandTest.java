@@ -117,13 +117,13 @@ public class SortCommandTest {
 
         // expected
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
+        expectedModel.addPerson(ALICE);
+        expectedModel.addPerson(BENSON);
         expectedModel.addPerson(CARL);
         expectedModel.addPerson(DANIEL);
         expectedModel.addPerson(ELLE);
         expectedModel.addPerson(FIONA);
         expectedModel.addPerson(GEORGE);
-        expectedModel.addPerson(ALICE);
-        expectedModel.addPerson(BENSON);
 
         // actual
         SortCommand sortCommand = new SortCommand(new Prefix("note"));

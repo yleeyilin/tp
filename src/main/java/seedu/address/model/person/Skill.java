@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Supplier's product in the address book.
+ * Represents a Maintainer's skill in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSkill(String)}
  */
 public class Skill {

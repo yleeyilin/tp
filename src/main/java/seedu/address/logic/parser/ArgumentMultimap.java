@@ -118,8 +118,8 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Gets all the prefixes
-     * @return an array of prefixes in the hashmap
+     * Gets all the prefixes.
+     * @return An array of prefixes in the hashmap.
      */
     public Prefix[] getAllPrefixes() {
         return argMultimap.keySet().toArray(new Prefix[0]);
@@ -144,7 +144,7 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns a string implementation of Argument Multi Map
+     * Returns a string implementation of Argument Multi Map.
      */
     @Override
     public String toString() {

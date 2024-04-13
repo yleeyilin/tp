@@ -14,7 +14,7 @@ public class Commission {
     public final String value;
 
     /**
-     * Constructs an {@code Commission}.
+     * Constructs a {@code Commission}.
      *
      * @param value A valid commission.
      */

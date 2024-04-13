@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.FAILED_TO_SEARCH;
+import static seedu.address.logic.messages.SearchMessages.FAILED_TO_SEARCH;
+import static seedu.address.logic.messages.SearchMessages.SEARCH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
 
 import java.util.stream.Stream;
@@ -17,8 +18,8 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SearchCommand
-     * and returns a SearchCommand object for execution. Parameter args cannot be null.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns a SearchCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public SearchCommand parse(String args) throws ParseException {
         assert (args != null) : "argument to pass for search command is null";
@@ -29,7 +30,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         ParserUtil.verifyNoUnknownPrefix(
                 args,
                 SearchCommand.MESSAGE_USAGE,
-                "search",
+                SEARCH,
                 FAILED_TO_SEARCH,
                 PREFIX_SEARCH_COLLECTION);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
