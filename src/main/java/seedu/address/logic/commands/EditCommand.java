@@ -101,8 +101,14 @@ public class EditCommand extends Command {
         Rating presentRating = personToEdit.getRating(); //edit cannot change rating
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName,
+        Person updatedPerson = new Person(updatedName,
                 updatedPhone, updatedEmail, updatedAddress, presentNote, updatedTags, presentRating);
+
+        if (personToEdit.isPinned()) {
+            updatedPerson.toPin();
+        }
+
+        return updatedPerson;
     }
 
     @Override

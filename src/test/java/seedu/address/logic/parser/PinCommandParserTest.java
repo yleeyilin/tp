@@ -20,7 +20,6 @@ public class PinCommandParserTest {
     @Test
     public void parse_missingNamePrefix_failure() {
         // no field specified
-        // no field specified
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");
         String exception = FAILED_TO_PIN + String.format(MESSAGE_MISSING_FIELD_FORMAT, undetectedFields);

@@ -111,8 +111,14 @@ public class EditMaintainerCommand extends Command {
         Commission updatedCommission = editMaintainerDescriptor.getCommission()
                 .orElse(maintainerToEdit.getCommission());
 
-        return new Maintainer(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote,
-                updatedTags, updatedSkill, updatedCommission, presentRating);
+        Maintainer updatedMaintainer = new Maintainer(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                presentNote, updatedTags, updatedSkill, updatedCommission, presentRating);
+
+        if (maintainerToEdit.isPinned()) {
+            updatedMaintainer.toPin();
+        }
+
+        return updatedMaintainer;
     }
 
     @Override
