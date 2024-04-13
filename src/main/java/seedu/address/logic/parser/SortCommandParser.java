@@ -26,7 +26,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         Prefix prefix;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, SortCommand.MESSAGE_USAGE, "sort",
                 FAILED_TO_SORT, PREFIX_FIELD);
         ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, "sort",

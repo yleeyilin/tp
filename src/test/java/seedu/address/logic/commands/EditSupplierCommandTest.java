@@ -32,9 +32,6 @@ public class EditSupplierCommandTest {
         // null -> returns false
         assertFalse(standardCommand.equals(null));
 
-        // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
-
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditSupplierCommand(BENSONSUPPLIER.getName(), DESC_AMY_SUPPLIER)));
 

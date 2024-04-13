@@ -30,7 +30,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         String commandType;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help",
                 FAILED_TO_HELP, PREFIX_HELP);
         ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help",

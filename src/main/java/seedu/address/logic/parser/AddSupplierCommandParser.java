@@ -50,7 +50,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_RATING);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, AddSupplierCommand.MESSAGE_USAGE, "add-supplier",
                 FAILED_TO_ADD, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_RATING);

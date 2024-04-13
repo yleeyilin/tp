@@ -27,7 +27,7 @@ public class PinCommandParser implements Parser<PinCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, PinCommand.MESSAGE_USAGE, "pin",
                 FAILED_TO_PIN,
                 PREFIX_NAME);

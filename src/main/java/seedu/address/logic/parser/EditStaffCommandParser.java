@@ -48,7 +48,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         EditStaffDescriptor editStaffDescriptor;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, EditStaffCommand.MESSAGE_USAGE, "edit-staff",
                 FAILED_TO_EDIT, PREFIX_NAME,
                 PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT, PREFIX_SALARY);
