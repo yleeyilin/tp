@@ -14,7 +14,7 @@ public class Price {
     public final String value;
 
     /**
-     * Constructs an {@code Product}.
+     * Constructs a {@code Price}.
      *
      * @param value A valid price.
      */

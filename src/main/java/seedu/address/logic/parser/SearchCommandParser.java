@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.FAILED_TO_SEARCH;
+import static seedu.address.logic.messages.SearchMessages.FAILED_TO_SEARCH;
+import static seedu.address.logic.messages.SearchMessages.SEARCH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
 
 import java.util.stream.Stream;
@@ -17,34 +18,30 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SearchCommand
-     * and returns a SearchCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns a SearchCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public SearchCommand parse(String args) throws ParseException {
-
-        ParserUtil.verifyNoUnknownPrefix(
-                args,
-                SearchCommand.MESSAGE_USAGE,
-                "search",
-                FAILED_TO_SEARCH,
-                PREFIX_SEARCH_COLLECTION);
+        assert (args != null) : "argument to pass for search command is null";
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_COLLECTION);
 
-        // invalid command syntax
-        if (!argMultimap.getPreamble().isEmpty()) {
+        // validate correct user command
+        ParserUtil.verifyNoUnknownPrefix(
+                args,
+                SearchCommand.MESSAGE_USAGE,
+                SEARCH,
+                FAILED_TO_SEARCH,
+                PREFIX_SEARCH_COLLECTION);
+        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
+        if (!isPreambleEmpty) {
             throw new ParseException(SearchMessages.MESSAGE_SEARCH_INVALID_FIELD);
         }
-
-        // no prefixes present
-        if (!atLeastOnePrefixPresent(argMultimap, PREFIX_SEARCH_COLLECTION)) {
+        boolean isAnyPrefixPresent = atLeastOnePrefixPresent(argMultimap, PREFIX_SEARCH_COLLECTION);
+        if (!isAnyPrefixPresent) {
             throw new ParseException(SearchMessages.MESSAGE_SEARCH_MISSING_FIELD);
         }
-
-        // duplicate field entries
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SEARCH_COLLECTION);
-
-        // empty entries
         argMultimap.verifyNoEmptyEntries();
 
         return new SearchCommand(new KeywordPredicate(argMultimap));

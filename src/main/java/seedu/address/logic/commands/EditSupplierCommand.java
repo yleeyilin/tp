@@ -252,6 +252,7 @@ public class EditSupplierCommand extends Command {
                 return true;
             }
 
+            // instanceof handles nulls
             if (!(other instanceof EditSupplierDescriptor)) {
                 return false;
             }

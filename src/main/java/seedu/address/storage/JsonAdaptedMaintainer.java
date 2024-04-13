@@ -4,13 +4,9 @@ import seedu.address.model.person.Maintainer;
 import seedu.address.model.person.Person;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Maintainer}.
  */
 class JsonAdaptedMaintainer extends JsonAdaptedPerson {
-
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
-
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */

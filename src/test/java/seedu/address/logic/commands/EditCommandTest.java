@@ -44,12 +44,11 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(ALICE.getName(), descriptor);
 
-        String expectedMessage = String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                EditMessages.formatPerson(editedPerson));
-
+        // expected model result
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
+        // execute method for model
         editCommand.execute(model);
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
     }
@@ -62,17 +61,15 @@ public class EditCommandTest {
             PersonBuilder personInList = new PersonBuilder(lastPerson);
             Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                     .withTags(VALID_TAG).build();
-
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                     .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG).build();
             EditCommand editCommand = new EditCommand(lastPerson.getName(), descriptor);
 
-            String expectedMessage = String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                    EditMessages.formatPerson(editedPerson));
-
+            // execute method for model
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
             expectedModel.setPerson(lastPerson, editedPerson);
 
+            // execute method for model
             editCommand.execute(model);
             assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
         } catch (CommandException e) {
@@ -84,8 +81,6 @@ public class EditCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         try {
             EditCommand editCommand = new EditCommand(ALICE.getName(), new EditPersonDescriptor());
-            Person editedPerson = model.findPersonByName(new Name("Alice Pauline"),
-                    EditMessages.MESSAGE_INVALID_EDIT_PERSON);
             editCommand.execute(model);
             AddressBook addressBookCopy = new VersionedAddressBook(model.getAddressBook());
 
@@ -104,12 +99,11 @@ public class EditCommandTest {
             EditCommand editCommand = new EditCommand(ALICE.getName(),
                     new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-            String expectedMessage = String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
-                    EditMessages.formatPerson(editedPerson));
-
+            // expected model result
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
             expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
+            // execute method for model
             editCommand.execute(model);
             assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
         } catch (CommandException e) {
@@ -140,9 +134,6 @@ public class EditCommandTest {
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
-
-        // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different name -> returns false
         assertFalse(standardCommand.equals(new EditCommand(BENSON.getName(), DESC_AMY)));

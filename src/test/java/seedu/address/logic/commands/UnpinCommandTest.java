@@ -31,16 +31,17 @@ public class UnpinCommandTest {
         Person personToUnpin = new PersonBuilder(ALICE).withName("Unpin Test Alice Person")
                 .withAddress(VALID_ADDRESS_BOB).build();
         personToUnpin.toPin();
-
         Person expectedPerson = new PersonBuilder(ALICE).withName("Unpin Test Alice Person")
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedPerson.toPin();
         expectedPerson.toUnpin();
 
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedPerson);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(personToUnpin);
         UnpinCommand unpinCommand = new UnpinCommand(expectedPerson.getName());
 
@@ -53,16 +54,17 @@ public class UnpinCommandTest {
         Supplier supplierToUnpin = new SupplierBuilder(ALICESUPPLIER).withName("Unpin Test Alice Supplier")
                 .withAddress(VALID_ADDRESS_BOB).build();
         supplierToUnpin.toPin();
-
         Supplier expectedSupplier = new SupplierBuilder(ALICESUPPLIER).withName("Unpin Test Alice Supplier")
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedSupplier.toPin();
         expectedSupplier.toUnpin();
 
+        // expected model resultv
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedSupplier);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(supplierToUnpin);
         UnpinCommand unpinCommand = new UnpinCommand(expectedSupplier.getName());
 
@@ -75,16 +77,17 @@ public class UnpinCommandTest {
         Maintainer maintainerToUnpin = new MaintainerBuilder(ALICEMAINTAINER)
                 .withName("Unpin Test Alice Maintainer").withAddress(VALID_ADDRESS_BOB).build();
         maintainerToUnpin.toPin();
-
         Maintainer expectedMaintainer = new MaintainerBuilder(ALICEMAINTAINER)
                 .withName("Unpin Test Alice Maintainer").withAddress(VALID_ADDRESS_BOB).build();
         expectedMaintainer.toPin();
         expectedMaintainer.toUnpin();
 
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedMaintainer);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(maintainerToUnpin);
         UnpinCommand unpinCommand = new UnpinCommand(expectedMaintainer.getName());
 
@@ -97,16 +100,17 @@ public class UnpinCommandTest {
         Staff staffToUnpin = new StaffBuilder(ALICESTAFF).withName("Unpin Test Alice Staff")
                 .withAddress(VALID_ADDRESS_BOB).build();
         staffToUnpin.toPin();
-
         Staff expectedStaff = new StaffBuilder(ALICESTAFF).withName("Unpin Test Alice Staff")
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedStaff.toPin();
         expectedStaff.toUnpin();
 
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedStaff);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(staffToUnpin);
         UnpinCommand unpinCommand = new UnpinCommand(expectedStaff.getName());
 
