@@ -31,13 +31,13 @@ public class RemindPredicateTest {
     public void test_detectsValidDeadlines() {
         RemindPredicate predicate = new RemindPredicate();
 
-        // after todays date -> true
+        // valid note after todays date -> true
         assertTrue(predicate.test(new PersonBuilder().withNote("get dogs by: Oct 10 2025").build()));
 
-        // before todays date -> false
+        // valid note before todays date -> false
         assertFalse(predicate.test(new PersonBuilder().withNote("get dogs by: Oct 10 2020").build()));
 
-        //date is in incorrect format -> false
+        //invalid note where date is in incorrect format -> false
         assertFalse(predicate.test(new PersonBuilder().withNote("get dogs by: 10-9-2025").build()));
     }
 }
