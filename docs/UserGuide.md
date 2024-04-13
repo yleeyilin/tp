@@ -288,10 +288,20 @@ Examples: <br>
 
 * Any valid fields, such as `name`, `phone`, `address`, `email`, `salary`, `employment`, `price`, `product`, `skill`, `commission`, `tag` or `note`, can be provided.<br>
 
-* Only one field can be provided.<br>
+* Multiple fields can be provided.<br>
 
 * Query is case-insensitive but space-sensitive.<br>
 </div>
+
+* For search queries regarding `salary`, `price` and `commission`:
+  * if you would like to search for exact `salary`/`price`/`commission`, you can follow this format (e.g. `$[Number]/hr`, `$[Number]/bag`). Only results that match the exact number will be shown. Examples:
+    * `/search ; salary : $50/hr`
+    * `/search ; price : $50/bag`
+  * If you want to search for `salaries`/`prices`/`commissions` within a specified range instead, you can follow this format `$[Query digits]`. In this case, query digits refer to the first few digits of a number.
+    * For instance, if you want to query for all salaries in the range `$50-59/hr`, you can key in `/search ; salary : $5`, with `$5` as the search query. This displays all staff that are paid from `$50/hr` to `$59/hr`.
+    * Note that this query also returns staff with salaries exactly `$5/hr`, from `$500/hr` to `$599/hr` as well, and even in larger ranges too. This same query type also applies to `price` and `commission`.
+
+* Keying in repeated fields (e.g. )
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
@@ -487,7 +497,10 @@ Example: <br>
 
 * Sorts by specifying a valid field, such as `name`, `phone`, `email`, `address`, `salary`, `employment`, `price`, `product`, `skill`, `commission`, `tag` or `note`.<br>
 
-* All field input are case-insensitive.<br>
+* All field inputs are case-insensitive.<br>
+
+* If you type in multiple field entries (e.g. `/sort ; field : name ; field : phone`), PoochPlanner sorts by the last field entered (i.e. `phone`).
+
 </div>
 
 #### Adding a note : `note`
@@ -954,7 +967,7 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 | **Redo**                 | Format : <br>`/redo`                                                                                                                                   <br> <br> Example : <br> `/redo`                                                                                                                                                              |
 | **Pin**                  | Format : <br>`/pin ; name : [name]`                                                                                                                    <br> <br> Example : <br> `/pin ; name : Poochie`                                                                                                                                              |
 | **Unpin**                | Format : <br>`/unpin ; name : [name]`                                                                                                                  <br> <br> Example : <br> `/unpin ; name : Poochie`                                                                                                                                            |
-| **Sort**                 | Format : <br>`/sort ; target-field`                                                                                                                    <br> <br> Example : <br> `/sort ; name`                                                                                                                                                       |
+| **Sort**                 | Format : <br>`/sort ; field : [target-field]`                                                                                                                    <br> <br> Example : <br> `/sort ; field ; name`                                                                                                                                     |
 | **Note**                 | Format : <br>`/note ; name : [name] ; note : [note]` <br> or <br> `/note ; name : [name] ; note : [note] ; deadline : [deadline]`                                <br> <br> Example : <br> `/note ; name : Poochie ; note : get dog for groomers ; deadline : 2020-10-10`                                                                             |
 | **Remind**               | Format : <br>`/remind`                                                                                                                                    <br> <br> Example : <br> `/remind`                                                                                                                                                         |
 | **Exit**                 | Format : <br>`/exit`                                                                                                                                    <br> <br> Example : <br> `/exit`                                                                                                                                                             |

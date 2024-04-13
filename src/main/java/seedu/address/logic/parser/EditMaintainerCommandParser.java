@@ -13,7 +13,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditMaintainerCommand;
 import seedu.address.logic.commands.EditMaintainerCommand.EditMaintainerDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -25,42 +28,45 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditMaintainerCommand object
  */
 public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand> {
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditMaintainerCommand
-     * and returns an EditMaintainerCommand object for execution.
+     * and returns an EditMaintainerCommand object for execution. Parameter args cannot be null.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditMaintainerCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        assert (args != null) : "argument to pass for edit maintainer command is null";
 
-        Name name;
-        String fieldArgs;
+        logger.log(Level.INFO, "Going to start parsing for edit maintainer command.");
 
         String parsedArgs = ParserUtil.parseArg(args);
-
+        Name name;
+        String fieldArgs;
+        EditMaintainerDescriptor editMaintainerDescriptor;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
-
-        boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
-        if (hasDuplicateNamePrefix) {
+        ParserUtil.verifyNoMissingField(argMultimap, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
+                FAILED_TO_EDIT,
+                PREFIX_NAME, PREFIX_FIELD);
+        boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
+        if (isNamePrefixDuplicated) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 
-        // check for missing fields
-        ParserUtil.verifyNoMissingField(argMultimap, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
-                FAILED_TO_EDIT,
-                PREFIX_NAME, PREFIX_FIELD);
-
+        // maps user commands to name and field
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditMaintainerCommand.MESSAGE_USAGE));
 
+        // maps fields to edit to their values
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
@@ -68,15 +74,10 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
-        EditMaintainerDescriptor editMaintainerDescriptor;
+        editMaintainerDescriptor = editMaintainerDescription(fieldArgMultimap);
 
-        try {
-            editMaintainerDescriptor = editMaintainerDescription(fieldArgMultimap);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, pe.getMessage()));
-        }
-
-        if (!editMaintainerDescriptor.isAnyFieldEdited()) {
+        boolean isNoFieldEdited = !editMaintainerDescriptor.isAnyFieldEdited();
+        if (isNoFieldEdited) {
             throw new ParseException(EditMessages.MESSAGE_EDIT_EMPTY_FIELD);
         }
 
@@ -96,26 +97,30 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
      */
     private EditMaintainerDescriptor editMaintainerDescription(
                 ArgumentMultimap fieldArgMultimap) throws ParseException {
-        EditMaintainerDescriptor editMaintainerDescriptor = new EditMaintainerDescriptor();
+        try {
+            EditMaintainerDescriptor editMaintainerDescriptor = new EditMaintainerDescriptor();
 
-        if (fieldArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editMaintainerDescriptor.setPhone(ParserUtil.parsePhone(fieldArgMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editMaintainerDescriptor.setEmail(ParserUtil.parseEmail(fieldArgMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editMaintainerDescriptor.setAddress(ParserUtil.parseAddress(
-                    fieldArgMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_SKILL).isPresent()) {
-            editMaintainerDescriptor.setSkill(ParserUtil.parseSkill(fieldArgMultimap.getValue(PREFIX_SKILL).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_COMMISSION).isPresent()) {
-            editMaintainerDescriptor.setCommission(ParserUtil.parseCommission(
-                    fieldArgMultimap.getValue(PREFIX_COMMISSION).get()));
-        }
+            if (fieldArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
+                editMaintainerDescriptor.setPhone(ParserUtil.parsePhone(fieldArgMultimap.getValue(PREFIX_PHONE).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+                editMaintainerDescriptor.setEmail(ParserUtil.parseEmail(fieldArgMultimap.getValue(PREFIX_EMAIL).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+                editMaintainerDescriptor.setAddress(ParserUtil.parseAddress(
+                        fieldArgMultimap.getValue(PREFIX_ADDRESS).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_SKILL).isPresent()) {
+                editMaintainerDescriptor.setSkill(ParserUtil.parseSkill(fieldArgMultimap.getValue(PREFIX_SKILL).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_COMMISSION).isPresent()) {
+                editMaintainerDescriptor.setCommission(ParserUtil.parseCommission(
+                        fieldArgMultimap.getValue(PREFIX_COMMISSION).get()));
+            }
 
-        return editMaintainerDescriptor;
+            return editMaintainerDescriptor;
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, pe.getMessage()));
+        }
     }
 }

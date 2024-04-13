@@ -11,7 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.messages.EditMessages;
@@ -23,61 +26,60 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * and returns an EditCommand object for execution. Parameter args cannot be null.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        assert (args != null) : "argument to pass for edit command is null";
 
-        Name name;
-        String fieldArgs;
+        logger.log(Level.INFO, "Going to start parsing for edit command.");
 
         String parsedArgs = ParserUtil.parseArg(args);
-
+        Name name;
+        String fieldArgs;
+        EditPersonDescriptor editPersonDescriptor;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditCommand.MESSAGE_USAGE, "edit",
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-
-        boolean hasDuplicateNamePrefix = argMultimap.hasDuplicateNamePrefix();
-        if (hasDuplicateNamePrefix) {
+        ParserUtil.verifyNoMissingField(argMultimap, EditCommand.MESSAGE_USAGE, "edit",
+                FAILED_TO_EDIT,
+                PREFIX_NAME, PREFIX_FIELD);
+        boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
+        if (isNamePrefixDuplicated) {
             throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
                     EditCommand.MESSAGE_USAGE));
         }
 
-        // check for missing fields
-        ParserUtil.verifyNoMissingField(argMultimap, EditCommand.MESSAGE_USAGE, "edit",
-                FAILED_TO_EDIT,
-                PREFIX_NAME, PREFIX_FIELD);
-
+        // maps user commands to name and field
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE));
 
+        // maps fields to edit to their values
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-        EditPersonDescriptor editPersonDescriptor;
 
-        try {
-            editPersonDescriptor = editPersonDescription(fieldArgMultimap);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, pe.getMessage()));
-        }
+        editPersonDescriptor = editPersonDescription(fieldArgMultimap);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        boolean isNoFieldEdited = !editPersonDescriptor.isAnyFieldEdited();
+        if (isNoFieldEdited) {
             throw new ParseException(EditMessages.MESSAGE_EDIT_EMPTY_FIELD);
         }
 
         Set<Tag> tags = new HashSet<>();
         tags.add(new Tag("other"));
         editPersonDescriptor.setTags(tags);
-
         return new EditCommand(name, editPersonDescriptor);
     }
 
@@ -89,18 +91,23 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException Indicates the invalid format that users might have entered.
      */
     private EditPersonDescriptor editPersonDescription(ArgumentMultimap fieldArgMultimap) throws ParseException {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        try {
+            EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
-        if (fieldArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(fieldArgMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(fieldArgMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (fieldArgMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(fieldArgMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
+            if (fieldArgMultimap.getValue(PREFIX_PHONE).isPresent()) {
+                editPersonDescriptor.setPhone(ParserUtil.parsePhone(fieldArgMultimap.getValue(PREFIX_PHONE).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+                editPersonDescriptor.setEmail(ParserUtil.parseEmail(fieldArgMultimap.getValue(PREFIX_EMAIL).get()));
+            }
+            if (fieldArgMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+                editPersonDescriptor.setAddress(ParserUtil.parseAddress(
+                    fieldArgMultimap.getValue(PREFIX_ADDRESS).get()));
+            }
 
-        return editPersonDescriptor;
+            return editPersonDescriptor;
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, pe.getMessage()));
+        }
     }
 }

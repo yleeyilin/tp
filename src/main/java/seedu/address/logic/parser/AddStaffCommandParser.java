@@ -39,31 +39,46 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
-     * and returns an AddCommand object for execution.
+     * and returns an AddCommand object for execution. Parameter args cannot be null.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStaffCommand parse(String args) throws ParseException {
+        assert (args != null) : "`argument` to pass for add staff command is null";
+
         logger.log(Level.INFO, "Going to start parsing for add staff command.");
-        ParserUtil.verifyNoUnknownPrefix(args, AddStaffCommand.MESSAGE_USAGE, "add-staff",
-                FAILED_TO_ADD,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
 
+        // validates user command fields
+        ParserUtil.verifyNoUnknownPrefix(args, AddStaffCommand.MESSAGE_USAGE, "add-staff",
+                FAILED_TO_ADD,
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
         ParserUtil.verifyNoMissingField(argMultimap, AddStaffCommand.MESSAGE_USAGE, "add-staff",
                 FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_EMPLOYMENT, PREFIX_SALARY);
-
-        if (!argMultimap.getPreamble().isEmpty()) {
+        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
+        if (!isPreambleEmpty) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStaffCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SALARY, PREFIX_EMPLOYMENT);
 
+        Staff person = createStaffContact(argMultimap);
+
+        return new AddStaffCommand(person);
+    }
+
+    /**
+     * Creates a staff contact based on the argument multimap.
+     * @param argMultimap Contains the mappings of values to the specific prefixes.
+     * @return A staff contact.
+     * @throws ParseException Thrown when invalid paramters are used.
+     */
+    private Staff createStaffContact(ArgumentMultimap argMultimap) throws ParseException {
         try {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElseThrow());
@@ -77,10 +92,7 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
             tags.add(tag);
             Employment employment = ParserUtil.parseEmployment(argMultimap.getValue(PREFIX_EMPLOYMENT).orElseThrow());
             Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).orElseThrow());
-
-            Staff person = new Staff(name, phone, email, address, note, tags, salary, employment, rating);
-
-            return new AddStaffCommand(person);
+            return new Staff(name, phone, email, address, note, tags, salary, employment, rating);
         } catch (ParseException pe) {
             throw new ParseException(String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, pe.getMessage()));
         }

@@ -35,30 +35,44 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * and returns an AddCommand object for execution. Parameter args cannot be null.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
         assert (args != null) : "`argument` to pass for add command is null";
+
         logger.log(Level.INFO, "Going to start parsing for add command.");
-        ParserUtil.verifyNoUnknownPrefix(args, AddCommand.MESSAGE_USAGE, "add",
-                FAILED_TO_ADD,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE,
                         PREFIX_RATING);
 
+        // validates user command fields
+        ParserUtil.verifyNoUnknownPrefix(args, AddCommand.MESSAGE_USAGE, "add",
+                FAILED_TO_ADD,
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);
         ParserUtil.verifyNoMissingField(argMultimap, AddCommand.MESSAGE_USAGE, "add",
                 FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL);
-
-        if (!argMultimap.getPreamble().isEmpty()) {
+        boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
+        if (!isPreambleEmpty) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
+        Person person = createPersonContact(argMultimap);
+
+        return new AddCommand(person);
+    }
+
+    /**
+     * Creates a person contact based on the argument multimap.
+     * @param argMultimap Contains the mappings of values to the specific prefixes.
+     * @return A person contact.
+     * @throws ParseException Thrown when invalid paramters are used.
+     */
+    private Person createPersonContact(ArgumentMultimap argMultimap) throws ParseException {
         try {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElseThrow());
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElseThrow());
@@ -70,9 +84,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Tag tag = new Tag("other");
             Set<Tag> tags = new HashSet<>();
             tags.add(tag);
-            Person person = new Person(name, phone, email, address, note, tags, rating);
-
-            return new AddCommand(person);
+            return new Person(name, phone, email, address, note, tags, rating);
         } catch (ParseException pe) {
             throw new ParseException(String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, pe.getMessage()));
         }
