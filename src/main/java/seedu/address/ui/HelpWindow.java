@@ -93,7 +93,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the help message based on command to give help for.
+     * Sets the help message based on the command to give help for.
      *
      * @param message Help message based on command to give help for.
      */

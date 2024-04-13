@@ -7,9 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's Note in the address book.
  */
 public class Note {
-
     public static final String MESSAGE_CONSTRAINTS = "Note can take any values, and it should not be blank";
-
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     private String value;
@@ -28,13 +26,19 @@ public class Note {
 
     /**
      * Returns true if a given string is a valid note.
+     *
+     * @param test Note to test.
+     * @return Boolean indicating whether the string is a valid note.
      */
     public static boolean isValidNote(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Returns true if a given string contains deadline prefix.
+     * Returns true if a given string contains the deadline prefix.
+     *
+     * @param test String to test.
+     * @return Boolean indicating whether the string contains the deadline prefix.
      */
     public static boolean isNoteContainingDeadline(String test) {
         String trimmedDeadlinePrefix = "; deadline :";

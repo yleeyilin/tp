@@ -11,7 +11,7 @@ import seedu.address.logic.messages.HelpMessages;
 import seedu.address.model.Model;
 
 /**
- * Returns help instructions for each command.
+ * Returns help details for each command.
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "/help";

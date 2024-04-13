@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Adds a note to an existing person in PoochPlanner.
- * A non-empty note must be specified.
+ * A non-empty note and name must be specified.
  */
 public class NoteCommand extends Command {
     public static final String COMMAND_WORD = "/note";
@@ -50,6 +50,8 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert (note != null) : "specified note to add to contact is null";
+        assert (name != null) : "specified name to add note to is null";
         logger.info("started executing the note command");
         requireNonNull(model);
 
