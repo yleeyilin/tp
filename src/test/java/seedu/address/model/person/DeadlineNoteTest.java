@@ -8,11 +8,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineNoteTest {
-
-    private String validNote = "careful poochies";
-
     @Test
     public void constructor_null_throwsNullPointerException() {
+        String validNote = "careful poochies";
         assertThrows(NullPointerException.class, () -> new DeadlineNote(validNote, null));
     }
 
@@ -48,21 +46,24 @@ public class DeadlineNoteTest {
 
     @Test
     public void equals() {
-        Note deadlineNote = new DeadlineNote("kind cats", "2025-10-10");
+        Note deadlineNote1 = new DeadlineNote("kind cats", "2025-10-10");
+        Note deadlineNote2 = new DeadlineNote("kind cats", "2025-10-10");
+        Note deadlineNote3 = new DeadlineNote("kind cats", "2345-10-10");
+
 
         // same values -> returns true
-        assertTrue(deadlineNote.equals(new DeadlineNote("kind cats", "2025-10-10")));
+        assertTrue(deadlineNote1.equals(deadlineNote2));
 
         // same object -> returns true
-        assertTrue(deadlineNote.equals(deadlineNote));
+        assertTrue(deadlineNote1.equals(deadlineNote1));
 
         // null -> returns false
-        assertFalse(deadlineNote.equals(null));
+        assertFalse(deadlineNote1.equals(null));
 
         // different types -> returns false
-        assertFalse(deadlineNote.equals(5.0f));
+        assertFalse(deadlineNote1.equals(5));
 
         // different values -> returns false
-        assertFalse(deadlineNote.equals(new DeadlineNote("kind cats", "2345-10-10")));
+        assertFalse(deadlineNote1.equals(deadlineNote3));
     }
 }

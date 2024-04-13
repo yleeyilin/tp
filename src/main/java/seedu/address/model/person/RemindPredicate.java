@@ -14,22 +14,21 @@ public class RemindPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Note currNote = person.getNote();
+
+        // checks if note is a deadline note by checking if it contains
+        // the string " by: "
         if (!currNote.toString().contains(" by: ")) {
             return false;
         }
         String[] noteAndDate = currNote.toString().split(" by: ");
 
         try {
-
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
-
             LocalDate convertedDate = LocalDate.parse(noteAndDate[1], inputFormat);
-
             String outputDate = convertedDate.toString();
-
             LocalDate noteDate = LocalDate.parse(outputDate);
-
             LocalDate currDate = LocalDate.now();
+
             if (!noteDate.isBefore(currDate)) {
                 return true;
             } else {

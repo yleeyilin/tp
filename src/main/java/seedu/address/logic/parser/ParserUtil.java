@@ -254,6 +254,7 @@ public class ParserUtil {
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
+
         if (Note.isNoteContainingDeadline(trimmedNote)) {
             throw new ParseException(NoteMessages.MESSAGE_DEADLINE_NOT_SPECIFIED);
         }
@@ -286,12 +287,12 @@ public class ParserUtil {
         requireNonNull(note, deadline);
         String trimmedNote = note.trim();
         String trimmedDeadline = deadline.trim();
+
         if (!DeadlineNote.isValidNote(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         if (!DeadlineNote.isValidDate(deadline)) {
             throw new ParseException(DeadlineNote.MESSAGE_INVALID_DATE);
-
         }
         return new DeadlineNote(trimmedNote, trimmedDeadline);
     }
@@ -302,9 +303,9 @@ public class ParserUtil {
      * @throws ParseException If the given {@code commandType} is invalid.
      */
     public static String parseHelp(String commandType) throws ParseException {
-
         requireNonNull(commandType);
         String trimmedCommand = commandType.trim();
+
         if (!HelpCommand.isValidCommandType(commandType)) {
             throw new ParseException(HelpCommand.MESSAGE_CONSTRAINTS);
         }

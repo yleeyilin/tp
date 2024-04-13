@@ -144,6 +144,9 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Opens the help window or focuses on it if it's already opened.
+     *
+     * @param commandResult Message received from execute method which indicates
+     *                     the type of command to give help for.
      */
     @FXML
     public void handleAllHelp(CommandResult commandResult) {
@@ -212,6 +215,8 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Opens the help window for a specific command or focuses on it if it's already opened.
+     *
+     * @param displayedMessage Message to be displayed to users.
      */
     @FXML
     public void handleOtherHelp(String displayedMessage) {

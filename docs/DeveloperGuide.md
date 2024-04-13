@@ -32,7 +32,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -1186,18 +1186,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Planned Enhancement**
 
-1. `parse` for all command parsers
+1. Enhance command to be space insensitive
    1. Currently, we do not allow for incorrect spacing in commands. 
    2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com``` 
    3. The above example will be considered as invalid since there is no spacing before the `phone` and `address` prefixes and are not parsed as valid prefixes. 
    4. We plan to extend PoochPlanner to accept this alternative possible input to cater to fast typists.
 
-2. `parseXYZ` for all paramters
-   1. Currently, we have stricter parameter validation for all parameters such as `name`, `phone number`. 
-   2. These functions includes `parseName` etc.
-   3. Paramters that do not satisfy validation checks will not be accepted by PoochPlanner.
-   4. We plan to add a warning rather than an error message to improve usability for users. 
+2. Parse user's input
+   1. Currently, we do not have any checker to check user's input. 
+   2. We accept input value `John Doe` with different number of spacing as different inputs.
+   3. We plan to parse all the input to remove additional spacing to cater fast typists as additional spacing is high possibly due to typo.
 
+3. Enhance price to allow decimals
+   1. Currently, we do not allow decimal place for prices
+   2. We plan to allow decimal places for prices to cater for more flexibility in recording prices.
+
+4. Enhance salary to be stored in different unit
+   1. Currently, we only allow storing salary with unit `/hr`.
+   2. We plan to allow more flexible storing unit such as `/day`, `/month` and `/event`.
+
+5. Enhance validation on input fields for search command
+   1. Currently, we do not have any validation on input fields such as salary, phone in search commands.
+   2. If user insert random name in salary field, the execution will not throw any error.
+   3. We plan to do validation check on all the fields to ensure that user is inserting correct type of value in the field.
+
+6. Enhance post-search status
+   1. Currently, after a search command, the contact book will only display the filtered list.
+   2. After exucution of delete, pin, unpin, undo and redo will not return to main list.
+   3. We plan to enhance the commands by returning to main list after every execution of command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1223,6 +1239,36 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### Adding a contact
+
+1. Adding a `Person` contact
+
+   1. Prerequisites: The person name of the new contact must not exist in contact book.
+
+   2. Test case: `/add-person ; name : Person1 ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com`<br>
+     Expected: Woof! Added General Contact Person1 successfully! 🐶
+
+2. Adding a `Staff` contact
+
+   1. Prerequisites: The staff name of the new contact must not exist in contact book.
+
+   2. Test case: `/add-staff ; name : Staff1 ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time`<br>
+     Expected: Woof! Added Staff Staff1 successfully! 🐶
+
+3. Adding a `Supplier` contact
+
+   1. Prerequisites: The supplier name of the new contact must not exist in contact book.
+
+   2. Test case: `/add-supplier ; name : Supplier1 ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag`<br>
+     Expected: Woof! Added Supplier Supplier1 successfully! 🐶
+
+4. Adding a `Maintainer` contact
+
+   1. Prerequisites: The maintainer name of the new contact must not exist in contact book.
+
+   2. Test case: ` /add-maintainer ; name : Maintainer1  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr`<br>
+     Expected: Woof! Added Maintainer Maintainer1 successfully! 🐶
 
 ### Editing a contact
 
@@ -1384,6 +1430,84 @@ testers are expected to do more *exploratory* testing.
   2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
 
+### Search a contact
+1. Search contacts using field name.
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+      ``` 
+      /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+      /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+      ```
+   2. Test case: `/search ; name : John`
+      Expected: Woof! 2 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with name having `John` as substring.)
+
+2. Search contacts using field phone. 
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+   ``` 
+   /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+   /add-person ; name : John Doe ; phone : 8888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+   /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+   ```
+   
+   2. Test case: `/search ; phone : 12345678`
+      Expected: Woof! 1 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with phone number having `12345678` as substring.)
+
+
+### Sort contact list
+1. Sort contacts using field name.
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+      ``` 
+      /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+      /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+      ```
+   2. Test case: `/sort ; field : name`
+      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of contact book is omited. It should show the contacts with name in ascending order.)
+
+1. Sort contacts using field phone.
+   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+     ``` 
+     /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+     /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
+     /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
+     ```
+   2. Test case: `/sort ; field : phone`
+     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of contact book is omited. It should show the contacts with phone number in ascending order.)
+
+### Undo a command
+1. Undo a command that modified the contact book
+
+   1. Prerequisites: The previous command must modify the contact book. You can run the following command to modify the contact book:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+      
+   2. Test case: `/undo`
+      Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command.)
+
+2. Undo a command that did not modify the contact book
+   
+   1.  Prerequisites: There must exist a previous command that modify the contact book. You can run the following two commands which second command does not modify contact book:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /search ; name : Poochie
+      ```
+   
+   2. Test case: `/undo`
+      Expected:  Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command. In this case, due to search function will stay on partial list, contact of Poochie should disappear.)
+
+### Redo a command
+1. Redo an undo command.
+
+   1. Prerequisites: There must be at least one undo command executed. You can run the following command before testing:
+      ``` 
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /undo   
+      ```
+
+   2. Test case: `/redo`
+      Expected: Woof! Redo successfully! 🐶(Details of contact book is omitted. It should show the contact book list before undo command)
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -1391,3 +1515,35 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+### Appendix : Effort
+#### Project Overview
+Our project aimed to enhance the functionality of a contact management system, building upon the foundation laid by AB3 (Address Book 3). Key improvements included accommodating multiple types of contacts, refining command formats for user-friendliness, introducing dynamic search and sorting capabilities, implementing note and reminder features, integrating pin/unpin functionality, and incorporating undo/redo functionality. These enhancements aimed to provide users with a more intuitive and efficient contact management experience.
+
+#### Difficulty Level and Challenges Faced
+The project faced significant challenges due to its complexity and the need to seamlessly integrate new features with the existing AB3 framework. One major challenge was accommodating multiple types of contacts (staff, maintainer, supplier) while ensuring compatibility with the original AB3 data model and commands. This required thorough understanding of the project structure and meticulous modification of existing components, particularly the `JsonAdaptedPerson` classes.
+
+Additionally, redesigning command formats and implementing new features such as dynamic search, sorting, note/reminder functionalities, and pin/unpin features demanded careful planning and detailed implementation. Adapting the undo/redo feature from AB4 to fit within the AB3 framework posed another challenge, as it necessitated significant modifications to the model manager and command execution flow while ensuring backward compatibility.
+
+#### Effort Required
+The effort required for the project was substantial, spanning analysis, design, development, testing, and documentation phases. The multidisciplinary team invested significant time and resources in understanding AB3's architecture, identifying areas for enhancement, and implementing new features while ensuring compatibility and stability. Agile methodologies were employed to iteratively address challenges and incorporate stakeholder feedback, resulting in an efficient development process.
+
+#### Achievements
+Despite the challenges, the project achieved several milestones that significantly enhanced the contact management system's functionality and user experience. Key achievements include:
+
+1. Successful integration of multiple contact types, providing users with greater flexibility and organization capabilities.
+2. Redesigning command formats for improved intuitiveness and ease of use, enhancing user interaction.
+3. Implementation of dynamic search and sorting functionalities, empowering users to efficiently navigate and manage their contacts.
+4. Introduction of note and reminder features, enabling users to add context and schedule tasks associated with contacts.
+5. Seamless integration of pin/unpin functionality, allowing users to prioritize contacts.
+6. Seamless integration of undo/redo functionality, allowing users to revert to previous states and improve data integrity.
+
+
+#### Effort Saved Through Reuse:
+Approximately 10% of the project effort was saved through strategic reuse of existing components and libraries. Notably, the redesign of command formats leveraged insights from previous projects and industry best practices, streamlining development and ensuring consistency. Additionally, adapting the undo/redo feature from AB4 involved reusing core concepts and methodologies, significantly reducing implementation complexity and effort.
+
+In summary, the project's successful implementation of advanced features within the AB3 framework demonstrates our team's proficiency in software development and problem-solving. Despite the inherent challenges, our strategic approach to reuse and adaptation resulted in a robust and feature-rich contact management system that meets the evolving needs of users.
+
+### Acknowledgements
+1. The feature undo/redo (design and UML diagrams) was inspired and reused with minimal changes from [SE-addressbook](https://se-education.org/addressbook-level4/DeveloperGuide.html#undo-redo-feature).

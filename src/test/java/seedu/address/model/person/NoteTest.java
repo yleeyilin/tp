@@ -31,14 +31,14 @@ public class NoteTest {
         assertFalse(Note.isValidNote(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Note.isValidNote("happy puppies"));
+        assertTrue(Note.isValidNote("happy puppies")); //full phrase
         assertTrue(Note.isValidNote("-")); // one character
     }
 
     @Test
     public void isNoteContainingDeadline() {
         // no deadline prefix
-        assertFalse(Note.isNoteContainingDeadline("no deadline field")); // empty string
+        assertFalse(Note.isNoteContainingDeadline("no deadline field"));
 
         // contains deadline prefix
         assertTrue(Note.isNoteContainingDeadline("/note ; deadline :"));
@@ -46,21 +46,23 @@ public class NoteTest {
 
     @Test
     public void equals() {
-        Note note = new Note("kind cats");
+        Note note1 = new Note("kind cats");
+        Note note2 = new Note("kind cats");
+        Note note3 = new Note("mean cats");
 
         // same values -> returns true
-        assertTrue(note.equals(new Note("kind cats")));
+        assertTrue(note1.equals(note2));
 
         // same object -> returns true
-        assertTrue(note.equals(note));
+        assertTrue(note1.equals(note1));
 
         // null -> returns false
-        assertFalse(note.equals(null));
+        assertFalse(note1.equals(null));
 
         // different types -> returns false
-        assertFalse(note.equals(5.0f));
+        assertFalse(note1.equals(5));
 
         // different values -> returns false
-        assertFalse(note.equals(new Note("mean cats")));
+        assertFalse(note1.equals(note3));
     }
 }
