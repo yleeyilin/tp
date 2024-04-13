@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.FAILED_TO_RATE;
+import static seedu.address.logic.messages.RateMessages.FAILED_TO_RATE;
+import static seedu.address.logic.messages.RateMessages.RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -37,10 +38,10 @@ public class RateCommandParser implements Parser<RateCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_RATING);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE, "rate",
+        ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE, RATE,
                 FAILED_TO_RATE,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);
-        ParserUtil.verifyNoMissingField(argMultimap, RateCommand.MESSAGE_USAGE, "rate",
+        ParserUtil.verifyNoMissingField(argMultimap, RateCommand.MESSAGE_USAGE, RATE,
                 FAILED_TO_RATE,
                 PREFIX_NAME, PREFIX_RATING);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);

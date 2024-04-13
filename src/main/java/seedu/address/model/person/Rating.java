@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
 /**
- * Represents a Person's Note in the address book.
+ * Represents a Person's Rating in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRating(String)}
  */
 public class Rating {
@@ -15,7 +15,7 @@ public class Rating {
     private String value;
 
     /**
-     * Constructs an {@code Rating}.
+     * Constructs a {@code Rating}.
      *
      * @param rating A valid rating.
      */

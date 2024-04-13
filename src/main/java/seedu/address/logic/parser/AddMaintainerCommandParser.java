@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.FAILED_TO_ADD;
+import static seedu.address.logic.messages.AddMessages.ADD_MAINTAINER;
+import static seedu.address.logic.messages.AddMessages.FAILED_TO_ADD;
+import static seedu.address.logic.messages.AddMessages.MAINTAINER_TYPE;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.messages.NoteMessages.DEFAULT_NOTE;
+import static seedu.address.logic.messages.RateMessages.DEFAULT_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -52,11 +56,11 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
                         PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+        ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, ADD_MAINTAINER,
                 FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
-        ParserUtil.verifyNoMissingField(argMultimap, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
+        ParserUtil.verifyNoMissingField(argMultimap, AddMaintainerCommand.MESSAGE_USAGE, ADD_MAINTAINER,
                 FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_SKILL, PREFIX_COMMISSION);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
@@ -84,10 +88,10 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElseThrow());
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElseThrow());
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElseThrow());
-            String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse("No note here");
-            Note note = noteContent.equals("No note here") ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
-            Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse("0"));
-            Tag tag = new Tag("maintainer");
+            String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse(DEFAULT_NOTE);
+            Note note = noteContent.equals(DEFAULT_NOTE) ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
+            Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse(DEFAULT_RATING));
+            Tag tag = new Tag(MAINTAINER_TYPE);
             Set<Tag> tags = new HashSet<>();
             tags.add(tag);
             Skill skill = ParserUtil.parseSkill(argMultimap.getValue(PREFIX_SKILL).orElseThrow());

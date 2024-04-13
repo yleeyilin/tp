@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.Messages.FAILED_TO_SORT;
+import static seedu.address.logic.messages.SortMessages.FAILED_TO_SORT;
+import static seedu.address.logic.messages.SortMessages.SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_COLLECTION;
 
@@ -26,9 +27,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, SortCommand.MESSAGE_USAGE, "sort",
+        ParserUtil.verifyNoUnknownPrefix(args, SortCommand.MESSAGE_USAGE, SORT,
                 FAILED_TO_SORT, PREFIX_FIELD);
-        ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, "sort",
+        ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, SORT,
                 FAILED_TO_SORT, PREFIX_FIELD);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD);
 

@@ -1,7 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.Messages.FAILED_TO_PIN;
+import static seedu.address.logic.messages.PinMessages.FAILED_TO_PIN;
+import static seedu.address.logic.messages.PinMessages.PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.logging.Level;
@@ -34,10 +35,10 @@ public class PinCommandParser implements Parser<PinCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, PinCommand.MESSAGE_USAGE, "pin",
+        ParserUtil.verifyNoUnknownPrefix(args, PinCommand.MESSAGE_USAGE, PIN,
                 FAILED_TO_PIN,
                 PREFIX_NAME);
-        ParserUtil.verifyNoMissingField(argMultimap, PinCommand.MESSAGE_USAGE, "pin",
+        ParserUtil.verifyNoMissingField(argMultimap, PinCommand.MESSAGE_USAGE, PIN,
                 FAILED_TO_PIN,
                 PREFIX_NAME);
 
