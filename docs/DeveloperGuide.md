@@ -30,9 +30,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** above explains the high-level design of the PoochPlanner.
 
-Given below is a quick overview of the main components and how they interact with each other.
+Below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -42,10 +42,10 @@ Given below is a quick overview of the main components and how they interact wit
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the PoochPlanner.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Model`**](#model-component): Holds the data of the PoochPlanner in memory.
+* [**`Storage`**](#storage-component): Reads data from and writes data to the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -58,9 +58,9 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name} Manager` class which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than a concrete class. This is to prevent outside component's being coupled to the implementation of a component, as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -72,15 +72,15 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that are made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class, which captures the commonalities between classes that represent parts of the visible GUI.
 Note that `HelpWindow` refers to a window that provides general help for all commands. `HelpOtherWindow` refers to a window which offers help for specific commands.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* listens for changes to `Model` data, so that the UI can be updated with the modified data.
+* keeps a reference to `Logic` component, because `UI` relies on `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
@@ -98,7 +98,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
-How the `Logic` component works:
+The `Logic` component:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`). `XYZCommandParser` uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -120,13 +120,13 @@ How the parsing works:
 <img src="images/ModelClassDiagram.png" width="700" />
 
 
-The `Model` component,
+The `Model` component:
 
 * stores different states of address book inside versioned address book.
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data (i.e., all `Person` objects are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to outside as a `ReadOnlyUserPref` object.
+* does not depend on any of the other three components (because the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
 
@@ -134,8 +134,9 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="6000" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+The `Storage` component:
+
+* saves both address book data and user preference data in JSON forma, which is read during the bootup of PoochPlanner.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -715,12 +716,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a new contact is added into list.`
+**Guarantee**: `If MSS reach step 3, a new contact is added into the contacts list.`
 
 **MSS**:
 
 1.  User requests to add the contact of a person.
-2.  PoochPlanner updates list of persons.
+2.  PoochPlanner updates the contacts list.
 3.  PoochPlanner confirms success update.
 
     Use case ends.
@@ -762,12 +763,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, the contact is deleted from list.`
+**Guarantee**: `If MSS reach step 3, the contact is deleted from the contacts list.`
 
 **MSS**:
 
 1.  User requests to delete contact of a person.
-2.  PoochPlanner removes person and updates list of persons.
+2.  PoochPlanner removes person and updates the contacts list.
 3.  PoochPlanner confirms successful deletion.
 
     Use case ends.
@@ -795,7 +796,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, the contact is edited successfully in the list.`
+**Guarantee**: `If MSS reach step 3, the contact is successfully edited in the contacts list.`
 
 **MSS**:
 
@@ -894,7 +895,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a rating for the contact is updated successfully in the list.`
+**Guarantee**: `If MSS reach step 3, a rating for the contact is updated successfully in the contacts list.`
 
 **MSS**:
 
@@ -930,16 +931,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to learn more about the commands.
-2.  PoochPlanner displays a details relating to this command.
+2.  PoochPlanner displays details relating to this command.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. User requests to learn about an invalid command(a command not offered by PoochPlanner).
+* 1a. User requests to learn about an invalid command (a command that is not offered by PoochPlanner).
    * 1a1. PoochPlanner displays the error message.
    * 1a2. User re-enters a new command and request to learn about a valid command.
-   * Steps 1a1 - 1a2 are repeated until a valid command is inputted by the User.
+   * Steps 1a1 - 1a2 are repeated until a valid command is inputted by the user.
    * Use case resumes from step 2.
 
 ---
@@ -958,7 +959,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**:
 
-* 1a. PoochPlanner detects no previous state of address book.
+* 1a. PoochPlanner detects no previous record of address book.
 
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
@@ -994,7 +995,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to pin a contact.
-2.  PoochPlanner displays a list of contact with pinned contact at the top.
+2.  PoochPlanner displays the contacts list with the pinned contacts at the top.
 
     Use case ends.
 
@@ -1022,7 +1023,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to unpin a contact.
-2.  PoochPlanner displays a list of contact with the remaining pinned contact at the top.
+2.  PoochPlanner displays the contacts list with the rest of the pinned contacts at the top.
 
     Use case ends.
 
@@ -1049,7 +1050,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a note for the contact is updated successfully in the list.`
+**Guarantee**: `If MSS reach step 3, a note for the contact is updated successfully in the contacts list.`
 
 **MSS**:
 
@@ -1084,7 +1085,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC12 - View reminders for contact list`
+**Use case**: `UC12 - View reminders for the contacts list`
 
 **Actor**: `User`
 
@@ -1100,7 +1101,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC13 - Sort contact list`
+**Use case**: `UC13 - Sort the contacts list`
 
 **Actor**: `User`
 
@@ -1124,7 +1125,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC14 - Clear contact list`
+**Use case**: `UC14 - Clear contacts list`
 
 **Actor**: `User`
 
@@ -1139,7 +1140,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC15 - List contact list`
+**Use case**: `UC15 - List contacts list`
 
 **Actor**: `User`
 
@@ -1155,17 +1156,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. The application needs to be compatible across major operating systems, including Windows, MacOS, and Linux, supporting at least Java 11.
+1. PoochPlanner needs to be compatible across major operating systems, including Windows, MacOS, and Linux, supporting at least Java 11.
 2. User-managed transactions and budgets should be locally saved and backed up, ensuring restoration in subsequent sessions unless the data integrity is compromised.
 3. Thorough documentation of all non-private methods is imperative to ensure the maintainability of the codebase.
-4. The application should function completely offline. 
+4. PoochPlanner should function completely offline. 
 5. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
 6. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
 7. All code snippets presented in the developer guides shall follow a consistent coding style and formatting, adhering to the company's coding standards and best practices. 
 8. The developer guides shall undergo regular content audits, with outdated or deprecated information flagged for removal or revision, and new features or updates documented within one week of release. 
 9. The system should respond within 2 seconds. 
 10. The data should store locally and not accessible from other device for privacy issue. 
-11. The project is expected to adhere to schedule closely to deliver new feature.
+11. This project is expected to adhere to schedule closely to deliver new feature.
 
 ### Glossary
 
@@ -1345,7 +1346,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. PoochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
@@ -1366,7 +1367,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Pinning a person while all persons are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
@@ -1378,7 +1379,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Unpinning a person while all persons are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /pin ; name : Poochie
@@ -1391,7 +1392,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Rates a person while all persons are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
@@ -1524,7 +1525,7 @@ Our project aimed to enhance the functionality of a contact management system, b
 #### Difficulty Level and Challenges Faced
 The project faced significant challenges due to its complexity and the need to seamlessly integrate new features with the existing AB3 framework. One major challenge was accommodating multiple types of contacts (staff, maintainer, supplier) while ensuring compatibility with the original AB3 data model and commands. This required thorough understanding of the project structure and meticulous modification of existing components, particularly the `JsonAdaptedPerson` classes.
 
-Additionally, redesigning command formats and implementing new features such as dynamic search, sorting, note/reminder functionalities, and pin/unpin features demanded careful planning and detailed implementation. Adapting the undo/redo feature from AB4 to fit within the AB3 framework posed another challenge, as it necessitated significant modifications to the model manager and command execution flow while ensuring backward compatibility.
+Additionally, redesigning command formats and implementing new features such as dynamic search, sorting, note/reminder functionalities, and pin/unpin features demanded careful planning and detailed implementation. Adapting the undo/redo feature from AB3 to fit within the AB3 framework posed another challenge, as it necessitated significant modifications to the model manager and command execution flow while ensuring backward compatibility.
 
 #### Effort Required
 The effort required for the project was substantial, spanning analysis, design, development, testing, and documentation phases. The multidisciplinary team invested significant time and resources in understanding AB3's architecture, identifying areas for enhancement, and implementing new features while ensuring compatibility and stability. Agile methodologies were employed to iteratively address challenges and incorporate stakeholder feedback, resulting in an efficient development process.
@@ -1541,7 +1542,7 @@ Despite the challenges, the project achieved several milestones that significant
 
 
 #### Effort Saved Through Reuse:
-Approximately 10% of the project effort was saved through strategic reuse of existing components and libraries. Notably, the redesign of command formats leveraged insights from previous projects and industry best practices, streamlining development and ensuring consistency. Additionally, adapting the undo/redo feature from AB4 involved reusing core concepts and methodologies, significantly reducing implementation complexity and effort.
+Approximately 10% of the project effort was saved through strategic reuse of existing components and libraries. Notably, the redesign of command formats leveraged insights from previous projects and industry best practices, streamlining development and ensuring consistency. Additionally, adapting the undo/redo feature from AB3 involved reusing core concepts and methodologies, significantly reducing implementation complexity and effort.
 
 In summary, the project's successful implementation of advanced features within the AB3 framework demonstrates our team's proficiency in software development and problem-solving. Despite the inherent challenges, our strategic approach to reuse and adaptation resulted in a robust and feature-rich contact management system that meets the evolving needs of users.
 
