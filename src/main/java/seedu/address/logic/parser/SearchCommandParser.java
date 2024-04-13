@@ -25,7 +25,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SEARCH_COLLECTION);
 
-        // Validate correct user command
+        // validate correct user command
         ParserUtil.verifyNoUnknownPrefix(
                 args,
                 SearchCommand.MESSAGE_USAGE,

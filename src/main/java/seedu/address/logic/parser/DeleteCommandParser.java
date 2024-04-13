@@ -34,7 +34,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Name name;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, DeleteCommand.MESSAGE_USAGE, "delete",
                 FAILED_TO_DELETE, PREFIX_NAME);
         ParserUtil.verifyNoMissingField(argMultimap, DeleteCommand.MESSAGE_USAGE, "delete",

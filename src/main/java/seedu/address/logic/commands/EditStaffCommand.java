@@ -131,6 +131,7 @@ public class EditStaffCommand extends Command {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof EditStaffCommand)) {
             return false;
         }

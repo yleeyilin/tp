@@ -38,7 +38,7 @@ public class RateCommandParser implements Parser<RateCommand> {
         Name name;
         Rating rating;
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, RateCommand.MESSAGE_USAGE, "rate",
                 FAILED_TO_RATE,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_RATING);

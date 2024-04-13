@@ -51,7 +51,7 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SKILL, PREFIX_COMMISSION, PREFIX_RATING);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, AddMaintainerCommand.MESSAGE_USAGE, "add-maintainer",
                 FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

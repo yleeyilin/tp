@@ -47,7 +47,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         EditMaintainerDescriptor editMaintainerDescriptor;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -61,12 +61,12 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 
-        // Maps user commands to name, field
+        // maps user commands to name and field
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditMaintainerCommand.MESSAGE_USAGE));
 
-        // Maps fields to edit to their values
+        // maps fields to edit to their values
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);

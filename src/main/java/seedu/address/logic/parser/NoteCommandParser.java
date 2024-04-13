@@ -36,7 +36,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         Note note;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, "note",
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",

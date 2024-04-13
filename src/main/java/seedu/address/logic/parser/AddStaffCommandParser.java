@@ -51,7 +51,7 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SALARY, PREFIX_EMPLOYMENT, PREFIX_RATING);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, AddStaffCommand.MESSAGE_USAGE, "add-staff",
                 FAILED_TO_ADD,
                 PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,

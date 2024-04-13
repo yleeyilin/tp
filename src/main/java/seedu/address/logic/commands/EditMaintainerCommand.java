@@ -127,6 +127,7 @@ public class EditMaintainerCommand extends Command {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof EditMaintainerCommand)) {
             return false;
         }

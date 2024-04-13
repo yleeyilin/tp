@@ -34,10 +34,12 @@ public class PinCommandTest {
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedPerson.toPin();
 
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedPerson);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(personToPin);
         PinCommand pinCommand = new PinCommand(personToPin.getName());
 
@@ -53,10 +55,12 @@ public class PinCommandTest {
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedStaff.toPin();
 
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedStaff);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(staffToPin);
         PinCommand pinCommand = new PinCommand(staffToPin.getName());
 
@@ -72,10 +76,12 @@ public class PinCommandTest {
                 .withName("Pin Test Alice Maintainer").withAddress(VALID_ADDRESS_BOB).build();
         expectedMaintainer.toPin();
 
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedMaintainer);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(maintainerToPin);
         PinCommand pinCommand = new PinCommand(maintainerToPin.getName());
 
@@ -91,10 +97,12 @@ public class PinCommandTest {
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedSupplier.toPin();
 
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedSupplier);
         expectedModel.updatePinnedPersonList();
 
+        // execute method for model
         model.addPerson(supplierToPin);
         PinCommand pinCommand = new PinCommand(supplierToPin.getName());
 
