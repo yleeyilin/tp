@@ -1224,6 +1224,36 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a contact
+
+1. Adding a `Person` contact
+
+   1. Prerequisites: The person name of the new contact must not exist in contact book.
+
+   2. Test case: `/add-person ; name : Person1 ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com`<br>
+     Expected: Woof! Added General Contact Person1 successfully! 🐶
+
+2. Adding a `Staff` contact
+
+   1. Prerequisites: The staff name of the new contact must not exist in contact book.
+
+   2. Test case: `/add-staff ; name : Staff1 ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time`<br>
+     Expected: Woof! Added Staff Staff1 successfully! 🐶
+
+3. Adding a `Supplier` contact
+
+   1. Prerequisites: The supplier name of the new contact must not exist in contact book.
+
+   2. Test case: `/add-supplier ; name : Supplier1 ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag`<br>
+     Expected: Woof! Added Supplier Supplier1 successfully! 🐶
+
+4. Adding a `Maintainer` contact
+
+   1. Prerequisites: The maintainer name of the new contact must not exist in contact book.
+
+   2. Test case: ` /add-maintainer ; name : Maintainer1  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr`<br>
+     Expected: Woof! Added Maintainer Maintainer1 successfully! 🐶
+
 ### Editing a contact
 
 1. Edting a `Person` contact
@@ -1384,6 +1414,40 @@ testers are expected to do more *exploratory* testing.
   2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
 
+### Undo a command
+1. Undo a command that modified the contact book
+
+   1. Prerequisites: The previous command must modify the contact book. You can run the following command to modify the contact book:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+      
+   2. Test case: `/undo`
+      Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command.)
+
+2. Undo a command that did not modify the contact book
+   
+   1.  Prerequisites: There must exist a previous command that modify the contact book. You can run the following two commands which second command does not modify contact book:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /search ; name : Poochie
+      ```
+   
+   2. Test case: `/undo`
+      Expected:  Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command. In this case, due to search function will stay on partial list, contact of Poochie should disappear.)
+
+### Redo a command
+1. Redo an undo command.
+
+   1. Prerequisites: There must be at least one undo command executed. You can run the following command before testing:
+      ``` 
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      /undo   
+      ```
+
+   2. Test case: `/redo`
+      Expected: Woof! Redo successfully! 🐶(Details of contact book is omitted. It should show the contact book list before undo command)
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -1391,3 +1455,7 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+### Acknowledgements
+1. The feature undo/redo (design and UML diagrams) was inspired and reused with minimal changes from [SE-addressbook](https://se-education.org/addressbook-level4/DeveloperGuide.html#undo-redo-feature).
