@@ -256,6 +256,15 @@ completion of the `Delete` command.
 
 **3**: The contact with the name ‘Poochie’ will be deleted from PoochPlanner.
 
+**Aspect: How to implement delete command in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Only accept the name field, where only the last name field will be taken.
+  * Pros: User friendly. Users can easily correct the name field without deleting the previously incorrect name field entered. Since name cannot be edited, this ensures that the name will be consistent and the user do not have to check what to input everytime.
+  * Cons: Less rigorous validation check on name as users may not intentionally enter a second name field.
+
+* **Alternative 2**: Accept only one name field.
+  * Pros: Less prone to possible errors due to stricter validation checks on name fields.
+  * Cons: Less user friendly since users will have to put in more effort to fix their commands.
 
 ### Help feature
 
@@ -444,6 +453,17 @@ completion of the `Rate` command.
 **2**: The user inputs `/rate ; name : Poochie ; rating : 5` into the CLI.
 
 **3**: The contact with the name `Poochie` is rated with rating 5.
+
+**Aspect: How to store rate field in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Add rate field to all 4 constructors (Person, Staff, Maintainer, Supplier).
+  * Pros: Leverages inheritance, thus reducing repeated code and adheres to OOP.
+  * Cons: Changing the constructors of 4 classes is a tedious task.
+
+* **Alternative 2**: Add rate field to the Parent person constructor and use a setter to set new ratings.
+  * Pros: Much simpler implementation that will require less refactoring of code.
+  * Cons: Violates OOP, specifically encapsulation as the other classes would be able to manipulate the
+    ratings of Person objects directly.
 
 
 ### Remind feature
