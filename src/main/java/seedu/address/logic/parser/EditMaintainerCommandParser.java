@@ -32,8 +32,8 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditMaintainerCommand
-     * and returns an EditMaintainerCommand object for execution. Parameter args cannot be null.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an EditMaintainerCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format
      */
     public EditMaintainerCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -42,9 +42,6 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         logger.log(Level.INFO, "Going to start parsing for edit maintainer command.");
 
         String parsedArgs = ParserUtil.parseArg(args);
-        Name name;
-        String fieldArgs;
-        EditMaintainerDescriptor editMaintainerDescriptor;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
         // validates user command fields
@@ -62,8 +59,8 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         }
 
         // maps user commands to name and field
-        name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
-        fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        Name name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
+        String fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditMaintainerCommand.MESSAGE_USAGE));
 
         // maps fields to edit to their values
@@ -74,7 +71,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
 
-        editMaintainerDescriptor = editMaintainerDescription(fieldArgMultimap);
+        EditMaintainerDescriptor editMaintainerDescriptor = editMaintainerDescription(fieldArgMultimap);
 
         boolean isNoFieldEdited = !editMaintainerDescriptor.isAnyFieldEdited();
         if (isNoFieldEdited) {
@@ -93,7 +90,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditMaintainerDescriptor that contains the new values from the user.
-     * @throws ParseException Indicates the invalid format that users might have entered.
+     * @throws ParseException If the user enters invalid paramters.
      */
     private EditMaintainerDescriptor editMaintainerDescription(
                 ArgumentMultimap fieldArgMultimap) throws ParseException {

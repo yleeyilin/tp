@@ -38,11 +38,11 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
     private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
-     * and returns an AddCommand object for execution. Parameter args cannot be null.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an AddCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddSupplierCommand parse(String args) throws ParseException {
-        assert (args != null) : "`argument` to pass for add supplier command is null";
+        assert (args != null) : "argument to pass for add supplier command is null";
 
         logger.log(Level.INFO, "Going to start parsing for supplier command.");
 
@@ -73,7 +73,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
      * Creates a supplier contact based on the argument multimap.
      * @param argMultimap Contains the mappings of values to the specific prefixes.
      * @return A supplier contact.
-     * @throws ParseException Thrown when invalid paramters are used.
+     * @throws ParseException If the user enters invalid paramters.
      */
     private Supplier createSupplierContact(ArgumentMultimap argMultimap) throws ParseException {
         try {

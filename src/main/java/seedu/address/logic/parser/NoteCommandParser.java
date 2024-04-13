@@ -24,16 +24,14 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the NoteCommand
-     * and returns a NoteCommand object for execution. Parameter args cannot be null.
-     *
-     * @throws ParseException if the user input does not conform the expected format.
+     * and returns a NoteCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public NoteCommand parse(String args) throws ParseException {
         assert (args != null) : "argument to pass for note command is null";
 
         logger.log(Level.INFO, "Going to start parsing for note command.");
-        Name name;
-        Note note;
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
         // validates user command fields
@@ -41,14 +39,15 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
         ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE);
-        boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
         if (!isPreambleEmpty) {
             logger.log(Level.WARNING, "Parsing error while parsing for note command.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
         try {
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
+            Note note;
             if (!isContainingDeadlinePrefix) {
                 note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
             } else {
