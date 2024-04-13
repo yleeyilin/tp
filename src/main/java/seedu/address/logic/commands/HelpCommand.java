@@ -5,19 +5,20 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.HelpMessages;
 import seedu.address.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Returns help instructions for each command.
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "/help";
     public static final String MESSAGE_USAGE = "Shows program usage instructions.\n"
             + "Example: /help ; command : exit";
     public static final String MESSAGE_CONSTRAINTS = "PoochPlanner only accepts general, add, delete, edit,"
-            + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort as"
+            + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort and clear as"
             + " valid command type inputs.";
     private final String commandType;
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -43,7 +44,9 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * @param commandType of command to get help for.
+     * Constructs a HelpCommand object.
+     *
+     * @param commandType The command type to give help for.
      */
     public HelpCommand(String commandType) {
         requireAllNonNull(commandType);
@@ -54,9 +57,8 @@ public class HelpCommand extends Command {
      * Checks if command provided is a valid command.
      * Parameter commandType cannot be null.
      *
-     * @param commandType command type that user needs help for.
-     *
-     * @return boolean showing whether the command type is valid.
+     * @param commandType The command type to give help for.
+     * @return Boolean showing whether the command type is valid.
      * */
     public static boolean isValidCommandType(String commandType) {
         assert (commandType != null) : "specified command type to give help for is null";
@@ -72,11 +74,11 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Executes the command and returns the result message.
+     * Executes the command and returns the help message.
      * Field commandType cannot be null.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return feedback message of the operation result for display
+     * @return Feedback message of the operation result for display.
      * @throws CommandException If an error occurs during command execution.
      */
     @Override
@@ -84,6 +86,7 @@ public class HelpCommand extends Command {
         assert (commandType != null) : "specified command type to give help for is null";
         logger.info("started executing the help command");
 
+        // return the correct help message based on command type
         String capitalisedCommandType = commandType.toUpperCase();
         if (capitalisedCommandType.equals(CommandTypes.GENERAL.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE, true, false);
@@ -135,5 +138,12 @@ public class HelpCommand extends Command {
 
         HelpCommand otherHelpCommand = (HelpCommand) other;
         return commandType.equals(otherHelpCommand.commandType);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("command type", commandType)
+                .toString();
     }
 }

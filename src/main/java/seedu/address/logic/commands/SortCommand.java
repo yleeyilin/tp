@@ -47,8 +47,12 @@ public class SortCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        logger.fine(String.format(SortMessages.MESSAGE_SORT_PERSON_SUCCESS, prefix.getPrefix()));
-
-        return new CommandResult(String.format(SortMessages.MESSAGE_SORT_PERSON_SUCCESS, prefix.getPrefix()));
+        if (prefix.getPrefix().equalsIgnoreCase("phone")) {
+            logger.fine(String.format(SortMessages.MESSAGE_SORT_PERSON_SUCCESS, "phone number"));
+            return new CommandResult(String.format(SortMessages.MESSAGE_SORT_PERSON_SUCCESS, "phone number"));
+        } else {
+            logger.fine(String.format(SortMessages.MESSAGE_SORT_PERSON_SUCCESS, prefix.getPrefix()));
+            return new CommandResult(String.format(SortMessages.MESSAGE_SORT_PERSON_SUCCESS, prefix.getPrefix()));
+        }
     }
 }

@@ -36,6 +36,15 @@ public class NoteTest {
     }
 
     @Test
+    public void isNoteContainingDeadline() {
+        // no deadline prefix
+        assertFalse(Note.isNoteContainingDeadline("no deadline field")); // empty string
+
+        // contains deadline prefix
+        assertTrue(Note.isNoteContainingDeadline("/note ; deadline :"));
+    }
+
+    @Test
     public void equals() {
         Note note = new Note("kind cats");
 

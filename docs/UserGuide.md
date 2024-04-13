@@ -48,7 +48,7 @@ Sort | View your contacts in a sorted list so that you can locate your contacts 
 ## Navigating this User Guide
 This user guide is designed to help you make the most of PoochPlanner, whether you are a beginner or an experienced user.
 
-- If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
+- If you are eager to get started with PoochPlanner, head over to **[Quick Start](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#quick-start)** for easy-to-follow instructions on downloading PoochPlanner.
 - If you are a new user, explore the following sections to familiarise yourself with the basics:<br>
     1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the command box and contact cards.<br>
     2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
@@ -89,17 +89,17 @@ Case-Insensitive | The casing of the alphabetic characters does not matter (e.g.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` installed in your Computer.
 
 1. Download the latest `poochplanner.jar` from [here](https://github.com/AY2324S2-CS2103T-W10-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your PoochPlanner.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar poochplanner.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note that the app does not contain sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`/help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. 
    Some example commands you can try:
 
    * `/add-person ; name : Janna  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com` : Adds a general contact named `Janna` to the Pooch Planner.
@@ -145,9 +145,6 @@ Here's a quick look at the different parts of our GUI and some tips on how to us
 * Parameters can be in any order.<br>
   e.g. if the command specifies `address : [address] ; phone : [phone]`, `phone : [phone] ; address : [address]` is also acceptable.
 
-* All command words are case-sensitive.<br>
-  e.g. if the command word specifies `/add`, then `/ADD` is invalid.
-
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 * Commands are space-sensitive so you should take caution when entering the commands.
 </div>
@@ -184,6 +181,8 @@ The table below summarises the add command, format and examples for each contact
 
 * Name is case-insensitive but space-sensitive.<br>
 
+* Email must in format {example}@{domain} or {example}@{domain}.{extension}
+
 * Phone number must be in format {Number} and at least 3 digits long.<br>
 
 * Only one phone number is allowed to be inserted.<br>
@@ -206,12 +205,12 @@ Edits a **person / staff / supplier / maintainer** contact so that you can consi
 
 The table below summarises the edit command, format and examples for each contact type.
 
-| Edits a ...    | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit-person ; name : Mochie ; field : { address : Pooch Street 31}`<br> The above command edits the **address** field of `Mochie` to `Pooch Street31`.                                                                                                                                     |
+| Edits a ...    | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                          |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Person**     | Format : <br>`/edit-person ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] }` <br><br> Example:<br> `/edit-person ; name : Mochie ; field : { address : Pooch Street 31}`<br> The above command edits the **address** field of `Mochie` to `Pooch Street 31`.                                                                                                                          |
 | **Staff**      | Format : <br>`/edit-staff ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part/full] }` <br><br> Example: <br>`/edit-staff ; name : Thomas ; field : { address : Poochie Street 25 ; employment : full-time }` <br> The above command edits the **address and employment** field of `Thomas` to `Poochie Street 25` and `full-time` respectively. |
 | **Supplier**   | Format : <br>`/edit-supplier ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price] }` <br><br> Example: <br>`/edit-supplier ; name : Supplier1 ; field : { product : kibble ; price : $75/bag}` <br>The above command edits the **product and price** field of `Supplier1` to `kibble` and `$75/bag` respectively.                                   |
-| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of `Maintainer1` to `$10/hr`.                                                                           |
+| **Maintainer** | Format : <br>`/edit-maintainer ; name : [name] ; field : { phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission] }` <br><br> Example: <br>`/edit-maintainer ; name : Maintainer1 ; field : { commission : $10/hr}`<br>The above command edits the **commission** field of `Maintainer1` to `$10/hr`.                                                                       |
 
 <br> 
 
@@ -232,9 +231,9 @@ The table below summarises the edit command, format and examples for each contac
 
 * Name must be present in Pooch Planner.<br>
 
-* Contact type, i.e. Person / Staff / Supplier / Maintainer, must match command used. i.e. `/edit`, `/edit-staff`, `/edit-supplier` and `/edit-maintainer` respectively.<br>
+* Contact type, i.e. Person / Staff / Supplier / Maintainer, must match command used. i.e. `/edit-person`, `/edit-staff`, `/edit-supplier` and `/edit-maintainer` respectively.<br>
 
-* The field(s) to be edited must be a valid field within their contact type, i.e. Person / Staff / Supplier / Maintainer.<br>
+* The field(s) to be edited must be a valid field (excluding name) within their contact type, i.e. Person / Staff / Supplier / Maintainer.<br>
 
 * At least one field must be provided.<br>
 
@@ -289,10 +288,20 @@ Examples: <br>
 
 * Any valid fields, such as `name`, `phone`, `address`, `email`, `salary`, `employment`, `price`, `product`, `skill`, `commission`, `tag` or `note`, can be provided.<br>
 
-* Only one field can be provided.<br>
+* Multiple fields can be provided.<br>
 
 * Query is case-insensitive but space-sensitive.<br>
 </div>
+
+* For search queries regarding `salary`, `price` and `commission`:
+  * if you would like to search for exact `salary`/`price`/`commission`, you can follow this format (e.g. `$[Number]/hr`, `$[Number]/bag`). Only results that match the exact number will be shown. Examples:
+    * `/search ; salary : $50/hr`
+    * `/search ; price : $50/bag`
+  * If you want to search for `salaries`/`prices`/`commissions` within a specified range instead, you can follow this format `$[Query digits]`. In this case, query digits refer to the first few digits of a number.
+    * For instance, if you want to query for all salaries in the range `$50-59/hr`, you can key in `/search ; salary : $5`, with `$5` as the search query. This displays all staff that are paid from `$50/hr` to `$59/hr`.
+    * Note that this query also returns staff with salaries exactly `$5/hr`, from `$500/hr` to `$599/hr` as well, and even in larger ranges too. This same query type also applies to `price` and `commission`.
+
+* Keying in repeated fields (e.g. )
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
 
@@ -367,7 +376,7 @@ Example:
 
 * Name and Rating is a compulsory field that is **case-insensitive** but **space-sensitive**.<br>
 
-* Rating of 0 will automatically display `No rating given yet`.<br>
+* Rating of 0 is equivalent to no rating given and will not display any rating.<br>
 
 </div>
 
@@ -479,7 +488,7 @@ Example: <br>
     <br>
 </div>
 
-<br> 
+<br>
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
@@ -488,7 +497,10 @@ Example: <br>
 
 * Sorts by specifying a valid field, such as `name`, `phone`, `email`, `address`, `salary`, `employment`, `price`, `product`, `skill`, `commission`, `tag` or `note`.<br>
 
-* All field input are case-insensitive.<br>
+* All field inputs are case-insensitive.<br>
+
+* If you type in multiple field entries (e.g. `/sort ; field : name ; field : phone`), PoochPlanner sorts by the last field entered (i.e. `phone`).
+
 </div>
 
 #### Adding a note : `note`
@@ -510,7 +522,7 @@ Examples: <br>
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie ; deadline : 2020-10-10`
 
   The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`.
-  It also sets a deadline of the note to Nov 10 2020.
+  It also sets a deadline of the note to Oct 10 2020.
 
 <br> 
 
@@ -936,26 +948,26 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 
 ## Command Summary
 
-| Action                   | Format and Example                                                                                                                                                                                                                                                                                                                            |
-|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add General Contact**  | Format : <br>`/add-person ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission]`     <br> <br> Example : <br> `/add-person ; name : Janna  ; phone : 98765435 ; address : Poochie Street 24 ; email : iamjanna@gmail.com`                                                   |
-| **Add Staff**            | Format : <br>`/add-staff ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part/full]`    <br> <br> Example : <br> `/add-staff ; name : Poochie ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time`    |
-| **Add Supplier**         | Format : <br> `/add-supplier ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price]`        <br> <br> Example : <br> `/add-supplier ; name : PetCo ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag`         |
-| **Add Maintainer**       | Format : <br>`/add-maintainer ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission]` <br> <br> Example : <br> `/add-maintainer ; name : Tom Tan  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr` |
-| **Edit General Contact** | Format : <br>`/edit-person ; name : [name] ; field : { target-field : [value] }`                                                                       <br> <br> Example : <br> `/edit-person ; name : Poochie ; field : { address : Poochie Street 25 }`                                                                                     |
-| **Edit Staff**           | Format : <br>`/edit-staff ; name : [name] ; field : { target-field : [value] }`                                                                        <br> <br> Example : <br> `/edit-staff ; name : Poochie ; field : { salary : $40/hr ; employment : part-time }`                                                                         |
-| **Edit Supplier**        | Format : <br>`/edit-supplier ; name : [name] ; field : { target-field : [value] }`                                                                     <br> <br> Example : <br> `/edit-supplier ; name : Poochie ; field : { product : kibble ; price : $75/bag }`                                                                            |
-| **Edit Maintainer**      | Format : <br>`/edit-maintainer ; name : [name] ; field : { target-field : [value] }`                                                                   <br> <br> Example : <br> `/edit-maintainer ; name : Poochie ; field : { commission : $10/hr }`                                                                                         |
-| **Delete**               | Format : <br>`/delete name : [name] `                                                                                                                  <br> <br> Example : <br> `/delete ; name : Poochie`                                                                                                                                    |
-| **Search**               | Format : <br>`/search ; target-field : [value]`                                                                                                        <br> <br> Example : <br> `/search ; name : Poochie`                                                                                                                                    |
-| **List**                 | Format : <br>`/list`                                                                                                                                   <br> <br> Example : <br> `/list`                                                                                                                                                       |
-| **Help**                 | Format : <br>`/help ; command : [command type]`                                                                                                        <br> <br> Example : <br> `/help ; command : delete`                                                                                                                                    |
-| **Rate**                 | Format : <br>`/rate ; name : [name] ; rating : [rating]`                                                                                               <br> <br> Example : <br> `/rate ; name : Poochie ; rating : 5`                                                                                                                         |
-| **Undo**                 | Format : <br>`/undo`                                                                                                                                   <br> <br> Example : <br> `/undo`                                                                                                                                                       |
-| **Redo**                 | Format : <br>`/redo`                                                                                                                                   <br> <br> Example : <br> `/redo`                                                                                                                                                       |
-| **Pin**                  | Format : <br>`/pin ; name : [name]`                                                                                                                    <br> <br> Example : <br> `/pin ; name : Poochie`                                                                                                                                       |
-| **Unpin**                | Format : <br>`/unpin ; name : [name]`                                                                                                                  <br> <br> Example : <br> `/unpin ; name : Poochie`                                                                                                                                     |
-| **Sort**                 | Format : <br>`/sort ; target-field`                                                                                                                    <br> <br> Example : <br> `/sort ; name`                                                                                                                                                |
-| **Note**                 | Format : <br>`/note ; name : [name] ; note : [note]` <br> or <br> `/note ; name : [name] ; note : [note] ; deadline : [deadline]`                                <br> <br> Example : <br> `/note ; name : Poochie ; note : get dog for groomers ; deadline : 2020-10-10`                                                                      |
-| **Remind**               | Format : <br>`/remind`                                                                                                                                    <br> <br> Example : <br> `/remind`                                                                                                                                                  |
-| **Exit**                 | Format : <br>`/exit`                                                                                                                                    <br> <br> Example : <br> `/exit`                                                                                                                                                      |
+| Action                   | Format and Example                                                                                                                                                                                                                                                                                                                                   |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add General Contact**  | Format : <br>`/add-person ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission]`     <br> <br> Example : <br> `/add-person ; name : Janna  ; phone : 98765435 ; address : Poochie Street 24 ; email : iamjanna@gmail.com`                                                          |
+| **Add Staff**            | Format : <br>`/add-staff ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; salary : [salary]  ; employment : [part-time/full-time]`    <br> <br> Example : <br> `/add-staff ; name : Poochie ; phone : 98765435 ; address : Poochie Street 21 ; email : ilovecatstoo@gmail.com ; salary : $50/hr ; employment : part-time` |
+| **Add Supplier**         | Format : <br> `/add-supplier ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; product : [product] ; price : [price]`        <br> <br> Example : <br> `/add-supplier ; name : PetCo ; phone : 98673098 ; address : Meow Street 24 ; email : ilovewombatstoo@gmail.com ; product : kibble ; price : $98/bag`                |
+| **Add Maintainer**       | Format : <br>`/add-maintainer ; name : [name] ; phone : [phone] ; address : [address] ; email : [email] ; skill : [skill] ; commission : [commission]` <br> <br> Example : <br> `/add-maintainer ; name : Tom Tan  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr`        |
+| **Edit General Contact** | Format : <br>`/edit-person ; name : [name] ; field : { target-field : [value] }`                                                                       <br> <br> Example : <br> `/edit-person ; name : Poochie ; field : { address : Poochie Street 25 }`                                                                                            |
+| **Edit Staff**           | Format : <br>`/edit-staff ; name : [name] ; field : { target-field : [value] }`                                                                        <br> <br> Example : <br> `/edit-staff ; name : Poochie ; field : { salary : $40/hr ; employment : part-time }`                                                                                |
+| **Edit Supplier**        | Format : <br>`/edit-supplier ; name : [name] ; field : { target-field : [value] }`                                                                     <br> <br> Example : <br> `/edit-supplier ; name : Poochie ; field : { product : kibble ; price : $75/bag }`                                                                                   |
+| **Edit Maintainer**      | Format : <br>`/edit-maintainer ; name : [name] ; field : { target-field : [value] }`                                                                   <br> <br> Example : <br> `/edit-maintainer ; name : Poochie ; field : { commission : $10/hr }`                                                                                                |
+| **Delete**               | Format : <br>`/delete ; name : [name] `                                                                                                                  <br> <br> Example : <br> `/delete ; name : Poochie`                                                                                                                                         |
+| **Search**               | Format : <br>`/search ; target-field : [value]`                                                                                                        <br> <br> Example : <br> `/search ; name : Poochie`                                                                                                                                           |
+| **List**                 | Format : <br>`/list`                                                                                                                                   <br> <br> Example : <br> `/list`                                                                                                                                                              |
+| **Help**                 | Format : <br>`/help ; command : [command type]`                                                                                                        <br> <br> Example : <br> `/help ; command : delete`                                                                                                                                           |
+| **Rate**                 | Format : <br>`/rate ; name : [name] ; rating : [rating]`                                                                                               <br> <br> Example : <br> `/rate ; name : Poochie ; rating : 5`                                                                                                                                |
+| **Undo**                 | Format : <br>`/undo`                                                                                                                                   <br> <br> Example : <br> `/undo`                                                                                                                                                              |
+| **Redo**                 | Format : <br>`/redo`                                                                                                                                   <br> <br> Example : <br> `/redo`                                                                                                                                                              |
+| **Pin**                  | Format : <br>`/pin ; name : [name]`                                                                                                                    <br> <br> Example : <br> `/pin ; name : Poochie`                                                                                                                                              |
+| **Unpin**                | Format : <br>`/unpin ; name : [name]`                                                                                                                  <br> <br> Example : <br> `/unpin ; name : Poochie`                                                                                                                                            |
+| **Sort**                 | Format : <br>`/sort ; field : [target-field]`                                                                                                                    <br> <br> Example : <br> `/sort ; field ; name`                                                                                                                                     |
+| **Note**                 | Format : <br>`/note ; name : [name] ; note : [note]` <br> or <br> `/note ; name : [name] ; note : [note] ; deadline : [deadline]`                                <br> <br> Example : <br> `/note ; name : Poochie ; note : get dog for groomers ; deadline : 2020-10-10`                                                                             |
+| **Remind**               | Format : <br>`/remind`                                                                                                                                    <br> <br> Example : <br> `/remind`                                                                                                                                                         |
+| **Exit**                 | Format : <br>`/exit`                                                                                                                                    <br> <br> Example : <br> `/exit`                                                                                                                                                             |
