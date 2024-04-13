@@ -57,7 +57,7 @@ This user guide is designed to help you easily navigate the commands of PoochPla
     2. **[Pin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#pinning-a-contact--pin)** and **[Unpin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
     3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
     4. **[Note](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : Add notes to your contacts.<br>
-    5. **[Remind](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : View your contacts with notes containing incoming deadlines.<br>
+    5. **[Remind](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#viewing-reminders--remind)** : View your contacts with notes containing incoming deadlines.<br>
 - If you want a quick overview of our commands, check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)**.
 - If you are encountering issues or have questions about PoochPlanner, Check out our **[Common Errors](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#common-errors)** and **[FAQ](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/docs/UserGuide.md#faq)** for helpful troubleshooting tips and answers to common queries.
 
@@ -455,7 +455,7 @@ Example: <br>
 <div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
 
 * Use the `pin` command for your frequently contacted addresses!<br>
-* For your convenience, if there are repeated fields, only the value of the latest repeated field will be processed. So, if you have mistakenly entered the wrong value, simply retype the field and value in the same line!<br>
+* For your convenience, if you have accidentally made a typo, you may conveniently rectify your mistake by retyping the field and value in your command as only the latest field will be processed.<br>
 
 </div>
 
@@ -499,7 +499,7 @@ Example: <br>
 
 <div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* For your convenience, if there are repeated fields, only the value of the latest repeated field will be processed. So, if you have mistakenly entered the wrong value, simply retype the field and value in the same line.<br>
+* For your convenience, if you have accidentally made a typo, you may conveniently rectify your mistake by retyping the field and value in your command as only the latest field will be processed.<br>
 
 </div>
 
@@ -596,7 +596,7 @@ Add a note with a deadline:<br>
 
 * Notes added are intended to be short details!<br>
 * To remove a note, specify in the note field `No note here`. **This note is case-sensitive**.<br>
-* For your convenience, if there are repeated fields, only the value of the latest repeated field will be processed. So, if you have mistakenly entered the wrong value, simply retype the field and value in the same line.<br>
+* For your convenience, if you have accidentally made a typo, you may conveniently rectify your mistake by retyping the field and value in your command as only the latest field will be processed.<br>
 * Refrain from using `;` in your note. The use of `;` makes the command difficult to parse as ";" is used as a delimiter. This may result in your note not being captured. 
 
 </div>
@@ -755,7 +755,7 @@ Examples: <br>
 <div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
 
 * If you wish to get help for all commands, enter the command input as `general` to open the general help window.<br>
-* For your convenience, if there are repeated fields, only the value of the latest repeated field will be processed. So, if you have mistakenly entered the wrong value, simply retype the field and value in the same line.<br>
+* For your convenience, if you have accidentally made a typo, you may conveniently rectify your mistake by retyping the field and value in your command as only the latest field will be processed.<br>
 </div>
 
 
@@ -876,8 +876,8 @@ Data in your PoochPlanner is saved automatically as a JSON file `[JAR file locat
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Caution:**<br>
 
-Manually editing the JSON file is not advised and should be taken with extreme caution. If your changes to the data file makes its format invalid, PoochPlanner may discard all data and start with an empty data file on the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
-Furthermore, certain manual edits can cause PoochPlanner to behave in unexpected ways (e.g., if a value entered lies outside its acceptable range).
+Manually editing the JSON file is not advised and should be taken with extreme caution. If your changes to the data file makes its format invalid, your PoochPlanner may discard all data and start with an empty data file on the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
+Furthermore, certain manual edits can cause your PoochPlanner to behave in unexpected ways (e.g., if a value entered lies outside its acceptable range).
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -901,7 +901,7 @@ in our [Command Summary](#command-summary). Below is an example of an unknown co
 ### Invalid Field
 
 If you encounter an invalid field error, please ensure that the field entered is a valid field for the command you
-are using. Refer to our [Command Summary](#command-summary) for a list of valid fields for each PoochPlanner command. Below is an example of a command with an invalid field and the corresponding error message.
+are using. Refer to our [Command Summary](#command-summary) for a list of valid fields for each PoochPlanner command.<br>Below is an example of a command with an invalid field and the corresponding error message.
 <br>
 
 <div style="text-align:center;">
@@ -970,7 +970,7 @@ If you encounter a missing field error, please ensure the fields listed in the e
 **A**: Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 **Q**: If I have a lot of contacts, is there a way for me to access my most frequently used contacts easily?<br>
-**A**: Yes! You may wish to make use of our `pin` feature, which keeps all of your pinned contacts at the very top of your contacts list, ensuring that you are always able to see them!<br><br>The syntax for the `pin` command is as follows:
+**A**: Yes! You may wish to keep your most important contacts at the top of your contacts list. With our `pin` feature, PoochPlanner ensures that you are always to see them!<br><br>The syntax for the `pin` command is as follows:
 ```
 /pin ; name : [name]
 ```
@@ -982,7 +982,7 @@ If you encounter a missing field error, please ensure the fields listed in the e
 ```
 
 **Q**: Can I append a note to a contact when creating it?<br>
-**A**: Yes you can! In fact, you may also rate contacts at their time of creation. Simply enter their respective [prefixes](#prefix-summary) and you should be on your way!<br><br>
+**A**: Yes you can! In fact, you may also rate a contact at its time of creation. Simply append the `; note :` prefix, and you should be on your way!<br><br>
 Example: Adding a new contact with a note and a rating
 ```
 /add-person ; name : Pooch ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com ; rating : 3 ; note : Hello my name is Pooch!
