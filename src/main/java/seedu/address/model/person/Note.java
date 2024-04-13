@@ -10,16 +10,12 @@ public class Note {
 
     public static final String MESSAGE_CONSTRAINTS = "Note can take any values, and it should not be blank";
 
-    /*
-     * The first character of the Note must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     private String value;
 
     /**
-     * Constructs an {@code Note}.
+     * Constructs a {@code Note}.
      *
      * @param note A valid note.
      */

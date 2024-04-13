@@ -112,8 +112,13 @@ public class EditSupplierCommand extends Command {
         Product updatedProduct = editSupplierDescriptor.getProduct().orElse(supplierToEdit.getProduct());
         Price updatedPrice = editSupplierDescriptor.getPrice().orElse(supplierToEdit.getPrice());
 
-        return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote,
+        Supplier updatedSupplier = new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, presentNote,
                 updatedTags, updatedProduct, updatedPrice, presentRating);
+
+        if (supplierToEdit.isPinned()) {
+            updatedSupplier.toPin();
+        }
+        return updatedSupplier;
     }
 
     @Override
