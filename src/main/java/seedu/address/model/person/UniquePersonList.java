@@ -123,51 +123,51 @@ public class UniquePersonList implements Iterable<Person> {
         String field = prefix.getPrefix();
 
         switch (field.toLowerCase()) {
-            case "name":
-                sortByFieldName();
-                break;
-            case "phone":
-                sortByFieldPhone();
-                break;
-            case "email":
-                sortByFieldEmail();
-                break;
-            case "address":
-                sortByFieldAddress();
-                break;
-            case "tag":
-                sortByFieldTag();
-                break;
-            case "salary":
-                sortByFieldSalary();
-                break;
-            case "employment":
-                sortByFieldEmployment();
-                break;
-            case "product":
-                sortByFieldProduct();
-                break;
-            case "price":
-                sortByFieldPrice();
-                break;
-            case "commission":
-                sortByFieldCommission();
-                break;
-            case "skill":
-                sortByFieldSkill();
-                break;
-            case "note":
-                sortByFieldNote();
-                break;
-            case "pin":
-                sortByFieldPin();
-                break;
-            case "rating":
-                sortByFieldRating();
-                break;
-            default:
-                sortByFieldName(); // Default sorting by name
-                break;
+        case "name":
+            sortByFieldName();
+            break;
+        case "phone":
+            sortByFieldPhone();
+            break;
+        case "email":
+            sortByFieldEmail();
+            break;
+        case "address":
+            sortByFieldAddress();
+            break;
+        case "tag":
+            sortByFieldTag();
+            break;
+        case "salary":
+            sortByFieldSalary();
+            break;
+        case "employment":
+            sortByFieldEmployment();
+            break;
+        case "product":
+            sortByFieldProduct();
+            break;
+        case "price":
+            sortByFieldPrice();
+            break;
+        case "commission":
+            sortByFieldCommission();
+            break;
+        case "skill":
+            sortByFieldSkill();
+            break;
+        case "note":
+            sortByFieldNote();
+            break;
+        case "pin":
+            sortByFieldPin();
+            break;
+        case "rating":
+            sortByFieldRating();
+            break;
+        default:
+            sortByFieldName(); // Default sorting by name
+            break;
         }
 
         sortByFieldPin();
