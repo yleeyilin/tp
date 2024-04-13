@@ -17,6 +17,8 @@ import java.util.stream.Stream;
  *    in the above example.<br>
  */
 public class ArgumentTokenizer {
+    private static String PREFIX_REGEX = ";\\s*([^:]+)\\s*:";
+    private static String ALPHABET_REGEX = "[A-Za-z]+";
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
@@ -40,13 +42,24 @@ public class ArgumentTokenizer {
     public static ArrayList<String> checkUndetectedPrefix(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         ArrayList<String> undetectedPrefixes = new ArrayList<>();
 
+        findUndetectedPrefix(undetectedPrefixes, argumentMultimap, prefixes);
+        return undetectedPrefixes;
+    }
+
+    /**
+     * Helps to insert undetected prefix into undetectedPrefixes array.
+     * @param undetectedPrefixes Array to store undetected Prefixes
+     * @param argumentMultimap Argument string that we want to check for undetected prefix
+     * @param prefixes Prefixes that we accept
+     */
+    private static void findUndetectedPrefix(ArrayList<String> undetectedPrefixes, ArgumentMultimap argumentMultimap,
+                                             Prefix... prefixes) {
         for (Prefix p : prefixes) {
             if (!arePrefixesPresent(argumentMultimap, p)) {
                 String field = extractAlphabets(p.getPrefix());
                 undetectedPrefixes.add(field);
             }
         }
-        return undetectedPrefixes;
     }
 
     /**
@@ -65,36 +78,45 @@ public class ArgumentTokenizer {
      */
     public static ArrayList<String> checkUnknownPrefix(String argsString, Prefix... prefixes) {
         ArrayList<String> unknownPrefixes = new ArrayList<>();
-        Pattern pattern = Pattern.compile(";\\s*([^:]+)\\s*:");
+        Pattern pattern = Pattern.compile(PREFIX_REGEX);
         Matcher matcher = pattern.matcher(argsString);
 
         while (matcher.find()) {
             String foundPrefix = matcher.group(0);
-            boolean isKnownPrefix = false;
-
-            for (Prefix p : prefixes) {
-                String expected = extractAlphabets(p.getPrefix());
-                String current = extractAlphabets(foundPrefix);
-                if (expected.equals(current)) {
-                    isKnownPrefix = true;
-                    break;
-                }
-            }
-
-            if (!isKnownPrefix) {
-                unknownPrefixes.add(extractAlphabets(foundPrefix));
-            }
+            findUnknownPrefix(unknownPrefixes, foundPrefix, prefixes);
         }
         return unknownPrefixes;
     }
 
+    /**
+     * Helps to insert unknown prefixes into unknownPrefixes array.
+     * @param unknownPrefixes Array to store unknown prefixes
+     * @param foundPrefix Current prefix for checking whether is it unknown prefix or valid prefix
+     * @param prefixes Prefixes that we accept
+     */
+    private static void findUnknownPrefix(ArrayList<String> unknownPrefixes, String foundPrefix, Prefix... prefixes) {
+        boolean isKnownPrefix = false;
+
+        for (Prefix p : prefixes) {
+            String expected = extractAlphabets(p.getPrefix());
+            String current = extractAlphabets(foundPrefix);
+            if (expected.equals(current)) {
+                isKnownPrefix = true;
+                break;
+            }
+        }
+
+        if (!isKnownPrefix) {
+            unknownPrefixes.add(extractAlphabets(foundPrefix));
+        }
+    }
 
     /**
      * Extracts and concatenates all alphabetical substrings from the provided input string.
      * Non-alphabetical characters are ignored, and separate alphabetical substrings are joined
      * with a space character in the order they appear in the input.
      *
-     * For example, given the input ";unknown:'", the method returns "unknown".
+     * For example, given the input ";unknown:", the method returns "unknown".
      *
      * @param input The input string from which to extract alphabetical substrings.
      * @return A concatenated string of all alphabetical substrings found in the input,
@@ -103,7 +125,7 @@ public class ArgumentTokenizer {
      */
     private static String extractAlphabets(String input) {
         StringBuilder result = new StringBuilder();
-        Pattern pattern = Pattern.compile("[A-Za-z]+");
+        Pattern pattern = Pattern.compile(ALPHABET_REGEX);
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) {
@@ -201,8 +223,7 @@ public class ArgumentTokenizer {
      * Returns the trimmed value of the argument in the arguments string specified by {@code currentPrefixPosition}.
      * The end position of the value is determined by {@code nextPrefixPosition}.
      */
-    private static String extractArgumentValue(String argsString,
-                                        PrefixPosition currentPrefixPosition,
+    private static String extractArgumentValue(String argsString, PrefixPosition currentPrefixPosition,
                                         PrefixPosition nextPrefixPosition) {
         Prefix prefix = currentPrefixPosition.getPrefix();
 
