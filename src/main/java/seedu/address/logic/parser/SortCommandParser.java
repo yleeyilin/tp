@@ -10,31 +10,28 @@ import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new PinCommand object
+ * Parses input arguments and creates a new SortCommand object
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the PinCommand
-     * and returns an PinCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns an SortCommand object for execution. Parameter args cannot be null.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        assert (args != null) : "argument to pass for sort command is null";
 
         Prefix prefix;
-
-        ParserUtil.verifyNoUnknownPrefix(args, SortCommand.MESSAGE_USAGE, "sort",
-                FAILED_TO_SORT, PREFIX_FIELD);
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 
-        // missing fields
+        // Validates user command fields
+        ParserUtil.verifyNoUnknownPrefix(args, SortCommand.MESSAGE_USAGE, "sort",
+                FAILED_TO_SORT, PREFIX_FIELD);
         ParserUtil.verifyNoMissingField(argMultimap, SortCommand.MESSAGE_USAGE, "sort",
                 FAILED_TO_SORT, PREFIX_FIELD);
-
-        // duplicate field entries
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_COLLECTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FIELD);
 
         prefix = mapName(argMultimap);
 

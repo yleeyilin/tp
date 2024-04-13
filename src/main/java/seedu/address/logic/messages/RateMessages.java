@@ -3,7 +3,7 @@ package seedu.address.logic.messages;
 /**
  * Container for user delete command visible messages.
  */
-public class RateMessages {
+public class RateMessages extends Messages {
     public static final String MESSAGE_RATE_PERSON_SUCCESS = "Woof! Rated %1$s successfully! \uD83D\uDC36";
     public static final String MESSAGE_RATE_NAME_NOT_FOUND = "Failed to rate Pooch Contact - "
             + "Name does not exist in our address book.\uD83D\uDC3E";
