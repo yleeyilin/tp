@@ -14,7 +14,7 @@ public class Salary {
     public final String value;
 
     /**
-     * Constructs an {@code Salary}.
+     * Constructs a {@code Salary}.
      *
      * @param value A valid salary value.
      */

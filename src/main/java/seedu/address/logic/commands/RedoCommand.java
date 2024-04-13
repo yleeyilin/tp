@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "/redo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous execution. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous undo execution. ";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
@@ -55,7 +56,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
 
-    public static final String VALID_NOTE_AMY = "Cancel shipment with amy";
+    public static final String VALID_NOTE_AMY = "No note here";
     public static final String VALID_NOTE_BOB = "Cancel shipment with bob";
     public static final String VALID_PRODUCT_BOB = "pooch food";
     public static final String VALID_PRICE_BOB = "$50/bag";
@@ -170,7 +171,7 @@ public class CommandTestUtil {
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
-            throw new AssertionError("Execution of command should not fail.", ce);
+            fail();
         }
     }
 
@@ -230,7 +231,7 @@ public class CommandTestUtil {
 
             assertEquals(1, model.getFilteredPersonList().size());
         } catch (CommandException e) {
-            e.printStackTrace();
+            fail();
         }
     }
 
