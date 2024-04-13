@@ -27,10 +27,9 @@ public class UnpinCommandParser implements Parser<UnpinCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        // Validates user command fields
+        // validates user command fields
         ParserUtil.verifyNoUnknownPrefix(args, UnpinCommand.MESSAGE_USAGE, "unpin",
                 FAILED_TO_UNPIN, PREFIX_NAME);
-
         ParserUtil.verifyNoMissingField(argMultimap, UnpinCommand.MESSAGE_USAGE, "unpin",
                 FAILED_TO_UNPIN, PREFIX_NAME);
 
