@@ -169,6 +169,8 @@ public class UniquePersonList implements Iterable<Person> {
                 sortByFieldName(); // Default sorting by name
                 break;
         }
+
+        sortByFieldPin();
     }
 
     /**
