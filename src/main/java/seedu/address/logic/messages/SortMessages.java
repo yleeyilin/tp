@@ -8,5 +8,5 @@ public class SortMessages extends Messages {
     public static final String MESSAGE_SORT_PERSON_SUCCESS =
             "Woof! Sorted PoochPlanner by %1$s successfully! \uD83D\uDC36";
     public static final String MESSAGE_SORT_INVALID_FIELD =
-            FAILED_TO_SORT +  "Please input a valid target field! \uD83D\uDC3E";
+            FAILED_TO_SORT + "Please input a valid target field! \uD83D\uDC3E";
 }
