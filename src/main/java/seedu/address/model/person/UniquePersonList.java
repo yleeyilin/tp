@@ -182,8 +182,14 @@ public class UniquePersonList implements Iterable<Person> {
                 return "1" + p.getName().toString();
             }));
         } else if (field.equalsIgnoreCase("note")) {
-            internalList.sort(Comparator.comparing((Person p) ->
-                    p.getNote().toString()).reversed());
+            internalList.sort(Comparator.comparing((Person p) -> {
+                        String note = p.getNote().toString();
+                        if (note.equals("No note here")) {
+                            return "1" + p.getName().toString();
+                        } else {
+                            return "0" + p.getNote().toString();
+                        }
+                    }));
         } else if (field.equalsIgnoreCase("pin")) {
             internalList.sort(Comparator.comparing((Person p) ->
                     p.getPin().toString()).reversed());
