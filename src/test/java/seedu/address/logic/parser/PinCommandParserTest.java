@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.FAILED_TO_PIN;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
+import static seedu.address.logic.messages.PinMessages.FAILED_TO_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -19,7 +19,6 @@ public class PinCommandParserTest {
 
     @Test
     public void parse_missingNamePrefix_failure() {
-        // no field specified
         // no field specified
         ArrayList<String> undetectedFields = new ArrayList<>();
         undetectedFields.add("name");

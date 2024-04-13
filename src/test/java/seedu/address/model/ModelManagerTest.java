@@ -148,7 +148,7 @@ public class ModelManagerTest {
             assertEquals(ALICE, modelManagerCopy.findPersonByName(ALICE.getName(),
                     EditMessages.MESSAGE_INVALID_EDIT_PERSON));
         } catch (CommandException e) {
-            e.printStackTrace();
+            fail();
         }
     }
 
