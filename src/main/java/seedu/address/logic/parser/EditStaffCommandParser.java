@@ -61,12 +61,12 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
                     EditStaffCommand.MESSAGE_USAGE));
         }
 
-        // Maps user commands to name, field
+        // maps user commands to name and field
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditStaffCommand.MESSAGE_USAGE));
 
-        // Maps fields to edit to their values
+        // maps fields to edit to their values
         ArgumentMultimap fieldArgMultimap =
                 ArgumentTokenizer.tokenize(fieldArgs, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_EMPLOYMENT, PREFIX_SALARY);

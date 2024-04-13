@@ -61,7 +61,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
                     EditSupplierCommand.MESSAGE_USAGE));
         }
 
-        // maps user commands to name, field
+        // maps user commands to name and field
         name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
         fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditSupplierCommand.MESSAGE_USAGE));
