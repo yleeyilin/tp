@@ -16,13 +16,12 @@ import seedu.address.model.UserPrefs;
 public class RemindCommandTest {
 
     @Test
-    public void execute_remindSuccessful() throws Exception {
+    public void execute_remindSuccessful() {
         Model modelManager = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
         CommandResult commandResult = new RemindCommand().execute(modelManager);
         assertEquals(String.format(RemindMessages.MESSAGE_REMIND_PERSON_SUCCESS,
                 modelManager.getFilteredPersonList().size()), commandResult.getFeedbackToUser());
     }
-
 
     @Test
     public void equals() {

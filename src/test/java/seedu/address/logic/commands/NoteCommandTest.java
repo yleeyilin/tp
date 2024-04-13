@@ -56,6 +56,7 @@ public class NoteCommandTest {
     public void execute_validNoteStaff_addSuccess() throws CommandException {
         Model modelStaff = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         modelStaff.addPerson(GEORGIASTAFF);
+
         // set expected results
         Staff toAddNotePerson = GEORGIASTAFF;
         Staff expectedPerson = new Staff(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
@@ -78,6 +79,7 @@ public class NoteCommandTest {
     public void execute_validNoteSupplier_addSuccess() throws CommandException {
         Model modelSupplier = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         modelSupplier.addPerson(GEORGIASUPPLIER);
+
         // set expected results
         Supplier toAddNotePerson = GEORGIASUPPLIER;
         Supplier expectedPerson = new Supplier(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
@@ -100,6 +102,7 @@ public class NoteCommandTest {
     public void execute_validNoteMaintainer_addSuccess() throws CommandException {
         Model modelMaintainer = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         modelMaintainer.addPerson(GEORGIAMAINTAINER);
+
         // set expected results
         Maintainer toAddNotePerson = GEORGIAMAINTAINER;
         Maintainer expectedPerson = new Maintainer(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
@@ -122,9 +125,7 @@ public class NoteCommandTest {
     @Test
     public void execute_invalidName_throwsCommandException() {
         Name invalidName = new Name("patty");
-
         NoteCommand noteCommand = new NoteCommand(invalidName, validNote1);
-
         assertCommandFailure(noteCommand, model, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);
     }
 

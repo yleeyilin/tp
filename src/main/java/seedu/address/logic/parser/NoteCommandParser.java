@@ -18,7 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 
 /**
- * Parses input arguments and creates a new NoteCommand object
+ * Parses input arguments and creates a new NoteCommand object.
  */
 public class NoteCommandParser implements Parser<NoteCommand> {
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -26,11 +26,13 @@ public class NoteCommandParser implements Parser<NoteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the NoteCommand
      * and returns a NoteCommand object for execution. Parameter {@code args} cannot be null.
+     *
+     * @param args Argument to parse.
+     * @return NoteCommand object with the parsed values.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public NoteCommand parse(String args) throws ParseException {
         assert (args != null) : "argument to pass for note command is null";
-
         logger.log(Level.INFO, "Going to start parsing for note command.");
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
@@ -45,6 +47,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             logger.log(Level.WARNING, "Parsing error while parsing for note command.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
+
         try {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
