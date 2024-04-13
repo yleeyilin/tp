@@ -36,32 +36,8 @@ public class SortCommandParser implements Parser<SortCommand> {
         // duplicate field entries
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT_COLLECTION);
 
-        prefix = mapName(argMultimap);
+        prefix = ParserUtil.mapSortFields(argMultimap, SortMessages.MESSAGE_SORT_INVALID_FIELD);
 
         return new SortCommand(prefix);
-    }
-
-    /**
-     * Returns prefix value
-     * @param argMultimap Object that contains mapping of field to prefix.
-     * @return Returns object representing prefix
-     * @throws ParseException Thrown when command is in invalid format.
-     */
-    public Prefix mapName(ArgumentMultimap argMultimap) throws ParseException {
-        try {
-            String value = argMultimap.getValue(PREFIX_FIELD).get();
-
-            for (Prefix prefix : PREFIX_SORT_COLLECTION) {
-                String keyword = ParserUtil.parseSortField(prefix.getPrefix());
-                if (keyword.equalsIgnoreCase(value)) {
-                    return new Prefix(value);
-                }
-            }
-
-            throw new ParseException(String.format(SortMessages.MESSAGE_SORT_INVALID_FIELD));
-
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(SortMessages.MESSAGE_SORT_INVALID_FIELD, pe.getMessage()));
-        }
     }
 }

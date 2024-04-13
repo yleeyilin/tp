@@ -4,8 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.MESSAGE_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_MISSING_FIELD_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_FIELD_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.messages.NoteMessages;
+import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Commission;
@@ -403,6 +403,31 @@ public class ParserUtil {
             return " " + ParserUtil.parseField(argMultimap.getValue(PREFIX_FIELD).get());
         } catch (ParseException pe) {
             throw new ParseException(message, pe);
+        }
+    }
+
+    /**
+     * Returns sort field values using PREFIX.
+     * @param argMultimap Object that contains mapping of prefix to value.
+     * @param message Error message to throw if parse exception.
+     * @return Returns object representing the respective fields.
+     * @throws ParseException Thrown when command is in invalid format.
+     */
+    public static Prefix mapSortFields(ArgumentMultimap argMultimap, String message) throws ParseException {
+        try {
+            String value = argMultimap.getValue(PREFIX_FIELD).get();
+
+            for (Prefix prefix : PREFIX_SORT_COLLECTION) {
+                String keyword = ParserUtil.parseSortField(prefix.getPrefix());
+                if (keyword.equalsIgnoreCase(value)) {
+                    return new Prefix(value);
+                }
+            }
+
+            throw new ParseException(String.format(message));
+
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(message, pe.getMessage()));
         }
     }
 
