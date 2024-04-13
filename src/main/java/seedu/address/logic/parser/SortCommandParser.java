@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.Messages.FAILED_TO_SORT;
+import static seedu.address.logic.messages.SortMessages.FAILED_TO_SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_COLLECTION;
 

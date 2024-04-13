@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.FAILED_TO_SEARCH;
+import static seedu.address.logic.messages.SearchMessages.FAILED_TO_SEARCH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
 
 import java.util.stream.Stream;

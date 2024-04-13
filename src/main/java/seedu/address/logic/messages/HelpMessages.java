@@ -4,6 +4,7 @@ package seedu.address.logic.messages;
  * Container for user help command visible messages.
  */
 public class HelpMessages extends Messages {
+    public static final String FAILED_TO_HELP = "Failed to display help window - ";
     public static final String MESSAGES_SHOWING_HELP_MESSAGE = "Opened help window.";
     public static final String MESSAGES_SHOWING_DELETE_HELP_MESSAGE = "Opened help window for delete command.";
     public static final String MESSAGES_SHOWING_EDIT_HELP_MESSAGE = "Opened help window for edit command.";
@@ -36,7 +37,7 @@ public class HelpMessages extends Messages {
     public static final String MESSAGES_INVALID_COMMAND_TYPE = "Invalid command type given.";
     public static final String MESSAGE_HELP_MISSING_COMMAND = "Failed to give help - "
             + "Help requires a command type field. %1$s\uD83D\uDC3E";
-    public static final String MESSAGE_HELP_INVALID_PARAMETERS = "Failed to display help window - "
+    public static final String MESSAGE_HELP_INVALID_PARAMETERS = FAILED_TO_HELP
             + "%1$s \uD83D\uDC3E";
 
     public static final String USERGUIDE_URL = "https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html";

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.Messages.FAILED_TO_PIN;
+import static seedu.address.logic.messages.PinMessages.FAILED_TO_PIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.PinCommand;
