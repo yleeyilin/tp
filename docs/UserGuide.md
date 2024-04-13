@@ -28,10 +28,10 @@ PoochPlanner is your go-to address book, tailor-made for dog cafe owners like yo
 
 Contact | Definition and Examples
 --------|------------------
-Person | Any persons that do not hold a special relationship.<br> E.g. Neighbours, Work friends.
-Staff | Any full-time or part-time employees.<br> E.g. Waiters, Waitresses, Dishwashers.
-Supplier | Any logistics partner that supplies stock for your dog cafe.<br> E.g. Kibbles supplier, Coffee beans supplier.
-Maintainer | Any externally hired specialised persons who takes care of the dogs.<br> E.g. Dog groomers, Vet.
+Person | Any persons that do not hold a special relationship.<br> E.g. neighbours, work friends.
+Staff | Any full-time or part-time employees.<br> E.g. waiters, waitresses, dishwashers.
+Supplier | Any logistics partner that supplies stock for your dog cafe.<br> E.g. kibbles supplier, coffee beans supplier.
+Maintainer | Any externally hired specialised persons who takes care of the dogs.<br> E.g. dog groomers, vet.
 
 
 But our commitment to improving your contact management experience doesn't end there. In addition to the essential functionalities like add, search, edit, delete, help, list, clear, undo, and redo, **PoochPlanner** comes loaded with extra features. You can now pin important contacts, jot down notes, set reminders, rate and even sort your contacts - all to ensure a seamless and efficient workflow tailored to your needs as a busy dog cafe owner.
@@ -85,13 +85,13 @@ Case-sensitive | The casing of the alphabetic characters matters (e.g. “good�
 Case-insensitive | The casing of the alphabetic characters does not matter (e.g. “good” is taken to be equal to “GOOD”).
 Space-sensitive | The number of spaces in a command matters (e.g. “happy puppy” is different from “happypuppy”).
 Space-insensitive | The number of spaces in a command does not matter (e.g. “happy puppy” is taken to be equal to “happypuppy”).
-Delimeter | A seperator in the command input that defines the boundaries between information in a command. ";" is a delimeter for our commands.
+Delimeter | A seperator in the command input that defines the boundaries between information in a command. ";" is a delimiter for our commands.
 Contact card | The box displayed for each contact, containing all their details.
 
 
 ## Quick start
 
-1. Ensure you have Java `11` installed in your computer.
+1. Ensure you have Java `11` installed on your computer.
 
 1. Download the latest `poochplanner.jar` from [here](https://github.com/AY2324S2-CS2103T-W10-2/tp/releases).
 
@@ -104,9 +104,9 @@ Contact card | The box displayed for each contact, containing all their details.
 1. Type the command in the input box and press enter to execute it. 
    Some example commands you can try:
 
-   * `/add-person ; name : Janna  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com` : Adds a general contact named `Janna` to the PoochPlanner.
+   * `/add-person ; name : Janna  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com` : Adds a general contact named `Janna` to your PoochPlanner.
 
-   * `/delete ; name : Janna` : Deletes the contact named Janna from PoochPlanner.
+   * `/delete ; name : Janna` : Deletes the contact named Janna from your PoochPlanner.
 
    * `/exit` : Exits the app.
 
@@ -185,16 +185,16 @@ The table below summarises the add command, format and examples for each contact
 
 * Name is case-insensitive but space-sensitive.<br>
 
-* Email must in format {example}@{domain} or {example}@{domain}.{extension} <br>
+* Email must in the format {example}@{domain} or {example}@{domain}.{extension} <br>
 
-* Phone number must be in format {Number} and at least 3 digits long.<br>
+* Phone number must be in the format {Number} and at least 3 digits long.<br>
 
 * Only one phone number is allowed to be inserted.<br>
 
 * Salary and commission must be in format ${Number}/hr.<br>
 
 * Price must be in format ${Number}/{quantity}.<br>
-* Employment must be either part-time or full-time.<br>
+* Employment must be either "part-time" or "full-time".<br>
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips:**<br>
@@ -321,7 +321,7 @@ Examples: <br>
 
 #### Deleting a contact : `delete`
 
-Deletes a **person / staff / supplier / maintainer** contact from the PoochPlanner so that you can remove outdated contacts.
+Deletes a **person / staff / supplier / maintainer** contact from your PoochPlanner so that you can remove outdated contacts.
 
 Format: <br>
 `/delete ; name : [value]`
@@ -357,7 +357,7 @@ Example: <br>
 
 #### Rating a Contact : `rate`
 
-Gives a **person / staff / supplier / maintainer** contact from the PoochPlanner a performance rating so that cafe owners can track the performance of their contacts.
+Gives a **person / staff / supplier / maintainer** contact from your PoochPlanner a performance rating so that cafe owners can track the performance of their contacts.
 
 Format: <br>
 `/rate ; name : [name] ; rating : [rating value from 1-5]`
@@ -402,7 +402,7 @@ Example:
 
 #### Pinning a contact : `pin`
 
-Pins the specified contact on PoochPlanner so that your important contacts will consistently appear at the top on the contact list.
+Pins the specified contact on PoochPlanner so that your important contacts will consistently appear at the top of your contact list.
 
 Format: <br>
 `/pin ; name : [name]`
@@ -434,7 +434,7 @@ Example: <br>
 
 * Name must be present in PoochPlanner.<br>
 
-* Using pin command on a contact that has been pinned do not make any changes to PoochPlanner.<br>
+* Using the pin command on a contact that has been pinned does not make any changes to PoochPlanner.<br>
 
 * A contact will still remain pinned if you use the undo command once on a contact that has been pinned twice or more.<br>
 </div>
@@ -448,7 +448,7 @@ Example: <br>
 
 #### Unpinning a contact : `unpin`
 
-Unpins the specified contact on PoochPlanner so that your less important contacts can be removed from the top on the contact list.
+Unpins the specified contact on PoochPlanner so that your less important contacts can be removed from the top of your contact list.
 
 Format: <br>
 `/unpin ; name : [name]`
@@ -479,7 +479,7 @@ Example: <br>
 
 * Name must be present in PoochPlanner.<br>
 
-* Using unpin command on a contact that has been unpinned do not make any changes to PoochPlanner.<br>
+* Using the unpin command on a contact that has been unpinned does not make any changes to PoochPlanner.<br>
 
 * A contact will still remain unpinned if you use the undo command once on a contact that has been unpinned twice or more.<br>
 </div>
@@ -569,11 +569,11 @@ Examples: <br>
 <div markdown="span" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
 * Name and Note are compulsory fields.<br>
-* Deadlines are optional fields. <br>
+* Deadline are optional fields. <br>
 * Deadlines must follow "YYYY-MM-DD" format. <br>
-* Name is case-insensitive but space-sensitive. <br>
-* Name must be present in PoochPlanner.<br>
-* Note cannot be empty.
+* Names are case-insensitive but space-sensitive. <br>
+* Names must be present in PoochPlanner.<br>
+* Notes cannot be empty.
 
 </div>
 
