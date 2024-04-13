@@ -1186,18 +1186,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Planned Enhancement**
 
-1. `parse` for all command parsers
+1. Enhance command to be space insensitive
    1. Currently, we do not allow for incorrect spacing in commands. 
    2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com``` 
    3. The above example will be considered as invalid since there is no spacing before the `phone` and `address` prefixes and are not parsed as valid prefixes. 
    4. We plan to extend PoochPlanner to accept this alternative possible input to cater to fast typists.
 
-2. `parseXYZ` for all paramters
-   1. Currently, we have stricter parameter validation for all parameters such as `name`, `phone number`. 
-   2. These functions includes `parseName` etc.
-   3. Paramters that do not satisfy validation checks will not be accepted by PoochPlanner.
-   4. We plan to add a warning rather than an error message to improve usability for users. 
+2. Parse user's input
+   1. Currently, we do not have any checker to check user's input. 
+   2. We accept input value `John Doe` with different number of spacing as different inputs.
+   3. We plan to parse all the input to remove additional spacing to cater fast typists as additional spacing is high possibly due to typo.
 
+3. Enhance price to allow decimals
+   1. Currently, we do not allow decimal place for prices
+   2. We plan to allow decimal places for prices to cater for more flexibility in recording prices.
+
+4. Enhance salary to be stored in different unit
+   1. Currently, we only allow storing salary with unit `/hr`.
+   2. We plan to allow more flexible storing unit such as `/day`, `/month` and `/event`.
+
+5. Enhance validation on input fields for search command
+   1. Currently, we do not have any validation on input fields such as salary, phone in search commands.
+   2. If user insert random name in salary field, the execution will not throw any error.
+   3. We plan to do validation check on all the fields to ensure that user is inserting correct type of value in the field.
+
+6. Enhance post-search status
+   1. Currently, after a search command, the contact book will only display the filtered list.
+   2. After exucution of delete, pin, unpin, undo and redo will not return to main list.
+   3. We plan to enhance the commands by returning to main list after every execution of command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
