@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.SearchMessages.FAILED_TO_SEARCH;
+import static seedu.address.logic.messages.SearchMessages.SEARCH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_COLLECTION;
 
 import java.util.stream.Stream;
@@ -29,7 +30,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         ParserUtil.verifyNoUnknownPrefix(
                 args,
                 SearchCommand.MESSAGE_USAGE,
-                "search",
+                SEARCH,
                 FAILED_TO_SEARCH,
                 PREFIX_SEARCH_COLLECTION);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();

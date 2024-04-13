@@ -17,8 +17,8 @@ import java.util.stream.Stream;
  *    in the above example.<br>
  */
 public class ArgumentTokenizer {
-    private static String PREFIX_REGEX = ";\\s*([^:]+)\\s*:";
-    private static String ALPHABET_REGEX = "[A-Za-z]+";
+    private static final String PREFIX_VALIDATION_REGEX = ";\\s*([^:]+)\\s*:";
+    private static final String ALPHABET_VALIDATION_REGEX = "[A-Za-z]+";
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
@@ -78,7 +78,7 @@ public class ArgumentTokenizer {
      */
     public static ArrayList<String> checkUnknownPrefix(String argsString, Prefix... prefixes) {
         ArrayList<String> unknownPrefixes = new ArrayList<>();
-        Pattern pattern = Pattern.compile(PREFIX_REGEX);
+        Pattern pattern = Pattern.compile(PREFIX_VALIDATION_REGEX);
         Matcher matcher = pattern.matcher(argsString);
 
         while (matcher.find()) {
@@ -125,7 +125,7 @@ public class ArgumentTokenizer {
      */
     private static String extractAlphabets(String input) {
         StringBuilder result = new StringBuilder();
-        Pattern pattern = Pattern.compile(ALPHABET_REGEX);
+        Pattern pattern = Pattern.compile(ALPHABET_VALIDATION_REGEX);
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) {

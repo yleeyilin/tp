@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.AddMessages.ADD_SUPPLIER;
 import static seedu.address.logic.messages.AddMessages.FAILED_TO_ADD;
+import static seedu.address.logic.messages.AddMessages.SUPPLIER_TYPE;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.messages.NoteMessages.DEFAULT_NOTE;
+import static seedu.address.logic.messages.RateMessages.DEFAULT_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -51,10 +55,10 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
                         PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_RATING);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, AddSupplierCommand.MESSAGE_USAGE, "add-supplier",
+        ParserUtil.verifyNoUnknownPrefix(args, AddSupplierCommand.MESSAGE_USAGE, ADD_SUPPLIER,
                 FAILED_TO_ADD, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_PRODUCT, PREFIX_PRICE, PREFIX_RATING);
-        ParserUtil.verifyNoMissingField(argMultimap, AddSupplierCommand.MESSAGE_USAGE, "add-supplier",
+        ParserUtil.verifyNoMissingField(argMultimap, AddSupplierCommand.MESSAGE_USAGE, ADD_SUPPLIER,
                 FAILED_TO_ADD, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PRODUCT, PREFIX_PRICE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
         if (!isPreambleEmpty) {
@@ -81,10 +85,10 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElseThrow());
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElseThrow());
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElseThrow());
-            String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse("No note here");
-            Note note = noteContent.equals("No note here") ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
-            Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse("0"));
-            Tag tag = new Tag("supplier");
+            String noteContent = argMultimap.getValue(PREFIX_NOTE).orElse(DEFAULT_NOTE);
+            Note note = noteContent.equals(DEFAULT_NOTE) ? new Note(noteContent) : ParserUtil.parseNote(noteContent);
+            Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).orElse(DEFAULT_RATING));
+            Tag tag = new Tag(SUPPLIER_TYPE);
             Set<Tag> tags = new HashSet<>();
             tags.add(tag);
             Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).orElseThrow());

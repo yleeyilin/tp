@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.messages.NoteMessages.FAILED_TO_ADD_NOTE;
+import static seedu.address.logic.messages.NoteMessages.NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -37,9 +38,9 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, "note",
+        ParserUtil.verifyNoUnknownPrefix(args, NoteCommand.MESSAGE_USAGE, NOTE,
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
-        ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, "note",
+        ParserUtil.verifyNoMissingField(argMultimap, NoteCommand.MESSAGE_USAGE, NOTE,
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE);
         boolean isContainingDeadlinePrefix = argMultimap.containsPrefix(PREFIX_DEADLINE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();

@@ -4,6 +4,10 @@ package seedu.address.logic.messages;
  * Container for user edit command visible messages.
  */
 public class EditMessages extends Messages {
+    public static final String EDIT = "edit";
+    public static final String EDIT_STAFF = "edit-staff";
+    public static final String EDIT_MAINTAINER = "edit-maintainer";
+    public static final String EDIT_SUPPLIER = "edit-supplier";
     public static final String FAILED_TO_EDIT = "Failed to edit Pooch Contact - ";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Woof! Edited %1$s successfully! \uD83D\uDC36";
     public static final String MESSAGE_EDIT_EMPTY_FIELD = FAILED_TO_EDIT

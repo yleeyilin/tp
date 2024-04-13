@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.HelpMessages.FAILED_TO_HELP;
+import static seedu.address.logic.messages.HelpMessages.HELP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HELP;
 
 import java.util.logging.Level;
@@ -31,9 +32,9 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, "help",
+        ParserUtil.verifyNoUnknownPrefix(args, HelpCommand.MESSAGE_USAGE, HELP,
                 FAILED_TO_HELP, PREFIX_HELP);
-        ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, "help",
+        ParserUtil.verifyNoMissingField(argMultimap, HelpCommand.MESSAGE_USAGE, HELP,
                 FAILED_TO_HELP, PREFIX_HELP);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
         if (!isPreambleEmpty) {

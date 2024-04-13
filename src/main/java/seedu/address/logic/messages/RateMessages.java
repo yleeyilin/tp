@@ -4,6 +4,8 @@ package seedu.address.logic.messages;
  * Container for user delete command visible messages.
  */
 public class RateMessages extends Messages {
+    public static final String RATE = "rate";
+    public static final String DEFAULT_RATING = "0";
     public static final String FAILED_TO_RATE = "Failed to rate Pooch Contact - ";
     public static final String MESSAGE_RATE_PERSON_SUCCESS = "Woof! Rated %1$s successfully! \uD83D\uDC36";
     public static final String MESSAGE_RATE_NAME_NOT_FOUND = FAILED_TO_RATE

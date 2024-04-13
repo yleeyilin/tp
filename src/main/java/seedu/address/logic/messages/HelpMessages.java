@@ -4,6 +4,7 @@ package seedu.address.logic.messages;
  * Container for user help command visible messages.
  */
 public class HelpMessages extends Messages {
+    public static final String HELP = "help";
     public static final String FAILED_TO_HELP = "Failed to display help window - ";
     public static final String MESSAGES_SHOWING_HELP_MESSAGE = "Opened help window.";
     public static final String MESSAGES_SHOWING_DELETE_HELP_MESSAGE = "Opened help window for delete command.";

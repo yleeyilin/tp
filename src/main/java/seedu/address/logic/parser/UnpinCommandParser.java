@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.UnpinMessages.FAILED_TO_UNPIN;
+import static seedu.address.logic.messages.UnpinMessages.UNPIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.UnpinCommand;
@@ -28,9 +29,9 @@ public class UnpinCommandParser implements Parser<UnpinCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, UnpinCommand.MESSAGE_USAGE, "unpin",
+        ParserUtil.verifyNoUnknownPrefix(args, UnpinCommand.MESSAGE_USAGE, UNPIN,
                 FAILED_TO_UNPIN, PREFIX_NAME);
-        ParserUtil.verifyNoMissingField(argMultimap, UnpinCommand.MESSAGE_USAGE, "unpin",
+        ParserUtil.verifyNoMissingField(argMultimap, UnpinCommand.MESSAGE_USAGE, UNPIN,
                 FAILED_TO_UNPIN, PREFIX_NAME);
 
         name = ParserUtil.mapName(argMultimap, UnpinMessages.MESSAGE_UNPIN_INVALID_NAME);

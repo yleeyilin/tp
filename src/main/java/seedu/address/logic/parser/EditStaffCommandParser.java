@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.AddMessages.STAFF_TYPE;
+import static seedu.address.logic.messages.EditMessages.EDIT_STAFF;
 import static seedu.address.logic.messages.EditMessages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -49,10 +51,10 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(args, EditStaffCommand.MESSAGE_USAGE, "edit-staff",
+        ParserUtil.verifyNoUnknownPrefix(args, EditStaffCommand.MESSAGE_USAGE, EDIT_STAFF,
                 FAILED_TO_EDIT, PREFIX_NAME,
                 PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT, PREFIX_SALARY);
-        ParserUtil.verifyNoMissingField(argMultimap, EditStaffCommand.MESSAGE_USAGE, "edit-staff",
+        ParserUtil.verifyNoMissingField(argMultimap, EditStaffCommand.MESSAGE_USAGE, EDIT_STAFF,
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD);
         boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
@@ -82,7 +84,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         }
 
         Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("staff"));
+        tags.add(new Tag(STAFF_TYPE));
         editStaffDescriptor.setTags(tags);
 
         return new EditStaffCommand(name, editStaffDescriptor);

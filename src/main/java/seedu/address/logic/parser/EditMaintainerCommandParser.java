@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.AddMessages.MAINTAINER_TYPE;
+import static seedu.address.logic.messages.EditMessages.EDIT_MAINTAINER;
 import static seedu.address.logic.messages.EditMessages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -48,11 +50,11 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
+        ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditMaintainerCommand.MESSAGE_USAGE, EDIT_MAINTAINER,
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SKILL, PREFIX_COMMISSION);
-        ParserUtil.verifyNoMissingField(argMultimap, EditMaintainerCommand.MESSAGE_USAGE, "edit-maintainer",
+        ParserUtil.verifyNoMissingField(argMultimap, EditMaintainerCommand.MESSAGE_USAGE, EDIT_MAINTAINER,
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD);
         boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
@@ -82,7 +84,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
         }
 
         Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("maintainer"));
+        tags.add(new Tag(MAINTAINER_TYPE));
         editMaintainerDescriptor.setTags(tags);
 
         return new EditMaintainerCommand(name, editMaintainerDescriptor);

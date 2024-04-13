@@ -4,6 +4,8 @@ package seedu.address.logic.messages;
  * Container for user note command visible messages.
  */
 public class NoteMessages extends Messages {
+    public static final String NOTE = "note";
+    public static final String DEFAULT_NOTE = "No note here";
     public static final String FAILED_TO_ADD_NOTE = "Failed to add note to Pooch Contact - ";
     public static final String MESSAGE_ADD_NOTE_SUCCESS =
             "Woof! Added note to %1$s successfully! \uD83D\uDC36";

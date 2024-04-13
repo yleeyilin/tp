@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.AddMessages.SUPPLIER_TYPE;
+import static seedu.address.logic.messages.EditMessages.EDIT_SUPPLIER;
 import static seedu.address.logic.messages.EditMessages.FAILED_TO_EDIT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -48,11 +50,11 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
         // validates user command fields
-        ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
+        ParserUtil.verifyNoUnknownPrefix(parsedArgs, EditSupplierCommand.MESSAGE_USAGE, EDIT_SUPPLIER,
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_NAME, PREFIX_PRODUCT, PREFIX_PRICE);
-        ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, "edit-supplier",
+        ParserUtil.verifyNoMissingField(argMultimap, EditSupplierCommand.MESSAGE_USAGE, EDIT_SUPPLIER,
                 FAILED_TO_EDIT,
                 PREFIX_NAME, PREFIX_FIELD);
         boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
@@ -81,7 +83,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         }
 
         Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("supplier"));
+        tags.add(new Tag(SUPPLIER_TYPE));
         editSupplierDescriptor.setTags(tags);
 
         return new EditSupplierCommand(name, editSupplierDescriptor);

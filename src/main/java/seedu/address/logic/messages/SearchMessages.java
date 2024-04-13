@@ -4,6 +4,7 @@ package seedu.address.logic.messages;
  * Container for user search command visible messages.
  */
 public class SearchMessages extends Messages {
+    public static final String SEARCH = "search";
     public static final String FAILED_TO_SEARCH = "Failed to search Pooch Contact - ";
     public static final String MESSAGE_SEARCH_PERSON_SUCCESS = "Woof! %1$s contact(s) found! \uD83D\uDC36";
     public static final String MESSAGE_SEARCH_MISSING_FIELD = FAILED_TO_SEARCH
