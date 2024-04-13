@@ -43,11 +43,11 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
     private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
-     * and returns an AddCommand object for execution. Parameter args cannot be null.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an AddCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddMaintainerCommand parse(String args) throws ParseException {
-        assert (args != null) : "`argument` to pass for add maintainer command is null";
+        assert (args != null) : "argument to pass for add maintainer command is null";
 
         logger.log(Level.INFO, "Going to start parsing for add maintainer command.");
 
@@ -80,7 +80,7 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
      * Creates a maintainer contact based on the argument multimap.
      * @param argMultimap Contains the mappings of values to the specific prefixes.
      * @return A maintainer contact.
-     * @throws ParseException Thrown when invalid paramters are used.
+     * @throws ParseException If the user enters invalid paramters.
      */
     private Maintainer createMaintainerContact(ArgumentMultimap argMultimap) throws ParseException {
         try {

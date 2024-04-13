@@ -34,8 +34,8 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditSupplierCommand
-     * and returns an EditSupplierCommand object for execution. Parameter args cannot be null.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an EditSupplierCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format
      */
     public EditSupplierCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -44,9 +44,6 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         logger.log(Level.INFO, "Going to start parsing for edit supplier command.");
 
         String parsedArgs = ParserUtil.parseArg(args);
-        Name name;
-        String fieldArgs;
-        EditSupplierDescriptor editSupplierDescriptor;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
         // validates user command fields
@@ -64,8 +61,8 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
         }
 
         // maps user commands to name and field
-        name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
-        fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        Name name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
+        String fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditSupplierCommand.MESSAGE_USAGE));
 
         // maps fields to edit to their values
@@ -75,7 +72,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
 
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        editSupplierDescriptor = editSupplierDescription(fieldArgMultimap);
+        EditSupplierDescriptor editSupplierDescriptor = editSupplierDescription(fieldArgMultimap);
 
         boolean isNoFieldEdited = !editSupplierDescriptor.isAnyFieldEdited();
         if (isNoFieldEdited) {
@@ -94,7 +91,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditSupplierDescriptor that contains the new values from the user.
-     * @throws ParseException Indicates the invalid format that users might have entered.
+     * @throws ParseException If the user enters invalid paramters.
      */
     private EditSupplierDescriptor editSupplierDescription(ArgumentMultimap fieldArgMultimap) throws ParseException {
         try {

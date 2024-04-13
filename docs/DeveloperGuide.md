@@ -256,6 +256,15 @@ completion of the `Delete` command.
 
 **3**: The contact with the name ‘Poochie’ will be deleted from PoochPlanner.
 
+**Aspect: How to implement delete command in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Only accept the name field, where only the last name field will be taken.
+  * Pros: User friendly. Users can easily correct the name field without deleting the previously incorrect name field entered. Since name cannot be edited, this ensures that the name will be consistent and the user do not have to check what to input everytime.
+  * Cons: Less rigorous validation check on name as users may not intentionally enter a second name field.
+
+* **Alternative 2**: Accept only one name field.
+  * Pros: Less prone to possible errors due to stricter validation checks on name fields.
+  * Cons: Less user friendly since users will have to put in more effort to fix their commands.
 
 ### Help feature
 
@@ -320,6 +329,16 @@ The following sequence diagram models the interactions between the different com
 2. The user inputs `/search ; name : Poochie` into the CLI.
 3. The address book is updated to display all contact cards that match the search queries.
 
+**Aspect: How to implement search command using multiple field inputs:**
+
+* **Alternative 1 (current choice)**: Accepts multiple search fields as search query.
+  * Pros: More user friendly as users can conduct multi-layered filters using several fields at once, allowing for a more targeted search.
+  * Cons: More prone to errors due to broader search scope over multiple fields.
+
+* **Alternative 2**: Only accept 1 field as search query.
+  * Pros: Less prone to errors due to stricter search only over 1 field.
+  * Cons: Less user friendly since users will not be able to conduct multi-layered filters using several fields at once.
+
 ### Sort feature
 
 #### Overview
@@ -343,6 +362,16 @@ The following sequence diagram models the interactions between the different com
 1. The user launches the application.
 2. The user inputs `/sort ; field : phone` into the CLI.
 3. The address book is updated to sort all the contact cards by ascending phone number.
+
+**Aspect: How use sort command for ascending or descending order:**
+
+* **Alternative 1 (current choice)**: Sorts only by ascending order, alphabetically and numerically
+  * Pros: Straight forward to key in command. Users can just key in the field they want to sort by without having to indicate whether to sort either is ascending or descending order.
+  * Cons: Less flexible in sorting as later alphabets and larger values will take longer to find.
+
+* **Alternative 2**: Sorts by both ascending and descending order depending on user indication
+  * Pros: More flexible in sorting for users to sort in either way to find what they need.
+  * Cons: Longer command, another field required to specify either ascending or descending sort.
 
 ### Note feature
 
@@ -424,6 +453,17 @@ completion of the `Rate` command.
 **2**: The user inputs `/rate ; name : Poochie ; rating : 5` into the CLI.
 
 **3**: The contact with the name `Poochie` is rated with rating 5.
+
+**Aspect: How to store rate field in Persons class and subclasses:**
+
+* **Alternative 1 (current choice)**: Add rate field to all 4 constructors (Person, Staff, Maintainer, Supplier).
+  * Pros: Leverages inheritance, thus reducing repeated code and adheres to OOP.
+  * Cons: Changing the constructors of 4 classes is a tedious task.
+
+* **Alternative 2**: Add rate field to the Parent person constructor and use a setter to set new ratings.
+  * Pros: Much simpler implementation that will require less refactoring of code.
+  * Cons: Violates OOP, specifically encapsulation as the other classes would be able to manipulate the
+    ratings of Person objects directly.
 
 
 ### Remind feature

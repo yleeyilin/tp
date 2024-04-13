@@ -34,9 +34,8 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditStaffCommand
-     * and returns an EditStaffCommand object for execution. Parameter args cannot be null.
-     *
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns an EditStaffCommand object for execution. Parameter {@code args} cannot be null.
+     * @throws ParseException If the user input does not conform to the expected format
      */
     public EditStaffCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -45,9 +44,6 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         logger.log(Level.INFO, "Going to start parsing for edit staff command.");
 
         String parsedArgs = ParserUtil.parseArg(args);
-        Name name;
-        String fieldArgs;
-        EditStaffDescriptor editStaffDescriptor;
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
 
         // validates user command fields
@@ -64,8 +60,8 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         }
 
         // maps user commands to name and field
-        name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
-        fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        Name name = ParserUtil.mapName(argMultimap, EditMessages.MESSAGE_EDIT_INVALID_NAME);
+        String fieldArgs = ParserUtil.mapFields(argMultimap, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditStaffCommand.MESSAGE_USAGE));
 
         // maps fields to edit to their values
@@ -76,7 +72,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
         fieldArgMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_EMPLOYMENT, PREFIX_SALARY);
 
-        editStaffDescriptor = editStaffDescription(fieldArgMultimap);
+        EditStaffDescriptor editStaffDescriptor = editStaffDescription(fieldArgMultimap);
 
         boolean isNoFieldEdited = !editStaffDescriptor.isAnyFieldEdited();
         if (isNoFieldEdited) {
@@ -95,7 +91,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditStaffDescriptor that contains the new values from the user.
-     * @throws ParseException Indicates the invalid format that users might have entered.
+     * @throws ParseException If the user enters invalid paramters.
      */
     private EditStaffDescriptor editStaffDescription(ArgumentMultimap fieldArgMultimap) throws ParseException {
         try {
