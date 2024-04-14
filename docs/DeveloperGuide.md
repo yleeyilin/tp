@@ -298,7 +298,7 @@ The following sequence diagram models the interactions between the different com
 * **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Difference
   in messages is created by displaying different strings.
   * Pros: Code is made much more concise.
-  * Cons: Lengthy if-else statements are required to displayed the correct string.
+  * Cons: Lengthy if-else statements are required to display the correct string.
 
 * **Alternative 2**: Create a different window for each type of command.
   * Pros: All details relating to a single command is within its own page. Can be perceived as neater.
@@ -332,12 +332,12 @@ The following sequence diagram models the interactions between the different com
 **Aspect: How to implement search command using multiple field inputs:**
 
 * **Alternative 1 (current choice)**: Accepts multiple search fields as search query.
-  * Pros: More user friendly as users can conduct multi-layered filters using several fields at once, allowing for a more targeted search.
+  * Pros: More user-friendly as users can conduct multi-layered filters using several fields at once, allowing for a more targeted search.
   * Cons: More prone to errors due to broader search scope over multiple fields.
 
 * **Alternative 2**: Only accept 1 field as search query.
   * Pros: Less prone to errors due to stricter search only over 1 field.
-  * Cons: Less user friendly since users will not be able to conduct multi-layered filters using several fields at once.
+  * Cons: Less user-friendly since users will not be able to conduct multi-layered filters using several fields at once.
 
 ### Sort feature
 
@@ -571,12 +571,12 @@ The following sequence diagram models the interactions between the different com
 **Aspect: How to implement pin/unpin command in Persons class and subclasses:**
 
 * **Alternative 1 (current choice)**: Only accept the name field, where only the last name field will be taken.
-    * Pros: User friendly. Users can easily correct the name field without deleting the previously incorrect name field entered. Since name cannot be edited, this ensures that the name will be consistent and the user do not have to check what to input everytime. 
+    * Pros: User-friendly. Users can easily correct the name field without deleting the previously incorrect name field entered. Since name cannot be edited, this ensures that the name will be consistent and the user do not have to check what to input everytime. 
     * Cons: Less rigorous validation check on name as users may not intentionally enter a second name field. 
 
 * **Alternative 2**: Accept only one name field.
     * Pros: Less prone to possible errors due to stricter validation checks on name fields.
-    * Cons: Less user friendly since users will have to put in more effort to fix their commands. 
+    * Cons: Less user-friendly since users will have to put in more effort to fix their commands. 
 
 ### Undo/redo feature
 
@@ -1272,7 +1272,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a contact
 
-1. Edting a `Person` contact
+1. Editing a `Person` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Person` type. You can run the following command to add in a contact to edit:
       ```
@@ -1287,7 +1287,7 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
       Expected: The phone and email field of contact named 'Person1' is edited to `99990520` and `impooch@gmail13.com` respectively. Details of the edited contact shown in the status message.
 
-2. Edting a `Staff` contact
+2. Editing a `Staff` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Staff` type. You can run the following command to add in a contact to edit:
       ```
@@ -1305,7 +1305,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time }`<br>
       Expected: The salary and employment field of contact named 'Staff1' is edited to `40/hr` and `part-time` respectively. Details of the edited contact shown in the status message.
 
-3. Edting a `Supplier` contact
+3. Editing a `Supplier` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Supplier` type. You can run the following command to add in a contact to edit:
       ```
@@ -1323,7 +1323,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag }`<br>
       Expected: The product and price field of contact named 'Supplier1' is edited to `kibbles` and `$75/bag` respectively. Details of the edited contact shown in the status message.
 
-4. Edting a `Maintainer` contact
+4. Editing a `Maintainer` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Maintainer` type. You can run the following command to add in a contact to edit:
       ```
@@ -1343,7 +1343,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
    1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
       ```
@@ -1362,9 +1362,9 @@ testers are expected to do more *exploratory* testing.
    5. Other incorrect delete commands to try: `/delete`, `delete ; name :`<br>
       Expected: Similar to previous.
 
-### Pinning a person
+### Pinning a contact
 
-1. Pinning a person while all persons are being shown
+1. Pinning a contact while all contacts are being shown
 
    1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
       ```
@@ -1374,9 +1374,9 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/pin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is pinned at the top of the contact list.
 
-### Unpinning a person
+### Unpinning a contact
 
-1. Unpinning a person while all persons are being shown
+1. Unpinning a contact while all contacts are being shown
 
    1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
       ```
@@ -1387,9 +1387,9 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/unpin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is no longer pinned at the top of the contact list.
 
-### Rating a person
+### Rating a contact
 
-1. Rates a person while all persons are being shown
+1. Rating a contact while all contacts are being shown
 
    1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
       ```
@@ -1407,7 +1407,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a note to a contact
 
-1. Adding a note(no deadline) to a contact
+1. Adding a note (no deadline) to a contact
 
   1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
      ```
@@ -1430,19 +1430,22 @@ testers are expected to do more *exploratory* testing.
   2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
 
-### Search a contact
-1. Search contacts using field name.
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+### Searching a contact
+
+1. Searching contacts by name
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
       ``` 
       /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
       /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
       ```
    2. Test case: `/search ; name : John`
-      Expected: Woof! 2 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with name having `John` as substring.)
+      Expected: Woof! 2 contact(s) found! 🐶 (Details of contact book is omitted. It should show the contacts with name having `John` as substring.)
 
-2. Search contacts using field phone. 
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+2. Searching contacts by phone number
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
    ``` 
    /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
    /add-person ; name : John Doe ; phone : 8888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
@@ -1450,32 +1453,36 @@ testers are expected to do more *exploratory* testing.
    ```
    
    2. Test case: `/search ; phone : 12345678`
-      Expected: Woof! 1 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with phone number having `12345678` as substring.)
+      Expected: Woof! 1 contact(s) found! 🐶 (Details of contact book is omitted. It should show the contacts with phone number having `12345678` as substring.)
 
 
-### Sort contact list
-1. Sort contacts using field name.
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+### Sorting contact list
+
+1. Sorting contacts by name
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
       ``` 
       /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
       /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
       ```
    2. Test case: `/sort ; field : name`
-      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of contact book is omited. It should show the contacts with name in ascending order.)
+      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of contact book is omitted. It should show the contacts with name in ascending order.)
 
-1. Sort contacts using field phone.
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+2. Sorting contacts by phone number
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
      ``` 
      /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
      /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
      /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
      ```
    2. Test case: `/sort ; field : phone`
-     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of contact book is omited. It should show the contacts with phone number in ascending order.)
+     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of contact book is omitted. It should show the contacts with phone number in ascending order.)
 
-### Undo a command
-1. Undo a command that modified the contact book
+### Undoing a command
+
+1. Undoing a command that modifies the contact book
 
    1. Prerequisites: The previous command must modify the contact book. You can run the following command to modify the contact book:
       ```
@@ -1485,7 +1492,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/undo`
       Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command.)
 
-2. Undo a command that did not modify the contact book
+2. Undoing a command that does not modify the contact book
    
    1.  Prerequisites: There must exist a previous command that modify the contact book. You can run the following two commands which second command does not modify contact book:
       ```
@@ -1496,8 +1503,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/undo`
       Expected:  Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command. In this case, due to search function will stay on partial list, contact of Poochie should disappear.)
 
-### Redo a command
-1. Redo an undo command.
+### Redoing a command
+1. Redoing an undo command
 
    1. Prerequisites: There must be at least one undo command executed. You can run the following command before testing:
       ``` 
