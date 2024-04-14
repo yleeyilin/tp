@@ -18,9 +18,7 @@ import seedu.address.model.person.Staff;
  * Adds a person to the address book.
  */
 public class AddStaffCommand extends Command {
-
     public static final String COMMAND_WORD = "/add-staff";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a staff to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -37,27 +35,27 @@ public class AddStaffCommand extends Command {
             + PREFIX_SALARY + "$50/hr "
             + PREFIX_EMPLOYMENT + "part-time";
 
-    private final Staff toAdd;
+    private final Staff staffToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code staff}
      */
-    public AddStaffCommand(Staff person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddStaffCommand(Staff staff) {
+        requireNonNull(staff);
+        staffToAdd = staff;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(staffToAdd)) {
             throw new CommandException(AddMessages.MESSAGE_ADD_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addPerson(staffToAdd);
         return new CommandResult(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS,
-                AddMessages.formatPerson(toAdd)));
+                AddMessages.formatPerson(staffToAdd)));
     }
 
     @Override
@@ -72,13 +70,13 @@ public class AddStaffCommand extends Command {
         }
 
         AddStaffCommand otherAddCommand = (AddStaffCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return staffToAdd.equals(otherAddCommand.staffToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("staffToAdd", staffToAdd)
                 .toString();
     }
 }

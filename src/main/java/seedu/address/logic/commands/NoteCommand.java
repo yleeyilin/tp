@@ -32,6 +32,10 @@ public class NoteCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME
             + " Moochie" + " " + PREFIX_NOTE + "Meet at 6pm Tuesday";
+    public static final String MESSAGE_NULL_NAME = "specified note to add to contact is null";
+    public static final String MESSAGE_NULL_NOTE = "specified name to add to contact is null";
+    public static final String LOGGER_MESSAGE = "started executing the note command";
+
     private final Name name;
     private final Note note;
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -50,9 +54,9 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert (note != null) : "specified note to add to contact is null";
-        assert (name != null) : "specified name to add note to is null";
-        logger.info("started executing the note command");
+        assert (note != null) : MESSAGE_NULL_NOTE;
+        assert (name != null) : MESSAGE_NULL_NAME;
+        logger.info(LOGGER_MESSAGE);
         requireNonNull(model);
 
         Person personToEdit = model.findByName(name, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);

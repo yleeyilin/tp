@@ -15,9 +15,7 @@ import seedu.address.model.person.KeywordPredicate;
  * Keyword matching is case insensitive.
  */
 public class SearchCommand extends Command {
-
     public static final String COMMAND_WORD = "/search";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD \n"
@@ -28,7 +26,6 @@ public class SearchCommand extends Command {
             + "/search ; email : [full/partial email]\n"
             + "/search ; product : [full/partial product name]\n"
             + "/search ; employment : [employment]";
-
     private static final Logger logger = LogsCenter.getLogger(SearchCommand.class);
 
     private final KeywordPredicate predicate;

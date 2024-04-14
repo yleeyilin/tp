@@ -38,9 +38,7 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing staff in the address book.
  */
 public class EditStaffCommand extends Command {
-
     public static final String COMMAND_WORD = "/edit-staff";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -51,13 +49,12 @@ public class EditStaffCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_EMPLOYMENT + "EMPLOYMENT] \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe Staff "
             + PREFIX_FIELD + "{ "
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
-
     private static final Logger logger = LogsCenter.getLogger(EditStaffCommand.class);
 
     private final Name name;
@@ -96,7 +93,6 @@ public class EditStaffCommand extends Command {
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.formatPerson(editedStaff)));
     }
-
 
     /**
      * Creates and returns a {@code Staff} with the details of {@code staffToEdit}
@@ -148,7 +144,6 @@ public class EditStaffCommand extends Command {
                 .add("editStaffDescriptor", editStaffDescriptor)
                 .toString();
     }
-
 
     /**
      * Stores the details to edit the staff with. Each non-empty field value will replace the
@@ -250,7 +245,6 @@ public class EditStaffCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
-
 
         @Override
         public boolean equals(Object other) {

@@ -16,11 +16,13 @@ import seedu.address.model.person.RemindPredicate;
  */
 public class RemindCommand extends Command {
     public static final String COMMAND_WORD = "/remind";
+    public static final String LOGGER_MESSAGE = "started executing the remind command";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @Override
     public CommandResult execute(Model model) {
-        logger.info("started executing the remind command");
+        logger.info(LOGGER_MESSAGE);
         requireNonNull(model);
 
         model.updateFilteredPersonList(new RemindPredicate());
@@ -36,10 +38,7 @@ public class RemindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RemindCommand)) {
-            return false;
-        }
-        return true;
+        return other instanceof RemindCommand;
     }
 
     @Override

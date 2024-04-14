@@ -48,5 +48,4 @@ public class EditStaffCommandTest {
                 + editStaffDescriptor + "}";
         assertEquals(expected, editStaffCommand.toString());
     }
-
 }

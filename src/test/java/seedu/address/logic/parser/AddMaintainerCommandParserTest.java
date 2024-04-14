@@ -63,13 +63,13 @@ public class AddMaintainerCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Maintainer expectedPerson = new MaintainerBuilder(BOBMAINTAINER).build();
+        Maintainer expectedMaintainer = new MaintainerBuilder(BOBMAINTAINER).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SKILL_DESC_BOB + COMMISSION_DESC_BOB, new AddMaintainerCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
+                new AddMaintainerCommand(expectedMaintainer));
     }
-
 
     @Test
     public void parse_repeatedNonTagValue_failure() {

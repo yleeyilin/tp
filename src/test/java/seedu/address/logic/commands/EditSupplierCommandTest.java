@@ -49,5 +49,4 @@ public class EditSupplierCommandTest {
                 + editSupplierDescriptor + "}";
         assertEquals(expected, editSupplierCommand.toString());
     }
-
 }

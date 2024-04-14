@@ -18,7 +18,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class RedoCommandTest {
-
     @Test
     public void execute_redoSuccessful() throws Exception {
         Model modelManager = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
@@ -61,5 +60,4 @@ public class RedoCommandTest {
         String expected = RedoCommand.class.getCanonicalName() + "{}";
         assertEquals(expected, redoCommand.toString());
     }
-
 }

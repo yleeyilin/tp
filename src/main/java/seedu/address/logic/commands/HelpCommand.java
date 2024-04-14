@@ -20,11 +20,13 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_CONSTRAINTS = "PoochPlanner only accepts general, add, delete, edit,"
             + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort and clear as"
             + " valid command type inputs.";
+    public static final String MESSAGE_NULL_COMMAND = "specified command type to give help for is null";
+    public static final String LOGGER_MESSAGE = "started executing the help command";
+
     private final String commandType;
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-
-    enum CommandTypes {
+    private enum CommandTypes {
         GENERAL,
         ADD,
         DELETE,
@@ -61,7 +63,7 @@ public class HelpCommand extends Command {
      * @return Boolean showing whether the command type is valid.
      * */
     public static boolean isValidCommandType(String commandType) {
-        assert (commandType != null) : "specified command type to give help for is null";
+        assert (commandType != null) : MESSAGE_NULL_COMMAND;
 
         for (CommandTypes c : CommandTypes.values()) {
             String lowercaseName = c.name().toLowerCase();
@@ -83,8 +85,8 @@ public class HelpCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert (commandType != null) : "specified command type to give help for is null";
-        logger.info("started executing the help command");
+        assert (commandType != null) : MESSAGE_NULL_COMMAND;
+        logger.info(LOGGER_MESSAGE);
 
         // return the correct help message based on command type
         String capitalisedCommandType = commandType.toUpperCase();

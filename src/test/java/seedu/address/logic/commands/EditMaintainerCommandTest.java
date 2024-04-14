@@ -16,7 +16,6 @@ import seedu.address.model.person.Name;
  * Contains integration tests (interaction with the Model) and unit tests for EditMaintainerCommand.
  */
 public class EditMaintainerCommandTest {
-
     @Test
     public void equals() {
         final EditMaintainerCommand standardCommand =

@@ -16,7 +16,6 @@ import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.testutil.EditStaffDescriptorBuilder;
 
 public class EditStaffDescriptorTest {
-
     @Test
     public void equals() {
         // same values -> returns true

@@ -16,9 +16,7 @@ import seedu.address.model.person.Person;
  * Adds a person to the address book.
  */
 public class AddCommand extends Command {
-
     public static final String COMMAND_WORD = "/add-person";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -32,27 +30,27 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
-    private final Person toAdd;
+    private final Person personToAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Person person) {
         requireNonNull(person);
-        toAdd = person;
+        personToAdd = person;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(personToAdd)) {
             throw new CommandException(AddMessages.MESSAGE_ADD_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addPerson(personToAdd);
         return new CommandResult(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS,
-                AddMessages.formatPerson(toAdd)));
+                AddMessages.formatPerson(personToAdd)));
     }
 
     @Override
@@ -67,13 +65,13 @@ public class AddCommand extends Command {
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return personToAdd.equals(otherAddCommand.personToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("personToAdd", personToAdd)
                 .toString();
     }
 }

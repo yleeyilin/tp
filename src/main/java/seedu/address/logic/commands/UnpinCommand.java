@@ -15,7 +15,6 @@ import seedu.address.model.person.Person;
  */
 public class UnpinCommand extends Command {
     public static final String COMMAND_WORD = "/unpin";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpin a contact from the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "

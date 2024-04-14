@@ -24,7 +24,7 @@ import seedu.address.model.person.Supplier;
 
 public class RateCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Rating validRating1 = new Rating("1");
+    private final Rating validRating = new Rating("1");
 
     @Test
     public void execute_validRatingOther_addSuccess() throws CommandException {
@@ -32,12 +32,12 @@ public class RateCommandTest {
         Person toAddNotePerson = ALICE;
         Person expectedPerson = new Person(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
-                toAddNotePerson.getNote(), toAddNotePerson.getTags(), validRating1);
+                toAddNotePerson.getNote(), toAddNotePerson.getTags(), validRating);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedPerson);
 
         // execute note command
-        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating1);
+        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating);
         rateCommand.execute(model);
 
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -57,12 +57,12 @@ public class RateCommandTest {
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
                 toAddNotePerson.getNote(), toAddNotePerson.getTags(), toAddNotePerson.getSalary(),
                 toAddNotePerson.getEmployment(),
-                validRating1);
+                validRating);
         Model expectedModel = new ModelManager(modelStaff.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(modelStaff.getFilteredPersonList().get(7), expectedPerson);
 
         // execute note command
-        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating1);
+        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating);
         rateCommand.execute(modelStaff);
 
         assertEquals(modelStaff.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -80,12 +80,12 @@ public class RateCommandTest {
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
                 toAddNotePerson.getNote(), toAddNotePerson.getTags(), toAddNotePerson.getProduct(),
                 toAddNotePerson.getPrice(),
-                validRating1);
+                validRating);
         Model expectedModel = new ModelManager(modelSupplier.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(modelSupplier.getFilteredPersonList().get(7), expectedPerson);
 
         // execute note command
-        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating1);
+        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating);
         rateCommand.execute(modelSupplier);
 
         assertEquals(modelSupplier.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -103,12 +103,12 @@ public class RateCommandTest {
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
                 toAddNotePerson.getNote(), toAddNotePerson.getTags(), toAddNotePerson.getSkill(),
                 toAddNotePerson.getCommission(),
-                validRating1);
+                validRating);
         Model expectedModel = new ModelManager(modelMaintainer.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(modelMaintainer.getFilteredPersonList().get(7), expectedPerson);
 
         // execute note command
-        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating1);
+        RateCommand rateCommand = new RateCommand(toAddNotePerson.getName(), validRating);
         rateCommand.execute(modelMaintainer);
 
         assertEquals(modelMaintainer.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -118,8 +118,8 @@ public class RateCommandTest {
 
     @Test
     public void equals() {
-        RateCommand rateFirstCommand = new RateCommand(ALICE.getName(), validRating1);
-        RateCommand rateSecondCommand = new RateCommand(BENSON.getName(), validRating1);
+        RateCommand rateFirstCommand = new RateCommand(ALICE.getName(), validRating);
+        RateCommand rateSecondCommand = new RateCommand(BENSON.getName(), validRating);
 
         // same object -> returns true
         assertEquals(rateFirstCommand, rateFirstCommand);

@@ -16,10 +16,10 @@ import seedu.address.model.Model;
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "/undo";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo previous execution. ";
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    public static final String LOGGER_MESSAGE = "Going to execute undo command.";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Creates an UndoCommand.
@@ -29,7 +29,7 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        logger.log(Level.INFO, "Going to execute undo command.");
+        logger.log(Level.INFO, LOGGER_MESSAGE);
         requireNonNull(model);
 
         if (!model.canUndoAddressBook()) {
@@ -47,11 +47,7 @@ public class UndoCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UndoCommand)) {
-            return false;
-        }
-
-        return true;
+        return other instanceof UndoCommand;
     }
 
     @Override

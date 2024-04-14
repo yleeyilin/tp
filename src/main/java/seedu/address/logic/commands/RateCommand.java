@@ -19,7 +19,6 @@ import seedu.address.model.person.Rating;
  */
 public class RateCommand extends Command {
     public static final String COMMAND_WORD = "/rate";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Rates the person identified by their name.\n"
             + "Parameters: "
@@ -66,8 +65,8 @@ public class RateCommand extends Command {
 
         RateCommand otherRateCommand = (RateCommand) other;
         return targetName.equals(otherRateCommand.targetName);
-
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

@@ -16,17 +16,14 @@ import seedu.address.model.Model;
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "/sort";
-
     public static final String MESSAGE_USAGE =
             "Sorts the address book based on specified parameters.\n"
             + "Example: /sort ; field : name";
-
     public static final String MESSAGE_CONSTRAINTS =
             "Only accepts name, phone, email, address, "
             + "salary, employment, price, product, "
             + "skill, commission, tag, note, pin "
             + "and rating as valid command type inputs.";
-
     private static final Logger logger = LogsCenter.getLogger(SortCommand.class);
 
     private final Prefix prefix;
