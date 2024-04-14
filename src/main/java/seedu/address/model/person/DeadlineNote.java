@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * Represents a Person's Note with Deadline in the address book.
+ * Represents a Person's note with a deadline in the address book.
  */
 public class DeadlineNote extends Note {
 
@@ -20,7 +20,7 @@ public class DeadlineNote extends Note {
      * Constructs an {@code DeadlineNote}.
      *
      * @param note A valid note.
-     * @param note A valid deadline.
+     * @param deadline A valid deadline.
      */
     public DeadlineNote(String note, String deadline) {
         super(note);
@@ -33,10 +33,11 @@ public class DeadlineNote extends Note {
      * Returns true if date is in valid format, else
      * returns false.
      *
-     * @return Boolean indicating if it is in a
+     * @param test Date to test.
+     * @return Boolean indicating if date is in the
      *         correct format.
      */
-    public static Boolean isValidDate(String test) {
+    public static boolean isValidDate(String test) {
         if (test.equals("")) {
             return false;
         }
@@ -56,6 +57,9 @@ public class DeadlineNote extends Note {
     /**
      * Returns date converted into a more
      * readable format.
+     *
+     * @param deadline Deadline to convert.
+     * @return Converted deadline.
      */
     public String convertDate(String deadline) {
         assert (isValidDate(deadline)) : "deadline to convert is not valid";
