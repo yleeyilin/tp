@@ -33,10 +33,10 @@ PoochPlanner is your go-to address book, tailor-made for dog cafe owners like yo
 
 Contact | Definition and Examples
 --------|------------------
-Person | Any persons that do not fall under staff, supplier or maintainer.<br> E.g. neighbours, work friends
-Staff | Any full-time or part-time employees.<br> E.g. waiters, waitresses, dishwashers
-Supplier | Any logistics partner that supplies stock for your dog cafe.<br> E.g. kibbles suppliers, coffee beans suppliers
-Maintainer | Any externally hired specialised personel that takes care of the dogs.<br> E.g. dog groomers, veterinarians
+Person | Any persons that do not fall under staff, supplier or maintainer.<br> E.g. neighbour, work friend
+Staff | Any full-time or part-time employee.<br> E.g. waiter, waitress, dishwasher
+Supplier | Any logistics partner that supplies stock for your dog cafe.<br> E.g. kibbles supplier, coffee beans supplier
+Maintainer | Any externally hired specialised personel that takes care of the dogs.<br> E.g. dog groomer, veterinarian
 
 <div style="page-break-after: always;"></div>
 
@@ -119,14 +119,14 @@ Contact card | The box displayed for each contact which contains all of their re
     <img src="images/Ui.png" alt="Add before" style="width:100%;"/>
     <medium>A GUI similar to the one above should appear in a few seconds.</medium>
     <br>
-    <medium>Note that PoochPlanner does not contain any sample data. Thus, an empty contacts list will be shown on first use.</medium>
+    <medium>Since PoochPlanner does not contain any sample data, an empty contacts list will be shown on first use.</medium>
     <br>
 </div>
 
 <br>
 
 6. Type any command into the input box and press enter to execute it. <br>
-   Some example commands that you can try:
+   You can try out the sample commands below:
 
    * `/add-person ; name : Pooch  ; phone : 98765435 ; address : Poochie Street 24 ; email : iampooch@gmail.com` <br> 
    The above command adds a general contact named `Pooch` to your contacts list in PoochPlanner.
@@ -174,7 +174,7 @@ Here is a quick look at the different GUI components of PoochPlanner.
 * Parameters can be in any order.<br>
   For instance, if the command specifies `address : [address] ; phone : [phone]`, `phone : [phone] ; address : [address]` is also acceptable.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application. 
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to PoochPlanner. 
 
 * Commands are space-sensitive so you should take caution when entering the commands. Make sure that all of the prefixes that you key in have the correct spacing. <br> For instance, ` ; address : ` or ` ; phone : ` are correctly spaced prefixes. 
 
@@ -200,7 +200,7 @@ The table below summarises the `add` command, format and examples for each conta
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/addcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of adding a person contact named "Janna":</medium>
+    <medium>Above is an example of adding a person contact named "Janna".</medium>
     <br>
     <medium>Input: <code>/add-person ; name : Janna ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com</code></medium>
     <br>
@@ -220,7 +220,7 @@ The table below summarises the `add` command, format and examples for each conta
 
 * Adding duplicate names will not be allowed.<br>
 
-* `name` is case-insensitive but space-sensitive.<br>
+* `name` is case-insensitive and space-sensitive.<br>
 
 * `email` must in the format {example}@{domain} or {example}@{domain}.{extension}.<br>
 
@@ -260,7 +260,7 @@ The table below summarises the `edit` command, format and examples for each cont
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/editcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of editing a person contact named "Janna":</medium>
+    <medium>Above is an example of editing a person contact named "Janna".</medium>
     <br>
     <medium>Input: <code>/edit-person ; name : Janna ; field : { address : Pooch Street 31 }</code></medium>
     <br>
@@ -272,7 +272,7 @@ The table below summarises the `edit` command, format and examples for each cont
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
-* `name` is a compulsory field that is case-insensitive but space-sensitive.<br>
+* `name` is a compulsory field that is case-insensitive and space-sensitive.<br>
 
 * A contact with the specified `name` must be present in your contacts list.<br>
 
@@ -322,7 +322,7 @@ Examples: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/searchcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of searching for a contact named "Tom":</medium>
+    <medium>Above is an example of searching for a contact named "Tom".</medium>
     <br>
     <medium>Input: <code>/search ; name : Tom</code></medium>
     <br>
@@ -339,7 +339,7 @@ Examples: <br>
 
 * Multiple search fields may be provided.<br>
 
-* Queries are case-insensitive but space-sensitive.<br>
+* Queries are case-insensitive and space-sensitive.<br>
 
 * Duplicate entries for the same fields are not allowed. For instance, `/search ; name : Janna ; name : Poochie` is not allowed.<br>
 
@@ -353,9 +353,9 @@ If you would like to search for the exact `salary`/`price`/`commission`, you may
 
 * To search for the exact `salary` and `commission`, your input must be in the format ${Number}/hr.<br>
 
-* To search for the exact `price`, your input must be in the format ${Number}/{quantity}<br>. Examples of quantifiers are "bag, "gram", "litre".<br>
+* To search for the exact `price`, your input must be in the format ${Number}/{quantity}.<br>
 
-If you would like to search for `salaries`/`prices`/`commissions` within a specified range instead, you may follow this format:<br>
+If you would like to search for `salaries`/`prices`/`commissions` within a specified range, you may follow this format:<br>
 
 * To search for a range of values for `salaries`/`prices`/`commissions`, your input must be in the format ${Number}.<br>
 
@@ -384,7 +384,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/deletecommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of deleting a contact named "Janna":</medium>
+    <medium>Above is an example of deleting a contact named "Janna".</medium>
     <br>
     <medium>Input: <code>/delete ; name : Janna</code></medium>
     <br>
@@ -396,7 +396,7 @@ Example: <br>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
-* `name` is a compulsory field that is case-insensitive but space-sensitive.<br>
+* `name` is a compulsory field that is case-insensitive and space-sensitive.<br>
 
 * A contact with the specified `name` must be present in your contacts list.<br>
 </div>
@@ -422,7 +422,7 @@ Example:
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/ratecommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of rating a person contact named "Janna":</medium>
+    <medium>Above is an example of rating a person contact named "Janna".</medium>
     <br>
     <medium>Input: <code>/rate ; name : Janna ; rating : 5</code></medium>
     <br>
@@ -438,13 +438,13 @@ Example:
 
 * A contact with the `name` must be present in your contacts list.<br>
 
-* `name` and `rating` are compulsory fields that are case-insensitive but space-sensitive.<br>
+* `name` and `rating` are compulsory fields that are case-insensitive and space-sensitive.<br>
 
 * A `rating` of `0` is equivalent to no rating given and will not display any rating.<br>
 
 </div>
 
-<div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**<br>
 
 * You can set a contact's `rating` to `0` to reset its rating!<br>
 
@@ -469,7 +469,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/pincommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of pinning a person contact named "Tom":</medium>
+    <medium>Above is an example of pinning a person contact named "Tom".</medium>
     <br>
     <medium>Input: <code>/pin ; name : Tom</code></medium>
     <br>
@@ -482,7 +482,7 @@ Example: <br>
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
-* `name` is a compulsory field that is case-insensitive but space-sensitive.<br>
+* `name` is a compulsory field that is case-insensitive and space-sensitive.<br>
 
 * A contact with the specified `name` must be present in your contacts list.<br>
 
@@ -518,7 +518,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/unpincommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of unpinning a person contact named "Tom":</medium>
+    <medium>Above is an example of unpinning a person contact named "Tom".</medium>
     <br>
     <medium>Input: <code>/unpin ; name : Tom</code></medium>
     <br>
@@ -534,7 +534,7 @@ Example: <br>
 
 * Using the `pin` command on a contact that has been pinned does not make any changes to your contacts list and simply repins the same contact successfully.<br>
 
-* `name` is a compulsory field that is case-insensitive but space-sensitive.<br>
+* `name` is a compulsory field that is case-insensitive and space-sensitive.<br>
 
 * A contact with the specified `name` must be present in your contacts list.<br>
 
@@ -568,7 +568,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/sortcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of sorting your contacts list by the <code>name</code> field:</medium>
+    <medium>Above is an example of sorting your contacts list by the <code>name</code> field.</medium>
     <br>
     <medium>Input: <code>/sort ; field : name</code></medium>
     <br>
@@ -622,7 +622,7 @@ Add a note with a deadline:<br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/deadlinecommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of adding to a contact named "Ben":</medium>
+    <medium>Above is an example of adding to a contact named "Ben".</medium>
     <br>
     <medium>Input: <code>/note ; name : Ben ; note : pay his salary of $1500 ; deadline : 2024-04-20</code></medium>
     <br>
@@ -635,10 +635,15 @@ Add a note with a deadline:<br>
 <div markdown="block" class="alert alert-warning">:exclamation: **Constraints:**<br>
 
 * `name` and `note` are compulsory fields.<br>
+
 * `deadline` is an optional field.<br>
+
 * `deadline` must follow "YYYY-MM-DD" format.<br>
-* `name` is case-insensitive but space-sensitive.<br>
+
+* `name` is case-insensitive and space-sensitive.<br>
+
 * A contact with the specified `name` must be present in your contacts list.<br>
+
 * `note` can take any non-empty string.
 
 </div>
@@ -708,8 +713,9 @@ Below is an example of undoing an `add` command:
 
 <div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* `Undo` works on all commands that have modified your contacts list.<br>
-* `Undo` will not work on commands that do not modify your contacts list such as `search`, `list` and `help` commands!<br>
+* `/undo` works on all commands that have modified your contacts list.<br>
+
+* `/undo` will not work on commands that do not modify your contacts list such as `/search`, `/list` and `/help` commands!<br>
 
 </div>
 
@@ -766,8 +772,9 @@ Below is an example of redoing an <code>add</code> command :
 
 <div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* `Redo` works on all commands that modified your contacts list. <br>
-* `Redo` will not work on commands that do not modify your contacts list such as `search`, `list` and `help` commands!<br>
+* `/redo` works on all commands that modified your contacts list. <br>
+
+* `/redo` will not work on commands that do not modify your contacts list such as `/search`, `/list` and `/help` commands!<br>
 
 </div>
 
@@ -779,22 +786,22 @@ Shows a help message of how to use commands so that you can get help regarding t
 
 Format: <br>
 `/help ; command : [command type]`
-<br>
+
 Examples: <br>
 * `/help ; command : delete`
   <br>
-  The above command gives help for the `delete` command.
+  The above command provides help for the `delete` command.
 
 * `/help ; command : add`
   <br>
-  The above command gives help for the `add` command.
+  The above command provides help for the `add` command.
 
 <br> 
 
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/helpcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of getting help for the <code>add</code> command:</medium>
+    <medium>Above is an example of getting help for the <code>add</code> command.</medium>
     <br>
     <medium>Input: <code>/help ; command : add</code></medium>
     <br>
@@ -827,7 +834,7 @@ Shows all contacts with note deadlines from today onwards so that you can view a
 
 Format: <br>
 `/remind`
-<br>
+
 Example: <br>
 * `/remind`
   <br>
@@ -838,7 +845,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/remindcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of getting reminders of contacts with notes containing deadlines from today onwards:</medium>
+    <medium>Above is an example of getting reminders of contacts with notes containing deadlines from today onwards.</medium>
     <br>
     <medium>Input: <code>/remind</code></medium>
     <br>
@@ -864,7 +871,7 @@ Removes all contacts from your contacts list so that you can reset your contacts
 
 Format: <br>
 `/clear`
-<br>
+
 Example: <br>
 * `/clear`
   <br>
@@ -875,7 +882,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/clearcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of clearing your contacts list:</medium>
+    <medium>Above is an example of clearing your contacts list.</medium>
     <br>
     <medium>Input: <code>/clear</code></medium>
     <br>
@@ -885,7 +892,7 @@ Example: <br>
 
 <br> 
 
-<div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**<br>
 
 * To return back to your full contacts list, you can use the command `/list`.
 
@@ -899,7 +906,7 @@ Lists all contacts in your PoochPlanner so that you can view all contacts in you
 
 Format: <br>
 `/list`
-<br>
+
 Example: <br>
 * `/list`
   <br>
@@ -910,7 +917,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/listcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of listing all contacts:</medium>
+    <medium>Above is an example of listing all contacts.</medium>
     <br>
     <medium>Input: <code>/list</code></medium>
     <br>
@@ -920,7 +927,7 @@ Example: <br>
 
 <br> 
 
-<div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**<br>
 
 * To return back to your full contacts list after using any filtering commands such as `search`, you can use the command `/list`.
 
@@ -936,7 +943,7 @@ Format: `/exit`
 
 ### Saving the data
 
-Data in your PoochPlanner is saved in the hard disk automatically after any command that modfies the data. There is no need to save manually.
+Data in your PoochPlanner is saved in the hard disk automatically after any command that modfies the data. You will not need to save any data manually.
 
 ### Editing the data file
 
@@ -944,7 +951,7 @@ Data in your PoochPlanner is saved automatically as a JSON file `[JAR file locat
 
 <div markdown="block" class="alert alert-warning">:exclamation: **Caution:**<br>
 
-Manually editing the JSON file is not advised and should be taken with extreme caution. If your changes to the data file makes its format invalid, your PoochPlanner may discard all data and start with an empty data file on the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
+Manually editing the JSON file is not advised and should be taken with extreme caution.<br>If your changes to the data file makes its format invalid, your PoochPlanner may discard all data and start with an empty data file on the next run. <br>Hence, it is recommended to make a backup of the file before editing it.<br>
 Furthermore, certain manual edits can cause your PoochPlanner to behave in unexpected ways (e.g., if a value entered lies outside its acceptable range).
 </div>
 
@@ -962,7 +969,7 @@ in our [Command Summary](#command-summary). Below is an example of an unknown co
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/error-images/unknownCommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Image depicting an unknown command with the unknown command error message.</medium>
+    <medium>The above image depicts the unknown command error message caused by an unknown command.</medium>
     <br>
 </div>
 
@@ -976,7 +983,7 @@ are using. Refer to our [Command Summary](#command-summary) for a list of valid 
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/error-images/invalidField.png" alt="Add before" style="width:100%;"/>
-    <medium>Image depicting a `help` command with its invalid field error message.</medium>
+    <medium>The above image depicts an invalid field error message caused by a <code>help</code>  command with an invalid field.</medium>
     <br>
 </div>
 
@@ -988,7 +995,7 @@ If you encounter a missing field error, please ensure the fields listed in the e
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/error-images/missingField.png" alt="Add before" style="width:100%;"/>
-    <medium>Image depicting a `note` command with its missing field error message.</medium>
+    <medium>The above image depicts a missing field error caused by a <code>note</code> command with missing fields.</medium>
     <br>
 </div>
 
@@ -1063,7 +1070,7 @@ Example: Adding a new contact with a note and a rating
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by your PoochPlanner application before running PoochPlanner again.
+1. **When using multiple screens**, if you move PoochPlanner to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by your PoochPlanner before running PoochPlanner again.
 
 --------------------------------------------------------------------------------------------------------------------
 
