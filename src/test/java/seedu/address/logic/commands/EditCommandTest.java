@@ -39,17 +39,21 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
-        Person editedPerson = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(ALICE.getName(), descriptor);
+        try {
+            Person editedPerson = new PersonBuilder().build();
+            EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+            EditCommand editCommand = new EditCommand(ALICE.getName(), descriptor);
 
-        // expected model result
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+            // expected model result
+            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+            expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        // execute method for model
-        editCommand.execute(model);
-        assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+            // execute method for model
+            editCommand.execute(model);
+            assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
+        } catch (CommandException e) {
+            fail();
+        }
     }
 
     @Test
@@ -115,7 +119,6 @@ public class EditCommandTest {
         Name invalidName = new Name(INVALID_NAME);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName("Benson").build();
         EditCommand editCommand = new EditCommand(invalidName, descriptor);
-
         assertCommandFailure(editCommand, model, EditMessages.MESSAGE_INVALID_EDIT_PERSON);
     }
 

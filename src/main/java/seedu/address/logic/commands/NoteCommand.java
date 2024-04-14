@@ -32,8 +32,8 @@ public class NoteCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME
             + " Moochie" + " " + PREFIX_NOTE + "Meet at 6pm Tuesday";
-    public static final String MESSAGE_NULL_NAME = "specified note to add to contact is null";
-    public static final String MESSAGE_NULL_NOTE = "specified name to add to contact is null";
+    public static final String MESSAGE_NULL_NAME = "specified name to add to contact is null";
+    public static final String MESSAGE_NULL_NOTE = "specified note to add to contact is null";
     public static final String LOGGER_EXECUTE_NOTE_MESSAGE = "started executing the note command";
 
     private final Name name;
@@ -60,6 +60,7 @@ public class NoteCommand extends Command {
 
         Person personToEdit = model.findByName(name, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);
         Person editedPerson = personToEdit.updateNote(note);
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonListWithCommit(PREDICATE_SHOW_ALL_PERSONS);
 
