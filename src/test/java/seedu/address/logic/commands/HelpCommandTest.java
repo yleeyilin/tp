@@ -146,8 +146,8 @@ public class HelpCommandTest {
 
     @Test
     public void isValidCommandTypeTest() {
-        String invalidCommand = "add";
-        boolean isValidCommand = isValidCommandType(invalidCommand);
+        String validCommand = "add";
+        boolean isValidCommand = isValidCommandType(validCommand);
         assertEquals(true, isValidCommand);
     }
 
@@ -161,15 +161,15 @@ public class HelpCommandTest {
         // same object -> returns true
         assertTrue(helpFirstCommand.equals(helpFirstCommand));
 
-        // different names -> returns false
+        // different command types -> returns false
         assertFalse(helpFirstCommand.equals(helpSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
-        String commandType = "add";
-        HelpCommand helpCommand = new HelpCommand(commandType);
-        String expected = HelpCommand.class.getCanonicalName() + "{command type=" + commandType + "}";
+        String validCommandType = "add";
+        HelpCommand helpCommand = new HelpCommand(validCommandType);
+        String expected = HelpCommand.class.getCanonicalName() + "{command type=" + validCommandType + "}";
         assertEquals(expected, helpCommand.toString());
     }
 }

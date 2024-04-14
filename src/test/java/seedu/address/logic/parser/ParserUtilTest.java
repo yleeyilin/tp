@@ -56,7 +56,6 @@ public class ParserUtilTest {
     private static final String VALID_NOTE = "kind doggos";
     private static final String INVALID_DEADLINE = "2019";
     private static final String VALID_SORT_FIELD = "name";
-    private static final String INVALID_SORT_FIELD = "name";
 
     private static final String LEADING_SEMICOLON = "; ";
     private static final String TRAILING_COLON = " : ";
