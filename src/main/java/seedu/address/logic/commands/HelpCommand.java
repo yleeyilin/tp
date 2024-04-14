@@ -21,7 +21,7 @@ public class HelpCommand extends Command {
             + " exit, search, list, note, pin, unpin, note, rate, redo, undo, remind, sort and clear as"
             + " valid command type inputs.";
     public static final String MESSAGE_NULL_COMMAND = "specified command type to give help for is null";
-    public static final String LOGGER_MESSAGE = "started executing the help command";
+    public static final String LOGGER_EXECUTE_HELP_MESSAGE = "started executing the help command";
 
     private final String commandType;
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -85,7 +85,7 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert (commandType != null) : MESSAGE_NULL_COMMAND;
-        logger.info(LOGGER_MESSAGE);
+        logger.info(LOGGER_EXECUTE_HELP_MESSAGE);
 
         // return the correct help message based on command type
         String capitalizedCommandType = commandType.toUpperCase();

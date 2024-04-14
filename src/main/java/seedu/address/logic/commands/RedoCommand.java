@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "/redo";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous undid command. ";
-    public static final String LOGGER_MESSAGE = "Going to execute redo command.";
+    public static final String LOGGER_EXECUTE_REDO_MESSAGE = "Going to execute redo command.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -29,7 +29,7 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        logger.log(Level.INFO, LOGGER_MESSAGE);
+        logger.log(Level.INFO, LOGGER_EXECUTE_REDO_MESSAGE);
         requireNonNull(model);
 
         if (!model.canRedoAddressBook()) {

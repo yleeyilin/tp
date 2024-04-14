@@ -37,7 +37,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class AddressBookParser {
-    public static final String MESSAGE_PARSEEXCEPTION = "This user input caused a ParseException: ";
+    public static final String MESSAGE_PARSE_EXCEPTION = "This user input caused a ParseException: ";
 
     /**
      * Used for initial separation of command word and args.
@@ -49,7 +49,7 @@ public class AddressBookParser {
      * Parses user input into command for execution.
      *
      * @param userInput The full user input string.
-     * @return the command based on the user input.
+     * @return The command based on the user input.
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
@@ -135,7 +135,7 @@ public class AddressBookParser {
             return new SortCommandParser().parse(arguments);
 
         default:
-            logger.finer(MESSAGE_PARSEEXCEPTION + userInput);
+            logger.finer(MESSAGE_PARSE_EXCEPTION + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

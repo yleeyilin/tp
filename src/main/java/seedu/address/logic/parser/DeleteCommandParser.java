@@ -22,7 +22,7 @@ import seedu.address.model.person.Name;
 public class DeleteCommandParser implements Parser<DeleteCommand> {
     public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for delete command is null";
     public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for delete command.";
-    public static final String MESSAGE_PARSEEXCEPTION = "Parsing error while parsing for delete command.";
+    public static final String MESSAGE_PARSE_EXCEPTION = "Parsing error while parsing for delete command.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -46,7 +46,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         boolean isPreambleEmpty = argMultimap.getPreamble().isEmpty();
         if (!isPreambleEmpty) {
-            logger.log(Level.WARNING, MESSAGE_PARSEEXCEPTION);
+            logger.log(Level.WARNING, MESSAGE_PARSE_EXCEPTION);
             throw new ParseException(String.format(DeleteMessages.MESSAGE_DELETE_MISSING_NAME,
                     DeleteCommand.MESSAGE_USAGE));
         }

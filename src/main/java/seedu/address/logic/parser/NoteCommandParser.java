@@ -23,7 +23,7 @@ import seedu.address.model.person.Note;
 public class NoteCommandParser implements Parser<NoteCommand> {
     public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for note command is null";
     public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for note command.";
-    public static final String MESSAGE_PARSEEXCEPTION = "Parsing error while parsing for note command.";
+    public static final String MESSAGE_PARSE_EXCEPTION = "Parsing error while parsing for note command.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -48,7 +48,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
         if (!isPreambleEmpty) {
-            logger.log(Level.WARNING, MESSAGE_PARSEEXCEPTION);
+            logger.log(Level.WARNING, MESSAGE_PARSE_EXCEPTION);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 
