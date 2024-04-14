@@ -30,7 +30,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** above explains the high-level design of the PoochPlanner.
+The ***Architecture Diagram*** above explains the high-level design of PoochPlanner.
 
 Below is a quick overview of the main components and how they interact with each other.
 
@@ -42,9 +42,9 @@ Below is a quick overview of the main components and how they interact with each
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the PoochPlanner.
+* [**`UI`**](#ui-component): The UI of PoochPlanner.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the PoochPlanner in memory.
+* [**`Model`**](#model-component): Holds the data of PoochPlanner in memory.
 * [**`Storage`**](#storage-component): Reads data from and writes data to the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -60,7 +60,7 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name} Manager` class which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than a concrete class. This is to prevent outside component's being coupled to the implementation of a component, as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than a concrete class. This is to prevent the coupling of a component to outside components, as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that are made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class, which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that comprises of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class, which captures the commonalities between classes that represent parts of the visible GUI.
 Note that `HelpWindow` refers to a window that provides general help for all commands. `HelpOtherWindow` refers to a window which offers help for specific commands.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
