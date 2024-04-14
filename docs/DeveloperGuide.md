@@ -1188,23 +1188,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix: Planned Enhancement**
 
 1. Enhance command to be space insensitive
-   1. Currently, we do not allow for incorrect spacing in commands. 
+   1. Currently, we do not allow for incorrect spacings in commands. 
    2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com```.
-   3. The above example will be considered as invalid since there is no spacing before the `phone` and `address` prefixes and are not parsed as valid prefixes. 
-   4. We plan to extend PoochPlanner to accept this alternative possible input to cater to fast typists.
+   3. The above example will be considered as invalid since there is no spacing before the `phone` prefix and before the `address` prefix. The lack of spacing causes `phone` and `address` to not be parsed as valid prefixes.
+   4. We plan to extend PoochPlanner to accept alternative possible inputs with incorrect spacings to cater to fast typists.
 
 2. Enhance command to fix multiple white spacings in user's input
    1. Currently, we do not have any checker to verify if there exists multiple white spacings in user's input. 
    2. We take any input values `John Doe` with multiple number of spacing as different inputs as it is.
-   3. We plan to parse all the input to remove additional spacing to cater fast typists as additional spacing can likely occur due to typo.
+   3. We plan to parse all the input to remove additional spacings to cater fast typists as additional spacings are likely occur due to typo.
 
-3. Enhance price to allow decimals
+3. Enhance price to allow for decimal places
    1. Currently, we do not allow decimal places for prices.
    2. We plan to allow decimal places for prices to allow for greater flexibility in recording prices.
 
-4. Enhance salary to be stored in different unit
+4. Enhance salary to allow for storage in different units
    1. Currently, we only allow storing salary with unit `/hr`.
-   2. We plan to allow more flexible storing unit such as `/day`, `/month` and `/event`.
+   2. We plan to allow for more flexible storing unit such as `/day`, `/month` and `/event`.
 
 5. Enhance validation on input fields for search command
    1. Currently, we do not have any validation on input fields such as salary, phone in search commands.
@@ -1212,13 +1212,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    3. We plan to do validation check on all the fields to ensure that user is inserting correct type of value in the field.
 
 6. Enhance post-search status
-   1. Currently, after a search command, the contact book will only display the filtered list.
-   2. After exucution of delete, pin, unpin, undo and redo will not return to main list.
+   1. Currently, after a search command, the contact book will only display the filtered contacts list.
+   2. After exucution of delete, pin, unpin, undo and redo will not return to main contacts list.
    3. We plan to enhance the commands by returning to main list after every execution of command.
 
-7. Enhance commission validation
+7. Enhance commission to allow for decimal places
    1. Currently, we do not allow decimal places for commission.
    2. We plan to allow decimal places for commission to allow for greater flexibility in recording commission. 
+
+8. Enhance commission to allow for storage in different units
+   1. Currently, we only allow storing commission with unit `/hr`.
+   2. We plan to allow for more flexible storing unit such as `/day`, `/month` and `/event`.
+
+9. Enhance phone number storage
+   1. Currently, we only allow users to add one phone number to one contact.
+   2. We plan to allow users to add more than one phone number to allow for greater flexibility in storing contacts.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
