@@ -30,7 +30,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the application.
 
 Given below is a quick overview of the main components and how they interact with each other.
 
@@ -42,9 +42,9 @@ Given below is a quick overview of the main components and how they interact wit
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the app.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the app in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -60,7 +60,7 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's from being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -73,15 +73,14 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
-Note that `HelpWindow` refers to a window that provides general help for all commands. `HelpOtherWindow` refers to a window which offers help for specific commands.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* keeps a reference to the `Logic` component, because the `UI` component relies on the `Logic` component to execute commands.
+* depends on some classes in the `Model` component, as it displays the `Person` object residing in the `Model`.
 
 ### Logic component
 
@@ -101,18 +100,18 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+1. When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+2. All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -122,9 +121,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores different states of address book inside versioned address book.
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores different states of AddressBook inside VersionedAddressBook.
+* stores all data from PoochPlanner i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -135,7 +134,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="6000" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both PoochPlanner data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -268,11 +267,11 @@ completion of the `Delete` command.
 
 ### Help feature
 
-The help feature receive help for all commands.
+The help feature provides help for all commands.
 
 #### Overview
 
-The help command enables users to view help for all.
+The help command enables users to view help for all commands.
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `help` command.
 
@@ -284,7 +283,7 @@ The following sequence diagram models the interactions between the different com
 2. `HelpCommandParser` invokes the `parse` method which parses the user input by storing the prefix of its respective values as an `ArgumentMultimap` object.
    A `HelpCommand` object is created with the command type specified in the command field.
 3. The `HelpCommandParser` returns the `HelpCommand` object.
-4. `LogicManager` invokes the `execute` method of `HelpCommand`.
+4. `LogicManager` invokes the `execute` method of the `HelpCommand`.
 5. The `execute` method of `HelpCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Help` command.
 
 #### Example Usage
@@ -298,7 +297,7 @@ The following sequence diagram models the interactions between the different com
 * **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Difference
   in messages is created by displaying different strings.
   * Pros: Code is made much more concise.
-  * Cons: Lengthy if-else statements are required to displayed the correct string.
+  * Cons: Lengthy if-else statements are required to display the correct string.
 
 * **Alternative 2**: Create a different window for each type of command.
   * Pros: All details relating to a single command is within its own page. Can be perceived as neater.
@@ -327,7 +326,7 @@ The following sequence diagram models the interactions between the different com
 
 1. The user launches the application.
 2. The user inputs `/search ; name : Poochie` into the CLI.
-3. The address book is updated to display all contact cards that match the search queries.
+3. PoochPlanner is updated to display all contact cards that match the search queries.
 
 **Aspect: How to implement search command using multiple field inputs:**
 
@@ -361,7 +360,7 @@ The following sequence diagram models the interactions between the different com
 
 1. The user launches the application.
 2. The user inputs `/sort ; field : phone` into the CLI.
-3. The address book is updated to sort all the contact cards by ascending phone number.
+3. PoochPlanner is updated to sort all the contact cards by ascending phone number.
 
 **Aspect: How use sort command for ascending or descending order:**
 
@@ -385,13 +384,13 @@ The following sequence diagram models the interactions between the different com
 
 #### Details
 
-1. The user inputs the command to add a note a specified contact by first stating the target name of the contact they want to add a note to. This is followed by the respective fields and new values they want to modify.
+1. The user inputs the command to add a note to a specified contact by first stating the target name of the contact they want to add a note to. This is followed by the respective fields and the new values they want to modify.
 2. `NoteCommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their respective values as an `ArgumentMultimap` object.
  A `NoteCommand` object is created with the parsed name, note and optional deadline field.
 3. The `NoteCommandParser` returns the `NoteCommand` object.
 4. `LogicManager` invokes the `execute` method of `NoteCommand`. 
 5. The `execute` method of `NoteCommand` invokes the `findByName` method in `Model` property to find the person with the specified name. 
-6. The `execute` method of `NoteCommand` invokes the `setPerson` method in `Model` property to set the person in the existing contact list to the new `Person` object which has been edited the `execute` method of `NoteCommand`. 
+6. The `execute` method of `NoteCommand` invokes the `setPerson` method in `Model` property to set the person in the existing contact list to the new `Person` object which has been edited in the `execute` method of `NoteCommand`. 
 7. The `execute` method of `NoteCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
 8. The `execute` method of `NoteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Note` command.
 
@@ -404,14 +403,13 @@ The following sequence diagram models the interactions between the different com
 **Aspect: How to store note field in Persons class and subclasses:**
 
 * **Alternative 1 (current choice)**: Add note field to all 4 constructors (Person, Staff, Maintainer, Supplier).
-    * Pros: Maintains OOP. As in real life, each person has a note description, having each class containing
-  a note field models this and preserves OOP.
+    * Pros: Leverages inheritance, thus reducing repeated code and adheres to OOP.
     * Cons: Changing the constructors of 4 classes is a tedious task.
 
 * **Alternative 2**: Add note field to the Parent person constructor and use a setter to set new notes.
     * Pros: Much simpler implementation that will require less refactoring of code.
     * Cons: Violates OOP, specifically encapsulation as the other classes would be able to manipulate the
-  inner details of the Person classes.
+  inner details of the Person classes directly.
 
 ### Rate feature
 
@@ -509,7 +507,7 @@ The following sequence diagram models the interactions between the different com
 
 1. The user launches the application.
 2. The user inputs `/clear` into the CLI.
-3. The address book is emptied.
+3. The data in PoochPlanner is emptied.
 
 ### List feature
 
@@ -592,11 +590,11 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial AddressBook state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `/delete ; name : Poochie` command to delete the Person named Poochie in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `/delete ; name : Poochie` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `/delete ; name : Poochie` command to delete the Person named Poochie in PoochPlanner. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `/delete ; name : Poochie` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -651,7 +649,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Aspect: How undo & redo executes :
 
-**Alternative 1 (current choice)** : Saves the entire address book.
+**Alternative 1 (current choice)** : Saves the entire PoochPlanner.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -952,13 +950,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to undo previous command.
-2.  PoochPlanner retrieves previous record of address book.
+2.  PoochPlanner retrieves previous record of PoochPlanner data.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. PoochPlanner detects no previous state of address book.
+* 1a. PoochPlanner detects no previous state of PoochPlanner.
 
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
@@ -973,13 +971,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to redo previous command.
-2.  PoochPlanner retrieves future record of address book.
+2.  PoochPlanner retrieves future record of PoochPlanner data.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. PoochPlanner detects no next record of address book.
+* 1a. PoochPlanner detects no next record of PoochPlanner data.
 
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
@@ -1106,8 +1104,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**:
 
-1.  User requests to sort the address book by a specified field.
-2.  PoochPlanner updates the addrees book in the sorted order.
+1.  User requests to sort PoochPlanner by a specified field.
+2.  PoochPlanner updates the address book in the sorted order.
 3.  PoochPlanner confirms that the addressbook has been successfully sorted.
 
     Use case ends.
@@ -1130,9 +1128,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**:
 
-1.  User requests to clear the address book.
-2.  PoochPlanner updates the address book.
-3.  PoochPlanner confirms that the addressbook has been cleared.
+1.  User requests to clear the data in PoochPlanner.
+2.  PoochPlanner updates the data in PoochPlanner.
+3.  PoochPlanner confirms that the data in PoochPlanner has been cleared.
 
     Use case ends.
 
@@ -1212,13 +1210,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 6. Enhance post-search status
    1. Currently, after a search command, the contact book will only display the filtered list.
-   2. After exucution of delete, pin, unpin, undo and redo will not return to main list.
+   2. After execution of delete, pin, unpin, undo and redo will not return to main list.
    3. We plan to enhance the commands by returning to main list after every execution of command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
-Below are instructions to test the app manually.
+Below are instructions to test the app manually. Before each test, run `/clear` to reset the data in PoochPlanner.
+Also, take caution when copying the commands to the input box as our commands are space sensitive. Line breaks may result
+in spaces being omitted.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -1278,13 +1279,13 @@ testers are expected to do more *exploratory* testing.
       ```
       /add-person ; name : Person1 ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com
       ```
-   2. Test case: `/edit ; name : Person1 ; field : { phone : 99820520 }`<br>
+   2. Test case: `/edit-person ; name : Person1 ; field : { phone : 99820520 }`<br>
       Expected: The phone field of contact named 'Person1' is edited to `99820520`. Details of the edited contact shown in the status message.
 
-   3. Test case: `/edit ; name : Person1 ; field : { address : Pooch Street 31 }`<br>
+   3. Test case: `/edit-person ; name : Person1 ; field : { address : Pooch Street 31 }`<br>
       Expected: The address field of contact named 'Person1' is edited to `Pooch Street 31`. Details of the edited contact shown in the status message.
 
-   4. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
+   4. Test case: `/edit-person ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
       Expected: The phone and email field of contact named 'Person1' is edited to `99990520` and `impooch@gmail13.com` respectively. Details of the edited contact shown in the status message.
 
 2. Edting a `Staff` contact
@@ -1507,6 +1508,21 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `/redo`
       Expected: Woof! Redo successfully! 🐶(Details of contact book is omitted. It should show the contact book list before undo command)
+
+### View reminders
+
+1. View a reminder
+
+   1. Prerequisites: There must be one contact with a note that has a deadline after today's date. You can run the following commands to add such a contact:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+      ```
+      /note ; name : Poochie ; note : get kibble ; deadline : 2026-10-10
+      ```
+   2. Test case: `/remind`<br>
+      Expected: Woof! 1 contact(s) found! 🐶
+
 
 ### Saving data
 
