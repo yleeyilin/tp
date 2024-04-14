@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user add command visible messages.
+ * Container for {@code AddCommand} visible messages.
  */
 public class AddMessages extends Messages {
     public static final String ADD = "add";

@@ -53,7 +53,6 @@ import seedu.address.testutil.StaffBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
 public class AddressBookParserTest {
-
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
@@ -65,26 +64,26 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addStaff() throws Exception {
-        Staff person = new StaffBuilder().build();
+        Staff staff = new StaffBuilder().build();
         AddStaffCommand command = (AddStaffCommand) parser.parseCommand(
-                PersonUtil.getAddStaffCommand(person));
-        assertEquals(new AddStaffCommand(person), command);
+                PersonUtil.getAddStaffCommand(staff));
+        assertEquals(new AddStaffCommand(staff), command);
     }
 
     @Test
     public void parseCommand_addSupplier() throws Exception {
-        Supplier person = new SupplierBuilder().build();
+        Supplier supplier = new SupplierBuilder().build();
         AddSupplierCommand command = (AddSupplierCommand) parser.parseCommand(
-                PersonUtil.getAddSupplierCommand(person));
-        assertEquals(new AddSupplierCommand(person), command);
+                PersonUtil.getAddSupplierCommand(supplier));
+        assertEquals(new AddSupplierCommand(supplier), command);
     }
 
     @Test
     public void parseCommand_addMaintainer() throws Exception {
-        Maintainer person = new MaintainerBuilder().build();
+        Maintainer maintainer = new MaintainerBuilder().build();
         AddMaintainerCommand command = (AddMaintainerCommand) parser.parseCommand(
-                PersonUtil.getAddMaintainerCommand(person));
-        assertEquals(new AddMaintainerCommand(person), command);
+                PersonUtil.getAddMaintainerCommand(maintainer));
+        assertEquals(new AddMaintainerCommand(maintainer), command);
     }
 
     @Test
@@ -172,41 +171,40 @@ public class AddressBookParserTest {
         assertEquals(new SearchCommand(new KeywordPredicate(token)), command);
     }
 
-
     @Test
     public void parseCommand_note() throws Exception {
-        NoteCommand command = (NoteCommand) parser.parseCommand("/note ; name : Bob Choo ; note : get kibble");
-        assertTrue(command instanceof NoteCommand);
+        NoteCommand noteCommand = (NoteCommand) parser.parseCommand("/note ; name : Bob Choo ; note : get kibble");
+        assertTrue(noteCommand instanceof NoteCommand);
     }
 
     @Test
     public void parseCommand_redo() throws Exception {
-        RedoCommand command = (RedoCommand) parser.parseCommand("/redo");
-        assertTrue(command instanceof RedoCommand);
+        RedoCommand redoCommand = (RedoCommand) parser.parseCommand("/redo");
+        assertTrue(redoCommand instanceof RedoCommand);
     }
 
     @Test
     public void parseCommand_undo() throws Exception {
-        UndoCommand command = (UndoCommand) parser.parseCommand("/undo");
-        assertTrue(command instanceof UndoCommand);
+        UndoCommand undoCommand = (UndoCommand) parser.parseCommand("/undo");
+        assertTrue(undoCommand instanceof UndoCommand);
     }
 
     @Test
     public void parseCommand_pin() throws Exception {
-        PinCommand command = (PinCommand) parser.parseCommand("/pin ; name : Bob Choo");
-        assertEquals(new PinCommand(new Name("Bob Choo")), command);
+        PinCommand pinCommand = (PinCommand) parser.parseCommand("/pin ; name : Bob Choo");
+        assertEquals(new PinCommand(new Name("Bob Choo")), pinCommand);
     }
 
     @Test
     public void parseCommand_unpin() throws Exception {
-        UnpinCommand command = (UnpinCommand) parser.parseCommand("/unpin ; name : Bob Choo");
-        assertEquals(new UnpinCommand(new Name("Bob Choo")), command);
+        UnpinCommand unpinCommand = (UnpinCommand) parser.parseCommand("/unpin ; name : Bob Choo");
+        assertEquals(new UnpinCommand(new Name("Bob Choo")), unpinCommand);
     }
 
     @Test
     public void parseCommand_remind() throws Exception {
-        RemindCommand command = (RemindCommand) parser.parseCommand("/remind");
-        assertTrue(command instanceof RemindCommand);
+        RemindCommand remindCommand = (RemindCommand) parser.parseCommand("/remind");
+        assertTrue(remindCommand instanceof RemindCommand);
     }
 
     @Test
@@ -219,5 +217,4 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
-
 }

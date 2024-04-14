@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user delete command visible messages.
+ * Container for {@code RateCommand} visible messages.
  */
 public class RateMessages extends Messages {
     public static final String RATE = "rate";
@@ -16,5 +16,4 @@ public class RateMessages extends Messages {
             + "Please enter a rating. %1$s\uD83D\uDC3E";
     public static final String MESSAGE_RATE_INVALID_PARAMETERS = FAILED_TO_RATE
             + "%1$s \uD83D\uDC3E";
-
 }

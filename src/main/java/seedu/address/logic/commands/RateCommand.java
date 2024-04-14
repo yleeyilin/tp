@@ -15,23 +15,23 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Rating;
 
 /**
- * Rates a person identified using it's displayed name from the address book.
+ * Rates a person identified using their displayed name from the address book.
  */
 public class RateCommand extends Command {
     public static final String COMMAND_WORD = "/rate";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Rates the person identified by their name.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_RATING + "RATING "
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + "Moochie " + PREFIX_RATING + "2";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Moochie " + PREFIX_RATING + "2";
 
     private final Name targetName;
     private final Rating rating;
 
     /**
-     * Creates a RateCommand to rate the specified contact specified by {@code Name}
+     * Creates a RateCommand object.
+     * @param  name Name of the person in the person list to rate.
      */
     public RateCommand(Name name, Rating rating) {
         this.targetName = name;
@@ -66,8 +66,8 @@ public class RateCommand extends Command {
 
         RateCommand otherRateCommand = (RateCommand) other;
         return targetName.equals(otherRateCommand.targetName);
-
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

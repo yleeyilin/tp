@@ -15,20 +15,23 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new UnpinCommand object
+ * Parses input arguments and creates a new UnpinCommand object.
  */
 public class UnpinCommandParser implements Parser<UnpinCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for unpin command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for unpin command.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
     /**
-     * Parses the given {@code String} of arguments in the context of the UnpinCommand
+     * Parses the given {@code String} of arguments in the context of the UnpinCommand.
      * and returns an UnpinCommand object for execution. Parameter {@code args} cannot be null.
      * @throws ParseException If the user input does not conform to he expected format.
      */
     public UnpinCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert (args != null) : "argument to pass for unpin command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for unpin command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);

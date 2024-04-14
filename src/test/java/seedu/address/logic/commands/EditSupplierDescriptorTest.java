@@ -16,7 +16,6 @@ import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
 
 public class EditSupplierDescriptorTest {
-
     @Test
     public void equals() {
         // same values -> returns true

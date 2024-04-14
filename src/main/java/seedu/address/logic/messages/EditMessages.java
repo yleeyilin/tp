@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user edit command visible messages.
+ * Container for {@code EditCommand} visible messages.
  */
 public class EditMessages extends Messages {
     public static final String EDIT = "edit";

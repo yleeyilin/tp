@@ -46,24 +46,24 @@ public class DeadlineNoteTest {
 
     @Test
     public void equals() {
-        Note deadlineNote1 = new DeadlineNote("kind cats", "2025-10-10");
-        Note deadlineNote2 = new DeadlineNote("kind cats", "2025-10-10");
-        Note deadlineNote3 = new DeadlineNote("kind cats", "2345-10-10");
+        Note deadlineNote = new DeadlineNote("kind cats", "2025-10-10");
+        Note equivalentDeadlineNote = new DeadlineNote("kind cats", "2025-10-10");
+        Note differentDeadlineNote = new DeadlineNote("kind cats", "2345-10-10");
 
 
         // same values -> returns true
-        assertTrue(deadlineNote1.equals(deadlineNote2));
+        assertTrue(deadlineNote.equals(equivalentDeadlineNote));
 
         // same object -> returns true
-        assertTrue(deadlineNote1.equals(deadlineNote1));
+        assertTrue(deadlineNote.equals(deadlineNote));
 
         // null -> returns false
-        assertFalse(deadlineNote1.equals(null));
+        assertFalse(deadlineNote.equals(null));
 
         // different types -> returns false
-        assertFalse(deadlineNote1.equals(5));
+        assertFalse(deadlineNote.equals(5));
 
         // different values -> returns false
-        assertFalse(deadlineNote1.equals(deadlineNote3));
+        assertFalse(deadlineNote.equals(differentDeadlineNote));
     }
 }

@@ -51,7 +51,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private final AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -67,7 +67,6 @@ public class AddCommandParserTest {
                 + RATING_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
     }
-
 
     @Test
     public void parse_repeatedNonTagValue_failure() {

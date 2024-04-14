@@ -16,7 +16,6 @@ import seedu.address.logic.commands.EditMaintainerCommand.EditMaintainerDescript
 import seedu.address.testutil.EditMaintainerDescriptorBuilder;
 
 public class EditMaintainerDescriptorTest {
-
     @Test
     public void equals() {
         // same values -> returns true

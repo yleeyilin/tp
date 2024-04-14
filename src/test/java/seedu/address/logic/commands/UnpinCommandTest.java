@@ -23,8 +23,11 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StaffBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code UnpinCommand}.
+ */
 public class UnpinCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validUnpinOther_unpinSuccess() throws CommandException {
@@ -59,7 +62,7 @@ public class UnpinCommandTest {
         expectedSupplier.toPin();
         expectedSupplier.toUnpin();
 
-        // expected model resultv
+        // expected model result
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedSupplier);
         expectedModel.updatePinnedPersonList();
