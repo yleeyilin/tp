@@ -624,7 +624,7 @@ Add a note with a deadline:<br>
     <img src="images/ug-images/command-images/deadlinecommand.png" alt="Add before" style="width:100%;"/>
     <medium>Above is an example of adding to a contact named "Ben":</medium>
     <br>
-    <medium>Input: <code>/note ; name : Ben ; note : pay his salary of $1500 ; deadline : 2024-04-10</code></medium>
+    <medium>Input: <code>/note ; name : Ben ; note : pay his salary of $1500 ; deadline : 2024-04-20</code></medium>
     <br>
     <medium>Output: Adds a note with a deadline to the contact named "Ben" in your contacts list.</medium>
     <br>
@@ -794,11 +794,11 @@ Examples: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/helpcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of getting help for the <code>delete</code> command:</medium>
+    <medium>Above is an example of getting help for the <code>add</code> command:</medium>
     <br>
-    <medium>Input: <code>/help ; command : delete</code></medium>
+    <medium>Input: <code>/help ; command : add</code></medium>
     <br>
-    <medium>Output: Shows a pop-up help window for the <code>delete</code> command.</medium>
+    <medium>Output: Shows a pop-up help window for the <code>add</code> command.</medium>
     <br>
 </div>
 
