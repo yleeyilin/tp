@@ -24,7 +24,7 @@ public class RateCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_RATING + "RATING "
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + "Moochie " + PREFIX_RATING + "2";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Moochie " + PREFIX_RATING + "2";
 
     private final Name targetName;
     private final Rating rating;
