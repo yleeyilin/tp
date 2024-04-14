@@ -1048,22 +1048,19 @@ If you encounter a missing field error, please ensure the fields listed in the e
 
 **Q**: If I have a lot of contacts, is there a way for me to access my most frequently used contacts easily?<br>
 **A**: Yes! You may wish to keep your most important contacts at the top of your contacts list. With our `pin` feature, PoochPlanner ensures that you are always to see them!<br><br>The syntax for the `pin` command is as follows:
-```
-/pin ; name : [name]
-```
+
+`/pin ; name : [name]`
 
 **Q**: How can I remove a contact's rating?<br>
 **A**: In PoochPlanner, a `0` rating corresponds to a non-rating (no rating is provided). Therefore, to remove a contact's rating, simply give the target contact a rating of `0`.<br><br>The syntax for the `rate` command is as follows:
-```
-/rate ; name : [name] ; rating : [rating]
-```
+
+`/rate ; name : [name] ; rating : [rating]`
 
 **Q**: Can I append a note to a contact when creating it?<br>
 **A**: Yes you can! In fact, you may also rate a contact at its time of creation. Simply append the `; note :` prefix, and you should be on your way!<br><br>
 Example: Adding a new contact with a note and a rating
-```
-/add-person ; name : Pooch ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com ; rating : 3 ; note : Hello my name is Pooch!
-```
+
+`/add-person ; name : Pooch ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com ; rating : 3 ; note : Hello my name is Pooch!`
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
