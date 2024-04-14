@@ -10,4 +10,9 @@ public class SortMessages extends Messages {
             "Woof! Sorted PoochPlanner by %1$s successfully! \uD83D\uDC36";
     public static final String MESSAGE_SORT_INVALID_FIELD =
             FAILED_TO_SORT + "Please input a valid target field! \uD83D\uDC3E";
+    public static final String MESSAGE_SORT_MISSING_FIELD =
+            FAILED_TO_SORT + "Missing field detected : [field] \uD83D\uDC3E\n"
+                    + "Follow this command format! \n"
+                    + "Sorts the address book based on specified parameters.\n"
+                    + "Example: /sort ; field : name";
 }

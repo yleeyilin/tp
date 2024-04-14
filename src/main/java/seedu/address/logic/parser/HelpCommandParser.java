@@ -13,7 +13,7 @@ import seedu.address.logic.messages.HelpMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new HelpCommand object
+ * Parses input arguments and creates a new HelpCommand object.
  */
 public class HelpCommandParser implements Parser<HelpCommand> {
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -21,11 +21,13 @@ public class HelpCommandParser implements Parser<HelpCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the HelpCommand
      * and returns a HelpCommand object for execution. Parameter {@code args} cannot be null.
-     * @throws ParseException If the user input does not conform to the expected format
+     *
+     * @param args Argument to parse.
+     * @return HelpCommand object with the parsed command type value.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public HelpCommand parse(String args) throws ParseException {
         assert (args != null) : "argument to pass for help command is null";
-
         logger.log(Level.INFO, "going to start parsing for help command.");
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HELP);
