@@ -217,7 +217,7 @@ The following sequence diagram models the interactions between the different com
     * Pros: User friendly. Users will be less prone to error that involves trying to edit a field that does not exist for the specific contact type.
     * Cons: Steeper learning curve for the users due to the higher number of commands.
 
-* **Alternative 2**: Combinng edit command into one edit command.
+* **Alternative 2**: Combining edit command into one edit command.
     * Pros: Much simpler suite of features for users, which makes it easier to start using.
     * Cons: Complex to implement due to the need to check the contact type at the point of parsing before splitting into the different separate edit commands to handle their edit separately. This will violate the abstract initial implementation of MVC as the model will have to be accessible at the parser class in order for the type checking to be done. 
 
@@ -266,7 +266,7 @@ completion of the `Delete` command.
 
 * **Alternative 2**: Accept only one name field.
   * Pros: Less prone to possible errors due to stricter validation checks on name fields.
-  * Cons: Less user friendly since users will have to put in more effort to fix their commands.
+  * Cons: Less user-friendly since users will have to put in more effort to fix their commands.
 
 ### Help feature
 
@@ -678,10 +678,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**:
 
-* Dog cafe owners who need to manage a team of staff, F&B vendors & a dog maintainence team.
-* Prefer typing over other types and is comfortable using CLI applications.
+* Dog cafe owners who need to manage a team of staff, F&B vendors & a dog maintenance team.
+* Users who prefer typing to other forms of input and is comfortable using CLI applications.
 
-**Value proposition**: PoochPlanner is a desktop application to track details of various groups (vendors, staff, dog maintainence) that dog cafe owners have to regularly interact with.
+**Value proposition**: PoochPlanner is a desktop application to track details of various groups (vendors, staff, dog maintenance) that dog cafe owners have to regularly interact with.
 The app is optimised for use using Command Line Interface (CLI) while still encompassing a user-friendly Graphical User Interface (GUI).
 
 
@@ -716,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a new contact is added into the contacts list.`
+**Guarantee**: `If MSS reaches step 3, a new contact is added into the contacts list.`
 
 **MSS**:
 
@@ -763,7 +763,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, the contact is deleted from the contacts list.`
+**Guarantee**: `If MSS reaches step 3, the contact is deleted from the contacts list.`
 
 **MSS**:
 
@@ -796,7 +796,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, the contact is successfully edited in the contacts list.`
+**Guarantee**: `If MSS reaches step 3, the contact is successfully edited in the contacts list.`
 
 **MSS**:
 
@@ -895,7 +895,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a rating for the contact is updated successfully in the contacts list.`
+**Guarantee**: `If MSS reaches step 3, a rating for the contact is updated successfully in the contacts list.`
 
 **MSS**:
 
@@ -1050,7 +1050,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a note for the contact is updated successfully in the contacts list.`
+**Guarantee**: `If MSS reaches step 3, a note for the contact is updated successfully in the contacts list.`
 
 **MSS**:
 
@@ -1089,7 +1089,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 2, contacts will be displayed only if their note deadlines are on and after today's current date.`
+**Guarantee**: `If MSS reaches step 2, contacts will be displayed only if their note deadlines are on and after today's current date.`
 
 **MSS**:
 
@@ -1109,7 +1109,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to sort PoochPlanner by a specified field.
 2.  PoochPlanner updates the address book in the sorted order.
-3.  PoochPlanner confirms that the addressbook has been successfully sorted.
+3.  PoochPlanner confirms that the address book has been successfully sorted.
 
     Use case ends.
 
@@ -1228,6 +1228,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    1. Currently, we only allow users to add one phone number to one contact.
    2. We plan to allow users to add more than one phone number to allow for greater flexibility in storing contacts.
 
+10. Enhance undo command upon pinning or unpinning
+    1. Currently, when using pin command two or more times, calling undo once will not revert the pin operation. This is similar for unpin since they both share the same implementation.
+    2. We plan to allow users to use undo only once to undo all repeated and consecutive pin/unpin attempts.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1283,7 +1287,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: The maintainer name of the new contact must not exist in contact book.
 
-   2. Test case: ` /add-maintainer ; name : Maintainer1  ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr`<br>
+   2. Test case: ` /add-maintainer ; name : Maintainer1 ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr`<br>
      Expected: Woof! Added Maintainer Maintainer1 successfully! 🐶
 
 ### Editing a contact
@@ -1379,89 +1383,94 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ### Pinning a contact
-
+  
 1. Pinning a contact while all contacts are being shown
-
+  
    1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
-
+  
    2. Test case: `/pin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is pinned at the top of the contact list.
 
 ### Unpinning a contact
-
+  
 1. Unpinning a contact while all contacts are being shown
-
+  
    1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /pin ; name : Poochie
       ```
-
+  
    2. Test case: `/unpin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is no longer pinned at the top of the contact list.
 
 ### Rating a contact
-
+  
 1. Rating a contact while all contacts are being shown
-
+  
    1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
-
+  
    2. Test case: `/rate ; name : Poochie ; rating : 5`<br>
       Expected: Contact named **_Poochie_** is updated with a rating of 5. Contact type and name of the rated contact is shown in the status message. Timestamp in the status bar is updated.
-
+  
    3. Test case: `/rate ; name : Moochie ; rating : 5`<br>
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
-
+  
    4. Test case: `/rate ; name : Poochie ; rating : 6`<br>
       Expected: No contact is rated. Error details shown in the status message. Status bar remains the same.
 
 ### Adding a note to a contact
-
+  
 1. Adding a note (no deadline) to a contact
-
-  1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
-     ```
-     /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
-     ```
-  2. Test case: `/note ; name : Poochie ; note : get kibble`<br>
-     Expected: Woof! Added note to Pooch Contact Other Contact Janna successfully! 🐶
-  3. Test case: `/note ; name : ; note : get kibble`<br>
-     Expected : Names should only contain alphanumeric characters and spaces, and it should not be blank
-  4. Test case: `/note ; name : Poochie ; note : `<br>
-     Expected : Failed to add note to Pooch Contact - Note is not specified 🐾
-
-
+  
+   1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+        
+   2. Test case: `/note ; name : Poochie ; note : get kibble`<br>
+      Expected: Woof! Added note to Pooch Contact Other Contact Janna successfully! 🐶
+     
+   3. Test case: `/note ; name : ; note : get kibble`<br>
+      Expected : Names should only contain alphanumeric characters and spaces, and it should not be blank
+     
+   4. Test case: `/note ; name : Poochie ; note : `<br>
+      Expected : Failed to add note to Pooch Contact - Note is not specified 🐾
+  
+  
 2. Adding a note(with deadline) to a contact
-
-  1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
-     ```
-     /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
-     ```
-  2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
-     Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
+  
+   1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+        
+   2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
+      Expected: Woof! Added note to Pooch Contact Supplier Poochie successfully! 🐶
 
 ### Searching a contact
-
+  
 1. Searching contacts by name
-
-   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+  
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run the following commands to help in testing:
       ``` 
       /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
       /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
       ```
+        
    2. Test case: `/search ; name : John`
-      Expected: Woof! 2 contact(s) found! 🐶 (Details of contact book is omitted. It should show the contacts with name having `John` as substring.)
+      Expected: Woof! 2 contact(s) found! 🐶 (Details of the contacts list are omitted. It should display contacts with the names `John` and `John Doe`)
 
 2. Searching contacts by phone number
 
-   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run the following commands to help in testing:
    ``` 
    /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
    /add-person ; name : John Doe ; phone : 8888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
@@ -1469,79 +1478,80 @@ testers are expected to do more *exploratory* testing.
    ```
    
    2. Test case: `/search ; phone : 12345678`
-      Expected: Woof! 1 contact(s) found! 🐶 (Details of contact book is omitted. It should show the contacts with phone number having `12345678` as substring.)
+      Expected: Woof! 1 contact(s) found! 🐶 (Details of the contacts list are omitted. It should display only one contact named `Poochie` with the phone number `12345678`.)
 
 
 ### Sorting contact list
-
+  
 1. Sorting contacts by name
-
-   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+  
+   1. Prerequisites: The contacts list must have some contacts for testing purposes. You may run the following commands first to help in testing:
       ``` 
       /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
       /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
       ```
    2. Test case: `/sort ; field : name`
-      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of contact book is omitted. It should show the contacts with name in ascending order.)
+      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of the contacts list are omitted. It should display all contacts sorted by name in ascending order.)
 
 2. Sorting contacts by phone number
 
-   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+   1. Prerequisites: The contacts list must have some contacts for testing purposes. You may run the following commands first to help in testing:
      ``` 
      /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
      /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
      /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
      ```
    2. Test case: `/sort ; field : phone`
-     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of contact book is omitted. It should show the contacts with phone number in ascending order.)
+     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of the contacts list are omitted. It should display all contacts sorted by phone number in ascending order.)
 
 ### Undoing a command
-
+  
 1. Undoing a command that modifies the contact book
-
-   1. Prerequisites: The previous command must modify the contact book. You can run the following command to modify the contact book:
+  
+   1. Prerequisites: The previous command must have modified the contacts list. You may run the following command first to modify the contact book:
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
-      
+        
    2. Test case: `/undo`
-      Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command.)
+      Expected: Woof! Undo successfully! 🐶 (Details of the contacts list are omitted. It should revert the changes in the contacts list to just before executing the `add-person` command.)
 
 2. Undoing a command that does not modify the contact book
    
-   1.  Prerequisites: There must exist a previous command that modify the contact book. You can run the following two commands which second command does not modify contact book:
+   1.  Prerequisites: The previous command must not have made any modifications to the contacts list. You may run the following two commands, whereby the second command does not modify the contacts list:
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /search ; name : Poochie
       ```
    
    2. Test case: `/undo`
-      Expected:  Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command. In this case, due to search function will stay on partial list, contact of Poochie should disappear.)
+      Expected:  Expected: Woof! Undo successfully! 🐶 (Details of the contacts list are omitted. In this case, as no modifications were made directly to the contacts list upon performing the `search` command, the `undo` command reverts back the changes to just before the `add-person` is executed.)
 
 ### Redoing a command
 1. Redoing an undo command
-
-   1. Prerequisites: There must be at least one undo command executed. You can run the following command before testing:
+  
+   1. Prerequisites: There must have been at least one undo command executed. You may run the following command before testing:
       ``` 
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /undo   
       ```
-
+  
    2. Test case: `/redo`
-      Expected: Woof! Redo successfully! 🐶(Details of contact book is omitted. It should show the contact book list before undo command)
+      Expected: Woof! Redo successfully! 🐶 (Details of the contacts list are omitted. It should revert the changes caused by the `undo` command to just right after `add-person` command is executed.)
 
-### View reminders
-
-1. View a reminder
-
-   1. Prerequisites: There must be one contact with a note that has a deadline after today's date. You can run the following commands to add such a contact:
+### Viewing reminders
+  
+1. Viewing a reminder
+  
+   1. Prerequisites: There must be a contact with a note that has a deadline after today's date. You may run the following commands to add such a contact:
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
       ```
       /note ; name : Poochie ; note : get kibble ; deadline : 2026-10-10
       ```
+        
    2. Test case: `/remind`<br>
       Expected: Woof! 1 contact(s) found! 🐶
 
@@ -1552,7 +1562,7 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 
 ### Appendix : Effort
