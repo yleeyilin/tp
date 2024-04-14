@@ -30,9 +30,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the application.
 
-Given below is a quick overview of the main components and how they interact with each other.
+Below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -42,9 +42,9 @@ Given below is a quick overview of the main components and how they interact wit
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the app.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the app in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -58,9 +58,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name} Manager` class which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's from being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -72,16 +73,16 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
-Note that `HelpWindow` refers to a window that provides general help for all commands. `HelpOtherWindow` refers to a window which offers help for specific commands.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* keeps a reference to the `Logic` component, because the `UI` component relies on the `Logic` component to execute commands.
+* depends on some classes in the `Model` component, as it displays the `Person` object residing in the `Model`.
 
 ### Logic component
 
@@ -98,21 +99,21 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
-How the `Logic` component works:
+The `Logic` component:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+1. When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`). `XYZCommandParser` uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+2. All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -120,13 +121,13 @@ How the parsing works:
 <img src="images/ModelClassDiagram.png" width="700" />
 
 
-The `Model` component,
+The `Model` component:
 
-* stores different states of address book inside versioned address book.
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores different states of AddressBook inside VersionedAddressBook.
+* stores all data from PoochPlanner i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 ### Storage component
 
@@ -134,8 +135,9 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="6000" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+The `Storage` component:
+
+* saves both PoochPlanner data and user preference data in JSON format, which is read during the bootup of PoochPlanner.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -268,11 +270,11 @@ completion of the `Delete` command.
 
 ### Help feature
 
-The help feature receive help for all commands.
+The help feature provides help for all commands.
 
 #### Overview
 
-The help command enables users to view help for all.
+The help command enables users to view help for all commands.
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `help` command.
 
@@ -284,7 +286,7 @@ The following sequence diagram models the interactions between the different com
 2. `HelpCommandParser` invokes the `parse` method which parses the user input by storing the prefix of its respective values as an `ArgumentMultimap` object.
    A `HelpCommand` object is created with the command type specified in the command field.
 3. The `HelpCommandParser` returns the `HelpCommand` object.
-4. `LogicManager` invokes the `execute` method of `HelpCommand`.
+4. `LogicManager` invokes the `execute` method of the `HelpCommand`.
 5. The `execute` method of `HelpCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Help` command.
 
 #### Example Usage
@@ -298,7 +300,7 @@ The following sequence diagram models the interactions between the different com
 * **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Difference
   in messages is created by displaying different strings.
   * Pros: Code is made much more concise.
-  * Cons: Lengthy if-else statements are required to displayed the correct string.
+  * Cons: Lengthy if-else statements are required to display the correct string.
 
 * **Alternative 2**: Create a different window for each type of command.
   * Pros: All details relating to a single command is within its own page. Can be perceived as neater.
@@ -327,17 +329,17 @@ The following sequence diagram models the interactions between the different com
 
 1. The user launches the application.
 2. The user inputs `/search ; name : Poochie` into the CLI.
-3. The address book is updated to display all contact cards that match the search queries.
+3. PoochPlanner is updated to display all contact cards that match the search queries.
 
 **Aspect: How to implement search command using multiple field inputs:**
 
 * **Alternative 1 (current choice)**: Accepts multiple search fields as search query.
-  * Pros: More user friendly as users can conduct multi-layered filters using several fields at once, allowing for a more targeted search.
+  * Pros: More user-friendly as users can conduct multi-layered filters using several fields at once, allowing for a more targeted search.
   * Cons: More prone to errors due to broader search scope over multiple fields.
 
 * **Alternative 2**: Only accept 1 field as search query.
   * Pros: Less prone to errors due to stricter search only over 1 field.
-  * Cons: Less user friendly since users will not be able to conduct multi-layered filters using several fields at once.
+  * Cons: Less user-friendly since users will not be able to conduct multi-layered filters using several fields at once.
 
 ### Sort feature
 
@@ -361,7 +363,7 @@ The following sequence diagram models the interactions between the different com
 
 1. The user launches the application.
 2. The user inputs `/sort ; field : phone` into the CLI.
-3. The address book is updated to sort all the contact cards by ascending phone number.
+3. PoochPlanner is updated to sort all the contact cards by ascending phone number.
 
 **Aspect: How use sort command for ascending or descending order:**
 
@@ -385,13 +387,13 @@ The following sequence diagram models the interactions between the different com
 
 #### Details
 
-1. The user inputs the command to add a note a specified contact by first stating the target name of the contact they want to add a note to. This is followed by the respective fields and new values they want to modify.
+1. The user inputs the command to add a note to a specified contact by first stating the target name of the contact they want to add a note to. This is followed by the respective fields and the new values they want to modify.
 2. `NoteCommandParser` invokes the `parse` method which parses the user input by storing the prefixes and their respective values as an `ArgumentMultimap` object.
  A `NoteCommand` object is created with the parsed name, note and optional deadline field.
 3. The `NoteCommandParser` returns the `NoteCommand` object.
 4. `LogicManager` invokes the `execute` method of `NoteCommand`. 
 5. The `execute` method of `NoteCommand` invokes the `findByName` method in `Model` property to find the person with the specified name. 
-6. The `execute` method of `NoteCommand` invokes the `setPerson` method in `Model` property to set the person in the existing contact list to the new `Person` object which has been edited the `execute` method of `NoteCommand`. 
+6. The `execute` method of `NoteCommand` invokes the `setPerson` method in `Model` property to set the person in the existing contact list to the new `Person` object which has been edited in the `execute` method of `NoteCommand`. 
 7. The `execute` method of `NoteCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of PoochPlanner to show all contacts. 
 8. The `execute` method of `NoteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `Note` command.
 
@@ -404,14 +406,13 @@ The following sequence diagram models the interactions between the different com
 **Aspect: How to store note field in Persons class and subclasses:**
 
 * **Alternative 1 (current choice)**: Add note field to all 4 constructors (Person, Staff, Maintainer, Supplier).
-    * Pros: Maintains OOP. As in real life, each person has a note description, having each class containing
-  a note field models this and preserves OOP.
+    * Pros: Leverages inheritance, thus reducing repeated code and adheres to OOP.
     * Cons: Changing the constructors of 4 classes is a tedious task.
 
 * **Alternative 2**: Add note field to the Parent person constructor and use a setter to set new notes.
     * Pros: Much simpler implementation that will require less refactoring of code.
     * Cons: Violates OOP, specifically encapsulation as the other classes would be able to manipulate the
-  inner details of the Person classes.
+  inner details of the Person classes directly.
 
 ### Rate feature
 
@@ -509,7 +510,7 @@ The following sequence diagram models the interactions between the different com
 
 1. The user launches the application.
 2. The user inputs `/clear` into the CLI.
-3. The address book is emptied.
+3. The data in PoochPlanner is emptied.
 
 ### List feature
 
@@ -571,12 +572,12 @@ The following sequence diagram models the interactions between the different com
 **Aspect: How to implement pin/unpin command in Persons class and subclasses:**
 
 * **Alternative 1 (current choice)**: Only accept the name field, where only the last name field will be taken.
-    * Pros: User friendly. Users can easily correct the name field without deleting the previously incorrect name field entered. Since name cannot be edited, this ensures that the name will be consistent and the user do not have to check what to input everytime. 
+    * Pros: User-friendly. Users can easily correct the name field without deleting the previously incorrect name field entered. Since name cannot be edited, this ensures that the name will be consistent and the user do not have to check what to input everytime. 
     * Cons: Less rigorous validation check on name as users may not intentionally enter a second name field. 
 
 * **Alternative 2**: Accept only one name field.
     * Pros: Less prone to possible errors due to stricter validation checks on name fields.
-    * Cons: Less user friendly since users will have to put in more effort to fix their commands. 
+    * Cons: Less user-friendly since users will have to put in more effort to fix their commands. 
 
 ### Undo/redo feature
 
@@ -592,11 +593,11 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial AddressBook state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `/delete ; name : Poochie` command to delete the Person named Poochie in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `/delete ; name : Poochie` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `/delete ; name : Poochie` command to delete the Person named Poochie in PoochPlanner. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `/delete ; name : Poochie` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -651,7 +652,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Aspect: How undo & redo executes :
 
-**Alternative 1 (current choice)** : Saves the entire address book.
+**Alternative 1 (current choice)** : Saves the entire PoochPlanner.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -715,12 +716,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a new contact is added into list.`
+**Guarantee**: `If MSS reach step 3, a new contact is added into the contacts list.`
 
 **MSS**:
 
 1.  User requests to add the contact of a person.
-2.  PoochPlanner updates list of persons.
+2.  PoochPlanner updates the contacts list.
 3.  PoochPlanner confirms success update.
 
     Use case ends.
@@ -762,12 +763,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, the contact is deleted from list.`
+**Guarantee**: `If MSS reach step 3, the contact is deleted from the contacts list.`
 
 **MSS**:
 
 1.  User requests to delete contact of a person.
-2.  PoochPlanner removes person and updates list of persons.
+2.  PoochPlanner removes person and updates the contacts list.
 3.  PoochPlanner confirms successful deletion.
 
     Use case ends.
@@ -795,7 +796,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, the contact is edited successfully in the list.`
+**Guarantee**: `If MSS reach step 3, the contact is successfully edited in the contacts list.`
 
 **MSS**:
 
@@ -894,7 +895,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a rating for the contact is updated successfully in the list.`
+**Guarantee**: `If MSS reach step 3, a rating for the contact is updated successfully in the contacts list.`
 
 **MSS**:
 
@@ -930,16 +931,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to learn more about the commands.
-2.  PoochPlanner displays a details relating to this command.
+2.  PoochPlanner displays details relating to this command.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. User requests to learn about an invalid command(a command not offered by PoochPlanner).
+* 1a. User requests to learn about an invalid command (a command that is not offered by PoochPlanner).
    * 1a1. PoochPlanner displays the error message.
    * 1a2. User re-enters a new command and request to learn about a valid command.
-   * Steps 1a1 - 1a2 are repeated until a valid command is inputted by the User.
+   * Steps 1a1 - 1a2 are repeated until a valid command is inputted by the user.
    * Use case resumes from step 2.
 
 ---
@@ -952,13 +953,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to undo previous command.
-2.  PoochPlanner retrieves previous record of address book.
+2.  PoochPlanner retrieves previous record of PoochPlanner data.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. PoochPlanner detects no previous state of address book.
+* 1a. PoochPlanner detects no previous state of PoochPlanner.
 
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
@@ -973,13 +974,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to redo previous command.
-2.  PoochPlanner retrieves future record of address book.
+2.  PoochPlanner retrieves future record of PoochPlanner data.
 
     Use case ends.
 
 **Extensions**:
 
-* 1a. PoochPlanner detects no next record of address book.
+* 1a. PoochPlanner detects no next record of PoochPlanner data.
 
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
@@ -994,7 +995,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to pin a contact.
-2.  PoochPlanner displays a list of contact with pinned contact at the top.
+2.  PoochPlanner displays the contacts list with the pinned contacts at the top.
 
     Use case ends.
 
@@ -1022,7 +1023,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**:
 
 1.  User requests to unpin a contact.
-2.  PoochPlanner displays a list of contact with the remaining pinned contact at the top.
+2.  PoochPlanner displays the contacts list with the rest of the pinned contacts at the top.
 
     Use case ends.
 
@@ -1049,7 +1050,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor**: `User`
 
-**Guarantee**: `If MSS reach step 3, a note for the contact is updated successfully in the list.`
+**Guarantee**: `If MSS reach step 3, a note for the contact is updated successfully in the contacts list.`
 
 **MSS**:
 
@@ -1084,7 +1085,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC12 - View reminders for contact list`
+**Use case**: `UC12 - View reminders for the contacts list`
 
 **Actor**: `User`
 
@@ -1100,14 +1101,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC13 - Sort contact list`
+**Use case**: `UC13 - Sort the contacts list`
 
 **Actor**: `User`
 
 **MSS**:
 
-1.  User requests to sort the address book by a specified field.
-2.  PoochPlanner updates the addrees book in the sorted order.
+1.  User requests to sort PoochPlanner by a specified field.
+2.  PoochPlanner updates the address book in the sorted order.
 3.  PoochPlanner confirms that the addressbook has been successfully sorted.
 
     Use case ends.
@@ -1124,22 +1125,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC14 - Clear contact list`
+**Use case**: `UC14 - Clear contacts list`
 
 **Actor**: `User`
 
 **MSS**:
 
-1.  User requests to clear the address book.
-2.  PoochPlanner updates the address book.
-3.  PoochPlanner confirms that the addressbook has been cleared.
+1.  User requests to clear the data in PoochPlanner.
+2.  PoochPlanner updates the data in PoochPlanner.
+3.  PoochPlanner confirms that the data in PoochPlanner has been cleared.
 
     Use case ends.
 
 ---
 **System**: `PoochPlanner`
 
-**Use case**: `UC15 - List contact list`
+**Use case**: `UC15 - List contacts list`
 
 **Actor**: `User`
 
@@ -1155,17 +1156,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. The application needs to be compatible across major operating systems, including Windows, MacOS, and Linux, supporting at least Java 11.
+1. PoochPlanner needs to be compatible across major operating systems, including Windows, MacOS, and Linux, supporting at least Java 11.
 2. User-managed transactions and budgets should be locally saved and backed up, ensuring restoration in subsequent sessions unless the data integrity is compromised.
 3. Thorough documentation of all non-private methods is imperative to ensure the maintainability of the codebase.
-4. The application should function completely offline. 
+4. PoochPlanner should function completely offline. 
 5. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
 6. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
 7. All code snippets presented in the developer guides shall follow a consistent coding style and formatting, adhering to the company's coding standards and best practices. 
 8. The developer guides shall undergo regular content audits, with outdated or deprecated information flagged for removal or revision, and new features or updates documented within one week of release. 
 9. The system should respond within 2 seconds. 
 10. The data should store locally and not accessible from other device for privacy issue. 
-11. The project is expected to adhere to schedule closely to deliver new feature.
+11. This project is expected to adhere to schedule closely to deliver new feature.
 
 ### Glossary
 
@@ -1187,23 +1188,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix: Planned Enhancement**
 
 1. Enhance command to be space insensitive
-   1. Currently, we do not allow for incorrect spacing in commands. 
-   2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com``` 
-   3. The above example will be considered as invalid since there is no spacing before the `phone` and `address` prefixes and are not parsed as valid prefixes. 
-   4. We plan to extend PoochPlanner to accept this alternative possible input to cater to fast typists.
+   1. Currently, we do not allow for incorrect spacings in commands. 
+   2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com```.
+   3. The above example will be considered as invalid since there is no spacing before the `phone` prefix and before the `address` prefix. The lack of spacing causes `phone` and `address` to not be parsed as valid prefixes.
+   4. We plan to extend PoochPlanner to accept alternative possible inputs with incorrect spacings to cater to fast typists.
 
-2. Parse user's input
-   1. Currently, we do not have any checker to check user's input. 
-   2. We accept input value `John Doe` with different number of spacing as different inputs.
-   3. We plan to parse all the input to remove additional spacing to cater fast typists as additional spacing is high possibly due to typo.
+2. Enhance command to fix multiple white spacings in user's input
+   1. Currently, we do not have any checker to verify if there exists multiple white spacings in user's input. 
+   2. We take any input values `John Doe` with multiple number of spacing as different inputs as it is.
+   3. We plan to parse all the input to remove additional spacings to cater fast typists as additional spacings are likely occur due to typo.
 
-3. Enhance price to allow decimals
-   1. Currently, we do not allow decimal place for prices
-   2. We plan to allow decimal places for prices to cater for more flexibility in recording prices.
+3. Enhance price to allow for decimal places
+   1. Currently, we do not allow decimal places for prices.
+   2. We plan to allow decimal places for prices to allow for greater flexibility in recording prices.
 
-4. Enhance salary to be stored in different unit
+4. Enhance salary to allow for storage in different units
    1. Currently, we only allow storing salary with unit `/hr`.
-   2. We plan to allow more flexible storing unit such as `/day`, `/month` and `/event`.
+   2. We plan to allow for more flexible storing unit such as `/day`, `/month` and `/event`.
 
 5. Enhance validation on input fields for search command
    1. Currently, we do not have any validation on input fields such as salary, phone in search commands.
@@ -1211,14 +1212,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    3. We plan to do validation check on all the fields to ensure that user is inserting correct type of value in the field.
 
 6. Enhance post-search status
-   1. Currently, after a search command, the contact book will only display the filtered list.
-   2. After exucution of delete, pin, unpin, undo and redo will not return to main list.
+   1. Currently, after a search command, the contact book will only display the filtered contacts list.
+   2. After execution of delete, pin, unpin, undo and redo will not return to main contacts list.
    3. We plan to enhance the commands by returning to main list after every execution of command.
+
+7. Enhance commission to allow for decimal places
+   1. Currently, we do not allow decimal places for commission.
+   2. We plan to allow decimal places for commission to allow for greater flexibility in recording commission. 
+
+8. Enhance commission to allow for storage in different units
+   1. Currently, we only allow storing commission with unit `/hr`.
+   2. We plan to allow for more flexible storing unit such as `/day`, `/month` and `/event`.
+
+9. Enhance phone number storage
+   1. Currently, we only allow users to add one phone number to one contact.
+   2. We plan to allow users to add more than one phone number to allow for greater flexibility in storing contacts.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
-Below are instructions to test the app manually.
+Below are instructions to test the app manually. Before each test, run `/clear` to reset the data in PoochPlanner.
+Also, take caution when copying the commands to the input box as our commands are space sensitive. Line breaks may result
+in spaces being omitted.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -1272,22 +1288,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a contact
 
-1. Edting a `Person` contact
+1. Editing a `Person` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Person` type. You can run the following command to add in a contact to edit:
       ```
       /add-person ; name : Person1 ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com
       ```
-   2. Test case: `/edit ; name : Person1 ; field : { phone : 99820520 }`<br>
+   2. Test case: `/edit-person ; name : Person1 ; field : { phone : 99820520 }`<br>
       Expected: The phone field of contact named 'Person1' is edited to `99820520`. Details of the edited contact shown in the status message.
 
-   3. Test case: `/edit ; name : Person1 ; field : { address : Pooch Street 31 }`<br>
+   3. Test case: `/edit-person ; name : Person1 ; field : { address : Pooch Street 31 }`<br>
       Expected: The address field of contact named 'Person1' is edited to `Pooch Street 31`. Details of the edited contact shown in the status message.
 
-   4. Test case: `/edit ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
+   4. Test case: `/edit-person ; name : Person1 ; field : { phone : 99990520 ; email : impooch@gmail13.com }`<br>
       Expected: The phone and email field of contact named 'Person1' is edited to `99990520` and `impooch@gmail13.com` respectively. Details of the edited contact shown in the status message.
 
-2. Edting a `Staff` contact
+2. Editing a `Staff` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Staff` type. You can run the following command to add in a contact to edit:
       ```
@@ -1305,7 +1321,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `/edit-staff ; name : Staff1 ; field : { salary : $40/hr ; employment : part-time }`<br>
       Expected: The salary and employment field of contact named 'Staff1' is edited to `40/hr` and `part-time` respectively. Details of the edited contact shown in the status message.
 
-3. Edting a `Supplier` contact
+3. Editing a `Supplier` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Supplier` type. You can run the following command to add in a contact to edit:
       ```
@@ -1323,7 +1339,7 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `/edit-supplier ; name : Supplier1 ; field : { product : kibbles ; price : $75/bag }`<br>
       Expected: The product and price field of contact named 'Supplier1' is edited to `kibbles` and `$75/bag` respectively. Details of the edited contact shown in the status message.
 
-4. Edting a `Maintainer` contact
+4. Editing a `Maintainer` contact
 
    1. Prerequisites: The contact to be edited must exist and should have been added as a `Maintainer` type. You can run the following command to add in a contact to edit:
       ```
@@ -1343,9 +1359,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. PoochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
@@ -1362,11 +1378,11 @@ testers are expected to do more *exploratory* testing.
    5. Other incorrect delete commands to try: `/delete`, `delete ; name :`<br>
       Expected: Similar to previous.
 
-### Pinning a person
+### Pinning a contact
 
-1. Pinning a person while all persons are being shown
+1. Pinning a contact while all contacts are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
@@ -1374,11 +1390,11 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/pin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is pinned at the top of the contact list.
 
-### Unpinning a person
+### Unpinning a contact
 
-1. Unpinning a person while all persons are being shown
+1. Unpinning a contact while all contacts are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /pin ; name : Poochie
@@ -1387,11 +1403,11 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/unpin ; name : Poochie`<br>
       Expected: Contact named **_Poochie_** is no longer pinned at the top of the contact list.
 
-### Rating a person
+### Rating a contact
 
-1. Rates a person while all persons are being shown
+1. Rating a contact while all contacts are being shown
 
-   1. Prerequisites: only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner.
+   1. Prerequisites: Only **one** contact with the name **_Poochie_** should exist in PoochPlanner. If not, run the following command to ensure add **_Poochie_** into PoochPlanner. oochPlanner does not accept duplicate names so there will not be an instance where there is more than one contact with the name **_Poochie_** that exist in the contact list.
       ```
       /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       ```
@@ -1407,7 +1423,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a note to a contact
 
-1. Adding a note(no deadline) to a contact
+1. Adding a note (no deadline) to a contact
 
   1. Prerequisites: The contact to add a note to must exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:
      ```
@@ -1430,19 +1446,22 @@ testers are expected to do more *exploratory* testing.
   2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
 
-### Search a contact
-1. Search contacts using field name.
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+### Searching a contact
+
+1. Searching contacts by name
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
       ``` 
       /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
       /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
       ```
    2. Test case: `/search ; name : John`
-      Expected: Woof! 2 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with name having `John` as substring.)
+      Expected: Woof! 2 contact(s) found! 🐶 (Details of contact book is omitted. It should show the contacts with name having `John` as substring.)
 
-2. Search contacts using field phone. 
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+2. Searching contacts by phone number
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
    ``` 
    /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
    /add-person ; name : John Doe ; phone : 8888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
@@ -1450,32 +1469,36 @@ testers are expected to do more *exploratory* testing.
    ```
    
    2. Test case: `/search ; phone : 12345678`
-      Expected: Woof! 1 contact(s) found! 🐶 (Details of contact book is omited. It should show the contacts with phone number having `12345678` as substring.)
+      Expected: Woof! 1 contact(s) found! 🐶 (Details of contact book is omitted. It should show the contacts with phone number having `12345678` as substring.)
 
 
-### Sort contact list
-1. Sort contacts using field name.
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+### Sorting contact list
+
+1. Sorting contacts by name
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
       ``` 
       /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
       /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
       /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
       ```
    2. Test case: `/sort ; field : name`
-      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of contact book is omited. It should show the contacts with name in ascending order.)
+      Expected: Woof! Sorted PoochPlanner by name successfully! 🐶 (Details of contact book is omitted. It should show the contacts with name in ascending order.)
 
-1. Sort contacts using field phone.
-   1. Prerequistes: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
+2. Sorting contacts by phone number
+
+   1. Prerequisites: The contact list must have some contacts for testing purposes. You may run following commands to help in testing:
      ``` 
      /add-person ; name : Poochie ; phone : 12345678 ; address : Pooch Street 32 ; email : impoochie@gmail.com
      /add-person ; name : John Doe ; phone : 88888888 ; address : Pooch Street 32 ; email : imjohndoe@gmail.com
      /add-person ; name : John ; phone : 23452345 ; address : Pooch Street 32 ; email : imjohn@gmail.com
      ```
    2. Test case: `/sort ; field : phone`
-     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of contact book is omited. It should show the contacts with phone number in ascending order.)
+     Expected: Woof! Sorted PoochPlanner by phone number successfully! 🐶 (Details of contact book is omitted. It should show the contacts with phone number in ascending order.)
 
-### Undo a command
-1. Undo a command that modified the contact book
+### Undoing a command
+
+1. Undoing a command that modifies the contact book
 
    1. Prerequisites: The previous command must modify the contact book. You can run the following command to modify the contact book:
       ```
@@ -1485,7 +1508,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/undo`
       Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command.)
 
-2. Undo a command that did not modify the contact book
+2. Undoing a command that does not modify the contact book
    
    1.  Prerequisites: There must exist a previous command that modify the contact book. You can run the following two commands which second command does not modify contact book:
       ```
@@ -1496,8 +1519,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/undo`
       Expected:  Expected: Woof! Undo successfully! 🐶 (Details of contact book is omitted. It should show the contact book list before add-person command. In this case, due to search function will stay on partial list, contact of Poochie should disappear.)
 
-### Redo a command
-1. Redo an undo command.
+### Redoing a command
+1. Redoing an undo command
 
    1. Prerequisites: There must be at least one undo command executed. You can run the following command before testing:
       ``` 
@@ -1507,6 +1530,21 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `/redo`
       Expected: Woof! Redo successfully! 🐶(Details of contact book is omitted. It should show the contact book list before undo command)
+
+### View reminders
+
+1. View a reminder
+
+   1. Prerequisites: There must be one contact with a note that has a deadline after today's date. You can run the following commands to add such a contact:
+      ```
+      /add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com
+      ```
+      ```
+      /note ; name : Poochie ; note : get kibble ; deadline : 2026-10-10
+      ```
+   2. Test case: `/remind`<br>
+      Expected: Woof! 1 contact(s) found! 🐶
+
 
 ### Saving data
 

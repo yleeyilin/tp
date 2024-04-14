@@ -52,4 +52,19 @@ public class SortCommand extends Command {
             return new CommandResult(String.format(SortMessages.MESSAGE_SORT_PERSON_SUCCESS, prefix.getPrefix()));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        SortCommand otherSearchCommand = (SortCommand) other;
+        return prefix.equals(otherSearchCommand.prefix);
+    }
 }
