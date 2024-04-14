@@ -1189,18 +1189,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Enhance command to be space insensitive
    1. Currently, we do not allow for incorrect spacing in commands. 
-   2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com``` 
+   2. ```/add-person ; name : Person1 ;phone :98883888;address:Pooch Street 32 ; email : impooch@gmail.com```.
    3. The above example will be considered as invalid since there is no spacing before the `phone` and `address` prefixes and are not parsed as valid prefixes. 
    4. We plan to extend PoochPlanner to accept this alternative possible input to cater to fast typists.
 
-2. Parse user's input
-   1. Currently, we do not have any checker to check user's input. 
-   2. We accept input value `John Doe` with different number of spacing as different inputs.
-   3. We plan to parse all the input to remove additional spacing to cater fast typists as additional spacing is high possibly due to typo.
+2. Enhance command to fix multiple white spacings in user's input
+   1. Currently, we do not have any checker to verify if there exists multiple white spacings in user's input. 
+   2. We take any input values `John Doe` with multiple number of spacing as different inputs as it is.
+   3. We plan to parse all the input to remove additional spacing to cater fast typists as additional spacing can likely occur due to typo.
 
 3. Enhance price to allow decimals
-   1. Currently, we do not allow decimal place for prices
-   2. We plan to allow decimal places for prices to cater for more flexibility in recording prices.
+   1. Currently, we do not allow decimal places for prices.
+   2. We plan to allow decimal places for prices to allow for greater flexibility in recording prices.
 
 4. Enhance salary to be stored in different unit
    1. Currently, we only allow storing salary with unit `/hr`.
@@ -1215,6 +1215,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    1. Currently, after a search command, the contact book will only display the filtered list.
    2. After exucution of delete, pin, unpin, undo and redo will not return to main list.
    3. We plan to enhance the commands by returning to main list after every execution of command.
+
+7. Enhance commission validation
+   1. Currently, we do not allow decimal places for commission.
+   2. We plan to allow decimal places for commission to allow for greater flexibility in recording commission. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1525,7 +1529,7 @@ Our project aimed to enhance the functionality of a contact management system, b
 #### Difficulty Level and Challenges Faced
 The project faced significant challenges due to its complexity and the need to seamlessly integrate new features with the existing AB3 framework. One major challenge was accommodating multiple types of contacts (staff, maintainer, supplier) while ensuring compatibility with the original AB3 data model and commands. This required thorough understanding of the project structure and meticulous modification of existing components, particularly the `JsonAdaptedPerson` classes.
 
-Additionally, redesigning command formats and implementing new features such as dynamic search, sorting, note/reminder functionalities, and pin/unpin features demanded careful planning and detailed implementation. Adapting the undo/redo feature from AB3 to fit within the AB3 framework posed another challenge, as it necessitated significant modifications to the model manager and command execution flow while ensuring backward compatibility.
+Additionally, redesigning command formats and implementing new features such as dynamic search, sorting, note/reminder functionalities, and pin/unpin features demanded careful planning and detailed implementation. Adapting the undo/redo feature from AB4 to fit within the AB3 framework posed another challenge, as it necessitated significant modifications to the model manager and command execution flow while ensuring backward compatibility.
 
 #### Effort Required
 The effort required for the project was substantial, spanning analysis, design, development, testing, and documentation phases. The multidisciplinary team invested significant time and resources in understanding AB3's architecture, identifying areas for enhancement, and implementing new features while ensuring compatibility and stability. Agile methodologies were employed to iteratively address challenges and incorporate stakeholder feedback, resulting in an efficient development process.
@@ -1542,7 +1546,7 @@ Despite the challenges, the project achieved several milestones that significant
 
 
 #### Effort Saved Through Reuse:
-Approximately 10% of the project effort was saved through strategic reuse of existing components and libraries. Notably, the redesign of command formats leveraged insights from previous projects and industry best practices, streamlining development and ensuring consistency. Additionally, adapting the undo/redo feature from AB3 involved reusing core concepts and methodologies, significantly reducing implementation complexity and effort.
+Approximately 10% of the project effort was saved through strategic reuse of existing components and libraries. Notably, the redesign of command formats leveraged insights from previous projects and industry best practices, streamlining development and ensuring consistency. Additionally, adapting the undo/redo feature from AB4 involved reusing core concepts and methodologies, significantly reducing implementation complexity and effort.
 
 In summary, the project's successful implementation of advanced features within the AB3 framework demonstrates our team's proficiency in software development and problem-solving. Despite the inherent challenges, our strategic approach to reuse and adaptation resulted in a robust and feature-rich contact management system that meets the evolving needs of users.
 
