@@ -1,6 +1,5 @@
 package seedu.address.logic.messages;
 
-
 /**
  * Container for {@code UnpinCommand} visible messages.
  */
