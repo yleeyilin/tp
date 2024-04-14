@@ -1452,7 +1452,7 @@ testers are expected to do more *exploratory* testing.
       ```
         
    2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
-      Expected: Woof! Added note to Pooch Contact Supplier PetCo successfully! 🐶
+      Expected: Woof! Added note to Pooch Contact Supplier Poochie successfully! 🐶
 
 ### Searching a contact
   
