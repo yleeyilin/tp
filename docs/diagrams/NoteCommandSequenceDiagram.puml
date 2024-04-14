@@ -44,7 +44,7 @@ destroy NoteCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> NoteCommand : execute()
+LogicManager -> NoteCommand : execute(...)
 activate NoteCommand
 
 NoteCommand -> Model : findByName(name)

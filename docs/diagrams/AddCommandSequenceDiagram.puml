@@ -45,7 +45,7 @@ destroy AddCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> AddCommand : execute()
+LogicManager -> AddCommand : execute(...)
 activate AddCommand
 
 AddCommand -> Model : addPerson(Person)

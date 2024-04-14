@@ -44,7 +44,7 @@ destroy SearchCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> SearchCommand : execute()
+LogicManager -> SearchCommand : execute(...)
 activate SearchCommand
 
 SearchCommand -> Model : updateFilteredPersonList(KeywordPredicate)

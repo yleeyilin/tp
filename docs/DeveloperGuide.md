@@ -313,7 +313,7 @@ The `search` command enables users to find contacts in PoochPlanner that match t
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `search` command.
 
-<img src="images/dg-images/search-command-sequence-diagram.png" width="900" />
+<img src="images/SearchCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
@@ -348,7 +348,7 @@ The `sort` command enables users to sort contacts in PoochPlanner by a target fi
 
 The following sequence diagram models the interactions between the different components of PoochPlanner for the execution of the `sort` command.
 
-<img src="images/dg-images/sort-command-sequence-diagram.png" width="900" />
+<img src="images/SortCommandSequenceDiagram.png" width="900" />
 
 #### Details
 
