@@ -14,7 +14,7 @@ import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
 import seedu.address.model.person.Name;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditSupplierCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code EditSupplierCommand}.
  */
 public class EditSupplierCommandTest {
     @Test

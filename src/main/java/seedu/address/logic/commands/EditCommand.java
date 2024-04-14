@@ -119,8 +119,9 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return name.equals(otherEditCommand.name)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        boolean areNamesEqual = name.equals(otherEditCommand.name);
+        boolean areDescriptorsEqual = editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override

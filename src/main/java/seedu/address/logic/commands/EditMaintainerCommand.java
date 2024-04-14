@@ -131,8 +131,10 @@ public class EditMaintainerCommand extends Command {
         }
 
         EditMaintainerCommand otherEditMaintainerCommand = (EditMaintainerCommand) other;
-        return name.equals(otherEditMaintainerCommand.name)
-                && editMaintainerDescriptor.equals(otherEditMaintainerCommand.editMaintainerDescriptor);
+        boolean areNamesEqual = name.equals(otherEditMaintainerCommand.name);
+        boolean areDescriptorsEqual =
+                editMaintainerDescriptor.equals(otherEditMaintainerCommand.editMaintainerDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override

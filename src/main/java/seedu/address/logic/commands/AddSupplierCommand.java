@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Supplier;
 
 /**
- * Adds a person to the address book.
+ * Adds a supplier to the address book.
  */
 public class AddSupplierCommand extends Command {
     public static final String COMMAND_WORD = "/add-supplier";
@@ -38,7 +38,8 @@ public class AddSupplierCommand extends Command {
     private final Supplier supplierToAdd;
 
     /**
-     * Creates an AddSupplierCommand to add the specified {@code supplier}
+     * Creates an AddSupplierCommand object.
+     * @param supplier The {@code Supplier} to add.
      */
     public AddSupplierCommand(Supplier supplier) {
         requireNonNull(supplier);

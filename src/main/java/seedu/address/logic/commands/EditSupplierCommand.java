@@ -128,9 +128,10 @@ public class EditSupplierCommand extends Command {
             return false;
         }
 
-        EditSupplierCommand otherEditCommand = (EditSupplierCommand) other;
-        return name.equals(otherEditCommand.name)
-                && editSupplierDescriptor.equals(otherEditCommand.editSupplierDescriptor);
+        EditSupplierCommand otherEditSupplierCommand = (EditSupplierCommand) other;
+        boolean areNamesEqual = name.equals(otherEditSupplierCommand.name);
+        boolean areDescriptorsEqual = editSupplierDescriptor.equals(otherEditSupplierCommand.editSupplierDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override

@@ -256,12 +256,6 @@ public class AddMaintainerCommandParserTest {
                         + SKILL_DESC_BOB + INVALID_COMMISSION_DESC,
                 String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Commission.MESSAGE_CONSTRAINTS));
 
-        /*
-         invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-        Tag.MESSAGE_CONSTRAINTS);
-         */
-
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                         + INVALID_SKILL_DESC + INVALID_COMMISSION_DESC,

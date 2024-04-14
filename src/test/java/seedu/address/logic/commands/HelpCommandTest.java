@@ -13,6 +13,9 @@ import seedu.address.logic.messages.HelpMessages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code HelpCommand}.
+ */
 public class HelpCommandTest {
     private final Model model = new ModelManager();
     private final Model expectedModel = new ModelManager();

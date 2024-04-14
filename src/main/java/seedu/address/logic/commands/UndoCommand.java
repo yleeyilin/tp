@@ -12,17 +12,17 @@ import seedu.address.logic.messages.UndoMessages;
 import seedu.address.model.Model;
 
 /**
- * Undo Command.
+ * Undoes the last executed command.
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "/undo";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo previous execution. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo previous command. ";
     public static final String LOGGER_MESSAGE = "Going to execute undo command.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Creates an UndoCommand.
+     * Creates an UndoCommand object.
      */
     public UndoCommand() {
     }

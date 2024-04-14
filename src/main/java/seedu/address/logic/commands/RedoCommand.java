@@ -12,17 +12,17 @@ import seedu.address.logic.messages.RedoMessages;
 import seedu.address.model.Model;
 
 /**
- * Redo Command.
+ * Redoes the last undid command.
  */
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "/redo";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous undo execution. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous undid command. ";
     public static final String LOGGER_MESSAGE = "Going to execute redo command.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Creates an RedoCommand.
+     * Creates a RedoCommand Object.
      */
     public RedoCommand() {
     }

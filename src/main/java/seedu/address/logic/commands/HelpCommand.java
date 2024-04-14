@@ -47,7 +47,6 @@ public class HelpCommand extends Command {
 
     /**
      * Constructs a HelpCommand object.
-     *
      * @param commandType The command type to give help for.
      */
     public HelpCommand(String commandType) {
@@ -89,38 +88,38 @@ public class HelpCommand extends Command {
         logger.info(LOGGER_MESSAGE);
 
         // return the correct help message based on command type
-        String capitalisedCommandType = commandType.toUpperCase();
-        if (capitalisedCommandType.equals(CommandTypes.GENERAL.name())) {
+        String capitalizedCommandType = commandType.toUpperCase();
+        if (capitalizedCommandType.equals(CommandTypes.GENERAL.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.ADD.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.ADD.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_ADD_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.DELETE.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.DELETE.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_DELETE_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.EDIT.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.EDIT.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_EDIT_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.SEARCH.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.SEARCH.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_SEARCH_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.EXIT.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.EXIT.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_EXIT_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.LIST.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.LIST.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_LIST_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.NOTE.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.NOTE.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_NOTE_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.PIN.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.PIN.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_PIN_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.UNPIN.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.UNPIN.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_UNPIN_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.RATE.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.RATE.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_RATE_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.REDO.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.REDO.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_REDO_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.UNDO.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.UNDO.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_UNDO_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.REMIND.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.REMIND.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_REMIND_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.SORT.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.SORT.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_SORT_HELP_MESSAGE, true, false);
-        } else if (capitalisedCommandType.equals(CommandTypes.CLEAR.name())) {
+        } else if (capitalizedCommandType.equals(CommandTypes.CLEAR.name())) {
             return new CommandResult(HelpMessages.MESSAGES_SHOWING_CLEAR_HELP_MESSAGE, true, false);
         } else {
             throw new CommandException(HelpMessages.MESSAGES_INVALID_COMMAND_TYPE);

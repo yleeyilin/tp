@@ -22,6 +22,9 @@ import seedu.address.model.person.Rating;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code RateCommand}.
+ */
 public class RateCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Rating validRating = new Rating("1");

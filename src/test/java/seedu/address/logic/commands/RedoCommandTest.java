@@ -17,6 +17,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code RedoCommand}.
+ */
 public class RedoCommandTest {
     @Test
     public void execute_redoSuccessful() throws Exception {

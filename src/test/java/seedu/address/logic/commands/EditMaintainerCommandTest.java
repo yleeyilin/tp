@@ -12,8 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditMaintainerCommand.EditMaintainerDescriptor;
 import seedu.address.model.person.Name;
+
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditMaintainerCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code EditMaintainerCommand}.
  */
 public class EditMaintainerCommandTest {
     @Test

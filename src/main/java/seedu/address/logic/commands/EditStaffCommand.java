@@ -132,9 +132,10 @@ public class EditStaffCommand extends Command {
             return false;
         }
 
-        EditStaffCommand otherEditCommand = (EditStaffCommand) other;
-        return name.equals(otherEditCommand.name)
-                && editStaffDescriptor.equals(otherEditCommand.editStaffDescriptor);
+        EditStaffCommand otherEditStaffCommand = (EditStaffCommand) other;
+        boolean areNamesEqual = name.equals(otherEditStaffCommand.name);
+        boolean areDescriptorsEqual = editStaffDescriptor.equals(otherEditStaffCommand.editStaffDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override

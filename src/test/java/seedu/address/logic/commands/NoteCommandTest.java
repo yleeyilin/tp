@@ -24,6 +24,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code NoteCommand}.
+ */
 public class NoteCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Note validNote = new Note("get kibble today now");

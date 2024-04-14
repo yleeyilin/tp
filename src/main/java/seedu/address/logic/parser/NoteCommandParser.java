@@ -21,10 +21,14 @@ import seedu.address.model.person.Note;
  * Parses input arguments and creates a new NoteCommand object.
  */
 public class NoteCommandParser implements Parser<NoteCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for note command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for note command.";
+    public static final String MESSAGE_PARSEEXCEPTION = "Parsing error while parsing for note command.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Parses the given {@code String} of arguments in the context of the NoteCommand
+     * Parses the given {@code String} of arguments in the context of the NoteCommand.
      * and returns a NoteCommand object for execution. Parameter {@code args} cannot be null.
      *
      * @param args Argument to parse.
@@ -32,8 +36,8 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public NoteCommand parse(String args) throws ParseException {
-        assert (args != null) : "argument to pass for note command is null";
-        logger.log(Level.INFO, "Going to start parsing for note command.");
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NOTE, PREFIX_DEADLINE);
 
@@ -44,7 +48,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                 FAILED_TO_ADD_NOTE, PREFIX_NAME, PREFIX_NOTE);
         boolean isPreambleEmpty = argMultimap.isPreambleEmpty();
         if (!isPreambleEmpty) {
-            logger.log(Level.WARNING, "Parsing error while parsing for note command.");
+            logger.log(Level.WARNING, MESSAGE_PARSEEXCEPTION);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
 

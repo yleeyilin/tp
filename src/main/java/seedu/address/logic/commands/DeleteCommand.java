@@ -23,6 +23,10 @@ public class DeleteCommand extends Command {
 
     private final Name nameToDelete;
 
+    /**
+     * Creates a DeleteCommand object.
+     * @param name Name of the person in the person list to delete.
+     */
     public DeleteCommand(Name name) {
         this.nameToDelete = name;
     }
@@ -54,8 +58,8 @@ public class DeleteCommand extends Command {
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return nameToDelete.equals(otherDeleteCommand.nameToDelete);
-
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)

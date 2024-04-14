@@ -25,7 +25,8 @@ public class PinCommand extends Command {
     private final Name name;
 
     /**
-     * @param name of the person in the person list to pin.
+     * Creates a PinCommand object.
+     * @param name Name of the person in the address book to pin.
      */
     public PinCommand(Name name) {
         requireNonNull(name);

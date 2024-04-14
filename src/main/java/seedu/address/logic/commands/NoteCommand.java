@@ -42,7 +42,6 @@ public class NoteCommand extends Command {
 
     /**
      * Constructs a NoteCommand object.
-     *
      * @param name Name of the person in PoochPlanner to add note to.
      * @param note Note to add to the specified person in PoochPlanner.
      */

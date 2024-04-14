@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Staff;
 
 /**
- * Adds a person to the address book.
+ * Adds a staff to the address book.
  */
 public class AddStaffCommand extends Command {
     public static final String COMMAND_WORD = "/add-staff";
@@ -38,7 +38,8 @@ public class AddStaffCommand extends Command {
     private final Staff staffToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code staff}
+     * Creates an AddStaffCommand object.
+     * @param staff The {@code Staff} to add.
      */
     public AddStaffCommand(Staff staff) {
         requireNonNull(staff);

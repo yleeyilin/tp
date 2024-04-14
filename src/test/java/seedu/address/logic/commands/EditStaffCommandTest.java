@@ -14,7 +14,7 @@ import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.model.person.Name;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditStaffCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for {@code EditStaffCommand}.
  */
 public class EditStaffCommandTest {
     @Test

@@ -27,21 +27,24 @@ import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditStaffCommand object
+ * Parses input arguments and creates a new EditStaffCommand object.
  */
 public class EditStaffCommandParser implements Parser<EditStaffCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for edit staff command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for edit staff command.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditStaffCommand
+     * Parses the given {@code String} of arguments in the context of the EditStaffCommand.
      * and returns an EditStaffCommand object for execution. Parameter {@code args} cannot be null.
      * @throws ParseException If the user input does not conform to the expected format
      */
     public EditStaffCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert (args != null) : "argument to pass for edit staff command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for edit staff command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         String parsedArgs = ParserUtil.parseArg(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
@@ -87,11 +90,11 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
     }
 
     /**
-     * Edits the description of a Staff.
+     * Edits the description of a {@code Staff}.
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditStaffDescriptor that contains the new values from the user.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private EditStaffDescriptor editStaffDescription(ArgumentMultimap fieldArgMultimap) throws ParseException {
         try {

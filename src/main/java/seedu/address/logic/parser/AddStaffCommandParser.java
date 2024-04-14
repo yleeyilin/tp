@@ -36,9 +36,11 @@ import seedu.address.model.person.Staff;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddStaffCommand object
+ * Parses input arguments and creates a new AddStaffCommand object.
  */
 public class AddStaffCommandParser implements Parser<AddStaffCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for add staff command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for add staff command.";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
@@ -47,9 +49,9 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddStaffCommand parse(String args) throws ParseException {
-        assert (args != null) : "argument to pass for add staff command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for add staff command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -77,10 +79,10 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
     }
 
     /**
-     * Creates a staff contact based on the argument multimap.
+     * Creates a {@code Staff} contact based on the argument multimap.
      * @param argMultimap Contains the mappings of values to the specific prefixes.
      * @return A staff contact.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private Staff createStaffContact(ArgumentMultimap argMultimap) throws ParseException {
         try {

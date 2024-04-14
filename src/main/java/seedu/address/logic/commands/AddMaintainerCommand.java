@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Maintainer;
 
 /**
- * Adds a person to the address book.
+ * Adds a maintainer to the address book.
  */
 public class AddMaintainerCommand extends Command {
     public static final String COMMAND_WORD = "/add-maintainer";
@@ -38,7 +38,8 @@ public class AddMaintainerCommand extends Command {
     private final Maintainer maintainerToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code maintainer}
+     * Creates an AddMaintainerCommand object.
+     * @param maintainer The {@code Maintainer} to add.
      */
     public AddMaintainerCommand(Maintainer maintainer) {
         requireNonNull(maintainer);

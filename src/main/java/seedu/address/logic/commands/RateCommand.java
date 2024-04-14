@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Rating;
 
 /**
- * Rates a person identified using it's displayed name from the address book.
+ * Rates a person identified using their displayed name from the address book.
  */
 public class RateCommand extends Command {
     public static final String COMMAND_WORD = "/rate";
@@ -30,7 +30,8 @@ public class RateCommand extends Command {
     private final Rating rating;
 
     /**
-     * Creates a RateCommand to rate the specified contact specified by {@code Name}
+     * Creates a RateCommand object.
+     * @param  name Name of the person in the person list to rate.
      */
     public RateCommand(Name name, Rating rating) {
         this.targetName = name;

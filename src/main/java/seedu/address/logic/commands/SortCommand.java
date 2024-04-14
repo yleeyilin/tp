@@ -29,7 +29,8 @@ public class SortCommand extends Command {
     private final Prefix prefix;
 
     /**
-     * @param prefix parameter that the user wants to sort
+     * Creates a SortCommand object.
+     * @param prefix The contact field that the user wants to sort the address book by.
      */
     public SortCommand(Prefix prefix) {
         requireNonNull(prefix);
