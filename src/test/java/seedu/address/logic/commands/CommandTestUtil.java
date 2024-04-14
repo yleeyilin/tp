@@ -42,6 +42,9 @@ import seedu.address.testutil.EditSupplierDescriptorBuilder;
 public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_GEORGE_BEST = "George Best";
+    public static final String VALID_NAME_ALICE_PAULINE = "Alice Pauline";
+    public static final String VALID_NAME_BENSON = "Benson";
     public static final String VALID_NAME_UNPIN_ALICE_PERSON = "Unpin Test Alice Person";
     public static final String VALID_NAME_UNPIN_ALICE_SUPPLIER = "Unpin Test Alice Supplier";
     public static final String VALID_NAME_UNPIN_ALICE_MAINTAINER = "Unpin Test Alice Maintainer";
