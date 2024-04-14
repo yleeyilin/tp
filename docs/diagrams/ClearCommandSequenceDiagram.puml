@@ -15,7 +15,7 @@ activate LogicManager
 
 
 
-LogicManager -> ClearCommand : execute()
+LogicManager -> ClearCommand : execute(...)
 activate ClearCommand
 
 
