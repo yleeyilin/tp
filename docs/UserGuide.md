@@ -16,7 +16,6 @@ title: User Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -125,8 +124,7 @@ Contact card | The box displayed for each contact which contains all of their re
 
 <br>
 
-6. Type any command into the input box and press enter to execute it. <br>
-   You can try out the sample commands below:
+6. You can try out the sample commands below. <br>
 
    * `/add-person ; name : Pooch  ; phone : 98765435 ; address : Poochie Street 24 ; email : iampooch@gmail.com` <br> 
    The above command adds a general contact named `Pooch` to your contacts list in PoochPlanner.
@@ -138,7 +136,6 @@ Contact card | The box displayed for each contact which contains all of their re
 
 7. Refer to our [Features](#features) section below for the details of each command.
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -155,14 +152,10 @@ Here is a quick look at the different GUI components of PoochPlanner.
 
 ![Employee Card](images/ug-images/PersonCardGuiNavigation.png)
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 ## Features
-
-### Core Features
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -182,6 +175,7 @@ Here is a quick look at the different GUI components of PoochPlanner.
 
 <div style="page-break-after: always;"></div>
 
+### Core Features
 #### Adding a contact: `add`
 
 Adds a **person / staff / supplier / maintainer** contact so that your contacts list can be updated with new contacts.
@@ -240,7 +234,7 @@ The table below summarises the `add` command, format and examples for each conta
 * You can use the `undo` command to undo an `add` command so that you can revert your changes!<br>
 
 </div>
-
+<div style="page-break-after: always;"></div>
 
 #### Editing a contact : `edit`
 
@@ -404,7 +398,6 @@ Example: <br>
 <div style="page-break-after: always;"></div>
 
 ### Special Features
-
 #### Rating a Contact : `rate`
 
 Gives a performance rating to a **person / staff / supplier / maintainer** contact from your contacts list in PoochPlanner so that you can track the performance of your contacts.
@@ -609,13 +602,12 @@ Examples: <br>
 Add a note without a deadline:<br>
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie`
 
-  The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`.
+  The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`. Note that this note has no deadline.
 
 Add a note with a deadline:<br>
 * `/note ; name : Moochie ; note : get 10kg of matcha from moochie ; deadline : 2020-10-10`
 
-  The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`.
-  It also sets a deadline of the note to `Oct 10 2020`.
+  The above command adds the note "get 10kg of matcha from moochie" to the contact with name `Moochie`. Note that this note has a deadline set to `Oct 10 2020`.
 
 <br> 
 
@@ -766,7 +758,7 @@ Below is an example of redoing an <code>add</code> command :
 
 * Any unnecessary parameter or value after `/redo` will simply be ignored.<br>
 
-* This command can only be executed when at least one `undo` command has been executed.<br>
+* This command can only be executed when at least one `/undo` command has been executed.<br>
 
 </div>
 
@@ -849,7 +841,7 @@ Example: <br>
     <br>
     <medium>Input: <code>/remind</code></medium>
     <br>
-    <medium>Output: Shows all contacts with note deadlines from today (April 4 2024 in this example) onwards.</medium>
+    <medium>Output: Shows all contacts with note deadlines from today onwards.</medium>
     <br>
 </div>
 
@@ -929,7 +921,7 @@ Example: <br>
 
 <div markdown="block" class="alert alert-primary">:bulb: **Tip:**<br>
 
-* To return back to your full contacts list after using any filtering commands such as `search`, you can use the command `/list`.
+* To return back to your full contacts list after using any filtering commands such as `/search`, you can use the command `/list`.
 
 </div>
 
@@ -955,11 +947,9 @@ Manually editing the JSON file is not advised and should be taken with extreme c
 Furthermore, certain manual edits can cause your PoochPlanner to behave in unexpected ways (e.g., if a value entered lies outside its acceptable range).
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## Common Errors
-
 ### Unknown Command
 
 If you encounter an unknown command error, please ensure the command entered is a valid command mentioned
@@ -972,7 +962,7 @@ in our [Command Summary](#command-summary). Below is an example of an unknown co
     <medium>The above image depicts the unknown command error message caused by an unknown command.</medium>
     <br>
 </div>
-
+<div style="page-break-after: always;"></div>
 
 ### Invalid Field
 
@@ -986,6 +976,7 @@ are using. Refer to our [Command Summary](#command-summary) for a list of valid 
     <medium>The above image depicts an invalid field error message caused by a <code>help</code>  command with an invalid field.</medium>
     <br>
 </div>
+<div style="page-break-after: always;"></div>
 
 ### Missing Field
 
@@ -998,8 +989,6 @@ If you encounter a missing field error, please ensure the fields listed in the e
     <medium>The above image depicts a missing field error caused by a <code>note</code> command with missing fields.</medium>
     <br>
 </div>
-
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## FAQ
@@ -1060,16 +1049,13 @@ If you encounter a missing field error, please ensure the fields listed in the e
 **A**: Yes you can! In fact, you may also rate a contact at its time of creation. Simply append the `; note :` prefix, and you should be on your way!<br><br>
 Example: Adding a new contact with a note and a rating
 
-`/add-person ; name : Pooch ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com ; rating : 3 ; note : Hello my name is Pooch!`
-
---------------------------------------------------------------------------------------------------------------------
+`/add-person ; name : Pooch ; phone : 98883888 ; address : Pooch Street 32 ; email : impooch@gmail.com ; rating : 3 ; note : Hello my name is Pooch! `
 <div style="page-break-after: always;"></div>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move PoochPlanner to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by your PoochPlanner before running PoochPlanner again.
 
---------------------------------------------------------------------------------------------------------------------
 
 ## Prefix Summary
 
