@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user note command visible messages.
+ * Container for {@code NoteCommand} visible messages.
  */
 public class NoteMessages extends Messages {
     public static final String NOTE = "note";

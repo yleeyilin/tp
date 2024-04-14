@@ -15,21 +15,24 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new PinCommand object
+ * Parses input arguments and creates a new PinCommand object.
  */
 public class PinCommandParser implements Parser<PinCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for pin command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for pin command.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Parses the given {@code String} of arguments in the context of the PinCommand
+     * Parses the given {@code String} of arguments in the context of the PinCommand.
      * and returns a PinCommand object for execution. Parameter {@code args} cannot be null.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public PinCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert (args != null) : "argument to pass for pin command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for pin command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);

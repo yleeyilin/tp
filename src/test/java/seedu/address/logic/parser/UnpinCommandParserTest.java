@@ -15,7 +15,7 @@ import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.model.person.Name;
 
 public class UnpinCommandParserTest {
-    private UnpinCommandParser parser = new UnpinCommandParser();
+    private final UnpinCommandParser parser = new UnpinCommandParser();
 
     @Test
     public void parse_missingNamePrefix_failure() {

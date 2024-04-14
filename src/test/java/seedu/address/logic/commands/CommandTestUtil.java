@@ -40,7 +40,6 @@ import seedu.address.testutil.EditSupplierDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -95,10 +94,8 @@ public class CommandTestUtil {
     public static final String SKILL_DESC_BOB = " " + PREFIX_SKILL + VALID_SKILL_BOB;
     public static final String COMMISSION_DESC_BOB = "  " + PREFIX_COMMISSION + VALID_COMMISSION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME = "invalid name here";
-
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -112,7 +109,6 @@ public class CommandTestUtil {
     public static final String INVALID_SKILL_DESC = " " + PREFIX_SKILL;
     public static final String INVALID_COMMISSION_DESC = " " + PREFIX_COMMISSION + "20";
     public static final String INVALID_DESC_BOB = " " + PREFIX_NOTE;
-    public static final String INVALID_DEADLINENOTE_BOB = " " + PREFIX_NOTE + "20";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -124,7 +120,6 @@ public class CommandTestUtil {
     public static final EditSupplierCommand.EditSupplierDescriptor DESC_BOB_SUPPLIER;
     public static final EditMaintainerCommand.EditMaintainerDescriptor DESC_AMY_MAINTAINER;
     public static final EditMaintainerCommand.EditMaintainerDescriptor DESC_BOB_MAINTAINER;
-
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -201,6 +196,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -234,5 +230,4 @@ public class CommandTestUtil {
             fail();
         }
     }
-
 }

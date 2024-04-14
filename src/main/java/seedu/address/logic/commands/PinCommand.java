@@ -15,7 +15,6 @@ import seedu.address.model.person.Person;
  */
 public class PinCommand extends Command {
     public static final String COMMAND_WORD = "/pin";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins a contact to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -26,7 +25,8 @@ public class PinCommand extends Command {
     private final Name name;
 
     /**
-     * @param name of the person in the person list to pin.
+     * Creates a PinCommand object.
+     * @param name Name of the person in the address book to pin.
      */
     public PinCommand(Name name) {
         requireNonNull(name);

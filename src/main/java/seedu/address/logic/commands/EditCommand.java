@@ -34,9 +34,7 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
-
     public static final String COMMAND_WORD = "/edit-person";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -45,13 +43,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EMAIL + "EMAIL] \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe Others "
             + PREFIX_FIELD + "{ "
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
-
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
     private final Name name;
@@ -122,8 +119,9 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return name.equals(otherEditCommand.name)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        boolean areNamesEqual = name.equals(otherEditCommand.name);
+        boolean areDescriptorsEqual = editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override
@@ -235,7 +233,6 @@ public class EditCommand extends Command {
 
             return phoneEquals && emailEquals && addressEquals && tagsEquals;
         }
-
 
         @Override
         public String toString() {

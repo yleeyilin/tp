@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user clear command visible messages.
+ * Container for {@code ClearCommand} visible messages.
  */
 public class ClearMessages extends Messages {
     public static final String MESSAGE_CLEAR_POOCHPLANNER_SUCCESS =

@@ -60,17 +60,16 @@ import seedu.address.model.person.Staff;
 import seedu.address.testutil.StaffBuilder;
 
 public class AddStaffCommandParserTest {
-    private AddStaffCommandParser parser = new AddStaffCommandParser();
+    private final AddStaffCommandParser parser = new AddStaffCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Staff expectedPerson = new StaffBuilder(BOBSTAFF).build();
+        Staff expectedStaff = new StaffBuilder(BOBSTAFF).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB, new AddStaffCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + SALARY_DESC_BOB + EMPLOYMENT_DESC_BOB, new AddStaffCommand(expectedStaff));
     }
-
 
     @Test
     public void parse_repeatedNonTagValue_failure() {

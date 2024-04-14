@@ -24,10 +24,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code NoteCommand}.
+ */
 public class NoteCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Note validNote1 = new Note("get kibble today now");
-    private final Note validNote2 = new Note("get bones today");
+    private final Note validNote = new Note("get kibble today now");
+    private final Note differentValidNote = new Note("get bones today");
 
     @Test
     public void execute_validNoteOther_addSuccess() throws CommandException {
@@ -35,12 +38,12 @@ public class NoteCommandTest {
         Person toAddNotePerson = ALICE;
         Person expectedPerson = new Person(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
-                validNote1, toAddNotePerson.getTags(), toAddNotePerson.getRating());
+                validNote, toAddNotePerson.getTags(), toAddNotePerson.getRating());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedPerson);
 
         // execute note command
-        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
+        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote);
         noteCommand.execute(model);
 
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -61,13 +64,13 @@ public class NoteCommandTest {
         Staff toAddNotePerson = GEORGIASTAFF;
         Staff expectedPerson = new Staff(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
-                validNote1, toAddNotePerson.getTags(), toAddNotePerson.getSalary(), toAddNotePerson.getEmployment(),
+                validNote, toAddNotePerson.getTags(), toAddNotePerson.getSalary(), toAddNotePerson.getEmployment(),
                 toAddNotePerson.getRating());
         Model expectedModel = new ModelManager(modelStaff.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(modelStaff.getFilteredPersonList().get(7), expectedPerson);
 
         // execute note command
-        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
+        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote);
         noteCommand.execute(modelStaff);
 
         assertEquals(modelStaff.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -84,13 +87,13 @@ public class NoteCommandTest {
         Supplier toAddNotePerson = GEORGIASUPPLIER;
         Supplier expectedPerson = new Supplier(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
-                validNote1, toAddNotePerson.getTags(), toAddNotePerson.getProduct(), toAddNotePerson.getPrice(),
+                validNote, toAddNotePerson.getTags(), toAddNotePerson.getProduct(), toAddNotePerson.getPrice(),
                 toAddNotePerson.getRating());
         Model expectedModel = new ModelManager(modelSupplier.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(modelSupplier.getFilteredPersonList().get(7), expectedPerson);
 
         // execute note command
-        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
+        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote);
         noteCommand.execute(modelSupplier);
 
         assertEquals(modelSupplier.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -107,13 +110,13 @@ public class NoteCommandTest {
         Maintainer toAddNotePerson = GEORGIAMAINTAINER;
         Maintainer expectedPerson = new Maintainer(toAddNotePerson.getName(), toAddNotePerson.getPhone(),
                 toAddNotePerson.getEmail(), toAddNotePerson.getAddress(),
-                validNote1, toAddNotePerson.getTags(), toAddNotePerson.getSkill(), toAddNotePerson.getCommission(),
+                validNote, toAddNotePerson.getTags(), toAddNotePerson.getSkill(), toAddNotePerson.getCommission(),
                 toAddNotePerson.getRating());
         Model expectedModel = new ModelManager(modelMaintainer.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(modelMaintainer.getFilteredPersonList().get(7), expectedPerson);
 
         // execute note command
-        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote1);
+        NoteCommand noteCommand = new NoteCommand(toAddNotePerson.getName(), validNote);
         noteCommand.execute(modelMaintainer);
 
         assertEquals(modelMaintainer.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -125,15 +128,15 @@ public class NoteCommandTest {
     @Test
     public void execute_invalidName_throwsCommandException() {
         Name invalidName = new Name("patty");
-        NoteCommand noteCommand = new NoteCommand(invalidName, validNote1);
+        NoteCommand noteCommand = new NoteCommand(invalidName, validNote);
         assertCommandFailure(noteCommand, model, NoteMessages.MESSAGE_NOTE_NAME_NOT_FOUND);
     }
 
     @Test
     public void equals() {
-        NoteCommand noteFirstCommand = new NoteCommand(ALICE.getName(), validNote1);
-        NoteCommand noteSecondCommand = new NoteCommand(BENSON.getName(), validNote1);
-        NoteCommand noteThirdCommand = new NoteCommand(ALICE.getName(), validNote2);
+        NoteCommand noteFirstCommand = new NoteCommand(ALICE.getName(), validNote);
+        NoteCommand noteSecondCommand = new NoteCommand(BENSON.getName(), validNote);
+        NoteCommand noteThirdCommand = new NoteCommand(ALICE.getName(), differentValidNote);
 
         // same object -> returns true
         assertEquals(noteFirstCommand, noteFirstCommand);

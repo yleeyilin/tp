@@ -5,23 +5,35 @@ import static seedu.address.logic.messages.SortMessages.FAILED_TO_SORT;
 import static seedu.address.logic.messages.SortMessages.SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIELD;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
 /**
- * Parses input arguments and creates a new SortCommand object
+ * Parses input arguments and creates a new SortCommand object.
  */
 public class SortCommandParser implements Parser<SortCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for sort command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for sort command.";
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * Parses the given {@code String} of arguments in the context of the SortCommand.
      * and returns a SortCommand object for execution. Parameter {@code args} cannot be null.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert (args != null) : "argument to pass for sort command is null";
+
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
+
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIELD);
 

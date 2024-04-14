@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user pin command visible messages.
+ * Container for {@code PinCommand} visible messages.
  */
 public class PinMessages extends Messages {
     public static final String PIN = "pin";
@@ -12,5 +12,4 @@ public class PinMessages extends Messages {
             + "Name does not exist in our address book \uD83D\uDC3E";
     public static final String MESSAGE_PIN_MISSING_NAME = FAILED_TO_PIN
             + "Pin requires a name field. %1$s \uD83D\uDC3E";
-
 }

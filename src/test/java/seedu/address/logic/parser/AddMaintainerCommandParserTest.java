@@ -63,13 +63,13 @@ public class AddMaintainerCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Maintainer expectedPerson = new MaintainerBuilder(BOBMAINTAINER).build();
+        Maintainer expectedMaintainer = new MaintainerBuilder(BOBMAINTAINER).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + SKILL_DESC_BOB + COMMISSION_DESC_BOB, new AddMaintainerCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + SKILL_DESC_BOB + COMMISSION_DESC_BOB,
+                new AddMaintainerCommand(expectedMaintainer));
     }
-
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
@@ -255,12 +255,6 @@ public class AddMaintainerCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + SKILL_DESC_BOB + INVALID_COMMISSION_DESC,
                 String.format(AddMessages.MESSAGE_ADD_INVALID_PARAMETERS, Commission.MESSAGE_CONSTRAINTS));
-
-        /*
-         invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-        Tag.MESSAGE_CONSTRAINTS);
-         */
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC

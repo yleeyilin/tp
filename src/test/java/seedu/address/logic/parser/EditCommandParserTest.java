@@ -48,7 +48,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class EditCommandParserTest {
-    private EditCommandParser parser = new EditCommandParser();
+    private final EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -90,6 +90,7 @@ public class EditCommandParserTest {
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
         String exception = String.format(EditMessages.MESSAGE_EDITING_NAME, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified invalid field (product)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + PRODUCT_DESC_AMY
@@ -97,6 +98,7 @@ public class EditCommandParserTest {
         exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[product]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified invalid field (price)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + PRICE_DESC_AMY
@@ -104,6 +106,7 @@ public class EditCommandParserTest {
         exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[price]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified invalid field (employment)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + EMPLOYMENT_DESC_AMY
@@ -111,6 +114,7 @@ public class EditCommandParserTest {
         exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[employment]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified invalid field (salary)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + SALARY_DESC_AMY
@@ -118,6 +122,7 @@ public class EditCommandParserTest {
         exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[salary]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified invalid field (skill)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + SKILL_DESC_AMY
@@ -125,6 +130,7 @@ public class EditCommandParserTest {
         exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[skill]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified invalid field (commission)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY
@@ -143,6 +149,7 @@ public class EditCommandParserTest {
         String exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[commission, skill]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified three invalid field (name, skill and commission)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY + SKILL_DESC_AMY + NAME_DESC_AMY
@@ -150,6 +157,7 @@ public class EditCommandParserTest {
         exception = FAILED_TO_EDIT + String.format(MESSAGE_UNKNOWN_FIELD_FORMAT, "[commission, skill]");
         exception += "\n" + String.format(MESSAGE_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
+
         // specified three invalid field (salary, skill and commission)
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + COMMISSION_DESC_AMY + SKILL_DESC_AMY + SALARY_DESC_AMY
@@ -175,10 +183,12 @@ public class EditCommandParserTest {
             + " " + PREFIX_FIELD + "{" + INVALID_PHONE_DESC + " }";
         assertParseFailure(parser, userInput,
                 String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, Phone.MESSAGE_CONSTRAINTS)); // invalid phone
+
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + INVALID_EMAIL_DESC + " }";
         assertParseFailure(parser, userInput,
                 String.format(EditMessages.MESSAGE_EDIT_INVALID_FIELD, Email.MESSAGE_CONSTRAINTS)); // invalid email
+
         userInput = EditCommand.COMMAND_WORD + " " + PREFIX_NAME + "Person1"
             + " " + PREFIX_FIELD + "{" + INVALID_ADDRESS_DESC + " }";
         assertParseFailure(parser, userInput,
