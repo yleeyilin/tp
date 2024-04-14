@@ -44,7 +44,7 @@ destroy SortCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> SortCommand : execute()
+LogicManager -> SortCommand : execute(...)
 activate SortCommand
 
 SortCommand -> Model : updateSortedPersonList(phone)
