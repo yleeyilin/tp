@@ -1,5 +1,7 @@
 package seedu.address.logic.messages;
 
+//@@author jamessinmaojun
+
 /**
  * Container for {@code RateCommand} visible messages.
  */
