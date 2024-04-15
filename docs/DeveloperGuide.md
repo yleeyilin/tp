@@ -742,7 +742,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <div style="page-break-after: always;"></div>
 
 ### Use cases
-[//]: # (@@author chiageng)
+
 **System**: `PoochPlanner`
 
 **Use case**: `UC01 - Adding a contact`
@@ -784,8 +784,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1d2. User re-enters a new command with correct input for employment.
   * Steps 1d1 - 1d2 are repeated until there is no error in input.
   * Use case resumes from step 2.
-
-[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
