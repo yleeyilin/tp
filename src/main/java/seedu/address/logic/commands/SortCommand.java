@@ -12,7 +12,6 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 
 //@@author Joshy837
-
 /**
  * Format full help instructions for every command for display.
  */

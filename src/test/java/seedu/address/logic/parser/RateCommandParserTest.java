@@ -20,7 +20,6 @@ import seedu.address.logic.messages.RateMessages;
 import seedu.address.model.person.Rating;
 
 //@@author jamessinmaojun
-
 public class RateCommandParserTest {
     private final RateCommandParser parser = new RateCommandParser();
     private final Rating validRating = new Rating("0");

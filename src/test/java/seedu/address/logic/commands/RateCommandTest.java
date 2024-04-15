@@ -23,7 +23,6 @@ import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
 
 //@@author jamessinmaojun
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code RateCommand}.
  */

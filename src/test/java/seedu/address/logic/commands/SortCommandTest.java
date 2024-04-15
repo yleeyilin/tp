@@ -35,7 +35,6 @@ import seedu.address.testutil.StaffBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
 //@@author Joshy837
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code SortCommand}.
  */

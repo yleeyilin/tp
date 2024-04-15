@@ -11,7 +11,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 //@@author jamessinmaojun
-
 /**
  * Deletes a person identified using it's displayed name from the address book.
  */
