@@ -258,6 +258,7 @@ public class ParserUtil {
         return trimmedFields;
     }
 
+    //@@author jannaleong
     /**
      * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
@@ -275,11 +276,12 @@ public class ParserUtil {
         }
         return new Note(trimmedNote);
     }
+    //@@author
 
     /**
-     * Parses a {@code String note} into a {@code Note}.
+     * Parses a {@code String rating} into a {@code Rating}.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException If the given {@code note} is invalid.
+     * @throws ParseException If the given {@code rating} is invalid.
      */
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
@@ -290,10 +292,11 @@ public class ParserUtil {
         return new Rating(trimmedRating);
     }
 
+    //@@author jannaleong
     /**
-     * Parses a {@code String note} into a {@code Note}.
+     * Parses a {@code String note, String deadline} into a {@code DeadlineNote}.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException If the given {@code note} is invalid.
+     * @throws ParseException If the given {@code note, deadline} is invalid.
      */
     public static DeadlineNote parseDeadlineNote(String note, String deadline) throws ParseException {
         requireNonNull(note, deadline);
@@ -308,9 +311,11 @@ public class ParserUtil {
         }
         return new DeadlineNote(trimmedNote, trimmedDeadline);
     }
+    //@@author
 
+    //@@author jannaleong
     /**
-     * Parses a {@code String note}.
+     * Parses a {@code String commandType}.
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException If the given {@code commandType} is invalid.
      */
@@ -323,6 +328,7 @@ public class ParserUtil {
         }
         return trimmedCommand;
     }
+    //@@author
 
     //@@author Joshy837
     /**

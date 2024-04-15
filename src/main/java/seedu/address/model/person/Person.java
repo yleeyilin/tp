@@ -66,6 +66,7 @@ public class Person {
         return rating;
     }
 
+    //@@author jannaleong
     /**
      * Returns a new instantiation of the current {@code Person} with the updated note,
      * which throws {@code UnsupportedOperationException} if modification is attempted.
@@ -76,6 +77,7 @@ public class Person {
         personToReturn.setPinIfPinned(this);
         return personToReturn;
     }
+    //@@author
 
     /**
      * Returns a new instantiation of the current {@code Person} with the updated rating,
@@ -154,9 +156,11 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    //@@author jannaleong
     public void setNoteContent(String content) {
         this.note.setValue(content);
     }
+    //@@author
 
     /**
      * Returns true if both persons have the same identity and data fields.
