@@ -149,12 +149,14 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
+    //@@author jannaleong
     @Test
     public void parseCommand_help() throws Exception {
         HelpCommand command = (HelpCommand) parser.parseCommand(
                 HelpCommand.COMMAND_WORD + " ; command : " + "add");
         assertEquals(new HelpCommand("add"), command);
     }
+    //@@author
 
     @Test
     public void parseCommand_list() throws Exception {
@@ -171,11 +173,13 @@ public class AddressBookParserTest {
         assertEquals(new SearchCommand(new KeywordPredicate(token)), command);
     }
 
+    //@@author jannaleong
     @Test
     public void parseCommand_note() throws Exception {
         NoteCommand noteCommand = (NoteCommand) parser.parseCommand("/note ; name : Bob Choo ; note : get kibble");
         assertTrue(noteCommand instanceof NoteCommand);
     }
+    //@@author
 
     @Test
     public void parseCommand_redo() throws Exception {
@@ -201,11 +205,13 @@ public class AddressBookParserTest {
         assertEquals(new UnpinCommand(new Name("Bob Choo")), unpinCommand);
     }
 
+    //@@author jannaleong
     @Test
     public void parseCommand_remind() throws Exception {
         RemindCommand remindCommand = (RemindCommand) parser.parseCommand("/remind");
         assertTrue(remindCommand instanceof RemindCommand);
     }
+    //@@author
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

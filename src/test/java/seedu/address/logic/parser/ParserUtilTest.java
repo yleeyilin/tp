@@ -360,6 +360,7 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
 
+    //@@author jannaleong
     @Test
     public void parseDeadline_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil
@@ -383,6 +384,7 @@ public class ParserUtilTest {
         DeadlineNote expectedDeadlineNote = new DeadlineNote(VALID_NOTE, VALID_DEADLINE);
         assertEquals(expectedDeadlineNote, ParserUtil.parseDeadlineNote(VALID_NOTE, VALID_DEADLINE));
     }
+    //@@author
 
     @Test
     public void parseRating_null_throwsNullPointerException() {
