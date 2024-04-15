@@ -265,9 +265,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String note} into a {@code Note}.
+     * Parses a {@code String rating} into a {@code Rating}.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException If the given {@code note} is invalid.
+     * @throws ParseException If the given {@code rating} is invalid.
      */
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
