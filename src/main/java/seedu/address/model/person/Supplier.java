@@ -42,6 +42,7 @@ public class Supplier extends Person {
     }
     //@@author
 
+    //@@author jannaleong
     /**
      * Returns a new instantiation of the current {@code Supplier} with the updated note,
      * which throws {@code UnsupportedOperationException} if modification is attempted.
@@ -53,6 +54,7 @@ public class Supplier extends Person {
         supplierToReturn.setPinIfPinned(this);
         return supplierToReturn;
     }
+    //@@author
 
     /**
      * Returns a new instantiation of the current {@code Supplier} with the updated rating,
