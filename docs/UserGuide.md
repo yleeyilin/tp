@@ -176,6 +176,8 @@ Here is a quick look at the different GUI components of PoochPlanner.
 <div style="page-break-after: always;"></div>
 
 ### Core Features
+
+[//]: # (@@author chiageng)
 #### Adding a contact: `add`
 
 Adds a **person / staff / supplier / maintainer** contact so that your contacts list can be updated with new contacts.
@@ -235,6 +237,7 @@ The table below summarises the `add` command, format and examples for each conta
 
 </div>
 <div style="page-break-after: always;"></div>
+[//]: # (@@author)
 
 #### Editing a contact : `edit`
 
@@ -358,6 +361,7 @@ If you would like to search for `salaries`/`prices`/`commissions` within a speci
 * Note that this query also searches for staff with salaries of exactly `$5/hr`, from `$500/hr` to `$599/hr` as well, and even in larger ranges too.<br>
 
 </div>
+
 
 <div style="page-break-after: always;"></div>
 
@@ -654,6 +658,7 @@ Add a note with a deadline:<br>
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
 #### Undoing a command : `undo`
 
 Undoes the most recent action so that you can revert changes back easily.
@@ -771,6 +776,8 @@ Below is an example of redoing an <code>add</code> command :
 </div>
 
 <div style="page-break-after: always;"></div>
+
+[//]: # (@@author)
 
 #### Viewing help : `help`
 
@@ -1019,6 +1026,8 @@ If you encounter a missing field error, please ensure the fields listed in the e
 **Q**: How can I check my Java version?<br>
 **A**: You can open a command line and type `java -version`. If you do not have Java installed, you can install Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version. For macOS users, you may wish to follow the instructions [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
 
+<div style="page-break-after: always;"></div>
+
 ### Loading Data from Another Computer
 
 **Q**: How can I transfer my PoochPlanner contacts to another computer?<br>
@@ -1080,6 +1089,7 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
 ## Command Summary
 
 | Action              | Format and Example                                                                                                                                                                                                                                                                                                                                   |

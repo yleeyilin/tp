@@ -8,6 +8,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * Represents a Staff in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -27,15 +28,21 @@ public class Staff extends Person {
         this.salary = salary;
         this.employment = employment;
     }
+    //@@author
 
+    //@@author chiageng
     public Salary getSalary() {
         return salary;
     }
+    //@@author
 
+    //@@author chiageng
     public Employment getEmployment() {
         return employment;
     }
+    //@@author
 
+    //@@author jannaleong
     /**
      * Returns a new instantiation of the current {@code Staff} with the updated note,
      * which throws {@code UnsupportedOperationException} if modification is attempted.
@@ -47,6 +54,7 @@ public class Staff extends Person {
         staffToReturn.setPinIfPinned(this);
         return staffToReturn;
     }
+    //@@author
 
     /**
      * Returns a new instantiation of the current {@code Staff} with the updated rating,
@@ -84,6 +92,7 @@ public class Staff extends Person {
         return staffToReturn;
     }
 
+    //@@author chiageng
     /**
      * Returns true if both staffs have the same identity and data fields.
      * This defines a stronger notion of equality between two staff.
@@ -105,12 +114,14 @@ public class Staff extends Person {
                 && employment.equals(otherPerson.employment);
     }
 
+    //@@author chiageng
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(super.hashCode(), salary, employment);
     }
 
+    //@@author chiageng
     @Override
     public String toString() {
         return new ToStringBuilder(this)

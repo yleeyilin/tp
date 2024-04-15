@@ -35,6 +35,7 @@ import seedu.address.model.person.Rating;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * Parses input arguments and creates a new AddSupplierCommand object.
  */
@@ -74,6 +75,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
 
         return new AddSupplierCommand(person);
     }
+    //@@author
 
     /**
      * Creates a {@code Supplier} contact based on the argument multimap.

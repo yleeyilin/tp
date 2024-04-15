@@ -26,6 +26,7 @@ import seedu.address.model.person.Product;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.Skill;
 
+//@@author chiageng
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";

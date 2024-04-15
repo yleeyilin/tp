@@ -39,6 +39,7 @@ public class Messages {
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
+    //@@author chiageng
     /**
      * Formats the {@code Person} including basic person fields for display to the user.
      * @param person The person to be formatted.
@@ -56,7 +57,9 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Formats the {@code Person} for display to the user.
      * @param person The person to be formatted.
@@ -75,7 +78,9 @@ public class Messages {
         builder.append(person.getName());
         return builder.toString();
     }
+    //@@author
 
+    //@@author Joshy837
     /**
      * Returns an error message indicating the prefixes with no values.
      */
@@ -87,4 +92,5 @@ public class Messages {
 
         return MESSAGE_EMPTY_FIELDS + "[" + String.join(", ", emptyFields) + "]";
     }
+    //@@author
 }

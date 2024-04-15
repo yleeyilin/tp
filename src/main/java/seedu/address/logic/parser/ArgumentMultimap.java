@@ -65,6 +65,7 @@ public class ArgumentMultimap {
         return getValue(new Prefix("")).orElse("");
     }
 
+    //@@author chiageng
     /**
      * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
      * once among the arguments.
@@ -78,7 +79,9 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Checks that name prefix is not used more than once.
      * @return True if there is duplicate name prefix.
@@ -93,11 +96,13 @@ public class ArgumentMultimap {
         }
         return false;
     }
+    //@@author
 
     public boolean containsPrefix(Prefix prefix) {
         return argMultimap.containsKey(prefix);
     }
 
+    //@@author Joshy837
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -112,11 +117,13 @@ public class ArgumentMultimap {
         ArgumentMultimap otherArgumentMultimap = (ArgumentMultimap) other;
         return argMultimap.equals(otherArgumentMultimap.argMultimap);
     }
+    //@@author
 
     public boolean isPreambleEmpty() {
         return this.getPreamble().isEmpty();
     }
 
+    //@@author Joshy837
     /**
      * Gets all the prefixes.
      * @return An array of prefixes in the hashmap.
@@ -124,7 +131,9 @@ public class ArgumentMultimap {
     public Prefix[] getAllPrefixes() {
         return argMultimap.keySet().toArray(new Prefix[0]);
     }
+    //@@author
 
+    //@@author Joshy837
     /**
      * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
      * once among the arguments.
@@ -142,6 +151,7 @@ public class ArgumentMultimap {
                     emptyPrefixes.toArray(new Prefix[0])));
         }
     }
+    //@@author
 
     /**
      * Returns a string implementation of Argument Multi Map.

@@ -59,5 +59,4 @@ public class HelpCommandParserTest {
         assertParseFailure(parser, PREAMBLE_WHITESPACE + commandWithUnknownField,
                 expectedMessage);
     }
-
 }

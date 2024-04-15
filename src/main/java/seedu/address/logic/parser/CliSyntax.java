@@ -5,6 +5,7 @@ package seedu.address.logic.parser;
  */
 public class CliSyntax {
 
+    //@@author chiageng
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("; name : ");
     public static final Prefix PREFIX_PHONE = new Prefix("; phone : ");
@@ -19,6 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PRICE = new Prefix("; price : ");
     public static final Prefix PREFIX_SKILL = new Prefix("; skill : ");
     public static final Prefix PREFIX_COMMISSION = new Prefix("; commission : ");
+    //@@author
 
     public static final Prefix PREFIX_FIELD = new Prefix("; field : ");
     public static final Prefix PREFIX_NOTE = new Prefix("; note : ");
@@ -27,6 +29,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_HELP = new Prefix("; command : ");
     public static final Prefix PREFIX_DEADLINE = new Prefix("; deadline : ");
 
+    //@@author Joshy837
     public static final Prefix[] PREFIX_SEARCH_COLLECTION = new Prefix[] {
         PREFIX_NAME,
         PREFIX_PHONE,
@@ -62,4 +65,5 @@ public class CliSyntax {
         PREFIX_PIN,
         PREFIX_RATING
     };
+    //@@author
 }

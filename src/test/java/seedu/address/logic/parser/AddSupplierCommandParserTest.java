@@ -58,6 +58,7 @@ import seedu.address.model.person.Product;
 import seedu.address.model.person.Supplier;
 import seedu.address.testutil.SupplierBuilder;
 
+//@@author chiageng
 public class AddSupplierCommandParserTest {
     private final AddSupplierCommandParser parser = new AddSupplierCommandParser();
 
@@ -69,7 +70,6 @@ public class AddSupplierCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + PRODUCT_DESC_BOB + PRICE_DESC_BOB, new AddSupplierCommand(expectedSupplier));
     }
-
 
     @Test
     public void parse_repeatedNonTagValue_failure() {

@@ -35,6 +35,7 @@ import seedu.address.model.person.Salary;
 import seedu.address.model.person.Staff;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * Parses input arguments and creates a new AddStaffCommand object.
  */
@@ -77,6 +78,7 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
 
         return new AddStaffCommand(person);
     }
+    //@@author
 
     /**
      * Creates a {@code Staff} contact based on the argument multimap.
