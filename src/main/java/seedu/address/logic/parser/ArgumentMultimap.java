@@ -102,6 +102,7 @@ public class ArgumentMultimap {
         return argMultimap.containsKey(prefix);
     }
 
+    //@@author Joshy837
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -116,11 +117,13 @@ public class ArgumentMultimap {
         ArgumentMultimap otherArgumentMultimap = (ArgumentMultimap) other;
         return argMultimap.equals(otherArgumentMultimap.argMultimap);
     }
+    //@@author
 
     public boolean isPreambleEmpty() {
         return this.getPreamble().isEmpty();
     }
 
+    //@@author Joshy837
     /**
      * Gets all the prefixes.
      * @return An array of prefixes in the hashmap.
@@ -128,7 +131,9 @@ public class ArgumentMultimap {
     public Prefix[] getAllPrefixes() {
         return argMultimap.keySet().toArray(new Prefix[0]);
     }
+    //@@author
 
+    //@@author Joshy837
     /**
      * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
      * once among the arguments.
@@ -146,6 +151,7 @@ public class ArgumentMultimap {
                     emptyPrefixes.toArray(new Prefix[0])));
         }
     }
+    //@@author
 
     /**
      * Returns a string implementation of Argument Multi Map.

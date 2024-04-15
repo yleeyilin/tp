@@ -231,12 +231,12 @@ The following sequence diagram models the interactions between the different com
 **Aspect: How to implement edit command**
 
 * **Alternative 1 (current choice)**: Create 4 distinct edit commands for the 4 contact types (Person, Staff, Maintainer, Supplier).
-    * Pros: More user-friendly since users will be less prone to error that involves trying to edit a field that does not exist for the specific contact type.
+    * Pros: More user-friendly since users will be less prone to errors that involves trying to edit a field that does not exist for the specific contact type.
     * Cons: Steeper learning curve for the users due to the greater number of commands.
 
-* **Alternative 2**: Use only one edit command across all classse by using a dynamic edit parser. The dynamic edit parser will route to the correct edit command to handle the modification of different contact types separately.
+* **Alternative 2**: Use only one edit command across all classes by using a dynamic edit parser. The dynamic edit parser will route to the correct edit command to handle the modification of different contact types separately.
     * Pros: Much simpler suite of features for users, which makes it easier for users to start using PoochPlanner.
-    * Cons: Complex to implement since the checking of the contact type must be done at the point of parsing for the dynamic edit parser. However, doing so will violate the intended abstract implementation of MVC (Model-View-Controller) as the model will have to be accessible from within the parser class in order for the type checking to be done. 
+    * Cons: Complex to implement since the checking of the contact type must be done at the point of parsing for the dynamic edit parser. However, doing so will violate the intended abstract implementation of the MVC (Model-View-Controller) as the model will have to be accessible from within the parser class in order for the type checking to be done. 
 
 <div style="page-break-after: always;"></div>
 
@@ -741,6 +741,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+[//]: # (@@author chiageng)
 **System**: `PoochPlanner`
 
 **Use case**: `UC01 - Adding a contact`
@@ -800,6 +801,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1g2. User re-enters a new command with a correct price format.
     * Steps 1g1 - 1g2 are repeated until there are no errors in input.
     * Use case resumes from step 2.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 

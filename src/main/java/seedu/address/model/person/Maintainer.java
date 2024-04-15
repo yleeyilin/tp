@@ -42,6 +42,7 @@ public class Maintainer extends Person {
     }
     //@@author
 
+    //@@author jannaleong
     /**
      * Returns a new instantiation of the current {@code Maintainer} with the updated note,
      * which throws {@code UnsupportedOperationException} if modification is attempted.
@@ -53,6 +54,7 @@ public class Maintainer extends Person {
         maintainerToReturn.setPinIfPinned(this);
         return maintainerToReturn;
     }
+    //@@author
 
     /**
      * Returns a new instantiation of the current {@code Maintainer} with the updated rating,

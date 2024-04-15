@@ -362,6 +362,7 @@ If you would like to search for `salaries`/`prices`/`commissions` within a speci
 
 </div>
 
+
 <div style="page-break-after: always;"></div>
 
 #### Deleting a contact : `delete`

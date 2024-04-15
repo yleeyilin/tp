@@ -42,6 +42,7 @@ public class Staff extends Person {
     }
     //@@author
 
+    //@@author jannaleong
     /**
      * Returns a new instantiation of the current {@code Staff} with the updated note,
      * which throws {@code UnsupportedOperationException} if modification is attempted.
@@ -53,6 +54,7 @@ public class Staff extends Person {
         staffToReturn.setPinIfPinned(this);
         return staffToReturn;
     }
+    //@@author
 
     /**
      * Returns a new instantiation of the current {@code Staff} with the updated rating,
