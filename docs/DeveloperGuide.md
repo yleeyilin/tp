@@ -608,7 +608,7 @@ The following sequence diagram models the interactions between the different com
 
 **Aspect: How to display different help command windows**
 
-* **Alternative 1 (current choice)**: Use only 1 help window to display help for specific commands. Different contents are displayed by passing in different strings.
+* **Alternative 1 (current choice)**: Use only 1 help window class to display help for all the different specific commands. Different contents are displayed by passing in different strings.
   * Pros: Code is made much more concise.
   * Cons: Lengthy if-else statements are required to display the correct string.
 
@@ -631,10 +631,11 @@ The following sequence diagram models the interactions between the different com
 #### Details
 
 1. The user inputs the command to view reminders.
-2. `LogicManager` invokes the `execute` method of `RemindCommand`.
-3. The `execute` method of `RemindCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of the application to show contacts
-   with note deadlines from today onwards.
-4. The `execute` method of `NoteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `remind` command.
+2. A `RemindCommand` object is created.
+3. `LogicManager` invokes the `execute` method of `RemindCommand`. 
+4. The `execute` method of `RemindCommand` invokes the `updateFilteredPersonList` method in `Model` property to update the view of the application to show contacts
+   with note deadlines from today onwards. 
+5. The `execute` method of `RemindCommand` returns a `CommandResult` object which stores the data regarding the completion of the `remind` command.
 
 #### Example Usage
 
@@ -1663,7 +1664,7 @@ testers are expected to do more *exploratory* testing.
   
 1. Adding a note (no deadline) to a contact
   
-   1. Prerequisites: The contact to add a note to must already exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:<br>
+   1. Prerequisites: The contact to add a note to must already exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a contact:<br>
       `/add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com`
         
    2. Test case: `/note ; name : Poochie ; note : get kibble`<br>
@@ -1671,7 +1672,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a note (with deadline) to a contact
   
-   1. Prerequisites: The contact to add a note to must already exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a note to a contact:<br>
+   1. Prerequisites: The contact to add a note to must already exist. This contact can be of `Person`/`Supplier`/`Staff`/`Maintainer` type. You can run the following command to add a contact:<br>
       `/add-person ; name : Poochie ; phone : 98883888 ; address : Pooch Street 32 ; email : impoochie@gmail.com`
         
    2. Test case: `/note ; name : Poochie ; note : get kibble ; deadline : 2020-10-10`<br>
@@ -1729,7 +1730,16 @@ testers are expected to do more *exploratory* testing.
       `/note ; name : Poochie ; note : get kibble ; deadline : 2026-10-10`
         
    2. Test case: `/remind`<br>
-      Expected: Displays the contact named **_Poochie_** with the note deadline after today.
+      Expected: Displays the contact named **_Poochie_** with a note deadline after today.
+
+<div style="page-break-after: always;"></div>
+
+### Viewing help
+
+1. Viewing help
+
+  1. Test case: `/help ; command : delete`<br>
+     Expected: Displays help details for the delete command.
 
 <div style="page-break-after: always;"></div>
 
