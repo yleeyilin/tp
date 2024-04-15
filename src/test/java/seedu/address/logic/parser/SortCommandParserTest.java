@@ -12,7 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 //@@author Joshy837
 public class SortCommandParserTest {
-
     private SortCommandParser parser = new SortCommandParser();
 
     @Test
