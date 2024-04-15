@@ -99,6 +99,7 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(ALICE.getName()), command);
     }
 
+    //@@author yleeyilin
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
@@ -142,6 +143,7 @@ public class AddressBookParserTest {
                 + PersonUtil.getEditMaintainerDescriptorDetails(descriptor) + "}");
         assertEquals(new EditMaintainerCommand(maintainer.getName(), descriptor), command);
     }
+    //@@author
 
     @Test
     public void parseCommand_exit() throws Exception {
@@ -189,6 +191,7 @@ public class AddressBookParserTest {
         assertTrue(undoCommand instanceof UndoCommand);
     }
 
+    //@@author yleeyilin
     @Test
     public void parseCommand_pin() throws Exception {
         PinCommand pinCommand = (PinCommand) parser.parseCommand("/pin ; name : Bob Choo");
@@ -200,6 +203,7 @@ public class AddressBookParserTest {
         UnpinCommand unpinCommand = (UnpinCommand) parser.parseCommand("/unpin ; name : Bob Choo");
         assertEquals(new UnpinCommand(new Name("Bob Choo")), unpinCommand);
     }
+    //@@author
 
     @Test
     public void parseCommand_remind() throws Exception {

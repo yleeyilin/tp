@@ -81,17 +81,18 @@ public class ArgumentMultimap {
     }
     //@@author
 
-    //@@author chiageng
+    //@@author yleeyilin
     /**
      * Checks that name prefix is not used more than once.
      * @return True if there is duplicate name prefix.
      */
     public boolean hasDuplicateNamePrefix() {
-        Prefix[] duplicatedPrefixes = Stream.of(PREFIX_NAME).distinct()
+        Prefix[] duplicatedNamePrefixes = Stream.of(PREFIX_NAME).distinct()
                 .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
                 .toArray(Prefix[]::new);
 
-        if (duplicatedPrefixes.length > 0) {
+        boolean isNamePrefixDuplicated = duplicatedNamePrefixes.length > 0;
+        if (isNamePrefixDuplicated) {
             return true;
         }
         return false;

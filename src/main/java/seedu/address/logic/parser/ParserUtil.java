@@ -248,6 +248,7 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author yleeyilin
     /**
      * Parses a {@code String args} into an {@code String args}.
      * Leading and trailing whitespaces and curly brackets will be trimmed.
@@ -257,6 +258,7 @@ public class ParserUtil {
         String trimmedFields = args.replaceAll("[{}]", "").trim();
         return trimmedFields;
     }
+    //@@author
 
     //@@author jannaleong
     /**
@@ -278,6 +280,7 @@ public class ParserUtil {
     }
     //@@author
 
+    //@@author jamessinmaojun
     /**
      * Parses a {@code String rating} into a {@code Rating}.
      * Leading and trailing whitespaces will be trimmed.
@@ -291,6 +294,7 @@ public class ParserUtil {
         }
         return new Rating(trimmedRating);
     }
+    //@@author
 
     //@@author jannaleong
     /**
@@ -350,6 +354,7 @@ public class ParserUtil {
     }
     //@@author
 
+    //@@author yleeyilin
     /**
      * Standardises all prefixes input by users to lower case.
      * @param argsString The input string to parse.
@@ -370,9 +375,9 @@ public class ParserUtil {
                 result.append(" ; ").append(part.trim());
             }
         }
-
         return result.toString();
     }
+    //@@author
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -382,6 +387,7 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    //@@author yleeyilin
     /**
      * Returns name value using PREFIX.
      * @param argMultimap Object that contains mapping of prefix to value.
@@ -396,7 +402,9 @@ public class ParserUtil {
             throw new ParseException(String.format(message, pe.getMessage()));
         }
     }
+    //@@author
 
+    //@@author yleeyilin
     /**
      * Returns field values using PREFIX.
      * @param argMultimap Object that contains mapping of prefix to value.
@@ -411,6 +419,7 @@ public class ParserUtil {
             throw new ParseException(message, pe);
         }
     }
+    //@@author
 
     //@@author Joshy837
     /**
