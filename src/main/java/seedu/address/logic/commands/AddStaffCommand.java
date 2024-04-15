@@ -14,6 +14,7 @@ import seedu.address.logic.messages.AddMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Staff;
 
+//@@author chiageng
 /**
  * Adds a staff to the address book.
  */

@@ -29,6 +29,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
 
+//@@author chiageng
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */

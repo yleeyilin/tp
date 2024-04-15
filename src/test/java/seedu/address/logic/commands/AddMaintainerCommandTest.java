@@ -18,6 +18,7 @@ import seedu.address.logic.stubs.ModelStubWithPerson;
 import seedu.address.model.person.Maintainer;
 import seedu.address.testutil.MaintainerBuilder;
 
+//@@author chiageng
 public class AddMaintainerCommandTest {
     @Test
     public void constructor_nullMaintainer_throwsNullPointerException() {
