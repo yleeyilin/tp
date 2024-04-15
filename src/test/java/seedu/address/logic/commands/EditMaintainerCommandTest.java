@@ -26,7 +26,6 @@ public class EditMaintainerCommandTest {
         EditMaintainerDescriptor copyDescriptor = new EditMaintainerDescriptor(DESC_AMY_MAINTAINER);
         EditMaintainerCommand commandWithSameValues =
                 new EditMaintainerCommand(ALICEMAINTAINER.getName(), copyDescriptor);
-
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true

@@ -1025,6 +1025,8 @@ If you encounter a missing field error, please ensure the fields listed in the e
 **Q**: How can I check my Java version?<br>
 **A**: You can open a command line and type `java -version`. If you do not have Java installed, you can install Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version. For macOS users, you may wish to follow the instructions [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
 
+<div style="page-break-after: always;"></div>
+
 ### Loading Data from Another Computer
 
 **Q**: How can I transfer my PoochPlanner contacts to another computer?<br>

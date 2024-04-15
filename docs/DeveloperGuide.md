@@ -176,8 +176,7 @@ The following sequence diagram models the interactions between the different com
 
 ![Add Sequence Diagram](images/AddCommandSequenceDiagram.png)
 
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`, `staff`, `supplier`, `maintainer`. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in their accepted attributes. `XYZ` can refer to `person`, `staff`, `supplier`, `maintainer`. 
 </div>
 
 #### Details
@@ -209,8 +208,7 @@ The following sequence diagram models the interactions between the different com
 
 ![Edit Sequence Diagram](images/EditCommandSequenceDiagram.png)
 
-<div class="callout callout-important" markdown="span" style="margin-bottom: 20px;">
-**Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in the accepted attributes. `XYZ` can refer to `person`, `staff`, `supplier`, `maintainer`. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The implementation for person, staff, suppliers, maintainers are similar and only differ in their accepted attributes. `XYZ` can refer to `person`, `staff`, `supplier`, `maintainer`. 
 </div>
 
 #### Details
@@ -228,17 +226,17 @@ The following sequence diagram models the interactions between the different com
 #### Example Usage
 1. The user launches the application.
 2. The user inputs `/edit-person ; name : Alice Tan ; field : { phone : 9990520 ; email : impooch@gmail12.com }`
-3. The contact card for `Alice Tan` is updated for the `phone` and `email` fields respectively. This change should be reflected on the contacts list on PoochPlanner.
+3. The contact card for `Alice Tan` is updated for the `phone` and `email` fields respectively. This change should be reflected on the contacts list within PoochPlanner.
 
 **Aspect: How to implement edit command**
 
-* **Alternative 1 (current choice)**: Create 4 different edit commands for the 4 contact types (Person, Staff, Maintainer, Supplier).
-    * Pros: User-friendly. Users will be less prone to error that involves trying to edit a field that does not exist for the specific contact type.
+* **Alternative 1 (current choice)**: Create 4 distinct edit commands for the 4 contact types (Person, Staff, Maintainer, Supplier).
+    * Pros: More user-friendly since users will be less prone to error that involves trying to edit a field that does not exist for the specific contact type.
     * Cons: Steeper learning curve for the users due to the greater number of commands.
 
-* **Alternative 2**: Combining edit command into using only one edit command across all classes.
+* **Alternative 2**: Use only one edit command across all classse by using a dynamic edit parser. The dynamic edit parser will route to the correct edit command to handle the modification of different contact types separately.
     * Pros: Much simpler suite of features for users, which makes it easier for users to start using PoochPlanner.
-    * Cons: Complex to implement due to the need to check the contact type at the point of parsing before splitting into the different edit commands to handle the modification separately. This will violate the intended abstract implementation of MVC (Model-View-Controller) as the model will have to be accessible from within the parser class in order for the type checking to be done. 
+    * Cons: Complex to implement since the checking of the contact type must be done at the point of parsing for the dynamic edit parser. However, doing so will violate the intended abstract implementation of MVC (Model-View-Controller) as the model will have to be accessible from within the parser class in order for the type checking to be done. 
 
 <div style="page-break-after: always;"></div>
 
@@ -379,7 +377,7 @@ The following sequence diagram models the interactions between the different com
 
 ![Unpin Sequence Diagram](images/UnpinCommandSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The implementation for person, staff, suppliers, maintainers are the same. Pin and Unpin are also implemented similarly as seen above in the sequence diagrams. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The implementation for person, staff, suppliers, maintainers are the same. Pin and Unpin are also implemented similarly as seen in the sequence diagrams above. 
 </div>
 
 #### Details
@@ -403,7 +401,7 @@ The following sequence diagram models the interactions between the different com
 **Aspect: How to implement pin/unpin command**
 
 * **Alternative 1 (current choice)**: Accept multiple name fields, where only the last name field will be taken.
-  * Pros: User-friendly. Users can easily correct the name field without deleting the previously incorrect name field entered.
+  * Pros: More user-friendly as users can easily correct the name value without deleting the previously incorrect name value entered.
   * Cons: Less rigorous validation check on name as users may not intentionally enter a second name field.
 
 * **Alternative 2**: Accept only one name field.
@@ -726,15 +724,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                | I want to …​                                                          | So that I can…​                                                                             |
 |----------|------------------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | `* * *`  | well connected user    | add new contacts to my contacts list                                  | have the contact of all new people in my contacts list                                      |
-| `* * *`  | cafe owner user        | edit contacts                                                         | update contact information such as the new phone number of my staff member                  |
+| `* * *`  | cafe owner user        | edit my contacts in my contacts list                                  | update contact information such as the new phone number of my contacts              |
 | `* * *`  | cafe owner user        | delete contacts                                                       | remove outdated contacts such as retrenched staff                                           |
 | `* * *`  | well connected user    | search through my long list of contacts by different specified fields | find my contacts efficiently                                                                |
 | `* * *`  | first-time user        | get help about what commands to use                                   | easily know how to navigate the system                                                      |
 | `* *`    | frugal user            | sort vendors in ascending order of price                              | view the vendors selling the cheapest products easily                                       |
 | `* *`    | careless user          | undo my commands                                                      | revert my accidental commands easily                                                        |
 | `* *`    | careless user          | redo my commands                                                      | revert my accidental undo commands easily                                                   |
-| `* *`    | well connected user    | pin contacts                                                          | easily view frequent contacts                                                               |
-| `* *`    | well connected user    | unpin contacts                                                        | remove my less frequent contacts from the top of my list                                    |
+| `* *`    | well connected user    | pin my contacts in my contacts list                                   | easily view important contacts                                                               |
+| `* *`    | well connected user    | unpin my contacts in my contacts list                                 | remove my less important contacts from the top of my list                                    |
 | `* *`    | profit-maximising user | rate the efficiency of contacts                                       | view the efficiency of my contacts easily and only conduct business with efficient contacts |
 | `* *`    | forgetful user         | note down all details about my contacts                               | track and remember important details and deadlines easily                                   |
 | `* *`    | forgetful user         | be reminded of my deadlines                                           | complete all my tasks on time                                                               |
@@ -773,9 +771,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * Steps 1b1 - 1b2 are repeated until there is no duplicate entry in input.
    * Use case resumes from step 2.
 
-* 1c. PoochPlanner detects wrong format for email.
+* 1c. PoochPlanner detects invalid email format.
    * 1c1. PoochPlanner displays the error message.
-   * 1c2. User re-enters a new command with correct email format.
+   * 1c2. User re-enters a new command with a correct email format.
    * Steps 1c1 - 1c2 are repeated until there is no error in input.
    * Use case resumes from step 2.
 
@@ -784,6 +782,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1d2. User re-enters a new command with correct input for employment.
   * Steps 1d1 - 1d2 are repeated until there is no error in input.
   * Use case resumes from step 2.
+
+* 1e. PoochPlanner detects invalid phone format.
+    * 1e1. PoochPlanner displays the error message.
+    * 1e2. User re-enters a new command with a correct phone format.
+    * Steps 1e1 - 1e2 are repeated until there are no errors in input.
+    * Use case resumes from step 2.
+   
+* 1f. PoochPlanner detects invalid salary format.
+    * 1f1. PoochPlanner displays the error message.
+    * 1f2. User re-enters a new command with a correct salary format.
+    * Steps 1f1 - 1f2 are repeated until there are no errors in input.
+    * Use case resumes from step 2.
+
+* 1g. PoochPlanner detects invalid price format.
+    * 1g1. PoochPlanner displays the error message.
+    * 1g2. User re-enters a new command with a correct price format.
+    * Steps 1g1 - 1g2 are repeated until there are no errors in input.
+    * Use case resumes from step 2.
 
 <div style="page-break-after: always;"></div>
 
@@ -817,11 +833,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * Steps 1b1 - 1b2 are repeated until the input references a contact that exists in PoochPlanner.
    * Use case resumes from step 2.
 
-* 1c. User requests to edit the name field to a name that already exists in PoochPlanner.
-   * 1c1. PoochPlanner displays the error message.
-   * 1c2. User re-enters a new command with a different name.
-   * Steps 1c1 - 1c2 are repeated until the new name field is valid.
-   * Use case resumes from step 2.
+* 1c. PoochPlanner detects unknown input for employment.
+  * 1c1. PoochPlanner displays the error message.
+  * 1c2. User re-enters a new command with correct input for employment.
+  * Steps 1c1 - 1c2 are repeated until there are no errors in input.
+  * Use case resumes from step 2.
 
 * 1d. PoochPlanner detects empty field in the entered input.
    * 1d1. PoochPlanner displays the error message.
@@ -831,14 +847,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1e. User specifies an invalid field.
    * 1e1. PoochPlanner displays the error message.
-   * 1e2. User re-enters a new command and edits a different field.
+   * 1e2. User re-enters a new command with a correct field format.
    * Steps 1e1 - 1e2 are repeated until a valid field is specified.
    * Use case resumes from step 2.
 
-* 1f. PoochPlanner detects wrong format for email.
+* 1f. PoochPlanner detects invalid email format.
     * 1f1. PoochPlanner displays the error message.
     * 1f2. User re-enters a new command with a correct email format.
-    * Steps 1f1 - 1f2 are repeated until there is no error in input.
+    * Steps 1f1 - 1f2 are repeated until there are no errors in input.
+    * Use case resumes from step 2.
+
+* 1g. PoochPlanner detects invalid phone format.
+    * 1g1. PoochPlanner displays the error message.
+    * 1g2. User re-enters a new command with a correct phone format.
+    * Steps 1g1 - 1g2 are repeated until there are no errors in input.
+    * Use case resumes from step 2.
+   
+* 1h. PoochPlanner detects invalid salary format.
+    * 1h1. PoochPlanner displays the error message.
+    * 1h2. User re-enters a new command with a correct salary format.
+    * Steps 1h1 - 1h2 are repeated until there are no errors in input.
+    * Use case resumes from step 2.
+
+* 1i. PoochPlanner detects invalid price format.
+    * 1i1. PoochPlanner displays the error message.
+    * 1i2. User re-enters a new command with a correct price format.
+    * Steps 1i1 - 1i2 are repeated until there are no errors in input.
     * Use case resumes from step 2.
 
 <div style="page-break-after: always;"></div>

@@ -87,7 +87,7 @@ public class EditStaffCommandParserTest {
         String userInput = EditStaffCommand.COMMAND_WORD + " " + PREFIX_NAME + "Staff1"
             + " " + PREFIX_FIELD + "{" + NAME_DESC_AMY
             + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + " }";
-        String exception = String.format(EditMessages.MESSAGE_EDITING_NAME, EditStaffCommand.MESSAGE_USAGE);
+        String exception = String.format(EditMessages.MESSAGE_MULTIPLE_NAME, EditStaffCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, exception);
 
         // specified invalid field (product)
