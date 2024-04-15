@@ -35,6 +35,7 @@ import seedu.address.model.person.Rating;
 import seedu.address.model.person.Skill;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * Parses input arguments and creates a new AddMaintainerCommand object.
  */
@@ -77,6 +78,7 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
 
         return new AddMaintainerCommand(person);
     }
+    //@@author
 
     /**
      * Creates a {@code Maintainer} contact based on the argument multimap.

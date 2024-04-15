@@ -59,6 +59,7 @@ import seedu.address.model.person.Salary;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.StaffBuilder;
 
+//@@author chiageng
 public class AddStaffCommandParserTest {
     private final AddStaffCommandParser parser = new AddStaffCommandParser();
 

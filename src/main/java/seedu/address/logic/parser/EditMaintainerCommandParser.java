@@ -59,7 +59,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
                 PREFIX_NAME, PREFIX_FIELD);
         boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
         if (isNamePrefixDuplicated) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
+            throw new ParseException(String.format(EditMessages.MESSAGE_MULTIPLE_NAME,
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.StaffBuilder;
 
+//@@author chiageng
 public class StaffTest {
 
     @Test

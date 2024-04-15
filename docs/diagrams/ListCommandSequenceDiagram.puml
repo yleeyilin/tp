@@ -15,7 +15,7 @@ activate LogicManager
 
 
 
-LogicManager -> ListCommand : execute()
+LogicManager -> ListCommand : execute(...)
 activate ListCommand
 
 

@@ -31,6 +31,9 @@ Class Product
 Class Skill
 Class Commission
 Class Tag
+Class Pin
+Class Note
+Class Rating
 
 Class I #FFFFFF
 }
@@ -57,19 +60,22 @@ Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" Address
 Person *--> "1" Tag
+Person *--> "1" Pin
+Person *--> "1" Note
+Person *--> "1" Rating
 
 Person <|-- Staff
 Person <|-- Supplier
 Person <|-- Maintainer
 
-Staff *--> Salary
-Staff *--> Employment
+Staff *--> "1"Salary
+Staff *--> "1"Employment
 
-Supplier *--> Price
-Supplier *--> Product
+Supplier *--> "1"Price
+Supplier *--> "1"Product
 
-Maintainer *--> Skill
-Maintainer *--> Commission
+Maintainer *--> "1"Skill
+Maintainer *--> "1"Commission
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

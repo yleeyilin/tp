@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
+//@@author chiageng
 public class PersonTest {
 
     @Test

@@ -125,6 +125,7 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    //@@author chiageng
     /**
      * Parses a {@code String employment} into an {@code Employment}.
      * Leading and trailing whitespaces will be trimmed.
@@ -138,7 +139,9 @@ public class ParserUtil {
         }
         return new Employment(trimmedEmployment);
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Parses a {@code String salary} into an {@code Salary}.
      * Leading and trailing whitespaces will be trimmed.
@@ -152,7 +155,9 @@ public class ParserUtil {
         }
         return new Salary(trimmedSalary);
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Parses a {@code String product} into an {@code Product}.
      * Leading and trailing whitespaces will be trimmed.
@@ -166,7 +171,9 @@ public class ParserUtil {
         }
         return new Product(trimmedProduct);
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Parses a {@code String price} into an {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
@@ -181,7 +188,9 @@ public class ParserUtil {
         }
         return new Price(trimmedPrice);
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Parses a {@code String skill} into an {@code Skill}.
      * Leading and trailing whitespaces will be trimmed.
@@ -195,7 +204,9 @@ public class ParserUtil {
         }
         return new Skill(trimmedSkill);
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Parses a {@code String commission} into an {@code Commission}.
      * Leading and trailing whitespaces will be trimmed.
@@ -209,6 +220,7 @@ public class ParserUtil {
         }
         return new Commission(trimmedCommission);
     }
+    //@@author
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
@@ -246,6 +258,7 @@ public class ParserUtil {
         return trimmedFields;
     }
 
+    //@@author jannaleong
     /**
      * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
@@ -263,6 +276,7 @@ public class ParserUtil {
         }
         return new Note(trimmedNote);
     }
+    //@@author
 
     /**
      * Parses a {@code String rating} into a {@code Rating}.
@@ -278,10 +292,11 @@ public class ParserUtil {
         return new Rating(trimmedRating);
     }
 
+    //@@author jannaleong
     /**
-     * Parses a {@code String note} into a {@code Note}.
+     * Parses a {@code String note, String deadline} into a {@code DeadlineNote}.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException If the given {@code note} is invalid.
+     * @throws ParseException If the given {@code note, deadline} is invalid.
      */
     public static DeadlineNote parseDeadlineNote(String note, String deadline) throws ParseException {
         requireNonNull(note, deadline);
@@ -296,9 +311,11 @@ public class ParserUtil {
         }
         return new DeadlineNote(trimmedNote, trimmedDeadline);
     }
+    //@@author
 
+    //@@author jannaleong
     /**
-     * Parses a {@code String note}.
+     * Parses a {@code String commandType}.
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException If the given {@code commandType} is invalid.
      */
@@ -311,6 +328,7 @@ public class ParserUtil {
         }
         return trimmedCommand;
     }
+    //@@author
 
     /**
      * Parses a {@code String sort field}.
@@ -417,6 +435,7 @@ public class ParserUtil {
         }
     }
 
+    //@@author chiageng
     /**
      * Verifies that there are no invalid prefixes.
      * @param args Arguments.
@@ -438,7 +457,9 @@ public class ParserUtil {
             throw new ParseException(exception);
         }
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Verifies that there are no missing prefixes.
      * @param argMultimap Arguments.
@@ -460,4 +481,5 @@ public class ParserUtil {
             throw new ParseException(exception);
         }
     }
+    //@@author
 }

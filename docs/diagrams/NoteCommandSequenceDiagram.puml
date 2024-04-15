@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("/note ; name : poochie ; note : get kibble")
+[-> LogicManager : execute("/note ; name : poochie ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("/note ; name : poochie ; note : get kibble")
+LogicManager -> AddressBookParser : parseCommand("/note ; name : poochie...")
 activate AddressBookParser
 
 create NoteCommandParser
@@ -25,7 +25,7 @@ activate NoteCommandParser
 NoteCommandParser --> AddressBookParser
 deactivate NoteCommandParser
 
-AddressBookParser -> NoteCommandParser : parse(" ; name : poochie ; note : get kibble")
+AddressBookParser -> NoteCommandParser : parse(" ; name : poochie ...")
 activate NoteCommandParser
 
 create NoteCommand
@@ -44,7 +44,7 @@ destroy NoteCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> NoteCommand : execute()
+LogicManager -> NoteCommand : execute(...)
 activate NoteCommand
 
 NoteCommand -> Model : findByName(name)

@@ -18,6 +18,7 @@ import seedu.address.logic.stubs.ModelStubWithPerson;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.StaffBuilder;
 
+//@@author chiageng
 public class AddStaffCommandTest {
     @Test
     public void constructor_nullStaff_throwsNullPointerException() {

@@ -42,7 +42,7 @@ destroy HelpCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> HelpCommand : execute()
+LogicManager -> HelpCommand : execute(...)
 activate HelpCommand
 
 
@@ -55,7 +55,7 @@ activate CommandResult
 
 CommandResult --> HelpCommand
 deactivate CommandResult
-
+HelpCommand --> LogicManager
 
 deactivate HelpCommand
 

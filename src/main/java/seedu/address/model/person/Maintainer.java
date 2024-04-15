@@ -8,6 +8,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * Represents a Maintainer in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -27,14 +28,21 @@ public class Maintainer extends Person {
         this.skill = skill;
         this.commission = commission;
     }
+    //@@author
 
+    //@@author chiageng
     public Skill getSkill() {
         return skill;
     }
+    //@@author
 
+    //@@author chiageng
     public Commission getCommission() {
         return commission;
     }
+    //@@author
+
+    //@@author jannaleong
     /**
      * Returns a new instantiation of the current {@code Maintainer} with the updated note,
      * which throws {@code UnsupportedOperationException} if modification is attempted.
@@ -46,6 +54,7 @@ public class Maintainer extends Person {
         maintainerToReturn.setPinIfPinned(this);
         return maintainerToReturn;
     }
+    //@@author
 
     /**
      * Returns a new instantiation of the current {@code Maintainer} with the updated rating,
@@ -83,6 +92,7 @@ public class Maintainer extends Person {
         return maintainerToReturn;
     }
 
+    //@@author chiageng
     /**
      * Returns true if both Maintainer have the same identity and data fields.
      * This defines a stronger notion of equality between two maintainer.
@@ -103,13 +113,17 @@ public class Maintainer extends Person {
                 && skill.equals(otherPerson.skill)
                 && commission.equals(otherPerson.commission);
     }
+    //@@author
 
+    //@@author chiageng
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(super.hashCode(), skill, commission);
     }
+    //@@author
 
+    //@@author chiageng
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -123,4 +137,5 @@ public class Maintainer extends Person {
                 .add("commission", commission)
                 .toString();
     }
+    //@@author
 }

@@ -14,6 +14,7 @@ import seedu.address.logic.messages.AddMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Supplier;
 
+//@@author chiageng
 /**
  * Adds a supplier to the address book.
  */
