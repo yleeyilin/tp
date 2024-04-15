@@ -32,10 +32,10 @@ PoochPlanner is your go-to address book, tailor-made for dog cafe owners like yo
 
 Contact | Definition and Examples
 --------|------------------
-Person | Any person that do not fall under staff, supplier or maintainer.<br> E.g. neighbour, work friend
+Person | Any person that does not fall under staff, supplier or maintainer.<br> E.g. neighbor, work friend
 Staff | Any full-time or part-time employee working in your dog cafe.<br> E.g. waiter, waitress, dishwasher
 Supplier | Any logistics partner that supplies stock for your dog cafe.<br> E.g. kibbles supplier, coffee beans supplier
-Maintainer | Any externally hired specialised personel that takes care of the dogs.<br> E.g. dog groomer, veterinarian
+Maintainer | Any externally hired specialized personnel that takes care of the dogs.<br> E.g. dog groomer, veterinarian
 
 <div style="page-break-after: always;"></div>
 
@@ -55,13 +55,13 @@ Sort | View your contacts in a sorted list so that you can easily filter and loc
 This user guide is designed to help you easily navigate the commands of PoochPlanner and make the most of this tool, whether you are a beginner or an experienced user.
 
 - If you are eager to get started with PoochPlanner, head over to our **[Quick Start](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#quick-start)** section for easy-to-follow instructions on downloading PoochPlanner.
-- If you are a new user, explore the following sections to familiarise yourself with the basics:<br>
+- If you are a new user, explore the following sections to familiarize yourself with the basics:<br>
     1. **[Navigating the GUI](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#navigating-the-gui)** : Learn about the input box and contact cards.<br>
     2. **[Features](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#features)** : Discover the exciting features waiting for you.<br>
 - If you are an advanced user, dive into our special features to further enhance your experience:
     1. **[Rate](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#rating-a-contact--rate)** : Add performance ratings to your contacts. <br>
     2. **[Pin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#pinning-a-contact--pin)** and **[Unpin](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#unpinning-a-contact--unpin)** : Keep your frequent contacts accessible. <br>
-    3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organise your contacts based on your preferences.<br>
+    3. **[Sort](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#sorting-the-address-book--sort)** : Organize your contacts based on your preferences.<br>
     4. **[Note](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#adding-a-note--note)** : Add notes to your contacts.<br>
     5. **[Remind](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#viewing-reminders--remind)** : View your contacts with notes containing incoming deadlines.<br>
 - If you want a quick overview of our commands, check out our **[Command Summary](https://ay2324s2-cs2103t-w10-2.github.io/tp/UserGuide.html#command-summary)**.
@@ -183,7 +183,7 @@ Here is a quick look at the different GUI components of PoochPlanner.
 
 Adds a **person / staff / supplier / maintainer** contact so that your contacts list can be updated with new contacts.
 
-The table below summarises the `add` command, format and examples for each contact type.
+The table below summarizes the `add` command, format and examples for each contact type.
 
 | Adds a ...       | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -236,17 +236,16 @@ The table below summarises the `add` command, format and examples for each conta
 
 <div markdown="block" class="alert alert-primary">:bulb: **Tip:**<br>
 
-* You can use the `undo` command to undo an `add` command so that you can revert your changes!<br>
+* You can use the `/undo` command to undo an `/add` command so that you can revert your changes!<br>
 
 </div>
 <div style="page-break-after: always;"></div>
-[//]: # (@@author)
 
 #### Editing a contact : `edit`
 
 Edits a **person / staff / supplier / maintainer** contact so that you can consistently modify and update your contacts list in PoochPlanner with new details.
 
-The table below summarises the `edit` command, format and examples for each contact type.
+The table below summarizes the `edit` command, format and examples for each contact type.
 
 | Edits a ...    | Format & Examples                                                                                                                                                                                                                                                                                                                                                                                                            |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -673,7 +672,6 @@ Add a note with a deadline:<br>
 
 <div style="page-break-after: always;"></div>
 
-[//]: # (@@author chiageng)
 #### Undoing a command : `undo`
 
 Undoes the most recent action so that you can easily revert the changes that you made in PoochPlanner.
@@ -784,7 +782,7 @@ Below is an example of redoing an <code>add</code> command :
 
 <div markdown="block" class="alert alert-primary">:bulb: **Tips:**<br>
 
-* `/redo` works on all commands that modified your contacts list. <br>
+* `/redo` works on all commands that modifies your contacts list. <br>
 
 * `/redo` will not work on commands that do not modify your contacts list such as `/search`, `/list` and `/help` commands!<br>
 
@@ -792,7 +790,6 @@ Below is an example of redoing an <code>add</code> command :
 
 <div style="page-break-after: always;"></div>
 
-[//]: # (@@author)
 
 #### Viewing help : `help`
 
@@ -957,7 +954,7 @@ Format: `/exit`
 
 ### Saving the data
 
-Data in your PoochPlanner is saved in the hard disk automatically after any command that modfies the data. You will not need to save any data manually.
+Data in your PoochPlanner is saved in the hard disk automatically after any command that modifies the data. You will not need to save any data manually.
 
 ### Editing the data file
 
@@ -1084,26 +1081,25 @@ Example: Adding a new contact with a note and a rating
 
 A **prefix** is an integral construct of PoochPlanner's commands that allow PoochPlanner to uniquely identify contact fields.
 
-| Prefix           | Field                                                   | Contact Type   |
-|------------------|---------------------------------------------------------|----------------|
-| `; name :`       | Specifies the name of the contact.                      | All            |
-| `; phone :`      | Specifies the phone number of the contact.              | All            |
-| `; address :`    | Specifies the address of the contact.                   | All            |
-| `; email :`      | Specifies the email address of the contact.             | All            |
-| `; note :`       | Specifies the note appended to the contact.             | All            |
-| `; rating :`     | Specifies the rating given to the contact.              | All            |
-| `; deadline :`   | Specifies the deadline of note appended to the contact. | All            |
-| `; command :`    | Specifies the command type to give help for.            | All            |
-| `; salary :`     | Specifies the salary of the contact.                    | Staff          |
-| `; employment :` | Specifies the employment of the contact.                | Staff          |
-| `; product :`    | Specifies the product sold by the contact.              | Supplier       |
-| `; price :`      | Specifies the price charged by the contact.             | Supplier       |
-| `; skill :`      | Specifies the type of service offered by the contact.   | Maintainer     |
-| `; commission :` | Specifies the commission charged by the contact.        | Maintainer     |
+| Prefix           | Field                                                       | Contact Type   |
+|------------------|-------------------------------------------------------------|----------------|
+| `; name :`       | Specifies the name of the contact.                          | All            |
+| `; phone :`      | Specifies the phone number of the contact.                  | All            |
+| `; address :`    | Specifies the address of the contact.                       | All            |
+| `; email :`      | Specifies the email address of the contact.                 | All            |
+| `; note :`       | Specifies the note appended to the contact.                 | All            |
+| `; rating :`     | Specifies the rating given to the contact.                  | All            |
+| `; deadline :`   | Specifies the deadline of the note appended to the contact. | All            |
+| `; command :`    | Specifies the command type to give help for.                | All            |
+| `; salary :`     | Specifies the salary of the contact.                        | Staff          |
+| `; employment :` | Specifies the employment of the contact.                    | Staff          |
+| `; product :`    | Specifies the product sold by the contact.                  | Supplier       |
+| `; price :`      | Specifies the price charged by the contact.                 | Supplier       |
+| `; skill :`      | Specifies the type of service offered by the contact.       | Maintainer     |
+| `; commission :` | Specifies the commission charged by the contact.            | Maintainer     |
 
 <div style="page-break-after: always;"></div>
 
-[//]: # (@@author chiageng)
 ## Command Summary
 
 | Action              | Format and Example                                                                                                                                                                                                                                                                                                                                   |
