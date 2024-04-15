@@ -176,6 +176,8 @@ Here is a quick look at the different GUI components of PoochPlanner.
 <div style="page-break-after: always;"></div>
 
 ### Core Features
+
+[//]: # (@@author chiageng)
 #### Adding a contact: `add`
 
 Adds a **person / staff / supplier / maintainer** contact so that your contacts list can be updated with new contacts.
@@ -235,6 +237,7 @@ The table below summarises the `add` command, format and examples for each conta
 
 </div>
 <div style="page-break-after: always;"></div>
+[//]: # (@@author)
 
 #### Editing a contact : `edit`
 
@@ -654,6 +657,7 @@ Add a note with a deadline:<br>
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
 #### Undoing a command : `undo`
 
 Undoes the most recent action so that you can revert changes back easily.
@@ -771,6 +775,8 @@ Below is an example of redoing an <code>add</code> command :
 </div>
 
 <div style="page-break-after: always;"></div>
+
+[//]: # (@@author)
 
 #### Viewing help : `help`
 
@@ -1080,6 +1086,7 @@ A **prefix** is an integral construct of PoochPlanner's commands that allow Pooc
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
 ## Command Summary
 
 | Action              | Format and Example                                                                                                                                                                                                                                                                                                                                   |

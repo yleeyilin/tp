@@ -32,6 +32,7 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Person}.
  */
 class JsonAdaptedPerson {
+    //@@author chiageng
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     private final String name;
     private final String phone;
@@ -43,6 +44,7 @@ class JsonAdaptedPerson {
     private String price;
     private String skill;
     private String commission;
+    //@@author
     private String note;
     private String rating;
     private String pin;
@@ -97,29 +99,41 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
     }
 
+    //@@author chiageng
     public void setEmployment(String employment) {
         this.employment = employment;
     }
+    //@@author
 
+    //@@author chiageng
     public void setSalary(String salary) {
         this.salary = salary;
     }
+    //@@author
 
+    //@@author chiageng
     public void setProduct(String product) {
         this.product = product;
     }
+    //@@author
 
+    //@@author chiageng
     public void setPrice(String price) {
         this.price = price;
     }
+    //@@author
 
+    //@@author chiageng
     public void setSkill(String skill) {
         this.skill = skill;
     }
+    //@@author
 
+    //@@author chiageng
     public void setCommission(String commission) {
         this.commission = commission;
     }
+    //@@author
 
     public void setPin(String pin) {
         this.pin = pin;
@@ -140,6 +154,7 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        //@@author chiageng
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -172,12 +187,15 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        //@@author
+
         final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Rating modelRating = new Rating(rating);
 
+        //@@author chiageng
         if (salary != null && employment != null) {
             if (!Salary.isValidSalary(salary)) {
                 throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
@@ -231,6 +249,7 @@ class JsonAdaptedPerson {
             }
             return currMaintainer;
         }
+        //@@author
 
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));

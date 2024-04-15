@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    //@@author chiageng
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -41,6 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
+    //@@author
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
@@ -120,12 +122,14 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //@@author chiageng
     @Override
     public void commitAddressBook() {
         addressBook.commit();
         logger.fine("New commit on address book: " + addressBook + " and user prefs " + userPrefs);
     }
 
+    //@@author chiageng
     @Override
     public void undoAddressBook() {
         addressBook.undo();
@@ -133,6 +137,7 @@ public class ModelManager implements Model {
                 + addressBook + " and user prefs " + userPrefs);
     }
 
+    //@@author chiageng
     @Override
     public void redoAddressBook() {
         addressBook.redo();
@@ -140,15 +145,18 @@ public class ModelManager implements Model {
                 + addressBook + " and user prefs " + userPrefs);
     }
 
+    //@@author chiageng
     @Override
     public boolean canUndoAddressBook() {
         return addressBook.canUndo();
     }
 
+    //@@author chiageng
     @Override
     public boolean canRedoAddressBook() {
         return addressBook.canRedo();
     }
+    //@@author
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -167,6 +175,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //@@author chiageng
     @Override
     public void updateFilteredPersonListWithCommit(Predicate<Person> predicate) {
         requireNonNull(predicate);

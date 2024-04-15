@@ -31,6 +31,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rating;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * Parses input arguments and creates a new AddCommand object.
  */
@@ -72,6 +73,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         return new AddCommand(person);
     }
+    //@@author
 
     /**
      * Creates a {@code Person} contact based on the argument multimap.

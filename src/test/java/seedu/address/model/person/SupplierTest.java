@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.SupplierBuilder;
 
+//@@author chiageng
 public class SupplierTest {
 
     @Test
@@ -24,7 +25,7 @@ public class SupplierTest {
     }
 
     @Test
-    public void isSameStaff() {
+    public void isSameSupplier() {
         // same object -> returns true
         assertTrue(ALICESUPPLIER.isSamePerson(ALICESUPPLIER));
 

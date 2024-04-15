@@ -65,6 +65,7 @@ public class ArgumentMultimap {
         return getValue(new Prefix("")).orElse("");
     }
 
+    //@@author chiageng
     /**
      * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
      * once among the arguments.
@@ -78,7 +79,9 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+    //@@author
 
+    //@@author chiageng
     /**
      * Checks that name prefix is not used more than once.
      * @return True if there is duplicate name prefix.
@@ -93,6 +96,7 @@ public class ArgumentMultimap {
         }
         return false;
     }
+    //@@author
 
     public boolean containsPrefix(Prefix prefix) {
         return argMultimap.containsKey(prefix);

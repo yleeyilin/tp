@@ -58,6 +58,7 @@ import seedu.address.model.person.Product;
 import seedu.address.model.person.Supplier;
 import seedu.address.testutil.SupplierBuilder;
 
+//@@author chiageng
 public class AddSupplierCommandParserTest {
     private final AddSupplierCommandParser parser = new AddSupplierCommandParser();
 

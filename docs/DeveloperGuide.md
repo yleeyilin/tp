@@ -165,6 +165,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+[//]: # (@@author chiageng)
 ### Add feature
 
 #### Overview
@@ -193,6 +194,8 @@ The following sequence diagram models the interactions between the different com
 1. The user launches the application.
 2. The user inputs `/add-person ; name : John Doe ; phone : 98765432 ; email : johnd@example.com ; address : 311, Clementi Ave 2, #02-25`
 3. The contact card for `John Doe` is created. This change should be reflected on the contacts list on PoochPlanner.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -486,6 +489,7 @@ The following sequence diagram models the interactions between the different com
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
 ### Undo/redo feature
 
 #### Overview
@@ -574,6 +578,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Alternative 2** : Individual command knows how to undo/redo by itself.
 * Pros: Will use less memory(e.g. for delete, just save the person being deleted).
 * Cons: We must ensure that the implementation of each individual command are correct.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -736,7 +742,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <div style="page-break-after: always;"></div>
 
 ### Use cases
-
+[//]: # (@@author chiageng)
 **System**: `PoochPlanner`
 
 **Use case**: `UC01 - Adding a contact`
@@ -778,6 +784,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1d2. User re-enters a new command with correct input for employment.
   * Steps 1d1 - 1d2 are repeated until there is no error in input.
   * Use case resumes from step 2.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1154,6 +1162,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
+
 **System**: `PoochPlanner`
 
 **Use case**: `UC11 - Undoing a command`
@@ -1175,7 +1185,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
 
+[//]: # (@@author)
+
 <div style="page-break-after: always;"></div>
+
+[//]: # (@@author chiageng)
 
 **System**: `PoochPlanner`
 
@@ -1197,6 +1211,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. PoochPlanner detects no future record of the address book data.
     * 1a1. PoochPlanner displays the error message.
     * Use case ends.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1278,6 +1294,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
+
 ### Non-Functional Requirements
 
 1. PoochPlanner needs to be compatible across major operating systems, including Windows, MacOS, and Linux, supporting only Java 11.
@@ -1290,6 +1308,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8. The developer guide shall undergo regular content audits, with outdated or deprecated information flagged for removal or revision, and new features or updates documented within one week of release. 
 9. The system should respond within 2 seconds. 
 10. The data should be stored locally and should not accessible from other devices due to privacy issues.
+    
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1308,6 +1328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
 ## **Appendix: Planned Enhancement**
 
 1. Enhance command to be space insensitive
@@ -1355,6 +1376,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     1. Currently, when using pin command two or more times, calling undo once will not revert the pin operation. This is similar for unpin since they both share the same implementation.
     2. We plan to allow users to use undo only once to undo all repeated and consecutive pin/unpin attempts.
 
+[//]: # (@@author)
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
@@ -1386,6 +1409,8 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
+
 ### Adding a contact
 
 1. Adding a `Person` contact
@@ -1415,6 +1440,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: ` /add-maintainer ; name : Maintainer1 ; phone : 98765435 ; address : Poochie Street 24 ; email : ihelppooches@gmail.com ; skill : trainer ; commission : $60/hr`<br>
      Expected: Adds a maintainer named 'Maintainer1' into the contacts list. Details of the added contact shown in the status message.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1617,6 +1644,8 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author chiageng)
+
 ### Undoing a command
   
 1. Undoing a command that modifies the contacts list
@@ -1636,7 +1665,11 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/undo`<br>
       Expected: In this case, as no modifications were made directly to the contacts list upon performing the `search` command, the `undo` command reverts back the changes to just before the `add-person` is executed.
 
+[//]: # (@@author)
+
 <div style="page-break-after: always;"></div>
+
+[//]: # (@@author chiageng)
 
 ### Redoing a command
 1. Redoing an undo command
@@ -1647,6 +1680,8 @@ testers are expected to do more *exploratory* testing.
   
    2. Test case: `/redo`<br>
       Expected: Reverts the changes caused by the `undo` command to just right after `add-person` command is executed.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1662,6 +1697,8 @@ testers are expected to do more *exploratory* testing.
       Expected: Displays the contact named **_Poochie_** with the note deadline after today.
 
 <div style="page-break-after: always;"></div>
+
+[//]: # (@@author chiageng)
 
 ### Appendix : Effort
 #### Project Overview
@@ -1696,3 +1733,4 @@ In summary, the project's successful implementation of advanced features within 
 ### Acknowledgements
 1. PoochPlanner is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 2. The feature undo/redo (design and UML diagrams) was inspired and reused with minimal changes from [SE-addressbook](https://se-education.org/addressbook-level4/DeveloperGuide.html#undo-redo-feature).
+

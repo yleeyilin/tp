@@ -8,6 +8,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * Represents a Supplier in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -27,14 +28,19 @@ public class Supplier extends Person {
         this.product = product;
         this.price = price;
     }
+    //@@author
 
+    //@@author chiageng
     public Price getPrice() {
         return price;
     }
+    //@@author
 
+    //@@author chiageng
     public Product getProduct() {
         return product;
     }
+    //@@author
 
     /**
      * Returns a new instantiation of the current {@code Supplier} with the updated note,
@@ -84,6 +90,7 @@ public class Supplier extends Person {
         return supplierToReturn;
     }
 
+    //@@author chiageng
     /**
      * Returns true if both staffs have the same identity and data fields.
      * This defines a stronger notion of equality between two supplier.
@@ -105,12 +112,14 @@ public class Supplier extends Person {
                 && price.equals(otherPerson.price);
     }
 
+    //@@author chiageng
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(super.hashCode(), product, price);
     }
 
+    //@@author chiageng
     @Override
     public String toString() {
         return new ToStringBuilder(this)

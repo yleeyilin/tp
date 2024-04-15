@@ -33,6 +33,7 @@ import seedu.address.model.person.Supplier;
  */
 public class PersonUtil {
 
+    //@@author chiageng
     /**
      * Returns an add command string for adding the {@code person}.
      */
@@ -51,6 +52,7 @@ public class PersonUtil {
     public static String getAddMaintainerCommand(Maintainer person) {
         return AddMaintainerCommand.COMMAND_WORD + " " + getMaintainerDetails(person);
     }
+    //@@author
 
     /**
      * Returns an edit command string for adding the {@code person}.
@@ -72,6 +74,7 @@ public class PersonUtil {
     }
 
 
+    //@@author chiageng
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
@@ -130,6 +133,7 @@ public class PersonUtil {
         sb.append(PREFIX_COMMISSION + person.getCommission().value + " ");
         return sb.toString();
     }
+    //@@author
 
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.

@@ -18,6 +18,7 @@ import seedu.address.logic.stubs.ModelStubWithPerson;
 import seedu.address.model.person.Supplier;
 import seedu.address.testutil.SupplierBuilder;
 
+//@@author chiageng
 public class AddSupplierCommandTest {
     @Test
     public void constructor_nullSupplier_throwsNullPointerException() {

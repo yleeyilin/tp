@@ -18,6 +18,7 @@ import seedu.address.logic.stubs.ModelStubWithPerson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+//@@author chiageng
 public class AddCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
