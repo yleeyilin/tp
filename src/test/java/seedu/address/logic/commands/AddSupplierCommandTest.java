@@ -18,30 +18,30 @@ import seedu.address.logic.stubs.ModelStubWithPerson;
 import seedu.address.model.person.Supplier;
 import seedu.address.testutil.SupplierBuilder;
 
+//@@author chiageng
 public class AddSupplierCommandTest {
-
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullSupplier_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddSupplierCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_supplierAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Supplier validPerson = new SupplierBuilder().build();
+        Supplier validSupplier = new SupplierBuilder().build();
 
-        CommandResult commandResult = new AddSupplierCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddSupplierCommand(validSupplier).execute(modelStub);
 
-        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.formatPerson(validPerson)),
+        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.formatPerson(validSupplier)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validSupplier), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Supplier validPerson = new SupplierBuilder().build();
-        AddSupplierCommand addCommand = new AddSupplierCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateSupplier_throwsCommandException() {
+        Supplier validSupplier = new SupplierBuilder().build();
+        AddSupplierCommand addCommand = new AddSupplierCommand(validSupplier);
+        ModelStub modelStub = new ModelStubWithPerson(validSupplier);
 
         assertThrows(CommandException.class,
                 AddMessages.MESSAGE_ADD_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
@@ -74,7 +74,7 @@ public class AddSupplierCommandTest {
     @Test
     public void toStringMethod() {
         AddSupplierCommand addCommand = new AddSupplierCommand(ALICESUPPLIER);
-        String expected = AddSupplierCommand.class.getCanonicalName() + "{toAdd=" + ALICESUPPLIER + "}";
+        String expected = AddSupplierCommand.class.getCanonicalName() + "{supplierToAdd=" + ALICESUPPLIER + "}";
         assertEquals(expected, addCommand.toString());
     }
 }

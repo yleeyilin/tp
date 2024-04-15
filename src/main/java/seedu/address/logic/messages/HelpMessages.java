@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user help command visible messages.
+ * Container for {@code HelpCommand} visible messages.
  */
 public class HelpMessages extends Messages {
     public static final String HELP = "help";
@@ -140,7 +140,7 @@ public class HelpMessages extends Messages {
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
 
-    public static final String DISPLAYED_SORT_MESSAGE = "Sorts contacts because on specified field."
+    public static final String DISPLAYED_SORT_MESSAGE = "Sorts contacts based on specified field."
             + "\n" + "" + "\n"
             + "Format: " + "/sort ; target-field : [target-field]"
             + "\n" + "" + "\n"
@@ -151,6 +151,4 @@ public class HelpMessages extends Messages {
             + "Format: " + "/clear"
             + "\n" + "" + "\n"
             + "Go to our UG for more information : " + USERGUIDE_URL;
-
-
 }

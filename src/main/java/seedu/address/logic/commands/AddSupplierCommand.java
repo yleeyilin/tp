@@ -14,13 +14,12 @@ import seedu.address.logic.messages.AddMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Supplier;
 
+//@@author chiageng
 /**
- * Adds a person to the address book.
+ * Adds a supplier to the address book.
  */
 public class AddSupplierCommand extends Command {
-
     public static final String COMMAND_WORD = "/add-supplier";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a supplier to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -37,27 +36,28 @@ public class AddSupplierCommand extends Command {
             + PREFIX_PRODUCT + "poochie food "
             + PREFIX_PRICE + "$50/bag";
 
-    private final Supplier toAdd;
+    private final Supplier supplierToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddSupplierCommand object.
+     * @param supplier The {@code Supplier} to add.
      */
-    public AddSupplierCommand(Supplier person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddSupplierCommand(Supplier supplier) {
+        requireNonNull(supplier);
+        supplierToAdd = supplier;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(supplierToAdd)) {
             throw new CommandException(AddMessages.MESSAGE_ADD_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addPerson(supplierToAdd);
         return new CommandResult(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS,
-                AddMessages.formatPerson(toAdd)));
+                AddMessages.formatPerson(supplierToAdd)));
     }
 
     @Override
@@ -72,13 +72,13 @@ public class AddSupplierCommand extends Command {
         }
 
         AddSupplierCommand otherAddCommand = (AddSupplierCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return supplierToAdd.equals(otherAddCommand.supplierToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("supplierToAdd", supplierToAdd)
                 .toString();
     }
 }

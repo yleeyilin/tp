@@ -44,7 +44,7 @@ destroy RateCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> RateCommand : execute()
+LogicManager -> RateCommand : execute(...)
 activate RateCommand
 
 RateCommand -> Model : findByName(name)

@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user search command visible messages.
+ * Container for {@code SearchCommand} visible messages.
  */
 public class SearchMessages extends Messages {
     public static final String SEARCH = "search";

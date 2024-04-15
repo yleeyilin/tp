@@ -34,8 +34,11 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StaffBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code SortCommand}.
+ */
 public class SortCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validSortByName_sortSuccess() throws CommandException {

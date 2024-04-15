@@ -18,30 +18,30 @@ import seedu.address.logic.stubs.ModelStubWithPerson;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.StaffBuilder;
 
+//@@author chiageng
 public class AddStaffCommandTest {
-
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullStaff_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddStaffCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_staffAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Staff validPerson = new StaffBuilder().build();
+        Staff validStaff = new StaffBuilder().build();
 
-        CommandResult commandResult = new AddStaffCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddStaffCommand(validStaff).execute(modelStub);
 
-        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.formatPerson(validPerson)),
+        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.formatPerson(validStaff)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validStaff), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Staff validPerson = new StaffBuilder().build();
-        AddStaffCommand addCommand = new AddStaffCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateStaff_throwsCommandException() {
+        Staff validStaff = new StaffBuilder().build();
+        AddStaffCommand addCommand = new AddStaffCommand(validStaff);
+        ModelStub modelStub = new ModelStubWithPerson(validStaff);
 
         assertThrows(CommandException.class,
                 AddMessages.MESSAGE_ADD_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
@@ -74,7 +74,7 @@ public class AddStaffCommandTest {
     @Test
     public void toStringMethod() {
         AddStaffCommand addCommand = new AddStaffCommand(ALICESTAFF);
-        String expected = AddStaffCommand.class.getCanonicalName() + "{toAdd=" + ALICESTAFF + "}";
+        String expected = AddStaffCommand.class.getCanonicalName() + "{staffToAdd=" + ALICESTAFF + "}";
         assertEquals(expected, addCommand.toString());
     }
 }

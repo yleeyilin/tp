@@ -58,16 +58,17 @@ import seedu.address.model.person.Product;
 import seedu.address.model.person.Supplier;
 import seedu.address.testutil.SupplierBuilder;
 
+//@@author chiageng
 public class AddSupplierCommandParserTest {
-    private AddSupplierCommandParser parser = new AddSupplierCommandParser();
+    private final AddSupplierCommandParser parser = new AddSupplierCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Supplier expectedPerson = new SupplierBuilder(BOBSUPPLIER).build();
+        Supplier expectedSupplier = new SupplierBuilder(BOBSUPPLIER).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + PRODUCT_DESC_BOB + PRICE_DESC_BOB, new AddSupplierCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + PRODUCT_DESC_BOB + PRICE_DESC_BOB, new AddSupplierCommand(expectedSupplier));
     }
 
 

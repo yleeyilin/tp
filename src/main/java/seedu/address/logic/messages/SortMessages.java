@@ -1,7 +1,7 @@
 package seedu.address.logic.messages;
 
 /**
- * Container for user sort command visible messages.
+ * Container for {@code SortCommand} visible messages.
  */
 public class SortMessages extends Messages {
     public static final String SORT = "sort";

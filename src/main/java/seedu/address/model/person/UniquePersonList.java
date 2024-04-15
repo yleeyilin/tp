@@ -107,7 +107,8 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the list based on the isPinned field.
+     * Sorts the list based on the isPinned field of contacts.
+     * Tie-breaks using the lexographical order of the contact names.
      */
     public void sortByPinnedStatus() {
         internalList.sort(Comparator.comparing(Person::isPinned).reversed()

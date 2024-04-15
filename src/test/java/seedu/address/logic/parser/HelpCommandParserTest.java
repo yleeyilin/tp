@@ -17,7 +17,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.messages.HelpMessages;
 
 public class HelpCommandParserTest {
-
     private final HelpCommandParser parser = new HelpCommandParser();
     private final String validCommand = "delete";
     private final String invalidCommand = "poodle";

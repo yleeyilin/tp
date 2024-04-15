@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.MaintainerBuilder;
 
+//@@author chiageng
 public class MaintainerTest {
 
     @Test
@@ -24,7 +25,7 @@ public class MaintainerTest {
     }
 
     @Test
-    public void isSameStaff() {
+    public void isSameMaintainer() {
         // same object -> returns true
         assertTrue(ALICEMAINTAINER.isSamePerson(ALICEMAINTAINER));
 

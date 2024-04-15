@@ -13,8 +13,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code RemindCommand}.
+ */
 public class RemindCommandTest {
-
     @Test
     public void execute_remindSuccessful() {
         Model modelManager = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
@@ -44,5 +46,4 @@ public class RemindCommandTest {
         String expected = RemindCommand.class.getCanonicalName() + "{}";
         assertEquals(expected, remindCommand.toString());
     }
-
 }

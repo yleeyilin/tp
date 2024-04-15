@@ -44,7 +44,7 @@ destroy PinCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> PinCommand : execute()
+LogicManager -> PinCommand : execute(...)
 activate PinCommand
 
 PinCommand -> Model : findByName(name)

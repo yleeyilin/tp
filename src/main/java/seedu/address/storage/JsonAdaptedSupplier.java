@@ -3,6 +3,7 @@ package seedu.address.storage;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Supplier;
 
+//@@author chiageng
 /**
  * Jackson-friendly version of {@link Supplier}.
  */

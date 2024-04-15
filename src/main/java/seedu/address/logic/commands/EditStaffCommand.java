@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT;
@@ -35,12 +36,10 @@ import seedu.address.model.person.Staff;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing staff in the address book.
+ * Edits the details of an existing staff in PoochPlanner.
  */
 public class EditStaffCommand extends Command {
-
     public static final String COMMAND_WORD = "/edit-staff";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -51,41 +50,36 @@ public class EditStaffCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_EMPLOYMENT + "EMPLOYMENT] \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe Staff "
             + PREFIX_FIELD + "{ "
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
-
-    private static final Logger logger = LogsCenter.getLogger(EditStaffCommand.class);
+    public static final String MESSAGE_NULL_NAME = "specified name to edit staff is null";
 
     private final Name name;
     private final EditStaffDescriptor editStaffDescriptor;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * @param name of the staff in the filtered person list to edit
-     * @param editStaffDescriptor details to edit the staff with
+     * @param name Name of the staff in the filtered person list to edit.
+     * @param editStaffDescriptor Details to edit the staff with.
      */
     public EditStaffCommand(Name name, EditStaffDescriptor editStaffDescriptor) {
-        requireNonNull(name);
-        requireNonNull(editStaffDescriptor);
-
+        requireAllNonNull(name, editStaffDescriptor);
         this.name = name;
         this.editStaffDescriptor = new EditStaffDescriptor(editStaffDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert (name != null) : MESSAGE_NULL_NAME;
         requireNonNull(model);
 
         Staff staffToEdit = model.findStaffByName(name,
                 EditMessages.MESSAGE_INVALID_EDIT_STAFF);
         Staff editedStaff = createEditedStaff(staffToEdit, editStaffDescriptor);
-
-        if (!staffToEdit.isSamePerson(editedStaff) && model.hasPerson(editedStaff)) {
-            throw new CommandException(EditMessages.MESSAGE_EDIT_NO_DIFFERENCE);
-        }
 
         model.setPerson(staffToEdit, editedStaff);
         model.updateFilteredPersonListWithCommit(PREDICATE_SHOW_ALL_PERSONS);
@@ -96,7 +90,6 @@ public class EditStaffCommand extends Command {
         return new CommandResult(String.format(EditMessages.MESSAGE_EDIT_PERSON_SUCCESS,
                 EditMessages.formatPerson(editedStaff)));
     }
-
 
     /**
      * Creates and returns a {@code Staff} with the details of {@code staffToEdit}
@@ -136,9 +129,10 @@ public class EditStaffCommand extends Command {
             return false;
         }
 
-        EditStaffCommand otherEditCommand = (EditStaffCommand) other;
-        return name.equals(otherEditCommand.name)
-                && editStaffDescriptor.equals(otherEditCommand.editStaffDescriptor);
+        EditStaffCommand otherEditStaffCommand = (EditStaffCommand) other;
+        boolean areNamesEqual = name.equals(otherEditStaffCommand.name);
+        boolean areDescriptorsEqual = editStaffDescriptor.equals(otherEditStaffCommand.editStaffDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override
@@ -148,7 +142,6 @@ public class EditStaffCommand extends Command {
                 .add("editStaffDescriptor", editStaffDescriptor)
                 .toString();
     }
-
 
     /**
      * Stores the details to edit the staff with. Each non-empty field value will replace the
@@ -250,7 +243,6 @@ public class EditStaffCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
-
 
         @Override
         public boolean equals(Object other) {

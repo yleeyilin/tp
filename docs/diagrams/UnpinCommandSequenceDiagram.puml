@@ -44,7 +44,7 @@ destroy UnpinCommandParser
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser
 
-LogicManager -> UnpinCommand : execute()
+LogicManager -> UnpinCommand : execute(...)
 activate UnpinCommand
 
 UnpinCommand -> Model : findByName(name)
