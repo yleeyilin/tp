@@ -324,6 +324,7 @@ public class ParserUtil {
         return trimmedCommand;
     }
 
+    //@@author Joshy837
     /**
      * Parses a {@code String sort field}.
      * Leading "; " and trailing " : " will be trimmed
@@ -341,6 +342,7 @@ public class ParserUtil {
 
         return trimmedSortField;
     }
+    //@@author
 
     /**
      * Standardises all prefixes input by users to lower case.
@@ -404,6 +406,7 @@ public class ParserUtil {
         }
     }
 
+    //@@author Joshy837
     /**
      * Returns sort field values using PREFIX.
      * @param argMultimap Object that contains mapping of prefix to value.
@@ -428,6 +431,7 @@ public class ParserUtil {
             throw new ParseException(String.format(message, pe.getMessage()));
         }
     }
+    //@@author
 
     //@@author chiageng
     /**

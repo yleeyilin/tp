@@ -115,6 +115,7 @@ public class UniquePersonList implements Iterable<Person> {
                 .thenComparing(p -> p.getName().toString()));
     }
 
+    //@@author Joshy837
     /**
      * Sorts the list based on the specified field.
      *
@@ -317,6 +318,7 @@ public class UniquePersonList implements Iterable<Person> {
     private void sortByFieldRating() {
         internalList.sort(Comparator.comparing((Person p) -> p.getRating().toString()).reversed());
     }
+    //@@author
 
     @Override
     public Iterator<Person> iterator() {

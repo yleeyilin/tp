@@ -240,6 +240,7 @@ The following sequence diagram models the interactions between the different com
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 ### Search feature
 
 #### Overview
@@ -274,6 +275,8 @@ The following sequence diagram models the interactions between the different com
 * **Alternative 2**: Only accept one field in search query.
   * Pros: Less prone to errors due to stricter search only over one field.
   * Cons: Less user-friendly since users will not be able to search using multiple fields at once.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -410,6 +413,7 @@ The following sequence diagram models the interactions between the different com
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 ### Sort feature
 
 #### Overview
@@ -443,6 +447,8 @@ The following sequence diagram models the interactions between the different com
 * **Alternative 2**: Sorts by both ascending and descending order depending on user indication.
   * Pros: More flexible in sorting for users to sort in either way to find what they need.
   * Cons: Longer command, another field required to specify either ascending or descending sorting order.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -877,6 +883,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 **System**: `PoochPlanner`
 
 **Use case**: `UC03 - Searching for a contact`
@@ -906,6 +913,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b2. User re-enters a new command with a specified field.
   * Steps 1a1 - 1a2 are repeated until the command does not contain any duplicate fields.
   * Use case resumes from step 2.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1059,6 +1068,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 **System**: `PoochPlanner`
 
 **Use case**: `UC08 - Sorting the contacts list`
@@ -1088,6 +1098,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b2. User re-enters a new command with a specified name.
   * Steps 1b1 - 1b2 are repeated until a valid name is inputted by the User.
   * Use case resumes from step 2.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1546,6 +1558,7 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 ### Searching a contact
 
 1. Searching contacts by name
@@ -1567,6 +1580,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `/search ; phone : 12345678`<br>
      Expected: Displays only one contact named **_Poochie_** with the phone number `12345678`.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -1632,6 +1647,7 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 ### Sorting contacts list
 
 1. Sorting contacts by name
@@ -1653,6 +1669,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `/sort ; field : phone`<br>
      Expected: Displays all contacts sorted by phone number in ascending order.
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 

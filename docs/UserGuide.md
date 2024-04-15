@@ -292,6 +292,7 @@ The table below summarises the `edit` command, format and examples for each cont
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 #### Searching a contact : `search`
 
 Filters a **person / staff / supplier / maintainer** contact in your contacts list in PoochPlanner so that you can locate your contacts easily.
@@ -361,6 +362,8 @@ If you would like to search for `salaries`/`prices`/`commissions` within a speci
 * Note that this query also searches for staff with salaries of exactly `$5/hr`, from `$500/hr` to `$599/hr` as well, and even in larger ranges too.<br>
 
 </div>
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
@@ -547,6 +550,7 @@ Example: <br>
 
 <div style="page-break-after: always;"></div>
 
+[//]: # (@@author Joshy837)
 #### Sorting the address book : `sort`
 
 Sorts the address book by a target field in lexicographical order so that you can display all of your contacts neatly and locate them easily.
@@ -587,6 +591,8 @@ Example: <br>
 * For your convenience, if you have accidentally made a typo in the field value, you may conveniently rectify your mistake by retyping the corresponding prefix and field value in your command as only the latest field will be processed.<br>
 
 </div>
+
+[//]: # (@@author)
 
 <div style="page-break-after: always;"></div>
 
