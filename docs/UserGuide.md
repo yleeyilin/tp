@@ -632,7 +632,7 @@ Add a note with a deadline:<br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/deadlinecommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of adding to a contact named "Ben".</medium>
+    <medium>"Above is an example of adding a note to a contact named "Ben".</medium>
     <br>
     <medium>Input: <code>/note ; name : Ben ; note : pay his salary of $1500 ; deadline : 2024-05-20</code></medium>
     <br>
@@ -664,9 +664,9 @@ Add a note with a deadline:<br>
 
 * To remove a note, specify in the note field `No note here`. **This note is case-sensitive**.<br>
 
-* For your convenience, if you have accidentally made a typo in the field value, you may conveniently rectify your mistake by retyping the corresponding corresponding prefix and field value in your command as only the latest field will be processed.<br>
+* For your convenience, if you have accidentally made a typo in the field value, you may conveniently rectify your mistake by retyping the corresponding prefix and field value in your command as only the latest field will be processed.<br>
 
-* Refrain from using `;` in your note. The use of `;` makes the command difficult to parse as ";" is used as a delimiter. This may result in your note not being captured. 
+* Refrain from using `;` in your note. The use of `;` makes the command difficult to parse as `;` is used as a delimiter. This may result in your note not being captured. 
 
 </div>
 
@@ -856,7 +856,7 @@ Example: <br>
 <div style="text-align:center;">
     <br>
     <img src="images/ug-images/command-images/remindcommand.png" alt="Add before" style="width:100%;"/>
-    <medium>Above is an example of getting reminders of contacts with notes containing deadlines from today onwards.</medium>
+    <medium>"Above is an example of getting a reminder of a contact with a note deadline after today.</medium>
     <br>
     <medium>Input: <code>/remind</code></medium>
     <br>
