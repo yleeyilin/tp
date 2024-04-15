@@ -20,7 +20,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Rating;
 
 //@@author jamessinmaojun
-
 /**
  * Parses input arguments and creates a new RateCommand object.
  */

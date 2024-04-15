@@ -14,7 +14,6 @@ import seedu.address.logic.messages.SortMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 //@@author Joshy837
-
 /**
  * Parses input arguments and creates a new SortCommand object.
  */

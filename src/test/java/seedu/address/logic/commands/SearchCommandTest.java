@@ -24,7 +24,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.KeywordPredicate;
 
 //@@author Joshy837
-
 /**
  * Contains integration tests (interaction with the Model) for {@code SearchCommand}.
  */
