@@ -39,7 +39,6 @@ import seedu.address.model.tag.Tag;
  */
 public class EditMaintainerCommand extends Command {
     public static final String COMMAND_WORD = "/edit-maintainer";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -50,17 +49,17 @@ public class EditMaintainerCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_SKILL + "SKILL] "
             + "[" + PREFIX_COMMISSION + "COMMISSION] \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe Maintainer "
             + PREFIX_FIELD + "{ "
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
-
     private static final Logger logger = LogsCenter.getLogger(EditMaintainerCommand.class);
 
     private final Name name;
     private final EditMaintainerDescriptor editMaintainerDescriptor;
+
     /**
      * @param name of the maintainer in the filtered person list to edit
      * @param editMaintainerDescriptor details to edit the maintainer with
@@ -72,7 +71,6 @@ public class EditMaintainerCommand extends Command {
         this.name = name;
         this.editMaintainerDescriptor = new EditMaintainerDescriptor(editMaintainerDescriptor);
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -133,8 +131,10 @@ public class EditMaintainerCommand extends Command {
         }
 
         EditMaintainerCommand otherEditMaintainerCommand = (EditMaintainerCommand) other;
-        return name.equals(otherEditMaintainerCommand.name)
-                && editMaintainerDescriptor.equals(otherEditMaintainerCommand.editMaintainerDescriptor);
+        boolean areNamesEqual = name.equals(otherEditMaintainerCommand.name);
+        boolean areDescriptorsEqual =
+                editMaintainerDescriptor.equals(otherEditMaintainerCommand.editMaintainerDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override
@@ -245,7 +245,6 @@ public class EditMaintainerCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
-
 
         @Override
         public boolean equals(Object other) {

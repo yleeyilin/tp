@@ -38,9 +38,7 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing supplier in the address book.
  */
 public class EditSupplierCommand extends Command {
-
     public static final String COMMAND_WORD = "/edit-supplier";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -51,13 +49,12 @@ public class EditSupplierCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_PRODUCT + "PRODUCT] "
             + "[" + PREFIX_PRICE + "PRICE] \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe Supplier "
             + PREFIX_FIELD + "{ "
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
-
     private static final Logger logger = LogsCenter.getLogger(EditSupplierCommand.class);
 
     private final Name name;
@@ -74,7 +71,6 @@ public class EditSupplierCommand extends Command {
         this.name = name;
         this.editSupplierDescriptor = new EditSupplierDescriptor(editSupplierDescriptor);
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -132,9 +128,10 @@ public class EditSupplierCommand extends Command {
             return false;
         }
 
-        EditSupplierCommand otherEditCommand = (EditSupplierCommand) other;
-        return name.equals(otherEditCommand.name)
-                && editSupplierDescriptor.equals(otherEditCommand.editSupplierDescriptor);
+        EditSupplierCommand otherEditSupplierCommand = (EditSupplierCommand) other;
+        boolean areNamesEqual = name.equals(otherEditSupplierCommand.name);
+        boolean areDescriptorsEqual = editSupplierDescriptor.equals(otherEditSupplierCommand.editSupplierDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override

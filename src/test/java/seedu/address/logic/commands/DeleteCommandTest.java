@@ -26,7 +26,6 @@ import seedu.address.model.person.Person;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -100,9 +99,9 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Name targetName = ALICE.getName();
-        DeleteCommand deleteCommand = new DeleteCommand(targetName);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
+        Name nameToDelete = ALICE.getName();
+        DeleteCommand deleteCommand = new DeleteCommand(nameToDelete);
+        String expected = DeleteCommand.class.getCanonicalName() + "{nameToDelete=" + nameToDelete + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 

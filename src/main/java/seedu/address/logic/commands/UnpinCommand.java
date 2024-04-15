@@ -11,11 +11,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Pins a contact on the address book.
+ * Unpins a contact on the address book.
  */
 public class UnpinCommand extends Command {
     public static final String COMMAND_WORD = "/unpin";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpin a contact from the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -26,7 +25,8 @@ public class UnpinCommand extends Command {
     private final Name name;
 
     /**
-     * @param name of the person in the person list to unpin.
+     * Creates an UnpinCommand object.
+     * @param name Name of the person in the address book to unpin.
      */
     public UnpinCommand(Name name) {
         requireNonNull(name);

@@ -23,7 +23,6 @@ import seedu.address.model.person.DeadlineNote;
 import seedu.address.model.person.Note;
 
 public class NoteCommandParserTest {
-
     private final NoteCommandParser parser = new NoteCommandParser();
     private final Note validNote = new Note("Cancel shipment with bob");
     private final DeadlineNote validDeadlineNote = new DeadlineNote("Cancel shipment with bob", "2019-10-10");
@@ -70,6 +69,4 @@ public class NoteCommandParserTest {
         assertParseFailure(parser, PREAMBLE_WHITESPACE + commandWithUnknownField,
                 expectedMessage);
     }
-
-
 }

@@ -16,7 +16,6 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
-
     @Test
     public void equals() {
         // same values -> returns true
