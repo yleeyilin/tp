@@ -35,10 +35,13 @@ import seedu.address.model.person.Rating;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
- * Parses input arguments and creates a new AddStaffCommand object
+ * Parses input arguments and creates a new AddSupplierCommand object.
  */
 public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for add supplier command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for add supplier command.";
     private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
@@ -46,9 +49,9 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddSupplierCommand parse(String args) throws ParseException {
-        assert (args != null) : "argument to pass for add supplier command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for supplier command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -72,12 +75,13 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
 
         return new AddSupplierCommand(person);
     }
+    //@@author
 
     /**
-     * Creates a supplier contact based on the argument multimap.
+     * Creates a {@code Supplier} contact based on the argument multimap.
      * @param argMultimap Contains the mappings of values to the specific prefixes.
      * @return A supplier contact.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private Supplier createSupplierContact(ArgumentMultimap argMultimap) throws ParseException {
         try {

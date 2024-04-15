@@ -17,9 +17,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-
+//@@author chiageng
 public class UndoCommandTest {
-
     @Test
     public void execute_undoSuccessful() throws Exception {
         Model modelManager = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
@@ -62,5 +61,4 @@ public class UndoCommandTest {
         String expected = UndoCommand.class.getCanonicalName() + "{}";
         assertEquals(expected, undoCommand.toString());
     }
-
 }

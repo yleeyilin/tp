@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -35,11 +36,10 @@ import seedu.address.model.person.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing maintainer in the address book.
+ * Edits the details of an existing maintainer in PoochPlanner.
  */
 public class EditMaintainerCommand extends Command {
     public static final String COMMAND_WORD = "/edit-maintainer";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Main Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
@@ -50,32 +50,31 @@ public class EditMaintainerCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_SKILL + "SKILL] "
             + "[" + PREFIX_COMMISSION + "COMMISSION] \n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe Maintainer "
             + PREFIX_FIELD + "{ "
             + "phone : " + "99820550 "
             + PREFIX_ADDRESS + "NUS College Avenue"
             + " }";
-
-    private static final Logger logger = LogsCenter.getLogger(EditMaintainerCommand.class);
+    public static final String MESSAGE_NULL_NAME = "specified name to edit maintainer is null";
 
     private final Name name;
     private final EditMaintainerDescriptor editMaintainerDescriptor;
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     /**
-     * @param name of the maintainer in the filtered person list to edit
-     * @param editMaintainerDescriptor details to edit the maintainer with
+     * @param name Name of the maintainer in the filtered person list to edit.
+     * @param editMaintainerDescriptor Details to edit the maintainer with.
      */
     public EditMaintainerCommand(Name name, EditMaintainerDescriptor editMaintainerDescriptor) {
-        requireNonNull(name);
-        requireNonNull(editMaintainerDescriptor);
-
+        requireAllNonNull(name, editMaintainerDescriptor);
         this.name = name;
         this.editMaintainerDescriptor = new EditMaintainerDescriptor(editMaintainerDescriptor);
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert (name != null) : MESSAGE_NULL_NAME;
         requireNonNull(model);
 
         Maintainer maintainerToEdit = model.findMaintainerByName(name,
@@ -133,8 +132,10 @@ public class EditMaintainerCommand extends Command {
         }
 
         EditMaintainerCommand otherEditMaintainerCommand = (EditMaintainerCommand) other;
-        return name.equals(otherEditMaintainerCommand.name)
-                && editMaintainerDescriptor.equals(otherEditMaintainerCommand.editMaintainerDescriptor);
+        boolean areNamesEqual = name.equals(otherEditMaintainerCommand.name);
+        boolean areDescriptorsEqual =
+                editMaintainerDescriptor.equals(otherEditMaintainerCommand.editMaintainerDescriptor);
+        return areNamesEqual && areDescriptorsEqual;
     }
 
     @Override
@@ -245,7 +246,6 @@ public class EditMaintainerCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
-
 
         @Override
         public boolean equals(Object other) {

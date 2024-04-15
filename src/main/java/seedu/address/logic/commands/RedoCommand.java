@@ -11,24 +11,26 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.RedoMessages;
 import seedu.address.model.Model;
 
+//@@author chiageng
 /**
- * Redo Command.
+ * Redoes the last undid command.
  */
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "/redo";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous undid command. ";
+    public static final String LOGGER_EXECUTE_REDO_MESSAGE = "Going to execute redo command.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo previous undo execution. ";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Creates an RedoCommand.
+     * Creates a RedoCommand Object.
      */
     public RedoCommand() {
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        logger.log(Level.INFO, "Going to execute redo command.");
+        logger.log(Level.INFO, LOGGER_EXECUTE_REDO_MESSAGE);
         requireNonNull(model);
 
         if (!model.canRedoAddressBook()) {
@@ -46,11 +48,7 @@ public class RedoCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RedoCommand)) {
-            return false;
-        }
-
-        return true;
+        return other instanceof RedoCommand;
     }
 
     @Override

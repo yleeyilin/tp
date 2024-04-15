@@ -27,9 +27,12 @@ import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditSupplierCommand object
+ * Parses input arguments and creates a new EditSupplierCommand object.
  */
 public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for edit supplier command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for edit supplier command.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
@@ -39,9 +42,9 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
      */
     public EditSupplierCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert (args != null) : "argument to pass for edit supplier command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for edit supplier command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         String parsedArgs = ParserUtil.parseArg(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
@@ -56,7 +59,7 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
                 PREFIX_NAME, PREFIX_FIELD);
         boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
         if (isNamePrefixDuplicated) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
+            throw new ParseException(String.format(EditMessages.MESSAGE_MULTIPLE_NAME,
                     EditSupplierCommand.MESSAGE_USAGE));
         }
 
@@ -87,11 +90,11 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
     }
 
     /**
-     * Edits the description of a Supplier.
+     * Edits the description of a {@code Supplier}.
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditSupplierDescriptor that contains the new values from the user.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private EditSupplierDescriptor editSupplierDescription(ArgumentMultimap fieldArgMultimap) throws ParseException {
         try {

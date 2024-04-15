@@ -31,21 +31,25 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rating;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for add command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for add command.";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution. Parameter {@code args} cannot be null.
+     * @param args The arguments of the AddCommand object.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddCommand parse(String args) throws ParseException {
-        assert (args != null) : "argument to pass for add command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for add command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_NOTE,
@@ -69,12 +73,13 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         return new AddCommand(person);
     }
+    //@@author
 
     /**
-     * Creates a person contact based on the argument multimap.
+     * Creates a {@code Person} contact based on the argument multimap.
      * @param argMultimap Contains the mappings of values to the specific prefixes.
      * @return A person contact.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private Person createPersonContact(ArgumentMultimap argMultimap) throws ParseException {
         try {

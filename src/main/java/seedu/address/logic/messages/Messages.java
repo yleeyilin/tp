@@ -11,7 +11,7 @@ import seedu.address.model.person.Staff;
 import seedu.address.model.person.Supplier;
 
 /**
- * Container for user visible messages.
+ * Container for general visible messages.
  */
 public class Messages {
 
@@ -39,8 +39,10 @@ public class Messages {
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
+    //@@author chiageng
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code Person} including basic person fields for display to the user.
+     * @param person The person to be formatted.
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
@@ -55,9 +57,12 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+    //@@author
 
+    //@@author chiageng
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code Person} for display to the user.
+     * @param person The person to be formatted.
      */
     public static String formatPerson(Person person) {
         final StringBuilder builder = new StringBuilder();
@@ -73,6 +78,7 @@ public class Messages {
         builder.append(person.getName());
         return builder.toString();
     }
+    //@@author
 
     /**
      * Returns an error message indicating the prefixes with no values.

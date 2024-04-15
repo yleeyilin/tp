@@ -11,8 +11,7 @@ import seedu.address.logic.messages.SearchMessages;
 import seedu.address.model.person.KeywordPredicate;
 
 public class SearchCommandParserTest {
-
-    private SearchCommandParser parser = new SearchCommandParser();
+    private final SearchCommandParser parser = new SearchCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

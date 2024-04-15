@@ -18,30 +18,30 @@ import seedu.address.logic.stubs.ModelStubWithPerson;
 import seedu.address.model.person.Maintainer;
 import seedu.address.testutil.MaintainerBuilder;
 
+//@@author chiageng
 public class AddMaintainerCommandTest {
-
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullMaintainer_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddMaintainerCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_maintainerAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Maintainer validPerson = new MaintainerBuilder().build();
+        Maintainer validMaintainer = new MaintainerBuilder().build();
 
-        CommandResult commandResult = new AddMaintainerCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddMaintainerCommand(validMaintainer).execute(modelStub);
 
-        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.formatPerson(validPerson)),
+        assertEquals(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS, AddMessages.formatPerson(validMaintainer)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validMaintainer), modelStub.personsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Maintainer validPerson = new MaintainerBuilder().build();
-        AddMaintainerCommand addCommand = new AddMaintainerCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateMaintainer_throwsCommandException() {
+        Maintainer validMaintainer = new MaintainerBuilder().build();
+        AddMaintainerCommand addCommand = new AddMaintainerCommand(validMaintainer);
+        ModelStub modelStub = new ModelStubWithPerson(validMaintainer);
 
         assertThrows(CommandException.class,
                 AddMessages.MESSAGE_ADD_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
@@ -75,7 +75,7 @@ public class AddMaintainerCommandTest {
     public void toStringMethod() {
         AddMaintainerCommand addCommand = new AddMaintainerCommand(ALICEMAINTAINER);
         String expected = AddMaintainerCommand.class.getCanonicalName()
-                + "{toAdd=" + ALICEMAINTAINER + "}";
+                + "{maintainerToAdd=" + ALICEMAINTAINER + "}";
         assertEquals(expected, addCommand.toString());
     }
 }

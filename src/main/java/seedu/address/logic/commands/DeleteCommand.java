@@ -15,17 +15,20 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "/delete";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by their name.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + "Moochie";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Moochie";
 
-    private final Name targetName;
+    private final Name nameToDelete;
 
+    /**
+     * Creates a DeleteCommand object.
+     * @param name Name of the person in the person list to delete.
+     */
     public DeleteCommand(Name name) {
-        this.targetName = name;
+        this.nameToDelete = name;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class DeleteCommand extends Command {
 
         Person personToDelete;
 
-        personToDelete = model.findByName(targetName, DeleteMessages.MESSAGE_DELETE_NAME_NOT_FOUND);
+        personToDelete = model.findByName(nameToDelete, DeleteMessages.MESSAGE_DELETE_NAME_NOT_FOUND);
 
         model.deletePerson(personToDelete);
 
@@ -54,13 +57,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetName.equals(otherDeleteCommand.targetName);
-
+        return nameToDelete.equals(otherDeleteCommand.nameToDelete);
     }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetName", targetName)
+                .add("nameToDelete", nameToDelete)
                 .toString();
     }
 }

@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PIN_ALICE_MAINTAINER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PIN_ALICE_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PIN_ALICE_STAFF;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PIN_ALICE_SUPPLIER;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ALICEMAINTAINER;
 import static seedu.address.testutil.TypicalPersons.ALICESTAFF;
@@ -23,14 +27,17 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StaffBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code PinCommand}.
+ */
 public class PinCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validPinOther_pinSuccess() throws CommandException {
-        Person personToPin = new PersonBuilder(ALICE).withName("Pin Test Alice Person")
+        Person personToPin = new PersonBuilder(ALICE).withName(VALID_NAME_PIN_ALICE_PERSON)
                 .withAddress(VALID_ADDRESS_BOB).build();
-        Person expectedPerson = new PersonBuilder(ALICE).withName("Pin Test Alice Person")
+        Person expectedPerson = new PersonBuilder(ALICE).withName(VALID_NAME_PIN_ALICE_PERSON)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedPerson.toPin();
 
@@ -49,9 +56,9 @@ public class PinCommandTest {
 
     @Test
     public void execute_validPinStaff_pinSuccess() throws CommandException {
-        Staff staffToPin = new StaffBuilder(ALICESTAFF).withName("Pin Test Alice Staff")
+        Staff staffToPin = new StaffBuilder(ALICESTAFF).withName(VALID_NAME_PIN_ALICE_STAFF)
                 .withAddress(VALID_ADDRESS_BOB).build();
-        Staff expectedStaff = new StaffBuilder(ALICESTAFF).withName("Pin Test Alice Staff")
+        Staff expectedStaff = new StaffBuilder(ALICESTAFF).withName(VALID_NAME_PIN_ALICE_STAFF)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedStaff.toPin();
 
@@ -71,9 +78,9 @@ public class PinCommandTest {
     @Test
     public void execute_validPinMaintainer_pinSuccess() throws CommandException {
         Maintainer maintainerToPin = new MaintainerBuilder(ALICEMAINTAINER)
-                .withName("Pin Test Alice Maintainer").withAddress(VALID_ADDRESS_BOB).build();
+                .withName(VALID_NAME_PIN_ALICE_MAINTAINER).withAddress(VALID_ADDRESS_BOB).build();
         Maintainer expectedMaintainer = new MaintainerBuilder(ALICEMAINTAINER)
-                .withName("Pin Test Alice Maintainer").withAddress(VALID_ADDRESS_BOB).build();
+                .withName(VALID_NAME_PIN_ALICE_MAINTAINER).withAddress(VALID_ADDRESS_BOB).build();
         expectedMaintainer.toPin();
 
         // expected model result
@@ -91,9 +98,9 @@ public class PinCommandTest {
 
     @Test
     public void execute_validPinSupplier_pinSuccess() throws CommandException {
-        Supplier supplierToPin = new SupplierBuilder(ALICESUPPLIER).withName("Pin Test Alice Supplier")
+        Supplier supplierToPin = new SupplierBuilder(ALICESUPPLIER).withName(VALID_NAME_PIN_ALICE_SUPPLIER)
                 .withAddress(VALID_ADDRESS_BOB).build();
-        Supplier expectedSupplier = new SupplierBuilder(ALICESUPPLIER).withName("Pin Test Alice Supplier")
+        Supplier expectedSupplier = new SupplierBuilder(ALICESUPPLIER).withName(VALID_NAME_PIN_ALICE_SUPPLIER)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedSupplier.toPin();
 

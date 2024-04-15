@@ -35,21 +35,24 @@ import seedu.address.model.person.Rating;
 import seedu.address.model.person.Skill;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
- * Parses input arguments and creates a new AddStaffCommand object
+ * Parses input arguments and creates a new AddMaintainerCommand object.
  */
 public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> {
-
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for add maintainer command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for add maintainer command.";
     private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the AddStaffCommand
      * and returns an AddCommand object for execution. Parameter {@code args} cannot be null.
+     * @param args The arguments of the AddMaintainerCommand object.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddMaintainerCommand parse(String args) throws ParseException {
-        assert (args != null) : "argument to pass for add maintainer command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for add maintainer command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -75,12 +78,13 @@ public class AddMaintainerCommandParser implements Parser<AddMaintainerCommand> 
 
         return new AddMaintainerCommand(person);
     }
+    //@@author
 
     /**
-     * Creates a maintainer contact based on the argument multimap.
+     * Creates a {@code Maintainer} contact based on the argument multimap.
      * @param argMultimap Contains the mappings of values to the specific prefixes.
      * @return A maintainer contact.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private Maintainer createMaintainerContact(ArgumentMultimap argMultimap) throws ParseException {
         try {

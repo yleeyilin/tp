@@ -14,13 +14,12 @@ import seedu.address.logic.messages.AddMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Maintainer;
 
+//@@author chiageng
 /**
- * Adds a person to the address book.
+ * Adds a maintainer to the address book.
  */
 public class AddMaintainerCommand extends Command {
-
     public static final String COMMAND_WORD = "/add-maintainer";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a maintainer to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -37,27 +36,28 @@ public class AddMaintainerCommand extends Command {
             + PREFIX_SKILL + "train dog "
             + PREFIX_COMMISSION + "$50/hr";
 
-    private final Maintainer toAdd;
+    private final Maintainer maintainerToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddMaintainerCommand object.
+     * @param maintainer The {@code Maintainer} to add.
      */
-    public AddMaintainerCommand(Maintainer person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddMaintainerCommand(Maintainer maintainer) {
+        requireNonNull(maintainer);
+        maintainerToAdd = maintainer;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(maintainerToAdd)) {
             throw new CommandException(AddMessages.MESSAGE_ADD_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addPerson(maintainerToAdd);
         return new CommandResult(String.format(AddMessages.MESSAGE_ADD_PERSON_SUCCESS,
-                AddMessages.formatPerson(toAdd)));
+                AddMessages.formatPerson(maintainerToAdd)));
     }
 
     @Override
@@ -72,13 +72,13 @@ public class AddMaintainerCommand extends Command {
         }
 
         AddMaintainerCommand otherAddCommand = (AddMaintainerCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return maintainerToAdd.equals(otherAddCommand.maintainerToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("maintainerToAdd", maintainerToAdd)
                 .toString();
     }
 }

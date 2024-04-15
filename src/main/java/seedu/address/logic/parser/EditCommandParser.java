@@ -25,21 +25,24 @@ import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditCommand object.
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for edit command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for edit command.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * Parses the given {@code String} of arguments in the context of the EditCommand.
      * and returns an EditCommand object for execution. Parameter {@code args} cannot be null.
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert (args != null) : "argument to pass for edit command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for edit command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         String parsedArgs = ParserUtil.parseArg(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
@@ -53,7 +56,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_NAME, PREFIX_FIELD);
         boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
         if (isNamePrefixDuplicated) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
+            throw new ParseException(String.format(EditMessages.MESSAGE_MULTIPLE_NAME,
                     EditCommand.MESSAGE_USAGE));
         }
 
@@ -82,11 +85,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Edits the description of a Person.
+     * Edits the description of a {@code Person}.
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditPersonDescriptor that contains the new values from the user.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private EditPersonDescriptor editPersonDescription(ArgumentMultimap fieldArgMultimap) throws ParseException {
         try {

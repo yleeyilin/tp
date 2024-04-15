@@ -27,21 +27,24 @@ import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditMaintainerCommand object
+ * Parses input arguments and creates a new EditMaintainerCommand object.
  */
 public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand> {
+    public static final String MESSAGE_NULL_ARGUMENTS = "argument to pass for edit maintainer command is null";
+    public static final String MESSAGE_COMMENCE_PARSING = "Going to start parsing for edit maintainer command.";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditMaintainerCommand
+     * Parses the given {@code String} of arguments in the context of the EditMaintainerCommand.
      * and returns an EditMaintainerCommand object for execution. Parameter {@code args} cannot be null.
      * @throws ParseException If the user input does not conform to the expected format
      */
     public EditMaintainerCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        assert (args != null) : "argument to pass for edit maintainer command is null";
+        assert (args != null) : MESSAGE_NULL_ARGUMENTS;
 
-        logger.log(Level.INFO, "Going to start parsing for edit maintainer command.");
+        logger.log(Level.INFO, MESSAGE_COMMENCE_PARSING);
 
         String parsedArgs = ParserUtil.parseArg(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(parsedArgs, PREFIX_NAME, PREFIX_FIELD);
@@ -56,7 +59,7 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
                 PREFIX_NAME, PREFIX_FIELD);
         boolean isNamePrefixDuplicated = argMultimap.hasDuplicateNamePrefix();
         if (isNamePrefixDuplicated) {
-            throw new ParseException(String.format(EditMessages.MESSAGE_EDITING_NAME,
+            throw new ParseException(String.format(EditMessages.MESSAGE_MULTIPLE_NAME,
                     EditMaintainerCommand.MESSAGE_USAGE));
         }
 
@@ -88,11 +91,11 @@ public class EditMaintainerCommandParser implements Parser<EditMaintainerCommand
     }
 
     /**
-     * Edits the description of a Maintainer.
+     * Edits the description of a {@code Maintainer}.
      *
      * @param fieldArgMultimap The mapping of field arguments into different specific fields.
      * @return EditMaintainerDescriptor that contains the new values from the user.
-     * @throws ParseException If the user enters invalid paramters.
+     * @throws ParseException If the user enters invalid parameters.
      */
     private EditMaintainerDescriptor editMaintainerDescription(
                 ArgumentMultimap fieldArgMultimap) throws ParseException {

@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.PinMessages;
@@ -11,22 +14,25 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Pins a contact on the address book.
+ * Pins a contact in PoochPlanner.
  */
 public class PinCommand extends Command {
     public static final String COMMAND_WORD = "/pin";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins a contact to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe other ";
+    public static final String MESSAGE_NULL_NAME = "specified name to pin contact is null";
+    public static final String LOGGER_EXECUTE_PIN_MESSAGE = "started executing the pin command";
 
     private final Name name;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
-     * @param name of the person in the person list to pin.
+     * Constructs a PinCommand object.
+     * @param name Name of the person in PoochPlanner to pin.
      */
     public PinCommand(Name name) {
         requireNonNull(name);
@@ -35,6 +41,8 @@ public class PinCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert (name != null) : MESSAGE_NULL_NAME;
+        logger.info(LOGGER_EXECUTE_PIN_MESSAGE);
         requireNonNull(model);
 
         Person personToPin = model.findByName(name, PinMessages.MESSAGE_PIN_NAME_NOT_FOUND);

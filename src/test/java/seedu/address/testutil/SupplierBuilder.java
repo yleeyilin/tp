@@ -14,6 +14,7 @@ import seedu.address.model.person.Rating;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.tag.Tag;
 
+//@@author chiageng
 /**
  * A utility class to help with building Person objects.
  */

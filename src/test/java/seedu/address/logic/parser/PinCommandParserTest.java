@@ -15,7 +15,7 @@ import seedu.address.logic.commands.PinCommand;
 import seedu.address.model.person.Name;
 
 public class PinCommandParserTest {
-    private PinCommandParser parser = new PinCommandParser();
+    private final PinCommandParser parser = new PinCommandParser();
 
     @Test
     public void parse_missingNamePrefix_failure() {

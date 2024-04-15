@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    //@@author chiageng
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -41,6 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
+    //@@author
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
@@ -120,12 +122,14 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //@@author chiageng
     @Override
     public void commitAddressBook() {
         addressBook.commit();
         logger.fine("New commit on address book: " + addressBook + " and user prefs " + userPrefs);
     }
 
+    //@@author chiageng
     @Override
     public void undoAddressBook() {
         addressBook.undo();
@@ -133,6 +137,7 @@ public class ModelManager implements Model {
                 + addressBook + " and user prefs " + userPrefs);
     }
 
+    //@@author chiageng
     @Override
     public void redoAddressBook() {
         addressBook.redo();
@@ -140,15 +145,18 @@ public class ModelManager implements Model {
                 + addressBook + " and user prefs " + userPrefs);
     }
 
+    //@@author chiageng
     @Override
     public boolean canUndoAddressBook() {
         return addressBook.canUndo();
     }
 
+    //@@author chiageng
     @Override
     public boolean canRedoAddressBook() {
         return addressBook.canRedo();
     }
+    //@@author
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -167,6 +175,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //@@author chiageng
     @Override
     public void updateFilteredPersonListWithCommit(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -208,12 +217,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Find the person by their name.
      * Find a general contact by their name.
      * @param targetName Refers to the name identifier.
      * @param message Refers to the exception message for the specific command.
-     * @return Person that matches the name.
-     * @throws CommandException Handles invalid person message.
+     * @return Contact that matches the name.
+     * @throws CommandException If no matching contact can be found.
      */
     @Override
     public Person findByName(Name targetName, String message) throws CommandException {
@@ -227,11 +235,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Find the person by their name.
+     * Find a person by their name.
      * @param targetName Refers to the name identifier.
      * @param message Refers to the exception message for the specific command.
      * @return Person that matches the name.
-     * @throws CommandException Handles invalid person message.
+     * @throws CommandException If no valid person is found.
      */
     @Override
     public Person findPersonByName(Name targetName, String message) throws CommandException {
@@ -248,11 +256,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Find the maintainer by their name.
+     * Find a maintainer by their name.
      * @param targetName Refers to the name identifier.
      * @param message Refers to the exception message for the specific command.
      * @return Maintainer that matches the name.
-     * @throws CommandException Handles invalid maintainer message.
+     * @throws CommandException If no valid maintainer is found.
      */
     @Override
     public Maintainer findMaintainerByName(Name targetName, String message) throws CommandException {
@@ -266,11 +274,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Find the staff by their name.
+     * Find a staff by their name.
      * @param targetName Refers to the name identifier.
      * @param message Refers to the exception message for the specific command.
      * @return Staff that matches the name.
-     * @throws CommandException Handles invalid staff message.
+     * @throws CommandException If no valid staff is found.
      */
     @Override
     public Staff findStaffByName(Name targetName, String message) throws CommandException {
@@ -284,11 +292,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Find the supplier by their name.
+     * Find a supplier by their name.
      * @param targetName Refers to the name identifier.
      * @param message Refers to the exception message for the specific command.
      * @return Supplier that matches the name.
-     * @throws CommandException Handles invalid supplier message.
+     * @throws CommandException If no valid supplier is found.
      */
     @Override
     public Supplier findSupplierByName(Name targetName, String message) throws CommandException {
