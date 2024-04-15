@@ -22,7 +22,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 //@@author jamessinmaojun
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
